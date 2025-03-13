@@ -6,5 +6,10 @@ namespace book_store
         {
             InitializeComponent();
         }
+
+        private void labelRegister_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Открытие формы регистрации...");
+        }
     }
 }

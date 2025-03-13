@@ -28,18 +28,108 @@
         /// </summary>
         private void InitializeComponent()
         {
+            labelLogin = new Label();
+            tbUsername = new TextBox();
+            tbPassword = new TextBox();
+            buttonLogin = new Button();
+            label1 = new Label();
+            labelRegister = new Label();
             SuspendLayout();
+            // 
+            // labelLogin
+            // 
+            labelLogin.AutoSize = true;
+            labelLogin.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelLogin.Location = new Point(336, 53);
+            labelLogin.Name = "labelLogin";
+            labelLogin.Size = new Size(99, 48);
+            labelLogin.TabIndex = 0;
+            labelLogin.Text = "Вход";
+            // 
+            // tbUsername
+            // 
+            tbUsername.BackColor = Color.FromArgb(224, 224, 224);
+            tbUsername.BorderStyle = BorderStyle.None;
+            tbUsername.Font = new Font("Philosopher", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbUsername.Location = new Point(234, 156);
+            tbUsername.MinimumSize = new Size(300, 50);
+            tbUsername.Name = "tbUsername";
+            tbUsername.Size = new Size(300, 50);
+            tbUsername.TabIndex = 1;
+            // 
+            // tbPassword
+            // 
+            tbPassword.BackColor = Color.FromArgb(224, 224, 224);
+            tbPassword.BorderStyle = BorderStyle.None;
+            tbPassword.Font = new Font("Philosopher", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbPassword.Location = new Point(234, 222);
+            tbPassword.MinimumSize = new Size(300, 50);
+            tbPassword.Name = "tbPassword";
+            tbPassword.PasswordChar = '•';
+            tbPassword.Size = new Size(300, 50);
+            tbPassword.TabIndex = 2;
+            // 
+            // buttonLogin
+            // 
+            buttonLogin.BackColor = Color.FromArgb(88, 3, 154);
+            buttonLogin.Cursor = Cursors.Hand;
+            buttonLogin.FlatStyle = FlatStyle.Flat;
+            buttonLogin.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonLogin.ForeColor = SystemColors.Window;
+            buttonLogin.Location = new Point(234, 299);
+            buttonLogin.Name = "buttonLogin";
+            buttonLogin.Size = new Size(300, 50);
+            buttonLogin.TabIndex = 3;
+            buttonLogin.Text = "Вход";
+            buttonLogin.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Philosopher", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label1.Location = new Point(234, 367);
+            label1.Name = "label1";
+            label1.Size = new Size(148, 17);
+            label1.TabIndex = 4;
+            label1.Text = "Впервые в приложении?";
+            // 
+            // labelRegister
+            // 
+            labelRegister.AutoSize = true;
+            labelRegister.Cursor = Cursors.Hand;
+            labelRegister.Font = new Font("Philosopher", 9.749999F, FontStyle.Underline, GraphicsUnit.Point, 204);
+            labelRegister.Location = new Point(409, 367);
+            labelRegister.Name = "labelRegister";
+            labelRegister.Size = new Size(125, 17);
+            labelRegister.TabIndex = 5;
+            labelRegister.Text = "Зарегистрироваться";
+            labelRegister.Click += labelRegister_Click;
             // 
             // FormAuthorization
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(800, 450);
+            Controls.Add(labelRegister);
+            Controls.Add(label1);
+            Controls.Add(buttonLogin);
+            Controls.Add(tbPassword);
+            Controls.Add(tbUsername);
+            Controls.Add(labelLogin);
             Name = "FormAuthorization";
             Text = "Авторизация";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label labelLogin;
+        private TextBox tbUsername;
+        private TextBox tbPassword;
+        private Button buttonLogin;
+        private Label label1;
+        private Label labelRegister;
     }
 }
