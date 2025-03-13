@@ -1,8 +1,8 @@
 namespace book_store
 {
-    public partial class Form1 : Form
+    public partial class FormAuthorization : Form
     {
-        public Form1()
+        public FormAuthorization()
         {
             InitializeComponent();
         }
