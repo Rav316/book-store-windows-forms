@@ -14,36 +14,64 @@ namespace book_store.dao
 {
     internal class UserDao
     {
-        private static readonly Lazy<UserDao> _instance = new(() => new UserDao());
-        private UserDao() { }
-
-        public static UserDao Instance => _instance.Value;
-
-        public User Authenticate(string username, string password)
+        public User FindByUsername(string username)
         {
-            try
+            using (NpgsqlConnection connection = ConnectionManager.Open())
             {
-                using NpgsqlConnection connection = ConnectionManager.Open();
                 const string query = "SELECT * FROM users WHERE username = @username";
 
-                using NpgsqlCommand command = new NpgsqlCommand(query, connection);
-                command.Parameters.AddWithValue("username", username);
-
-                using NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                 {
-                    User user = BuildUser(reader);
-                    if(PasswordEncoder.Decode(password, user.Password))
+                    command.Parameters.AddWithValue("username", username);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
-                        SecurityContext.authentication = user;
-                    }
+                        if (reader.Read())
+                        {
+                            return BuildUser(reader);
+                        }
+
+                        return null;
+                    };
                 }
-            } catch (Exception ex)
+            }
+        }
+
+        public User FindByEmail(string email)
+        {
+            using NpgsqlConnection connection = ConnectionManager.Open();
+            const string query = "SELECT * FROM users WHERE email = @email";
+
+            using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+            command.Parameters.AddWithValue("email", email);
+
+            using NpgsqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
             {
-                Console.WriteLine($"Error during authentication: {ex.Message}");
+                return BuildUser(reader);
             }
 
             return null;
+        }
+
+        public int Create(string username, string password, string email, string address)
+        {
+            using NpgsqlConnection connection = ConnectionManager.Open();
+            const string query = """
+                                INSERT INTO users(username, password, email, address)
+                                VALUES
+                                (@username, @password, @email, @address)
+                                RETURNING id
+                                """;
+
+            using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+            command.Parameters.AddWithValue("username", username);
+            command.Parameters.AddWithValue("password", password);
+            command.Parameters.AddWithValue("email", email);
+            command.Parameters.AddWithValue("address", address);
+
+            return Convert.ToInt32(command.ExecuteScalar());
+
         }
 
         private User BuildUser(NpgsqlDataReader reader)
@@ -53,7 +81,7 @@ namespace book_store.dao
                 reader.IsDBNull(1) ? null : reader.GetString(1),
                 reader.IsDBNull(2) ? null : reader.GetString(2),
                 reader.IsDBNull(3) ? null : reader.GetString(3),
-                reader.IsDBNull(4) ? 0 : reader.GetInt32(4),
+                reader.IsDBNull(4) ? null : reader.GetString(4),
                 reader.IsDBNull(5) ? null : reader.GetString(5)
             );
         }

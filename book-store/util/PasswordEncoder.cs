@@ -25,7 +25,7 @@ namespace book_store.util
             }
         }
 
-        public static bool Decode(string input, string hash)
+        public static bool Matches(string input, string hash)
         {
             string hashOfInput = Encode(input);
 
