@@ -9,6 +9,6 @@ namespace book_store.context
 {
     public class SecurityContext
     {
-        public static User authentication;
+        public static User Authentication;
     }
 }

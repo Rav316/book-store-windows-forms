@@ -22,7 +22,7 @@ namespace book_store.service
             {
                 if(PasswordEncoder.Matches(password, user.Password))
                 {
-                    SecurityContext.authentication = user;
+                    SecurityContext.Authentication = user;
                 } else
                 {
                     throw new AuthenticationException("неправильный пароль");

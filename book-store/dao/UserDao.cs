@@ -16,25 +16,22 @@ namespace book_store.dao
     {
         public User FindByUsername(string username)
         {
-            using (NpgsqlConnection connection = ConnectionManager.Open())
+            using NpgsqlConnection connection = ConnectionManager.Open();
+
+            const string query = "SELECT * FROM users WHERE username = @username";
+
+            using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("username", username);
+
+            using NpgsqlDataReader reader = command.ExecuteReader();
+            
+            if (reader.Read())
             {
-                const string query = "SELECT * FROM users WHERE username = @username";
-
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("username", username);
-
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return BuildUser(reader);
-                        }
-
-                        return null;
-                    };
-                }
+                return BuildUser(reader);
             }
+
+            return null;
         }
 
         public User FindByEmail(string email)

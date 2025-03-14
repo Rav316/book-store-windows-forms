@@ -40,17 +40,24 @@
             textBox1 = new TextBox();
             labelAuthor = new Label();
             gbFilters = new GroupBox();
-            labelCoverType = new Label();
-            comboBox1 = new ComboBox();
-            cbLanguage = new ComboBox();
-            labelLanguage = new Label();
             labelPublisher = new Label();
             tbPublisher = new TextBox();
-            dataGridView1 = new DataGridView();
+            cbLanguage = new ComboBox();
+            labelLanguage = new Label();
+            comboBox1 = new ComboBox();
+            labelCoverType = new Label();
+            dgvBooks = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            BookName = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
+            BookImage = new DataGridViewImageColumn();
+            Price = new DataGridViewTextBoxColumn();
+            IsInFavorites = new DataGridViewCheckBoxColumn();
+            IsInCart = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             gbFilters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
             // 
             // tbUsername
@@ -169,23 +176,22 @@
             gbFilters.TabStop = false;
             gbFilters.Text = "фильтры";
             // 
-            // labelCoverType
+            // labelPublisher
             // 
-            labelCoverType.AutoSize = true;
-            labelCoverType.Font = new Font("Philosopher", 9.749999F);
-            labelCoverType.Location = new Point(6, 137);
-            labelCoverType.Name = "labelCoverType";
-            labelCoverType.Size = new Size(83, 17);
-            labelCoverType.TabIndex = 18;
-            labelCoverType.Text = "Тип обложки";
+            labelPublisher.AutoSize = true;
+            labelPublisher.Font = new Font("Philosopher", 9.749999F);
+            labelPublisher.Location = new Point(6, 242);
+            labelPublisher.Name = "labelPublisher";
+            labelPublisher.Size = new Size(43, 17);
+            labelPublisher.TabIndex = 23;
+            labelPublisher.Text = "Автор";
             // 
-            // comboBox1
+            // tbPublisher
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(6, 157);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 19;
+            tbPublisher.Location = new Point(6, 262);
+            tbPublisher.Name = "tbPublisher";
+            tbPublisher.Size = new Size(121, 23);
+            tbPublisher.TabIndex = 22;
             // 
             // cbLanguage
             // 
@@ -205,38 +211,89 @@
             labelLanguage.TabIndex = 20;
             labelLanguage.Text = "Язык";
             // 
-            // labelPublisher
+            // comboBox1
             // 
-            labelPublisher.AutoSize = true;
-            labelPublisher.Font = new Font("Philosopher", 9.749999F);
-            labelPublisher.Location = new Point(6, 242);
-            labelPublisher.Name = "labelPublisher";
-            labelPublisher.Size = new Size(43, 17);
-            labelPublisher.TabIndex = 23;
-            labelPublisher.Text = "Автор";
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(6, 157);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 19;
             // 
-            // tbPublisher
+            // labelCoverType
             // 
-            tbPublisher.Location = new Point(6, 262);
-            tbPublisher.Name = "tbPublisher";
-            tbPublisher.Size = new Size(121, 23);
-            tbPublisher.TabIndex = 22;
+            labelCoverType.AutoSize = true;
+            labelCoverType.Font = new Font("Philosopher", 9.749999F);
+            labelCoverType.Location = new Point(6, 137);
+            labelCoverType.Name = "labelCoverType";
+            labelCoverType.Size = new Size(83, 17);
+            labelCoverType.TabIndex = 18;
+            labelCoverType.Text = "Тип обложки";
             // 
-            // dataGridView1
+            // dgvBooks
             // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(182, 87);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(569, 334);
-            dataGridView1.TabIndex = 18;
+            dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart });
+            dgvBooks.Location = new Point(182, 83);
+            dgvBooks.Name = "dgvBooks";
+            dgvBooks.ReadOnly = true;
+            dgvBooks.RowTemplate.Height = 136;
+            dgvBooks.Size = new Size(569, 338);
+            dgvBooks.TabIndex = 18;
+            dgvBooks.CellFormatting += dgvBooks_CellFormatting;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // BookName
+            // 
+            BookName.HeaderText = "Название книги";
+            BookName.Name = "BookName";
+            BookName.ReadOnly = true;
+            // 
+            // Author
+            // 
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
+            Author.ReadOnly = true;
+            // 
+            // BookImage
+            // 
+            BookImage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            BookImage.HeaderText = "Изображение";
+            BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            BookImage.Name = "BookImage";
+            BookImage.ReadOnly = true;
+            BookImage.Resizable = DataGridViewTriState.True;
+            // 
+            // Price
+            // 
+            Price.HeaderText = "Цена";
+            Price.Name = "Price";
+            Price.ReadOnly = true;
+            // 
+            // IsInFavorites
+            // 
+            IsInFavorites.HeaderText = "В избранном";
+            IsInFavorites.Name = "IsInFavorites";
+            IsInFavorites.ReadOnly = true;
+            // 
+            // IsInCart
+            // 
+            IsInCart.HeaderText = "В корзине";
+            IsInCart.Name = "IsInCart";
+            IsInCart.ReadOnly = true;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvBooks);
             Controls.Add(gbFilters);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
@@ -246,11 +303,12 @@
             Controls.Add(tbUsername);
             Name = "FormMain";
             Text = "Главная";
+            Load += FormMain_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             gbFilters.ResumeLayout(false);
             gbFilters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -274,6 +332,13 @@
         private Label labelLanguage;
         private ComboBox comboBox1;
         private Label labelCoverType;
-        private DataGridView dataGridView1;
+        private DataGridView dgvBooks;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn BookName;
+        private DataGridViewTextBoxColumn Author;
+        private DataGridViewImageColumn BookImage;
+        private DataGridViewTextBoxColumn Price;
+        private DataGridViewCheckBoxColumn IsInFavorites;
+        private DataGridViewCheckBoxColumn IsInCart;
     }
 }
