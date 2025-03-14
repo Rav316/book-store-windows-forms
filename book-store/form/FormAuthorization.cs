@@ -1,4 +1,5 @@
-﻿using book_store.form;
+﻿using book_store.exception;
+using book_store.form;
 using book_store.service;
 using book_store.util;
 using System.Drawing.Drawing2D;
@@ -30,8 +31,10 @@ namespace book_store
             try
             {
                 userService.Authenticate(tbUsername.Text, tbPassword.Text);
-                MessageBox.Show("авторизация успешно пройдена ✅");
-            } catch (Exception ex)
+                Hide();
+                FormMain formMain = new FormMain();
+                formMain.Show();
+            } catch (Exception ex) when (ex is EntityNotFoundException || ex is AuthenticationException || ex is ArgumentException)
             {
                 MessageBox.Show(ex.Message, "Ошибка при авторизации пользователя", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
