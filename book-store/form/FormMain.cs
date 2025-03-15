@@ -20,7 +20,6 @@ namespace book_store.form
         private readonly CoverTypeService coverTypeService = new CoverTypeService();
         private readonly LanguageService languageService = new LanguageService();
         private List<Book> allBooks = new List<Book>();
-        private List<Book> books = new List<Book>();
         private List<Category> categories = new List<Category>();
         private List<CoverType> coverTypes = new List<CoverType>();
         private List<Language> languages = new List<Language>();
@@ -146,6 +145,13 @@ namespace book_store.form
         private void nudMaxPrice_ValueChanged(object sender, EventArgs e)
         {
             UpdateFilter();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            FormFavorites formFavorites = new FormFavorites();
+            Close();
+            formFavorites.Show();
         }
     }
 }

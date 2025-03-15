@@ -1,4 +1,5 @@
 ﻿using book_store.entity;
+using book_store.exception;
 using book_store.util;
 using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
@@ -57,6 +58,44 @@ namespace book_store.dao
             
         }
 
+        public Book FindByIdForUser(int id, int userId)
+        {
+            using NpgsqlConnection connection = ConnectionManager.Open();
+
+            const string query =
+                """
+                SELECT b.*,
+                    CASE
+                    WHEN f.book_id IS NOT NULL THEN TRUE
+                    ELSE FALSE
+                END AS is_favorite,
+                CASE
+                    WHEN c.book_id IS NOT NULL THEN TRUE
+                    ELSE FALSE
+                END AS is_in_cart,
+                FROM BOOK b
+                LEFT JOIN favorites f
+                ON b.id = f.book_id AND f.user_id = @userId
+                LEFT JOIN cart c
+                ON b.id = c.book_id AND c.user_id = @userId
+                ORDER BY b.id
+                """;
+
+            using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+            command.Parameters.AddWithValue("userId", userId);
+
+            using NpgsqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                Book book = BuildBook(reader);
+                book.IsInFavorites = reader.GetBoolean(19);
+                book.IsInCart = reader.GetBoolean(20);
+                return book;
+            }
+            return null;
+        }
+
         public (int, int) GetMinAndMaxPrice()
         {
             using NpgsqlConnection connection = ConnectionManager.Open();
@@ -82,6 +121,7 @@ namespace book_store.dao
         private Book BuildBook(NpgsqlDataReader reader)
         {
             return new Book(
+                // TODO переделать на именные параметры
                 reader.GetInt32(0),
                 reader.IsDBNull(1) ? 0.0 : reader.GetDouble(1),
                 reader.IsDBNull(2) ? 0 : reader.GetInt32(2),
