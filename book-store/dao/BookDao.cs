@@ -1,5 +1,6 @@
 ﻿using book_store.entity;
 using book_store.util;
+using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,28 @@ namespace book_store.dao
 
             return books;
             
+        }
+
+        public (int, int) GetMinAndMaxPrice()
+        {
+            using NpgsqlConnection connection = ConnectionManager.Open();
+
+            List<Book> books = new List<Book>();
+            const string query =
+                """
+                SELECT MIN(price), MAX(price)
+                FROM book
+                """;
+
+            using NpgsqlCommand command = new NpgsqlCommand(query, connection);
+
+            using NpgsqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return (reader.GetInt32(0), reader.GetInt32(1));
+            }
+            return (0, 0);
         }
 
         private Book BuildBook(NpgsqlDataReader reader)

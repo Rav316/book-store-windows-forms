@@ -1,4 +1,5 @@
-﻿namespace book_store.form
+﻿
+namespace book_store.form
 {
     partial class FormMain
     {
@@ -29,7 +30,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            tbUsername = new TextBox();
+            tbSearch = new TextBox();
             labelSearch = new Label();
             labelFavorites = new Label();
             labelCart = new Label();
@@ -37,14 +38,19 @@
             pictureBox2 = new PictureBox();
             cbCategory = new ComboBox();
             labelCategory = new Label();
-            textBox1 = new TextBox();
+            tbAuthor = new TextBox();
             labelAuthor = new Label();
             gbFilters = new GroupBox();
+            labelMaxPrice = new Label();
+            labelMinPrice = new Label();
+            nudMaxPrice = new NumericUpDown();
+            nudMinPrice = new NumericUpDown();
+            labelPrice = new Label();
             labelPublisher = new Label();
             tbPublisher = new TextBox();
             cbLanguage = new ComboBox();
             labelLanguage = new Label();
-            comboBox1 = new ComboBox();
+            cbCoverType = new ComboBox();
             labelCoverType = new Label();
             dgvBooks = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
@@ -57,19 +63,22 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             gbFilters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudMaxPrice).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nudMinPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
             // 
-            // tbUsername
+            // tbSearch
             // 
-            tbUsername.BackColor = Color.FromArgb(224, 224, 224);
-            tbUsername.BorderStyle = BorderStyle.None;
-            tbUsername.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbUsername.Location = new Point(182, 29);
-            tbUsername.MinimumSize = new Size(300, 35);
-            tbUsername.Name = "tbUsername";
-            tbUsername.Size = new Size(395, 36);
-            tbUsername.TabIndex = 2;
+            tbSearch.BackColor = Color.FromArgb(224, 224, 224);
+            tbSearch.BorderStyle = BorderStyle.None;
+            tbSearch.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbSearch.Location = new Point(182, 29);
+            tbSearch.MinimumSize = new Size(300, 35);
+            tbSearch.Name = "tbSearch";
+            tbSearch.Size = new Size(395, 36);
+            tbSearch.TabIndex = 2;
+            tbSearch.TextChanged += tbUsername_TextChanged;
             // 
             // labelSearch
             // 
@@ -103,6 +112,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(626, 26);
             pictureBox1.Name = "pictureBox1";
@@ -113,6 +123,7 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.Cursor = Cursors.Hand;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(710, 26);
             pictureBox2.Name = "pictureBox2";
@@ -123,11 +134,13 @@
             // 
             // cbCategory
             // 
+            cbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             cbCategory.FormattingEnabled = true;
             cbCategory.Location = new Point(6, 49);
             cbCategory.Name = "cbCategory";
             cbCategory.Size = new Size(121, 23);
             cbCategory.TabIndex = 13;
+            cbCategory.SelectedIndexChanged += cbCategory_SelectedIndexChanged;
             // 
             // labelCategory
             // 
@@ -139,12 +152,13 @@
             labelCategory.TabIndex = 14;
             labelCategory.Text = "Категория";
             // 
-            // textBox1
+            // tbAuthor
             // 
-            textBox1.Location = new Point(6, 103);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(121, 23);
-            textBox1.TabIndex = 15;
+            tbAuthor.Location = new Point(6, 103);
+            tbAuthor.Name = "tbAuthor";
+            tbAuthor.Size = new Size(121, 23);
+            tbAuthor.TabIndex = 15;
+            tbAuthor.TextChanged += tbAuthor_TextChanged;
             // 
             // labelAuthor
             // 
@@ -159,22 +173,73 @@
             // gbFilters
             // 
             gbFilters.BackColor = Color.Transparent;
+            gbFilters.Controls.Add(labelMaxPrice);
+            gbFilters.Controls.Add(labelMinPrice);
+            gbFilters.Controls.Add(nudMaxPrice);
+            gbFilters.Controls.Add(nudMinPrice);
+            gbFilters.Controls.Add(labelPrice);
             gbFilters.Controls.Add(labelPublisher);
             gbFilters.Controls.Add(tbPublisher);
             gbFilters.Controls.Add(cbLanguage);
             gbFilters.Controls.Add(labelLanguage);
-            gbFilters.Controls.Add(comboBox1);
+            gbFilters.Controls.Add(cbCoverType);
             gbFilters.Controls.Add(labelCoverType);
             gbFilters.Controls.Add(cbCategory);
             gbFilters.Controls.Add(labelAuthor);
             gbFilters.Controls.Add(labelCategory);
-            gbFilters.Controls.Add(textBox1);
+            gbFilters.Controls.Add(tbAuthor);
             gbFilters.Location = new Point(12, 26);
             gbFilters.Name = "gbFilters";
             gbFilters.Size = new Size(144, 395);
             gbFilters.TabIndex = 17;
             gbFilters.TabStop = false;
             gbFilters.Text = "фильтры";
+            // 
+            // labelMaxPrice
+            // 
+            labelMaxPrice.AutoSize = true;
+            labelMaxPrice.Font = new Font("Philosopher", 9.749999F);
+            labelMaxPrice.Location = new Point(87, 367);
+            labelMaxPrice.Name = "labelMaxPrice";
+            labelMaxPrice.Size = new Size(40, 17);
+            labelMaxPrice.TabIndex = 29;
+            labelMaxPrice.Text = "Макс.";
+            // 
+            // labelMinPrice
+            // 
+            labelMinPrice.AutoSize = true;
+            labelMinPrice.Font = new Font("Philosopher", 9.749999F);
+            labelMinPrice.Location = new Point(6, 367);
+            labelMinPrice.Name = "labelMinPrice";
+            labelMinPrice.Size = new Size(36, 17);
+            labelMinPrice.TabIndex = 28;
+            labelMinPrice.Text = "Мин.";
+            // 
+            // nudMaxPrice
+            // 
+            nudMaxPrice.Location = new Point(85, 341);
+            nudMaxPrice.Name = "nudMaxPrice";
+            nudMaxPrice.Size = new Size(42, 23);
+            nudMaxPrice.TabIndex = 27;
+            nudMaxPrice.ValueChanged += nudMaxPrice_ValueChanged;
+            // 
+            // nudMinPrice
+            // 
+            nudMinPrice.Location = new Point(6, 341);
+            nudMinPrice.Name = "nudMinPrice";
+            nudMinPrice.Size = new Size(42, 23);
+            nudMinPrice.TabIndex = 26;
+            nudMinPrice.ValueChanged += nudMinPrice_ValueChanged;
+            // 
+            // labelPrice
+            // 
+            labelPrice.AutoSize = true;
+            labelPrice.Font = new Font("Philosopher", 9.749999F);
+            labelPrice.Location = new Point(7, 305);
+            labelPrice.Name = "labelPrice";
+            labelPrice.Size = new Size(49, 17);
+            labelPrice.TabIndex = 25;
+            labelPrice.Text = "Цена, ₽";
             // 
             // labelPublisher
             // 
@@ -195,11 +260,13 @@
             // 
             // cbLanguage
             // 
+            cbLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
             cbLanguage.FormattingEnabled = true;
             cbLanguage.Location = new Point(6, 210);
             cbLanguage.Name = "cbLanguage";
             cbLanguage.Size = new Size(121, 23);
             cbLanguage.TabIndex = 21;
+            cbLanguage.SelectedIndexChanged += cbLanguage_SelectedIndexChanged;
             // 
             // labelLanguage
             // 
@@ -211,13 +278,15 @@
             labelLanguage.TabIndex = 20;
             labelLanguage.Text = "Язык";
             // 
-            // comboBox1
+            // cbCoverType
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(6, 157);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 19;
+            cbCoverType.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbCoverType.FormattingEnabled = true;
+            cbCoverType.Location = new Point(6, 157);
+            cbCoverType.Name = "cbCoverType";
+            cbCoverType.Size = new Size(121, 23);
+            cbCoverType.TabIndex = 19;
+            cbCoverType.SelectedIndexChanged += cbCoverType_SelectedIndexChanged;
             // 
             // labelCoverType
             // 
@@ -300,7 +369,7 @@
             Controls.Add(labelCart);
             Controls.Add(labelFavorites);
             Controls.Add(labelSearch);
-            Controls.Add(tbUsername);
+            Controls.Add(tbSearch);
             Name = "FormMain";
             Text = "Главная";
             Load += FormMain_Load;
@@ -308,6 +377,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             gbFilters.ResumeLayout(false);
             gbFilters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudMaxPrice).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nudMinPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -315,7 +386,7 @@
 
         #endregion
 
-        private TextBox tbUsername;
+        private TextBox tbSearch;
         private Label labelSearch;
         private Label labelFavorites;
         private Label labelCart;
@@ -323,14 +394,14 @@
         private PictureBox pictureBox2;
         private ComboBox cbCategory;
         private Label labelCategory;
-        private TextBox textBox1;
+        private TextBox tbAuthor;
         private Label labelAuthor;
         private GroupBox gbFilters;
         private Label labelPublisher;
         private TextBox tbPublisher;
         private ComboBox cbLanguage;
         private Label labelLanguage;
-        private ComboBox comboBox1;
+        private ComboBox cbCoverType;
         private Label labelCoverType;
         private DataGridView dgvBooks;
         private DataGridViewTextBoxColumn Id;
@@ -340,5 +411,10 @@
         private DataGridViewTextBoxColumn Price;
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
+        private Label labelPrice;
+        private NumericUpDown nudMaxPrice;
+        private NumericUpDown nudMinPrice;
+        private Label labelMaxPrice;
+        private Label labelMinPrice;
     }
 }
