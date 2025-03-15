@@ -1,6 +1,6 @@
 ﻿using book_store.context;
-using book_store.dao;
-using book_store.entity;
+using book_store.database.entity;
+using book_store.database.repository;
 using book_store.exception;
 using book_store.util;
 using System;
@@ -13,40 +13,48 @@ namespace book_store.service
 {
     internal class UserService
     {
-        private readonly UserDao userDao = new UserDao();
+        private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
 
-        public void Authenticate(string username, string password)
+        public async Task AuthenticateAsync(string username, string password)
         {
-            User user = userDao.FindByUsername(username);
-            if(user != null)
+            var user = await userRepository.FindByUsernameAsync(username);
+
+            if (user == null)
             {
-                if(PasswordEncoder.Matches(password, user.Password))
-                {
-                    SecurityContext.Authentication = user;
-                } else
-                {
-                    throw new AuthenticationException("неправильный пароль");
-                }
-            } else
-            {
-                throw new EntityNotFoundException($"пользователь с username {username} не найден");
+                throw new EntityNotFoundException($"Пользователь с username {username} не найден.");
             }
+
+            // Проверка пароля
+            if (!PasswordEncoder.Matches(password, user.Password))
+            {
+                throw new AuthenticationException("Неправильный пароль.");
+            }
+
+            SecurityContext.Authentication = user;
         }
 
-        public void CreateUser(string username, string password, string email, string address)
+        public async Task CreateUser(string username, string password, string email, string address)
         {
-            User byUsername = userDao.FindByUsername(username);
-            if(byUsername != null)
+            var byUsername = await userRepository.FindByUsernameAsync(username);
+            if (byUsername != null)
             {
                 throw new ArgumentException($"пользователь с username {username} уже существует");
             }
-            User byEmail = userDao.FindByEmail(email);
-            if(byEmail != null)
+            var byEmail = await userRepository.FindByEmailAsync(email);
+            if (byEmail != null)
             {
                 throw new ArgumentException($"полльзователь с email {email} уже существует");
             }
             string encodedPassword = PasswordEncoder.Encode(password);
-            userDao.Create(username, encodedPassword, email, address);
+            User user = new User
+            {
+                Username = username,
+                Password = PasswordEncoder.Encode(password),
+                Email = email,
+                Address = address,
+                Role = "user"
+            };
+            await userRepository.AddAsync(user);
         }
     }
 }

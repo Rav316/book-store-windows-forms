@@ -1,4 +1,4 @@
-﻿using book_store.entity;
+﻿using book_store.database.entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿using book_store.service;
+﻿//using book_store.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ namespace book_store.form
 {
     public partial class FormFavorites : Form
     {
-        private readonly BookService bookService = new BookService();
+        //private readonly BookService bookService = new BookService();
         public FormFavorites()
         {
             InitializeComponent();

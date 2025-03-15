@@ -1,5 +1,5 @@
-﻿using book_store.entity;
-using book_store.service;
+﻿using book_store.database.entity;
+//using book_store.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +15,10 @@ namespace book_store.form
 {
     public partial class FormMain : Form
     {
-        private readonly BookService bookService = new BookService();
-        private readonly CategoryService categoryService = new CategoryService();
-        private readonly CoverTypeService coverTypeService = new CoverTypeService();
-        private readonly LanguageService languageService = new LanguageService();
+        //private readonly BookService bookService = new BookService();
+        //private readonly CategoryService categoryService = new CategoryService();
+        //private readonly CoverTypeService coverTypeService = new CoverTypeService();
+        //private readonly LanguageService languageService = new LanguageService();
         private List<Book> allBooks = new List<Book>();
         private List<Category> categories = new List<Category>();
         private List<CoverType> coverTypes = new List<CoverType>();
@@ -41,39 +41,39 @@ namespace book_store.form
         {
             ViewAllBooks();
 
-            categories = categoryService.FindAll();
-            categories.Insert(0, new Category(0, "All"));
+            //categories = categoryService.FindAll();
+            //categories.Insert(0, new Category(0, "All"));
 
             cbCategory.DisplayMember = "Name";
             cbCategory.ValueMember = "Id";
             cbCategory.DataSource = categories;
 
-            coverTypes = coverTypeService.FindAll();
-            coverTypes.Insert(0, new CoverType(0, "Не выбрана"));
+            //coverTypes = coverTypeService.FindAll();
+            //coverTypes.Insert(0, new CoverType(0, "Не выбрана"));
 
             cbCoverType.DisplayMember = "Name";
             cbCoverType.ValueMember = "Id";
             cbCoverType.DataSource = coverTypes;
 
-            languages = languageService.FindAll();
-            languages.Insert(0, new Language(0, "All"));
+            //languages = languageService.FindAll();
+            //languages.Insert(0, new Language(0, "All"));
 
             cbLanguage.DisplayMember = "Name";
             cbLanguage.ValueMember = "Id";
             cbLanguage.DataSource = languages;
 
-            (int minPrice, int maxPrice) = bookService.GetMinAndMaxPrice();
-            nudMinPrice.Minimum = minPrice;
-            nudMinPrice.Maximum = maxPrice;
-            nudMaxPrice.Minimum = minPrice;
-            nudMaxPrice.Maximum = maxPrice;
-            nudMinPrice.Value = minPrice;
-            nudMaxPrice.Value = maxPrice;
+            //(int minPrice, int maxPrice) = bookService.GetMinAndMaxPrice();
+            //nudMinPrice.Minimum = minPrice;
+            //nudMinPrice.Maximum = maxPrice;
+            //nudMaxPrice.Minimum = minPrice;
+            //nudMaxPrice.Maximum = maxPrice;
+            //nudMinPrice.Value = minPrice;
+            //nudMaxPrice.Value = maxPrice;
         }
 
         private void ViewAllBooks()
         {
-            allBooks = bookService.FindAllWithUserInfo();
+            //allBooks = bookService.FindAllWithUserInfo();
             dgvBooks.DataSource = allBooks;
         }
 
@@ -107,8 +107,8 @@ namespace book_store.form
             int selectedLanguage = cbLanguage.SelectedValue as int? ?? 0;
 
             List<Book> filteredBooks = allBooks
-                                        .Where(book => book.BookName.ToLower().Contains(searchText))
-                                        .Where(book => book.AuthorName.ToLower().Contains(authorText))
+                                        //.Where(book => book.BookName.ToLower().Contains(searchText))
+                                        //.Where(book => book.AuthorName.ToLower().Contains(authorText))
                                         .Where(book => selectedCategory == 0 || book.CategoryId == selectedCategory)
                                         .Where(book => selectedCoverType == 0 || book.CoverTypeId == selectedCoverType)
                                         .Where(book => selectedLanguage == 0 || book.LanguageId == selectedLanguage)

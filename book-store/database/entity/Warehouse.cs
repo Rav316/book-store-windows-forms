@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace book_store.entity
+namespace book_store.database.entity
 {
-    internal class Favorites
+    internal class Warehouse
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
         public int BookId { get; set; }
+        public int Count { get; set; }
 
-        public Favorites(int id, int userId, int bookId)
+        public Warehouse(int id, int bookId, int count)
         {
             Id = id;
-            UserId = userId;
             BookId = bookId;
+            Count = count;
         }
     }
 }

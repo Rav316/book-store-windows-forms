@@ -22,7 +22,7 @@ namespace book_store.form
             InitializeComponent();
         }
 
-        private void buttonRegister_Click(object sender, EventArgs e)
+        private async void buttonRegister_Click(object sender, EventArgs e)
         {
             if (tbUsername.Text.Equals("") || tbPassword.Text.Equals(""))
             {
@@ -46,7 +46,7 @@ namespace book_store.form
             }
             try
             {
-                userService.CreateUser(tbUsername.Text, tbPassword.Text, tbEmail.Text, tbAddress.Text);
+                await userService.CreateUser(tbUsername.Text, tbPassword.Text, tbEmail.Text, tbAddress.Text);
                 MessageBox.Show("Пользователь успешно создан ✅");
                 Close();
             } catch (Exception ex)

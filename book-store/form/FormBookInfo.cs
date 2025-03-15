@@ -1,6 +1,6 @@
-﻿using book_store.entity;
+﻿using book_store.database.entity;
 using book_store.exception;
-using book_store.service;
+//using book_store.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +15,8 @@ namespace book_store.form
 {
     public partial class FormBookInfo : Form
     {
-        private readonly BookService bookService = new BookService();
-        private readonly AuthorService authorService = new AuthorService();
+        //private readonly BookService bookService = new BookService();
+        //private readonly AuthorService authorService = new AuthorService();
         private int bookId;
         private Book book;
         private Author author;
@@ -30,8 +30,8 @@ namespace book_store.form
         {
             try
             {
-                book = bookService.FindById(bookId);
-                author = authorService.FindById(book.AuthorId);
+                //book = bookService.FindById(bookId);
+                //author = authorService.FindById(book.AuthorId);
             } 
             catch (EntityNotFoundException ex)
             {
@@ -39,8 +39,8 @@ namespace book_store.form
                 Close();
                 return;
             }
-            pbBookImage.Image = book.Image;
-            labelBookName.Text = book.BookName;
+            //pbBookImage.Image = book.Image;
+            //labelBookName.Text = book.BookName;
             labelAuthor.Text = $"{author.FirstName} {author.LastName}";
             labelId.Text = book.Id.ToString();
         }

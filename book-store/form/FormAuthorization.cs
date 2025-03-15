@@ -1,6 +1,8 @@
 ﻿using book_store.exception;
 using book_store.form;
 using book_store.service;
+
+//using book_store.service;
 using book_store.util;
 using System.Drawing.Drawing2D;
 
@@ -21,7 +23,7 @@ namespace book_store
             formRegistration.Show();
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        private async void buttonLogin_Click(object sender, EventArgs e)
         {
             if(tbUsername.Text.Equals("") || tbPassword.Text.Equals(""))
             {
@@ -30,7 +32,7 @@ namespace book_store
             }
             try
             {
-                userService.Authenticate(tbUsername.Text, tbPassword.Text);
+                await userService.AuthenticateAsync(tbUsername.Text, tbPassword.Text);
                 Hide();
                 FormMain formMain = new FormMain();
                 formMain.Show();
