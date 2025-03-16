@@ -16,7 +16,7 @@ namespace book_store.database.entity
         public int Id { get; set; }
 
         public double? Rating { get; set; }
-        public int? Price { get; set; }
+        public int Price { get; set; }
 
         public string? ImagePath { get; set; }
         [Column("series")]
@@ -29,10 +29,10 @@ namespace book_store.database.entity
         public int? Weight { get; set; }
 
         public int? AgeRestrictions { get; set; }
-        public string? Name { get; set; }
+        public string Title { get; set; }
 
         [ForeignKey("CategoryId")]
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
 
         public string? Description { get; set; }

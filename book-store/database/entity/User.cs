@@ -28,5 +28,9 @@ namespace book_store.database.entity
         public string Email { get; set; }
 
         public string Address { get; set; }
+
+        public virtual List<Favorites> Favorites { get; set; } = new List<Favorites>();
+
+        public virtual List<Cart> Cart { get; set; } = new List<Cart>();
     }
 }

@@ -2,7 +2,6 @@
 using book_store.form;
 using book_store.service;
 
-//using book_store.service;
 using book_store.util;
 using System.Drawing.Drawing2D;
 

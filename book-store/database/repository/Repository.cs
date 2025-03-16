@@ -10,20 +10,20 @@ namespace book_store.database.repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly AppDbContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly AppDbContext context;
+        private readonly DbSet<T> dbSet;
 
         public Repository(AppDbContext context)
         {
-            _context = context;
-            _dbSet = context.Set<T>();
+            this.context = context;
+            this.dbSet = context.Set<T>();
         }   
 
-        public async Task<List<T>> GetAllAsync() => await _dbSet.ToListAsync();
-        public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
-        public async Task AddAsync(T entity) { await _dbSet.AddAsync(entity); await _context.SaveChangesAsync(); }
-        public async Task UpdateAsync(T entity) { _dbSet.Update(entity); await _context.SaveChangesAsync(); }
-        public async Task DeleteAsync(T entity) { _dbSet.Remove(entity); await _context.SaveChangesAsync(); }
+        public async Task<List<T>> FindAllAsync() => await dbSet.ToListAsync();
+        public async Task<T?> FindByIdAsync(int id) => await dbSet.FindAsync(id);
+        public async Task CreateAsync(T entity) { await dbSet.AddAsync(entity); await context.SaveChangesAsync(); }
+        public async Task UpdateAsync(T entity) { dbSet.Update(entity); await context.SaveChangesAsync(); }
+        public async Task DeleteAsync(T entity) { dbSet.Remove(entity); await context.SaveChangesAsync(); }
     }
 
 }

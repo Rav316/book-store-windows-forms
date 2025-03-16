@@ -1,5 +1,6 @@
 ﻿using book_store.database.entity;
-//using book_store.service;
+using book_store.dto.book;
+using book_store.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,11 @@ namespace book_store.form
 {
     public partial class FormMain : Form
     {
-        //private readonly BookService bookService = new BookService();
-        //private readonly CategoryService categoryService = new CategoryService();
-        //private readonly CoverTypeService coverTypeService = new CoverTypeService();
-        //private readonly LanguageService languageService = new LanguageService();
-        private List<Book> allBooks = new List<Book>();
+        private readonly BookService bookService = new BookService();
+        private readonly CategoryService categoryService = new CategoryService();
+        private readonly CoverTypeService coverTypeService = new CoverTypeService();
+        private readonly LanguageService languageService = new LanguageService();
+        private List<BookListDto> allBooks = new List<BookListDto>();
         private List<Category> categories = new List<Category>();
         private List<CoverType> coverTypes = new List<CoverType>();
         private List<Language> languages = new List<Language>();
@@ -29,52 +30,64 @@ namespace book_store.form
             InitializeComponent();
             dgvBooks.AutoGenerateColumns = false;
             dgvBooks.Columns[0].DataPropertyName = "Id";
-            dgvBooks.Columns[1].DataPropertyName = "BookName";
-            dgvBooks.Columns[2].DataPropertyName = "AuthorName";
+            dgvBooks.Columns[1].DataPropertyName = "Title";
+            dgvBooks.Columns[2].DataPropertyName = "AuthorFullName";
             dgvBooks.Columns[3].DataPropertyName = "Image";
             dgvBooks.Columns[4].DataPropertyName = "Price";
             dgvBooks.Columns[5].DataPropertyName = "IsInFavorites";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
-        private void FormMain_Load(object sender, EventArgs e)
+        private async void FormMain_Load(object sender, EventArgs e)
         {
-            ViewAllBooks();
+            
 
-            //categories = categoryService.FindAll();
-            //categories.Insert(0, new Category(0, "All"));
+            categories = await categoryService.FindAll();
+            categories.Insert(0, new Category { Id = 0, Name = "Все"});
 
             cbCategory.DisplayMember = "Name";
             cbCategory.ValueMember = "Id";
             cbCategory.DataSource = categories;
 
-            //coverTypes = coverTypeService.FindAll();
-            //coverTypes.Insert(0, new CoverType(0, "Не выбрана"));
+            coverTypes = await coverTypeService.FindAll();
+            coverTypes.Insert(0, new CoverType { Id = 0, Type = "Не выбрана"}); 
 
-            cbCoverType.DisplayMember = "Name";
+            cbCoverType.DisplayMember = "Type";
             cbCoverType.ValueMember = "Id";
             cbCoverType.DataSource = coverTypes;
 
-            //languages = languageService.FindAll();
-            //languages.Insert(0, new Language(0, "All"));
+            languages = await languageService.FindAll();
+            languages.Insert(0, new Language { Id = 0, Name = "Не выбран"});
 
             cbLanguage.DisplayMember = "Name";
             cbLanguage.ValueMember = "Id";
             cbLanguage.DataSource = languages;
 
-            //(int minPrice, int maxPrice) = bookService.GetMinAndMaxPrice();
-            //nudMinPrice.Minimum = minPrice;
-            //nudMinPrice.Maximum = maxPrice;
-            //nudMaxPrice.Minimum = minPrice;
-            //nudMaxPrice.Maximum = maxPrice;
-            //nudMinPrice.Value = minPrice;
-            //nudMaxPrice.Value = maxPrice;
+            (int minPrice, int maxPrice) = bookService.GetMinAndMaxPrice();
+            nudMinPrice.Minimum = minPrice;
+            nudMinPrice.Maximum = maxPrice;
+            nudMaxPrice.Minimum = minPrice;
+            nudMaxPrice.Maximum = maxPrice;
+            nudMinPrice.Value = minPrice;
+            nudMaxPrice.Value = maxPrice;
+            ViewAllBooks();
         }
 
-        private void ViewAllBooks()
+        private async void ViewAllBooks()
         {
-            //allBooks = bookService.FindAllWithUserInfo();
+            allBooks = await bookService.FindAllWithUserInfo();
+            allBooks.ForEach(book =>
+            {
+                if (book.ImagePath != null && !book.ImagePath.Equals(""))
+                {
+                    book.image = Image.FromFile(book.ImagePath);
+                } else
+                {
+                    book.image = Image.FromFile(@"..\..\..\Resources\Books\book.png");
+                }
+            });
             dgvBooks.DataSource = allBooks;
+            
         }
 
         private void dgvBooks_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -106,12 +119,12 @@ namespace book_store.form
             int selectedCoverType = cbCoverType.SelectedValue as int? ?? 0;
             int selectedLanguage = cbLanguage.SelectedValue as int? ?? 0;
 
-            List<Book> filteredBooks = allBooks
-                                        //.Where(book => book.BookName.ToLower().Contains(searchText))
-                                        //.Where(book => book.AuthorName.ToLower().Contains(authorText))
-                                        .Where(book => selectedCategory == 0 || book.CategoryId == selectedCategory)
-                                        .Where(book => selectedCoverType == 0 || book.CoverTypeId == selectedCoverType)
-                                        .Where(book => selectedLanguage == 0 || book.LanguageId == selectedLanguage)
+            List<BookListDto> filteredBooks = allBooks
+                                        .Where(book => book.Title.ToLower().Contains(searchText))
+                                        .Where(book => book.AuthorFullName.ToLower().Contains(authorText))
+                                        .Where(book => selectedCategory == 0 || book.Category == selectedCategory)
+                                        .Where(book => selectedCoverType == 0 || book.CoverType == selectedCoverType)
+                                        .Where(book => selectedLanguage == 0 || book.Language == selectedLanguage)
                                         .Where(book => book.Price >= nudMinPrice.Value && book.Price <= nudMaxPrice.Value)
                                         .ToList();
             dgvBooks.DataSource = filteredBooks;

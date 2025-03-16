@@ -15,12 +15,12 @@ namespace book_store.database.repository
 
         public async Task<User?> FindByUsernameAsync(string username)
         {
-            return await _context.user.FirstOrDefaultAsync(u => u.Username == username);
+            return await context.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<User?> FindByEmailAsync(string email)
         {
-            return await _context.user.FirstOrDefaultAsync(u => u.Email == email);
+            return await context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

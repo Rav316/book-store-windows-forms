@@ -16,13 +16,15 @@ namespace book_store.context
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
-        public DbSet<Book> book { get; set; }
-        public DbSet<Category> category { get; set; }
-        public DbSet<Publisher> publisher { get; set; }
-        public DbSet<Author> author { get; set; }
-        public DbSet<CoverType> cover_type { get; set; }
-        public DbSet<Language> language { get; set; }
-        public DbSet<User> user { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<CoverType> CoverTypes { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Favorites> Favorites { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
                     new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
@@ -34,6 +36,15 @@ namespace book_store.context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Book>().ToTable("book");
+            modelBuilder.Entity<Category>().ToTable("category");
+            modelBuilder.Entity<Publisher>().ToTable("publisher");
+            modelBuilder.Entity<Author>().ToTable("author");
+            modelBuilder.Entity<CoverType>().ToTable("cover_type");
+            modelBuilder.Entity<Language>().ToTable("language");
+            modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<Favorites>().ToTable("favorites");
+            modelBuilder.Entity<Cart>().ToTable("cart");
             modelBuilder.Entity<Book>()
                 .HasOne(b => b.Category)
                 .WithMany()

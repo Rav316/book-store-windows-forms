@@ -54,7 +54,7 @@ namespace book_store.service
                 Address = address,
                 Role = "user"
             };
-            await userRepository.AddAsync(user);
+            await userRepository.CreateAsync(user);
         }
     }
 }
