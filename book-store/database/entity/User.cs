@@ -31,6 +31,5 @@ namespace book_store.database.entity
 
         public virtual List<Book> FavoriteBooks { get; set; } = new List<Book>();
 
-        public virtual List<CartItem> Cart { get; set; } = new List<CartItem>();
     }
 }

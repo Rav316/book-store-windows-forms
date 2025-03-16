@@ -15,6 +15,7 @@ namespace book_store.service
     {
         private readonly BookRepository bookRepository = new BookRepository(AppDbContext.INSTANCE);
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
+        private readonly CartItemRepository cartItemRepository = new CartItemRepository(AppDbContext.INSTANCE);
 
 
         public Task<List<BookListDto>> FindAllWithUserInfo()
@@ -58,5 +59,14 @@ namespace book_store.service
             return userRepository.IsBookInFavorites(SecurityContext.Authentication.Id, bookId);
         }
 
+        public async Task AddToCart(int bookId, int? quantity)
+        {
+            await cartItemRepository.AddToCartAsync(SecurityContext.Authentication.Id, bookId, quantity);
+        }
+
+        public async Task RemoveFromCart(int bookId)
+        {
+            await cartItemRepository.RemoveFromCartAsync(SecurityContext.Authentication.Id, bookId);
+        }
     }
 }

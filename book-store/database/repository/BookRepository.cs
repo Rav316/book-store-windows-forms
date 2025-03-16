@@ -19,7 +19,6 @@ namespace book_store.database.repository
             const string query = """
                     SELECT b.id AS Id, b.title AS Title, b.category_id AS Category, b.image_path AS ImagePath,
                     b.cover_type_id AS CoverType, b.language_id AS Language, b.price AS Price,
-                    c.id AS cartItemId,
                         CASE WHEN f.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsFavorite,
                         CASE WHEN c.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsInCart,
                         CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName
@@ -48,6 +47,17 @@ namespace book_store.database.repository
         public bool IsInCartForUser(int bookId, int userId)
         {
             return context.CartItems.Any(c => c.BookId == bookId && c.UserId == userId);
+        }
+
+        public async Task<List<Book>> GetFavoriteBooks(int userId)
+        {
+            return await context.Favorites
+                .Where(f => f.UserId == userId)
+                .Include(f => f.Book) 
+                .ThenInclude(b => b.Author) 
+                .Select(f => f.Book)
+                .ToListAsync();
+
         }
     }
 }

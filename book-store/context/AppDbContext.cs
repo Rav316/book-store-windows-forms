@@ -45,7 +45,8 @@ namespace book_store.context
             modelBuilder.Entity<CoverType>().ToTable("cover_type");
             modelBuilder.Entity<Language>().ToTable("language");
             modelBuilder.Entity<User>().ToTable("users");
-            modelBuilder.Entity<CartItem>().ToTable("cart_item");
+            modelBuilder.Entity<CartItem>().ToTable("cart_item")
+                .HasKey(c => new { c.UserId, c.BookId });
             modelBuilder.Entity<Book>()
                 .HasOne(b => b.Category)
                 .WithMany()

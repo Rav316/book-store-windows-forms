@@ -56,5 +56,6 @@ namespace book_store.database.entity
         public virtual Language? Language { get; set; }
 
         public virtual List<User> FavoritedByUsers { get; set; } = new List<User>();
+
     }
 }

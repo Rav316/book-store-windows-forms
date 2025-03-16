@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 
 namespace book_store.database.entity
 {
-    [Table("cart")]
+    [Table("cart_item")]
     public class CartItem
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [Required]
+        [Column("user_id")]
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
@@ -24,7 +21,6 @@ namespace book_store.database.entity
         [Required]
         public int BookId { get; set; }
 
-        [ForeignKey("BookId")]
         public virtual Book Book { get; set; }
 
         [Required]

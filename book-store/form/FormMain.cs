@@ -198,6 +198,22 @@ namespace book_store.form
                     }
                 }
             }
+            else if(e.ColumnIndex == 6)
+            {
+                dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                {
+                    bool isChecked = (bool)checkBoxCell.Value;
+
+                    if (isChecked)
+                    {
+                        await bookService.AddToCart((int)dgvBooks[0, e.RowIndex].Value, 1);
+                    } else
+                    {
+                        await bookService.RemoveFromCart((int)dgvBooks[0, e.RowIndex].Value);
+                    }
+                }
+            }
         }
     }
 }
