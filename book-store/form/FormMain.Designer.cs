@@ -311,6 +311,7 @@ namespace book_store.form
             dgvBooks.Size = new Size(569, 338);
             dgvBooks.TabIndex = 18;
             dgvBooks.CellFormatting += dgvBooks_CellFormatting;
+            dgvBooks.DoubleClick += dgvBooks_DoubleClick;
             // 
             // Id
             // 

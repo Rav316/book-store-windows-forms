@@ -23,7 +23,16 @@ namespace book_store.database.repository
         public async Task<T?> FindByIdAsync(int id) => await dbSet.FindAsync(id);
         public async Task CreateAsync(T entity) { await dbSet.AddAsync(entity); await context.SaveChangesAsync(); }
         public async Task UpdateAsync(T entity) { dbSet.Update(entity); await context.SaveChangesAsync(); }
-        public async Task DeleteAsync(T entity) { dbSet.Remove(entity); await context.SaveChangesAsync(); }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var entity = await FindByIdAsync(id);
+            if (entity != null)
+            {
+                dbSet.Remove(entity);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 
 }

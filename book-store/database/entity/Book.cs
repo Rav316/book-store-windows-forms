@@ -36,6 +36,8 @@ namespace book_store.database.entity
         public virtual Category? Category { get; set; }
 
         public string? Description { get; set; }
+        public int? YearOfPublishing { get; set; }
+        public string? Isbn { get; set; }
 
         [ForeignKey("PublisherId")]
         public int? PublisherId { get; set; }

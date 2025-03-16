@@ -1,6 +1,7 @@
 ﻿using book_store.database.entity;
 using book_store.dto.book;
 using book_store.service;
+using book_store.util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,30 +35,30 @@ namespace book_store.form
             dgvBooks.Columns[2].DataPropertyName = "AuthorFullName";
             dgvBooks.Columns[3].DataPropertyName = "Image";
             dgvBooks.Columns[4].DataPropertyName = "Price";
-            dgvBooks.Columns[5].DataPropertyName = "IsInFavorites";
+            dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
         private async void FormMain_Load(object sender, EventArgs e)
         {
-            
+
 
             categories = await categoryService.FindAll();
-            categories.Insert(0, new Category { Id = 0, Name = "Все"});
+            categories.Insert(0, new Category { Id = 0, Name = "Все" });
 
             cbCategory.DisplayMember = "Name";
             cbCategory.ValueMember = "Id";
             cbCategory.DataSource = categories;
 
             coverTypes = await coverTypeService.FindAll();
-            coverTypes.Insert(0, new CoverType { Id = 0, Type = "Не выбрана"}); 
+            coverTypes.Insert(0, new CoverType { Id = 0, Type = "Не выбрана" });
 
             cbCoverType.DisplayMember = "Type";
             cbCoverType.ValueMember = "Id";
             cbCoverType.DataSource = coverTypes;
 
             languages = await languageService.FindAll();
-            languages.Insert(0, new Language { Id = 0, Name = "Не выбран"});
+            languages.Insert(0, new Language { Id = 0, Name = "Не выбран" });
 
             cbLanguage.DisplayMember = "Name";
             cbLanguage.ValueMember = "Id";
@@ -78,16 +79,10 @@ namespace book_store.form
             allBooks = await bookService.FindAllWithUserInfo();
             allBooks.ForEach(book =>
             {
-                if (book.ImagePath != null && !book.ImagePath.Equals(""))
-                {
-                    book.image = Image.FromFile(book.ImagePath);
-                } else
-                {
-                    book.image = Image.FromFile(@"..\..\..\Resources\Books\book.png");
-                }
+                book.image = ImageUtils.GetImageByPath(book.ImagePath);
             });
             dgvBooks.DataSource = allBooks;
-            
+
         }
 
         private void dgvBooks_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -165,6 +160,17 @@ namespace book_store.form
             FormFavorites formFavorites = new FormFavorites();
             Close();
             formFavorites.Show();
+        }
+
+        private void dgvBooks_DoubleClick(object sender, EventArgs e)
+        {
+            selectedRowIndex = dgvBooks.CurrentRow.Index;
+            if(selectedRowIndex >= 0)
+            {
+                FormBookInfo formBookInfo = new FormBookInfo(allBooks[selectedRowIndex].Id);
+                formBookInfo.ShowDialog();
+                ViewAllBooks();
+            }
         }
     }
 }

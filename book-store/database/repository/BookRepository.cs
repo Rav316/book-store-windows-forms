@@ -43,5 +43,15 @@ namespace book_store.database.repository
 
             return (minPrice ?? 0, maxPrice ?? 0);
         }
+
+        public bool IsInFavoritesForUser(int bookId, int userId)
+        {
+            return context.Favorites.Any(f => f.BookId == bookId && f.UserId == userId);
+        }
+
+        public bool IsInCartForUser(int bookId, int userId)
+        {
+            return context.Carts.Any(c => c.BookId == bookId && c.UserId == userId);
+        }
     }
 }

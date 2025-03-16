@@ -88,6 +88,7 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox2.TabIndex = 21;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // labelBookInfo
             // 
@@ -517,6 +518,7 @@
             pbInFavorites.SizeMode = PictureBoxSizeMode.Zoom;
             pbInFavorites.TabIndex = 62;
             pbInFavorites.TabStop = false;
+            pbInFavorites.Click += pbInFavorites_Click;
             // 
             // buttonInCart
             // 
@@ -591,7 +593,7 @@
             Controls.Add(pictureBox2);
             Name = "FormBookInfo";
             Text = "Информация о книге";
-            Load += this.FormBookInfo_Load;
+            Load += FormBookInfo_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbBookImage).EndInit();
             panel1.ResumeLayout(false);
