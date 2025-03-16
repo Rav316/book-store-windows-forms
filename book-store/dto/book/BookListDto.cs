@@ -15,6 +15,7 @@ namespace book_store.dto.book
         public string AuthorFullName { get; set; }
         public string? ImagePath { get; set; }
         public bool IsFavorite { get; set; }
+        public int? CartItemId { get; set; }
         public bool IsInCart { get; set; }
         public int Category { get; set; }
         public int CoverType { get; set; }

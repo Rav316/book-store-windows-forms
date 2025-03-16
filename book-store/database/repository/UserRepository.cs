@@ -22,5 +22,34 @@ namespace book_store.database.repository
         {
             return await context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
+
+        public async Task AddBookToFavorites(int userId, int bookId)
+        {
+            var favorite = await context.Favorites
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.BookId == bookId);
+
+            if (favorite == null)
+            {
+                context.Favorites.Add(new Favorite { UserId = userId, BookId = bookId });
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteBookFromFavorites(int userId, int bookId)
+        {
+            var favorite = await context.Favorites
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.BookId == bookId);
+            if(favorite != null)
+            {
+                context.Favorites.Remove(favorite);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public bool IsBookInFavorites(int userId, int bookId)
+        {
+            return context.Favorites
+                .Any(f => f.UserId == userId && f.BookId == bookId);
+        }
     }
 }

@@ -32,15 +32,16 @@
             labelFavorites = new Label();
             buttonSave = new Button();
             buttonCancel = new Button();
-            dgvBooks = new DataGridView();
             pictureBox1 = new PictureBox();
+            dgvBooks = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
-            BookName = new DataGridViewTextBoxColumn();
-            Author = new DataGridViewTextBoxColumn();
+            Title = new DataGridViewTextBoxColumn();
+            AuthorFullName = new DataGridViewTextBoxColumn();
             BookImage = new DataGridViewImageColumn();
             Price = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
+            IsInFavorites = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
             // 
             // labelFavorites
@@ -66,6 +67,7 @@
             buttonSave.TabIndex = 4;
             buttonSave.Text = "Сохранить";
             buttonSave.UseVisualStyleBackColor = false;
+            buttonSave.Click += buttonSave_Click;
             // 
             // buttonCancel
             // 
@@ -80,18 +82,7 @@
             buttonCancel.TabIndex = 5;
             buttonCancel.Text = "Отменить изменения";
             buttonCancel.UseVisualStyleBackColor = false;
-            // 
-            // dgvBooks
-            // 
-            dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price });
-            dgvBooks.Location = new Point(12, 63);
-            dgvBooks.Name = "dgvBooks";
-            dgvBooks.ReadOnly = true;
-            dgvBooks.RowTemplate.Height = 136;
-            dgvBooks.Size = new Size(776, 375);
-            dgvBooks.TabIndex = 19;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // pictureBox1
             // 
@@ -105,24 +96,32 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // dgvBooks
+            // 
+            dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, Title, AuthorFullName, BookImage, Price, IsInFavorites });
+            dgvBooks.Location = new Point(21, 75);
+            dgvBooks.Name = "dgvBooks";
+            dgvBooks.RowTemplate.Height = 136;
+            dgvBooks.Size = new Size(767, 363);
+            dgvBooks.TabIndex = 21;
+            // 
             // Id
             // 
             Id.HeaderText = "id";
             Id.Name = "Id";
-            Id.ReadOnly = true;
             Id.Visible = false;
             // 
-            // BookName
+            // Title
             // 
-            BookName.HeaderText = "Название книги";
-            BookName.Name = "BookName";
-            BookName.ReadOnly = true;
+            Title.HeaderText = "Название книги";
+            Title.Name = "Title";
             // 
-            // Author
+            // AuthorFullName
             // 
-            Author.HeaderText = "Автор";
-            Author.Name = "Author";
-            Author.ReadOnly = true;
+            AuthorFullName.HeaderText = "Автор";
+            AuthorFullName.Name = "AuthorFullName";
             // 
             // BookImage
             // 
@@ -130,29 +129,33 @@
             BookImage.HeaderText = "Изображение";
             BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
             BookImage.Name = "BookImage";
-            BookImage.ReadOnly = true;
             BookImage.Resizable = DataGridViewTriState.True;
             // 
             // Price
             // 
             Price.HeaderText = "Цена";
             Price.Name = "Price";
-            Price.ReadOnly = true;
+            // 
+            // IsInFavorites
+            // 
+            IsInFavorites.HeaderText = "В избранном";
+            IsInFavorites.Name = "IsInFavorites";
             // 
             // FormFavorites
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(pictureBox1);
             Controls.Add(dgvBooks);
+            Controls.Add(pictureBox1);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
             Controls.Add(labelFavorites);
             Name = "FormFavorites";
             Text = "Избранное";
-            ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
+            Load += FormFavorites_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -162,12 +165,13 @@
         private Label labelFavorites;
         private Button buttonSave;
         private Button buttonCancel;
-        private DataGridView dgvBooks;
         private PictureBox pictureBox1;
+        private DataGridView dgvBooks;
         private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn BookName;
-        private DataGridViewTextBoxColumn Author;
+        private DataGridViewTextBoxColumn Title;
+        private DataGridViewTextBoxColumn AuthorFullName;
         private DataGridViewImageColumn BookImage;
         private DataGridViewTextBoxColumn Price;
+        private DataGridViewCheckBoxColumn IsInFavorites;
     }
 }

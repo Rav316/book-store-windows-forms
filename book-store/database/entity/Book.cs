@@ -54,5 +54,7 @@ namespace book_store.database.entity
         [ForeignKey("LanguageId")]
         public int? LanguageId { get; set; }
         public virtual Language? Language { get; set; }
+
+        public virtual List<User> FavoritedByUsers { get; set; } = new List<User>();
     }
 }

@@ -19,12 +19,13 @@ namespace book_store.database.repository
             const string query = """
                     SELECT b.id AS Id, b.title AS Title, b.category_id AS Category, b.image_path AS ImagePath,
                     b.cover_type_id AS CoverType, b.language_id AS Language, b.price AS Price,
+                    c.id AS cartItemId,
                         CASE WHEN f.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsFavorite,
                         CASE WHEN c.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsInCart,
                         CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName
                     FROM book b
                     LEFT JOIN favorites f ON b.id = f.book_id AND f.user_id = {0}
-                    LEFT JOIN cart c ON b.id = c.book_id AND c.user_id = {0}
+                    LEFT JOIN cart_item c ON b.id = c.book_id AND c.user_id = {0}
                     LEFT JOIN author a ON b.author_id = a.id
                     ORDER BY b.id
                     """;
@@ -44,14 +45,9 @@ namespace book_store.database.repository
             return (minPrice ?? 0, maxPrice ?? 0);
         }
 
-        public bool IsInFavoritesForUser(int bookId, int userId)
-        {
-            return context.Favorites.Any(f => f.BookId == bookId && f.UserId == userId);
-        }
-
         public bool IsInCartForUser(int bookId, int userId)
         {
-            return context.Carts.Any(c => c.BookId == bookId && c.UserId == userId);
+            return context.CartItems.Any(c => c.BookId == bookId && c.UserId == userId);
         }
     }
 }

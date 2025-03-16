@@ -34,8 +34,8 @@ namespace book_store.form
             labelSearch = new Label();
             labelFavorites = new Label();
             labelCart = new Label();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            pbFavorites = new PictureBox();
+            pbCart = new PictureBox();
             cbCategory = new ComboBox();
             labelCategory = new Label();
             tbAuthor = new TextBox();
@@ -60,8 +60,10 @@ namespace book_store.form
             Price = new DataGridViewTextBoxColumn();
             IsInFavorites = new DataGridViewCheckBoxColumn();
             IsInCart = new DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            FavoriteItemId = new DataGridViewTextBoxColumn();
+            CartItemId = new DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)pbFavorites).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCart).BeginInit();
             gbFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudMaxPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudMinPrice).BeginInit();
@@ -110,28 +112,28 @@ namespace book_store.form
             labelCart.TabIndex = 10;
             labelCart.Text = "Корзина";
             // 
-            // pictureBox1
+            // pbFavorites
             // 
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(626, 26);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 20);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 11;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pbFavorites.Cursor = Cursors.Hand;
+            pbFavorites.Image = (Image)resources.GetObject("pbFavorites.Image");
+            pbFavorites.Location = new Point(626, 26);
+            pbFavorites.Name = "pbFavorites";
+            pbFavorites.Size = new Size(41, 20);
+            pbFavorites.SizeMode = PictureBoxSizeMode.Zoom;
+            pbFavorites.TabIndex = 11;
+            pbFavorites.TabStop = false;
+            pbFavorites.Click += pbFavorites_Click;
             // 
-            // pictureBox2
+            // pbCart
             // 
-            pictureBox2.Cursor = Cursors.Hand;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(710, 26);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(41, 20);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 12;
-            pictureBox2.TabStop = false;
+            pbCart.Cursor = Cursors.Hand;
+            pbCart.Image = (Image)resources.GetObject("pbCart.Image");
+            pbCart.Location = new Point(710, 26);
+            pbCart.Name = "pbCart";
+            pbCart.Size = new Size(41, 20);
+            pbCart.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCart.TabIndex = 12;
+            pbCart.TabStop = false;
             // 
             // cbCategory
             // 
@@ -303,13 +305,13 @@ namespace book_store.form
             // 
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart });
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, FavoriteItemId, CartItemId });
             dgvBooks.Location = new Point(182, 83);
             dgvBooks.Name = "dgvBooks";
-            dgvBooks.ReadOnly = true;
             dgvBooks.RowTemplate.Height = 136;
             dgvBooks.Size = new Size(569, 338);
             dgvBooks.TabIndex = 18;
+            dgvBooks.CellContentClick += dgvBooks_CellContentClick;
             dgvBooks.CellFormatting += dgvBooks_CellFormatting;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
             // 
@@ -317,20 +319,17 @@ namespace book_store.form
             // 
             Id.HeaderText = "id";
             Id.Name = "Id";
-            Id.ReadOnly = true;
             Id.Visible = false;
             // 
             // BookName
             // 
             BookName.HeaderText = "Название книги";
             BookName.Name = "BookName";
-            BookName.ReadOnly = true;
             // 
             // Author
             // 
             Author.HeaderText = "Автор";
             Author.Name = "Author";
-            Author.ReadOnly = true;
             // 
             // BookImage
             // 
@@ -338,26 +337,34 @@ namespace book_store.form
             BookImage.HeaderText = "Изображение";
             BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
             BookImage.Name = "BookImage";
-            BookImage.ReadOnly = true;
             BookImage.Resizable = DataGridViewTriState.True;
             // 
             // Price
             // 
             Price.HeaderText = "Цена";
             Price.Name = "Price";
-            Price.ReadOnly = true;
             // 
             // IsInFavorites
             // 
             IsInFavorites.HeaderText = "В избранном";
             IsInFavorites.Name = "IsInFavorites";
-            IsInFavorites.ReadOnly = true;
             // 
             // IsInCart
             // 
             IsInCart.HeaderText = "В корзине";
             IsInCart.Name = "IsInCart";
-            IsInCart.ReadOnly = true;
+            // 
+            // FavoriteItemId
+            // 
+            FavoriteItemId.HeaderText = "favoriteItemId";
+            FavoriteItemId.Name = "FavoriteItemId";
+            FavoriteItemId.Visible = false;
+            // 
+            // CartItemId
+            // 
+            CartItemId.HeaderText = "cartItemId";
+            CartItemId.Name = "CartItemId";
+            CartItemId.Visible = false;
             // 
             // FormMain
             // 
@@ -366,8 +373,8 @@ namespace book_store.form
             ClientSize = new Size(800, 450);
             Controls.Add(dgvBooks);
             Controls.Add(gbFilters);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbCart);
+            Controls.Add(pbFavorites);
             Controls.Add(labelCart);
             Controls.Add(labelFavorites);
             Controls.Add(labelSearch);
@@ -375,8 +382,8 @@ namespace book_store.form
             Name = "FormMain";
             Text = "Главная";
             Load += FormMain_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFavorites).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCart).EndInit();
             gbFilters.ResumeLayout(false);
             gbFilters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudMaxPrice).EndInit();
@@ -392,8 +399,8 @@ namespace book_store.form
         private Label labelSearch;
         private Label labelFavorites;
         private Label labelCart;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private PictureBox pbFavorites;
+        private PictureBox pbCart;
         private ComboBox cbCategory;
         private Label labelCategory;
         private TextBox tbAuthor;
@@ -406,6 +413,11 @@ namespace book_store.form
         private ComboBox cbCoverType;
         private Label labelCoverType;
         private DataGridView dgvBooks;
+        private Label labelPrice;
+        private NumericUpDown nudMaxPrice;
+        private NumericUpDown nudMinPrice;
+        private Label labelMaxPrice;
+        private Label labelMinPrice;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn BookName;
         private DataGridViewTextBoxColumn Author;
@@ -413,10 +425,7 @@ namespace book_store.form
         private DataGridViewTextBoxColumn Price;
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
-        private Label labelPrice;
-        private NumericUpDown nudMaxPrice;
-        private NumericUpDown nudMinPrice;
-        private Label labelMaxPrice;
-        private Label labelMinPrice;
+        private DataGridViewTextBoxColumn FavoriteItemId;
+        private DataGridViewTextBoxColumn CartItemId;
     }
 }

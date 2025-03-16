@@ -23,13 +23,15 @@ namespace book_store.context
         public DbSet<CoverType> CoverTypes { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Favorites> Favorites { get; set; }
-        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
                     new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                     .UseNpgsql("Server=localhost; Port=5432; DataBase=book_store_windows_forms; User Id=postgres; Password=1")
                     .UseLazyLoadingProxies()
+                    .LogTo(message => System.Diagnostics.Debug.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information)
+                    .EnableSensitiveDataLogging()
                     .Options));
 
         public static AppDbContext INSTANCE => _instance.Value;
@@ -43,8 +45,7 @@ namespace book_store.context
             modelBuilder.Entity<CoverType>().ToTable("cover_type");
             modelBuilder.Entity<Language>().ToTable("language");
             modelBuilder.Entity<User>().ToTable("users");
-            modelBuilder.Entity<Favorites>().ToTable("favorites");
-            modelBuilder.Entity<Cart>().ToTable("cart");
+            modelBuilder.Entity<CartItem>().ToTable("cart_item");
             modelBuilder.Entity<Book>()
                 .HasOne(b => b.Category)
                 .WithMany()
@@ -69,6 +70,9 @@ namespace book_store.context
                 .HasOne(b => b.Language)
                 .WithMany()
                 .HasForeignKey(b => b.LanguageId);
+
+            modelBuilder.Entity<Favorite>().ToTable("favorites")
+            .HasKey(f => new { f.BookId, f.UserId });
 
             base.OnModelCreating(modelBuilder);
 

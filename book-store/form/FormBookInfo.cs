@@ -91,10 +91,7 @@ namespace book_store.form
             }
             else
             {
-                bookService.AddToFavorites(new Favorites
-                {
-                    BookId = bookId
-                });
+                bookService.AddToFavorites(bookId);
                 isInFavorites = true;
                 pbInFavorites.Image = Image.FromFile(@"..\..\..\Resources\images\marked-favorites-big.png");
             }

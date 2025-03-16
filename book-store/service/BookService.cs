@@ -14,7 +14,7 @@ namespace book_store.service
     internal class BookService
     {
         private readonly BookRepository bookRepository = new BookRepository(AppDbContext.INSTANCE);
-        private readonly FavoritesRepository favoritesRepository = new FavoritesRepository(AppDbContext.INSTANCE);
+        private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
 
 
         public Task<List<BookListDto>> FindAllWithUserInfo()
@@ -32,25 +32,31 @@ namespace book_store.service
             return bookRepository.GetMinAndMaxPrice();
         }
 
-        public bool IsInFavoritesForCurrentUser(int bookId)
-        {
-            return bookRepository.IsInFavoritesForUser(bookId, SecurityContext.Authentication.Id);
-        }
-
         public bool IsInCartForCurrentUser(int bookId)
         {
             return bookRepository.IsInCartForUser(bookId, SecurityContext.Authentication.Id);
         }
 
-        public void RemoveFromFavorites(int bookId)
+        public async Task RemoveFromFavorites(int bookId)
         {
-            favoritesRepository.DeleteByBookAndUser(bookId, SecurityContext.Authentication.Id);
+            await userRepository.DeleteBookFromFavorites(SecurityContext.Authentication.Id, bookId);
         }
 
-        public async void AddToFavorites(Favorites favorites)
+        public async Task AddToFavorites(int bookId)
         {
-            favorites.UserId = SecurityContext.Authentication.Id;
-            await favoritesRepository.CreateAsync(favorites);
+            await userRepository.AddBookToFavorites(SecurityContext.Authentication.Id, bookId);
         }
+
+        public async Task<List<Book>> FindAllFavoritesByUser()
+        {
+            var currentUser = await userRepository.FindByIdAsync(SecurityContext.Authentication.Id);
+            return currentUser!.FavoriteBooks;
+        }
+
+        public bool IsInFavoritesForCurrentUser(int bookId)
+        {
+            return userRepository.IsBookInFavorites(SecurityContext.Authentication.Id, bookId);
+        }
+
     }
 }

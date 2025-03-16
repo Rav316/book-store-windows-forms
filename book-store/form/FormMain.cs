@@ -31,12 +31,19 @@ namespace book_store.form
             InitializeComponent();
             dgvBooks.AutoGenerateColumns = false;
             dgvBooks.Columns[0].DataPropertyName = "Id";
+            dgvBooks.Columns[0].ReadOnly = true;
             dgvBooks.Columns[1].DataPropertyName = "Title";
+            dgvBooks.Columns[1].ReadOnly = true;
             dgvBooks.Columns[2].DataPropertyName = "AuthorFullName";
+            dgvBooks.Columns[2].ReadOnly = true;
             dgvBooks.Columns[3].DataPropertyName = "Image";
+            dgvBooks.Columns[3].ReadOnly = true;
             dgvBooks.Columns[4].DataPropertyName = "Price";
+            dgvBooks.Columns[4].ReadOnly = true;
             dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
+            dgvBooks.Columns[7].DataPropertyName = "FavoriteItemId";
+            dgvBooks.Columns[8].DataPropertyName = "CartItemId";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
         private async void FormMain_Load(object sender, EventArgs e)
@@ -155,7 +162,7 @@ namespace book_store.form
             UpdateFilter();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pbFavorites_Click(object sender, EventArgs e)
         {
             FormFavorites formFavorites = new FormFavorites();
             Close();
@@ -165,11 +172,31 @@ namespace book_store.form
         private void dgvBooks_DoubleClick(object sender, EventArgs e)
         {
             selectedRowIndex = dgvBooks.CurrentRow.Index;
-            if(selectedRowIndex >= 0)
+            if (selectedRowIndex >= 0)
             {
                 FormBookInfo formBookInfo = new FormBookInfo(allBooks[selectedRowIndex].Id);
                 formBookInfo.ShowDialog();
                 ViewAllBooks();
+            }
+        }
+
+        private async void dgvBooks_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                {
+                    bool isChecked = (bool)checkBoxCell.Value;
+
+                    if (isChecked)
+                    {
+                        await bookService.AddToFavorites((int)dgvBooks[0, e.RowIndex].Value);
+                    } else
+                    {
+                        await bookService.RemoveFromFavorites((int)dgvBooks[0, e.RowIndex].Value);   
+                    }
+                }
             }
         }
     }
