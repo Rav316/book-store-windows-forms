@@ -60,7 +60,6 @@ namespace book_store.form
             Price = new DataGridViewTextBoxColumn();
             IsInFavorites = new DataGridViewCheckBoxColumn();
             IsInCart = new DataGridViewCheckBoxColumn();
-            FavoriteItemId = new DataGridViewTextBoxColumn();
             CartItemId = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbFavorites).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCart).BeginInit();
@@ -134,6 +133,7 @@ namespace book_store.form
             pbCart.SizeMode = PictureBoxSizeMode.Zoom;
             pbCart.TabIndex = 12;
             pbCart.TabStop = false;
+            pbCart.Click += pbCart_Click;
             // 
             // cbCategory
             // 
@@ -305,7 +305,7 @@ namespace book_store.form
             // 
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, FavoriteItemId, CartItemId });
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, CartItemId });
             dgvBooks.Location = new Point(182, 83);
             dgvBooks.Name = "dgvBooks";
             dgvBooks.RowTemplate.Height = 136;
@@ -353,12 +353,6 @@ namespace book_store.form
             // 
             IsInCart.HeaderText = "В корзине";
             IsInCart.Name = "IsInCart";
-            // 
-            // FavoriteItemId
-            // 
-            FavoriteItemId.HeaderText = "favoriteItemId";
-            FavoriteItemId.Name = "FavoriteItemId";
-            FavoriteItemId.Visible = false;
             // 
             // CartItemId
             // 
@@ -425,7 +419,6 @@ namespace book_store.form
         private DataGridViewTextBoxColumn Price;
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
-        private DataGridViewTextBoxColumn FavoriteItemId;
         private DataGridViewTextBoxColumn CartItemId;
     }
 }

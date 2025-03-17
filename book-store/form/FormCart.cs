@@ -1,11 +1,9 @@
-﻿using book_store.database.entity;
-using book_store.dto.book;
+﻿using book_store.dto.book;
 using book_store.service;
 using book_store.util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -15,12 +13,12 @@ using System.Windows.Forms;
 
 namespace book_store.form
 {
-    public partial class FormFavorites : Form
+    public partial class FormCart : Form
     {
         private readonly BookService bookService = new BookService();
         private List<BookListDto> allBooks = new List<BookListDto>();
         int selectedRowIndex = -1;
-        public FormFavorites()
+        public FormCart()
         {
             InitializeComponent();
             dgvBooks.AutoGenerateColumns = false;
@@ -36,17 +34,19 @@ namespace book_store.form
             dgvBooks.Columns[4].ReadOnly = true;
             dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
+            dgvBooks.Columns[7].DataPropertyName = "Quantity";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
         private void ViewAllBooks()
         {
-            allBooks = bookService.FindAllFavoritesWithUserInfo();
+            allBooks = bookService.FindAllInCartWithUserInfo();
             allBooks.ForEach(book =>
             {
                 book.image = ImageUtils.GetImageByPath(book.ImagePath);
             });
             dgvBooks.DataSource = allBooks;
+            labelTotalSum.Text =  $"{CalculateTotalSum()} ₽";
 
         }
 
@@ -62,27 +62,31 @@ namespace book_store.form
             formMain.Show();
         }
 
-        private void FormFavorites_Load(object sender, EventArgs e)
-        {
-            ViewAllBooks();
-            UpdateGridViewVisibility();
-        }
-
         private void UpdateGridViewVisibility()
         {
             if (dgvBooks.Rows.Count == 0)
             {
                 dgvBooks.Visible = false;
-                buttonClearFavorites.Visible = false;
+                labelResult.Visible = false;
+                labelTotalSum.Visible = false;
+                buttonPlaceOrder.Visible = false;
                 labelEmpty.Visible = true;
                 buttonBackToMainForm.Visible = true;
             } else
             {
                 dgvBooks.Visible = true;
-                buttonClearFavorites.Visible = true;
+                labelResult.Visible = true;
+                labelTotalSum.Visible = true;
+                buttonPlaceOrder.Visible = true;
                 labelEmpty.Visible = false;
                 buttonBackToMainForm.Visible = false;
             }
+        }
+
+        private void FormCart_Load(object sender, EventArgs e)
+        {
+            ViewAllBooks();
+            UpdateGridViewVisibility();
         }
 
         private void buttonBackToMainForm_Click(object sender, EventArgs e)
@@ -112,6 +116,20 @@ namespace book_store.form
             }
         }
 
+        private void dgvBooks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 7)
+            {
+                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewTextBoxCell textBoxCell)
+                {
+                    bookService.UpdateQuantityInCartForCurrentUser(
+                        (int)dgvBooks[0, e.RowIndex].Value, (int)dgvBooks[e.ColumnIndex, e.RowIndex].Value
+                    );
+                    labelTotalSum.Text = $"{CalculateTotalSum()} ₽";
+                }
+            }
+        }
+
         private async void dgvBooks_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 5)
@@ -121,14 +139,12 @@ namespace book_store.form
                 {
                     bool isChecked = (bool)checkBoxCell.Value;
 
-                    if (!isChecked)
+                    if (isChecked)
+                    {
+                        await bookService.AddToFavorites((int)dgvBooks[0, e.RowIndex].Value);
+                    } else
                     {
                         await bookService.RemoveFromFavorites((int)dgvBooks[0, e.RowIndex].Value);
-                        var list = (List<BookListDto>)dgvBooks.DataSource;
-                        list.RemoveAt(e.RowIndex);
-                        dgvBooks.DataSource = null;
-                        dgvBooks.DataSource = list;
-                        UpdateGridViewVisibility();
                     }
                 }
             } else if (e.ColumnIndex == 6)
@@ -138,33 +154,42 @@ namespace book_store.form
                 {
                     bool isChecked = (bool)checkBoxCell.Value;
 
-                    if (isChecked)
-                    {
-                        await bookService.AddToCart((int)dgvBooks[0, e.RowIndex].Value, 1);
-                    } else
+                    if (!isChecked)
                     {
                         await bookService.RemoveFromCart((int)dgvBooks[0, e.RowIndex].Value);
+                        var list = (List<BookListDto>)dgvBooks.DataSource;
+                        list.RemoveAt(e.RowIndex);
+                        dgvBooks.DataSource = null;
+                        dgvBooks.DataSource = list;
+                        UpdateGridViewVisibility();
+                        labelTotalSum.Text = $"{CalculateTotalSum()} ₽";
                     }
                 }
             }
         }
 
-        private void buttonClearFavorites_Click(object sender, EventArgs e)
+        private void dgvBooks_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-                "Вы точно хотите удалить все книги из избранного?",
-                "Подтверждение удаления",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
+            dgvBooks.CancelEdit();
+            MessageBox.Show("Введите корректное положительное число.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            e.Cancel = false;
+        }
 
-            if (result == DialogResult.Yes)
+        private int CalculateTotalSum()
+        {
+            int totalSum = 0;
+            foreach (DataGridViewRow row in dgvBooks.Rows)
             {
-                bookService.RemoveAllFavoritesForCurrentUser();
-                ViewAllBooks();
-                UpdateGridViewVisibility();
-                MessageBox.Show("Все книги удалены из избранного.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (row.Cells[4].Value != null && row.Cells[5].Value != null)
+                {
+                    if (int.TryParse(row.Cells[4].Value.ToString(), out int value1) &&
+                        int.TryParse(row.Cells[7].Value.ToString(), out int value2))
+                    {
+                        totalSum += value1 * value2;
+                    }
+                }
             }
+            return totalSum;
         }
     }
 }

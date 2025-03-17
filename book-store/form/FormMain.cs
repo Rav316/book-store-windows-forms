@@ -42,8 +42,6 @@ namespace book_store.form
             dgvBooks.Columns[4].ReadOnly = true;
             dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
-            dgvBooks.Columns[7].DataPropertyName = "FavoriteItemId";
-            dgvBooks.Columns[8].DataPropertyName = "CartItemId";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
         private async void FormMain_Load(object sender, EventArgs e)
@@ -194,11 +192,10 @@ namespace book_store.form
                         await bookService.AddToFavorites((int)dgvBooks[0, e.RowIndex].Value);
                     } else
                     {
-                        await bookService.RemoveFromFavorites((int)dgvBooks[0, e.RowIndex].Value);   
+                        await bookService.RemoveFromFavorites((int)dgvBooks[0, e.RowIndex].Value);
                     }
                 }
-            }
-            else if(e.ColumnIndex == 6)
+            } else if (e.ColumnIndex == 6)
             {
                 dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
                 if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
@@ -214,6 +211,13 @@ namespace book_store.form
                     }
                 }
             }
+        }
+
+        private void pbCart_Click(object sender, EventArgs e)
+        {
+            FormCart formCart = new FormCart();
+            Close();
+            formCart.Show();
         }
     }
 }

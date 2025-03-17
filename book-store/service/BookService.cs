@@ -28,6 +28,11 @@ namespace book_store.service
             return bookRepository.FindAllFavoritesWithUserInfo(SecurityContext.Authentication.Id);
         }
 
+        public List<BookListDto> FindAllInCartWithUserInfo()
+        {
+            return bookRepository.FindAllInCartWithUserInfo(SecurityContext.Authentication.Id);
+        }
+
         public Task<Book?> FindById(int id)
         {
             return bookRepository.FindByIdAsync(id) ?? throw new EntityNotFoundException($"книга с id {id} не найдена");
@@ -77,6 +82,11 @@ namespace book_store.service
         public void RemoveAllFavoritesForCurrentUser()
         {
             bookRepository.RemoveAllFavoritesForUser(SecurityContext.Authentication.Id);
+        }
+
+        public void UpdateQuantityInCartForCurrentUser(int bookId, int newQuantity)
+        {
+            cartItemRepository.UpdateQuantity(SecurityContext.Authentication.Id, bookId, newQuantity);
         }
     }
 }

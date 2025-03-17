@@ -16,6 +16,7 @@ namespace book_store.dto.book
         public string? ImagePath { get; set; }
         public bool IsFavorite { get; set; }
         public bool IsInCart { get; set; }
+        public int? Quantity { get; set; }
         public int Category { get; set; }
         public int CoverType { get; set; }
         public int Language { get; set; }

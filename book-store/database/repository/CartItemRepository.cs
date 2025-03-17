@@ -41,5 +41,15 @@ namespace book_store.database.repository
                 await context.SaveChangesAsync();
             }
         }
+
+        public void UpdateQuantity(int userId, int bookId, int newQuantity)
+        {
+            var cartItem = context.CartItems.FirstOrDefault(ci => ci.UserId == userId && ci.BookId == bookId);
+            if(cartItem != null)
+            {
+                cartItem.Quantity = newQuantity;
+                context.SaveChanges();
+            }
+        }
     }
 }
