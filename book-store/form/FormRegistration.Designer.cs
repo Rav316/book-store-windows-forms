@@ -47,7 +47,7 @@
             // 
             // buttonRegister
             // 
-            buttonRegister.BackColor = Color.FromArgb(88, 3, 154);
+            buttonRegister.BackColor = Color.FromArgb(41, 2, 71);
             buttonRegister.Cursor = Cursors.Hand;
             buttonRegister.FlatStyle = FlatStyle.Flat;
             buttonRegister.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);

@@ -18,12 +18,17 @@ namespace book_store.service
         private readonly CartItemRepository cartItemRepository = new CartItemRepository(AppDbContext.INSTANCE);
 
 
-        public Task<List<BookListDto>> FindAllWithUserInfo()
+        public List<BookListDto> FindAllWithUserInfo()
         {
             return bookRepository.FindAllWithUserInfo(SecurityContext.Authentication.Id);
         }
 
-        public Task<Book> FindById(int id)
+        public List<BookListDto> FindAllFavoritesWithUserInfo()
+        {
+            return bookRepository.FindAllFavoritesWithUserInfo(SecurityContext.Authentication.Id);
+        }
+
+        public Task<Book?> FindById(int id)
         {
             return bookRepository.FindByIdAsync(id) ?? throw new EntityNotFoundException($"книга с id {id} не найдена");
         }
@@ -67,6 +72,11 @@ namespace book_store.service
         public async Task RemoveFromCart(int bookId)
         {
             await cartItemRepository.RemoveFromCartAsync(SecurityContext.Authentication.Id, bookId);
+        }
+
+        public void RemoveAllFavoritesForCurrentUser()
+        {
+            bookRepository.RemoveAllFavoritesForUser(SecurityContext.Authentication.Id);
         }
     }
 }

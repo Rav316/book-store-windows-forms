@@ -81,9 +81,9 @@ namespace book_store.form
             ViewAllBooks();
         }
 
-        private async void ViewAllBooks()
+        private void ViewAllBooks()
         {
-            allBooks = await bookService.FindAllWithUserInfo();
+            allBooks = bookService.FindAllWithUserInfo();
             allBooks.ForEach(book =>
             {
                 book.image = ImageUtils.GetImageByPath(book.ImagePath);

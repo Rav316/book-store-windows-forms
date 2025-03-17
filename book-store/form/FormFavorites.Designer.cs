@@ -30,17 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFavorites));
             labelFavorites = new Label();
-            buttonSave = new Button();
-            buttonCancel = new Button();
-            pictureBox1 = new PictureBox();
+            pbBack = new PictureBox();
             dgvBooks = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
-            Title = new DataGridViewTextBoxColumn();
-            AuthorFullName = new DataGridViewTextBoxColumn();
+            BookName = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
             BookImage = new DataGridViewImageColumn();
             Price = new DataGridViewTextBoxColumn();
             IsInFavorites = new DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            IsInCart = new DataGridViewCheckBoxColumn();
+            FavoriteItemId = new DataGridViewTextBoxColumn();
+            CartItemId = new DataGridViewTextBoxColumn();
+            labelEmpty = new Label();
+            buttonBackToMainForm = new Button();
+            buttonClearFavorites = new Button();
+            ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
             // 
@@ -54,58 +58,31 @@
             labelFavorites.TabIndex = 1;
             labelFavorites.Text = "Избранное";
             // 
-            // buttonSave
+            // pbBack
             // 
-            buttonSave.BackColor = Color.FromArgb(88, 3, 154);
-            buttonSave.Cursor = Cursors.Hand;
-            buttonSave.FlatStyle = FlatStyle.Flat;
-            buttonSave.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSave.ForeColor = SystemColors.Window;
-            buttonSave.Location = new Point(582, 6);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(206, 50);
-            buttonSave.TabIndex = 4;
-            buttonSave.Text = "Сохранить";
-            buttonSave.UseVisualStyleBackColor = false;
-            buttonSave.Click += buttonSave_Click;
-            // 
-            // buttonCancel
-            // 
-            buttonCancel.BackColor = Color.FromArgb(88, 3, 154);
-            buttonCancel.Cursor = Cursors.Hand;
-            buttonCancel.FlatStyle = FlatStyle.Flat;
-            buttonCancel.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonCancel.ForeColor = SystemColors.Window;
-            buttonCancel.Location = new Point(357, 6);
-            buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(206, 50);
-            buttonCancel.TabIndex = 5;
-            buttonCancel.Text = "Отменить изменения";
-            buttonCancel.UseVisualStyleBackColor = false;
-            buttonCancel.Click += buttonCancel_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(21, 28);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(24, 10);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox1.TabIndex = 20;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            pbBack.Cursor = Cursors.Hand;
+            pbBack.Image = (Image)resources.GetObject("pbBack.Image");
+            pbBack.Location = new Point(21, 28);
+            pbBack.Name = "pbBack";
+            pbBack.Size = new Size(24, 10);
+            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.TabIndex = 20;
+            pbBack.TabStop = false;
+            pbBack.Click += pbBack_Click;
             // 
             // dgvBooks
             // 
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, Title, AuthorFullName, BookImage, Price, IsInFavorites });
-            dgvBooks.Location = new Point(21, 75);
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, FavoriteItemId, CartItemId });
+            dgvBooks.Location = new Point(21, 67);
             dgvBooks.Name = "dgvBooks";
             dgvBooks.RowTemplate.Height = 136;
-            dgvBooks.Size = new Size(767, 363);
+            dgvBooks.Size = new Size(767, 361);
             dgvBooks.TabIndex = 21;
+            dgvBooks.CellContentClick += dgvBooks_CellContentClick;
+            dgvBooks.CellFormatting += dgvBooks_CellFormatting;
+            dgvBooks.DoubleClick += dgvBooks_DoubleClick;
             // 
             // Id
             // 
@@ -113,15 +90,15 @@
             Id.Name = "Id";
             Id.Visible = false;
             // 
-            // Title
+            // BookName
             // 
-            Title.HeaderText = "Название книги";
-            Title.Name = "Title";
+            BookName.HeaderText = "Название книги";
+            BookName.Name = "BookName";
             // 
-            // AuthorFullName
+            // Author
             // 
-            AuthorFullName.HeaderText = "Автор";
-            AuthorFullName.Name = "AuthorFullName";
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
             // 
             // BookImage
             // 
@@ -141,20 +118,78 @@
             IsInFavorites.HeaderText = "В избранном";
             IsInFavorites.Name = "IsInFavorites";
             // 
+            // IsInCart
+            // 
+            IsInCart.HeaderText = "В корзине";
+            IsInCart.Name = "IsInCart";
+            // 
+            // FavoriteItemId
+            // 
+            FavoriteItemId.HeaderText = "favoriteItemId";
+            FavoriteItemId.Name = "FavoriteItemId";
+            FavoriteItemId.Visible = false;
+            // 
+            // CartItemId
+            // 
+            CartItemId.HeaderText = "cartItemId";
+            CartItemId.Name = "CartItemId";
+            CartItemId.Visible = false;
+            // 
+            // labelEmpty
+            // 
+            labelEmpty.AutoSize = true;
+            labelEmpty.Font = new Font("Philosopher", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelEmpty.Location = new Point(229, 164);
+            labelEmpty.Name = "labelEmpty";
+            labelEmpty.Size = new Size(358, 44);
+            labelEmpty.TabIndex = 22;
+            labelEmpty.Text = "Пока что здесь пусто :(";
+            // 
+            // buttonBackToMainForm
+            // 
+            buttonBackToMainForm.BackColor = Color.FromArgb(41, 2, 71);
+            buttonBackToMainForm.Cursor = Cursors.Hand;
+            buttonBackToMainForm.FlatStyle = FlatStyle.Flat;
+            buttonBackToMainForm.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonBackToMainForm.ForeColor = SystemColors.Window;
+            buttonBackToMainForm.Location = new Point(307, 227);
+            buttonBackToMainForm.Name = "buttonBackToMainForm";
+            buttonBackToMainForm.Size = new Size(206, 50);
+            buttonBackToMainForm.TabIndex = 23;
+            buttonBackToMainForm.Text = "Вернуться на главную";
+            buttonBackToMainForm.UseVisualStyleBackColor = false;
+            buttonBackToMainForm.Click += buttonBackToMainForm_Click;
+            // 
+            // buttonClearFavorites
+            // 
+            buttonClearFavorites.BackColor = Color.FromArgb(41, 2, 71);
+            buttonClearFavorites.Cursor = Cursors.Hand;
+            buttonClearFavorites.FlatStyle = FlatStyle.Flat;
+            buttonClearFavorites.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonClearFavorites.ForeColor = SystemColors.Window;
+            buttonClearFavorites.Location = new Point(582, 11);
+            buttonClearFavorites.Name = "buttonClearFavorites";
+            buttonClearFavorites.Size = new Size(206, 50);
+            buttonClearFavorites.TabIndex = 24;
+            buttonClearFavorites.Text = "Очистить";
+            buttonClearFavorites.UseVisualStyleBackColor = false;
+            buttonClearFavorites.Click += buttonClearFavorites_Click;
+            // 
             // FormFavorites
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonClearFavorites);
+            Controls.Add(buttonBackToMainForm);
+            Controls.Add(labelEmpty);
             Controls.Add(dgvBooks);
-            Controls.Add(pictureBox1);
-            Controls.Add(buttonCancel);
-            Controls.Add(buttonSave);
+            Controls.Add(pbBack);
             Controls.Add(labelFavorites);
             Name = "FormFavorites";
             Text = "Избранное";
             Load += FormFavorites_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -163,15 +198,19 @@
         #endregion
 
         private Label labelFavorites;
-        private Button buttonSave;
-        private Button buttonCancel;
-        private PictureBox pictureBox1;
+        private PictureBox pbBack;
         private DataGridView dgvBooks;
         private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn Title;
-        private DataGridViewTextBoxColumn AuthorFullName;
+        private DataGridViewTextBoxColumn BookName;
+        private DataGridViewTextBoxColumn Author;
         private DataGridViewImageColumn BookImage;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewCheckBoxColumn IsInFavorites;
+        private DataGridViewCheckBoxColumn IsInCart;
+        private DataGridViewTextBoxColumn FavoriteItemId;
+        private DataGridViewTextBoxColumn CartItemId;
+        private Label labelEmpty;
+        private Button buttonBackToMainForm;
+        private Button buttonClearFavorites;
     }
 }

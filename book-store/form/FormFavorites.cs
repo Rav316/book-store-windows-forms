@@ -1,6 +1,7 @@
 ﻿using book_store.database.entity;
 using book_store.dto.book;
 using book_store.service;
+using book_store.util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +18,8 @@ namespace book_store.form
     public partial class FormFavorites : Form
     {
         private readonly BookService bookService = new BookService();
-        //private readonly FavoritesService favoritesService = new FavoritesService();
-        //private List<BookFavoriteDto> favoriteBooks;
+        private List<BookListDto> allBooks = new List<BookListDto>();
+        int selectedRowIndex = -1;
         public FormFavorites()
         {
             InitializeComponent();
@@ -33,10 +34,30 @@ namespace book_store.form
             dgvBooks.Columns[3].ReadOnly = true;
             dgvBooks.Columns[4].DataPropertyName = "Price";
             dgvBooks.Columns[4].ReadOnly = true;
+            dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
+            dgvBooks.Columns[6].DataPropertyName = "IsInCart";
+            dgvBooks.Columns[7].DataPropertyName = "FavoriteItemId";
+            dgvBooks.Columns[8].DataPropertyName = "CartItemId";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void ViewAllBooks()
+        {
+            allBooks = bookService.FindAllFavoritesWithUserInfo();
+            allBooks.ForEach(book =>
+            {
+                book.image = ImageUtils.GetImageByPath(book.ImagePath);
+            });
+            dgvBooks.DataSource = allBooks;
+
+        }
+
+        private void pbBack_Click(object sender, EventArgs e)
+        {
+            OpenMainForm();
+        }
+
+        private void OpenMainForm()
         {
             Close();
             FormMain formMain = new FormMain();
@@ -45,59 +66,107 @@ namespace book_store.form
 
         private void FormFavorites_Load(object sender, EventArgs e)
         {
-            //favoriteBooks = bookService.FindAllFavoritesByUser();
-            dgvBooks.DataSource = null;
-            //dgvBooks.DataSource = favoriteBooks;
-            CheckAllBoxes();
+            ViewAllBooks();
+            UpdateGridViewVisibility();
         }
 
-        private void CheckAllBoxes()
+        private void UpdateGridViewVisibility()
         {
-            foreach (DataGridViewRow row in dgvBooks.Rows)
+            if (dgvBooks.Rows.Count == 0)
             {
-                if (!row.IsNewRow)
-                {
-                    row.Cells[5].Value = true;
-                }
-            }
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            CheckAllBoxes();
-        }
-
-        private async void buttonSave_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Вы точно хотите сохранить изменения?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            // Если пользователь нажал "Да"
-            if (result == DialogResult.Yes)
-            {
-                List<int> listForDeletion = new List<int>();
-                List<int> listForAddition = new List<int>();
-
-                foreach (DataGridViewRow row in dgvBooks.Rows)
-                {
-                    if (row.Cells[0].Value != null)
-                    {
-                        if ((bool)row.Cells[5].Value)
-                        {
-                            listForAddition.Add((int)row.Cells[0].Value);
-                        } else
-                        {
-                            listForDeletion.Add((int)row.Cells[0].Value);
-                        }
-                    }
-                }
-
-                //await favoritesService.DeleteByIdsAsync(listForDeletion);
+                dgvBooks.Visible = false;
+                buttonClearFavorites.Visible = false;
+                labelEmpty.Visible = true;
+                buttonBackToMainForm.Visible = true;
             } else
             {
-                // Если пользователь выбрал "Нет", отменяем операцию
-                return;
+                dgvBooks.Visible = true;
+                buttonClearFavorites.Visible = true;
+                labelEmpty.Visible = false;
+                buttonBackToMainForm.Visible = false;
             }
         }
 
+        private void buttonBackToMainForm_Click(object sender, EventArgs e)
+        {
+            OpenMainForm();
+        }
+
+        private void dgvBooks_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvBooks.Columns[e.ColumnIndex].DataPropertyName == "Price" && e.RowIndex >= 0)
+            {
+                if (e.Value != null)
+                {
+                    e.Value = e.Value.ToString() + " ₽";
+                }
+            }
+        }
+
+        private void dgvBooks_DoubleClick(object sender, EventArgs e)
+        {
+            selectedRowIndex = dgvBooks.CurrentRow.Index;
+            if (selectedRowIndex >= 0)
+            {
+                FormBookInfo formBookInfo = new FormBookInfo(allBooks[selectedRowIndex].Id);
+                formBookInfo.ShowDialog();
+                ViewAllBooks();
+            }
+        }
+
+        private async void dgvBooks_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                {
+                    bool isChecked = (bool)checkBoxCell.Value;
+
+                    if (!isChecked)
+                    {
+                        await bookService.RemoveFromFavorites((int)dgvBooks[0, e.RowIndex].Value);
+                        var list = (List<BookListDto>)dgvBooks.DataSource;
+                        list.RemoveAt(e.RowIndex);
+                        dgvBooks.DataSource = null;
+                        dgvBooks.DataSource = list;
+                        UpdateGridViewVisibility();
+                    }
+                }
+            } else if (e.ColumnIndex == 6)
+            {
+                dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                {
+                    bool isChecked = (bool)checkBoxCell.Value;
+
+                    if (isChecked)
+                    {
+                        await bookService.AddToCart((int)dgvBooks[0, e.RowIndex].Value, 1);
+                    } else
+                    {
+                        await bookService.RemoveFromCart((int)dgvBooks[0, e.RowIndex].Value);
+                    }
+                }
+            }
+        }
+
+        private void buttonClearFavorites_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Вы точно хотите удалить все книги из избранного?",
+                "Подтверждение удаления",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                bookService.RemoveAllFavoritesForCurrentUser();
+                ViewAllBooks();
+                UpdateGridViewVisibility();
+                MessageBox.Show("Все книги удалены из избранного.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
