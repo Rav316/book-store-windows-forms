@@ -16,7 +16,7 @@ namespace book_store.util
                 return Image.FromFile(imagePath);
             } else
             {
-                return Image.FromFile(@"..\..\..\Resources\Books\book.png");
+                return Image.FromFile(@"..\..\..\Resources\Images\book.png");
             }
         }
 
@@ -27,7 +27,7 @@ namespace book_store.util
                 return Image.FromFile(imagePath);
             } else
             {
-                return Image.FromFile(@"..\..\..\Resources\Users\avatar.png");
+                return Image.FromFile(@"..\..\..\Resources\Images\avatar.png");
             }
         }
     }
