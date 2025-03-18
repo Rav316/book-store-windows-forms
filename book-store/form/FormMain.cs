@@ -84,7 +84,7 @@ namespace book_store.form
             allBooks = bookService.FindAllWithUserInfo();
             allBooks.ForEach(book =>
             {
-                book.image = ImageUtils.GetImageByPath(book.ImagePath);
+                book.image = ImageUtils.GetBookImageByPath(book.ImagePath);
             });
             dgvBooks.DataSource = allBooks;
 
@@ -218,6 +218,13 @@ namespace book_store.form
             FormCart formCart = new FormCart();
             Close();
             formCart.Show();
+        }
+
+        private void pbProfile_Click(object sender, EventArgs e)
+        {
+            FormProfile formProfile = new FormProfile();
+            Close();
+            formProfile.Show();
         }
     }
 }

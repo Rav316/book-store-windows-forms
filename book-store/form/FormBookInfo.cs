@@ -38,7 +38,7 @@ namespace book_store.form
                 Close();
                 return;
             }
-            pbBookImage.Image = ImageUtils.GetImageByPath(book.ImagePath);
+            pbBookImage.Image = ImageUtils.GetBookImageByPath(book.ImagePath);
             labelBookName.Text = book.Title;
             var author = book.Author;
             labelAuthor.Text = $"{author?.FirstName} {author?.LastName}";

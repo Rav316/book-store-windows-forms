@@ -29,6 +29,8 @@ namespace book_store.database.entity
 
         public string Address { get; set; }
 
+        public string? ImagePath { get; set; }
+
         public virtual List<Book> FavoriteBooks { get; set; } = new List<Book>();
 
     }

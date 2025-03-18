@@ -61,12 +61,15 @@ namespace book_store.form
             IsInFavorites = new DataGridViewCheckBoxColumn();
             IsInCart = new DataGridViewCheckBoxColumn();
             CartItemId = new DataGridViewTextBoxColumn();
+            pbProfile = new PictureBox();
+            labelProfile = new Label();
             ((System.ComponentModel.ISupportInitialize)pbFavorites).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCart).BeginInit();
             gbFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudMaxPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudMinPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbProfile).BeginInit();
             SuspendLayout();
             // 
             // tbSearch
@@ -77,7 +80,7 @@ namespace book_store.form
             tbSearch.Location = new Point(182, 29);
             tbSearch.MinimumSize = new Size(300, 35);
             tbSearch.Name = "tbSearch";
-            tbSearch.Size = new Size(395, 36);
+            tbSearch.Size = new Size(329, 36);
             tbSearch.TabIndex = 2;
             tbSearch.TextChanged += tbUsername_TextChanged;
             // 
@@ -95,7 +98,7 @@ namespace book_store.form
             // 
             labelFavorites.AutoSize = true;
             labelFavorites.Font = new Font("Philosopher", 9.749999F);
-            labelFavorites.Location = new Point(611, 49);
+            labelFavorites.Location = new Point(527, 49);
             labelFavorites.Name = "labelFavorites";
             labelFavorites.Size = new Size(70, 17);
             labelFavorites.TabIndex = 9;
@@ -105,7 +108,7 @@ namespace book_store.form
             // 
             labelCart.AutoSize = true;
             labelCart.Font = new Font("Philosopher", 9.749999F);
-            labelCart.Location = new Point(704, 49);
+            labelCart.Location = new Point(620, 49);
             labelCart.Name = "labelCart";
             labelCart.Size = new Size(57, 17);
             labelCart.TabIndex = 10;
@@ -115,7 +118,7 @@ namespace book_store.form
             // 
             pbFavorites.Cursor = Cursors.Hand;
             pbFavorites.Image = (Image)resources.GetObject("pbFavorites.Image");
-            pbFavorites.Location = new Point(626, 26);
+            pbFavorites.Location = new Point(542, 26);
             pbFavorites.Name = "pbFavorites";
             pbFavorites.Size = new Size(41, 20);
             pbFavorites.SizeMode = PictureBoxSizeMode.Zoom;
@@ -127,7 +130,7 @@ namespace book_store.form
             // 
             pbCart.Cursor = Cursors.Hand;
             pbCart.Image = (Image)resources.GetObject("pbCart.Image");
-            pbCart.Location = new Point(710, 26);
+            pbCart.Location = new Point(626, 26);
             pbCart.Name = "pbCart";
             pbCart.Size = new Size(41, 20);
             pbCart.SizeMode = PictureBoxSizeMode.Zoom;
@@ -360,11 +363,35 @@ namespace book_store.form
             CartItemId.Name = "CartItemId";
             CartItemId.Visible = false;
             // 
+            // pbProfile
+            // 
+            pbProfile.Cursor = Cursors.Hand;
+            pbProfile.Image = (Image)resources.GetObject("pbProfile.Image");
+            pbProfile.Location = new Point(700, 26);
+            pbProfile.Name = "pbProfile";
+            pbProfile.Size = new Size(41, 20);
+            pbProfile.SizeMode = PictureBoxSizeMode.Zoom;
+            pbProfile.TabIndex = 20;
+            pbProfile.TabStop = false;
+            pbProfile.Click += pbProfile_Click;
+            // 
+            // labelProfile
+            // 
+            labelProfile.AutoSize = true;
+            labelProfile.Font = new Font("Philosopher", 9.749999F);
+            labelProfile.Location = new Point(691, 49);
+            labelProfile.Name = "labelProfile";
+            labelProfile.Size = new Size(60, 17);
+            labelProfile.TabIndex = 19;
+            labelProfile.Text = "Профиль";
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(pbProfile);
+            Controls.Add(labelProfile);
             Controls.Add(dgvBooks);
             Controls.Add(gbFilters);
             Controls.Add(pbCart);
@@ -383,6 +410,7 @@ namespace book_store.form
             ((System.ComponentModel.ISupportInitialize)nudMaxPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudMinPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbProfile).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -420,5 +448,7 @@ namespace book_store.form
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
         private DataGridViewTextBoxColumn CartItemId;
+        private PictureBox pbProfile;
+        private Label labelProfile;
     }
 }

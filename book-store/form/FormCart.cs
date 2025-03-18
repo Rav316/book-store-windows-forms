@@ -43,7 +43,7 @@ namespace book_store.form
             allBooks = bookService.FindAllInCartWithUserInfo();
             allBooks.ForEach(book =>
             {
-                book.image = ImageUtils.GetImageByPath(book.ImagePath);
+                book.image = ImageUtils.GetBookImageByPath(book.ImagePath);
             });
             dgvBooks.DataSource = allBooks;
             labelTotalSum.Text =  $"{CalculateTotalSum()} ₽";

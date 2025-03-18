@@ -44,7 +44,7 @@ namespace book_store.form
             allBooks = bookService.FindAllFavoritesWithUserInfo();
             allBooks.ForEach(book =>
             {
-                book.image = ImageUtils.GetImageByPath(book.ImagePath);
+                book.image = ImageUtils.GetBookImageByPath(book.ImagePath);
             });
             dgvBooks.DataSource = allBooks;
 

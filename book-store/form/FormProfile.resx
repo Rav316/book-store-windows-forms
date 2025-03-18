@@ -118,64 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pbFavorites.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pbBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABoAAAAmCAYAAADa8osYAAAABGdBTUEAALGPC/xhBQAAALtJREFUWEft
-        19ENhCAMBuAO4IMu4DmKmzmao2mK9EQs0PZCcg/9kyaowCdREwQAgHGYt2n47D0K50YD4omjZwXsPljW
-        HkXzf6GwvA5xyByHzHHIHIfMccgch8xxyJz/h3AzeNWy5te4qKG4bQ5902qBKihFaEXpVrqGiaEcKV/j
-        MRFUQygtrAlJEEoNq0IahFLCilBpgCTcWBbiOmqTz/GCpK+rJNxf5OtD/BWhPG88PmdsSB+6JvR7ie0T
-        4Fg5+HMuf/wAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="pbCart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADAAAAAuCAYAAABu3ppsAAAABGdBTUEAALGPC/xhBQAAAYdJREFUaEPt
-        mGFuwzAIhXuA/OgusO0ou9mO1qN1ovOTGc1Q/IxjM+2TUCunwX4EEOnlur1+vmxvtz27bu8fl9Uph707
-        drP3pECir8TlFCGUFLvLp72Whj8hIHUaoRbsehpQB7bNzrbDaa0ErGbH0rq01GUKGec5LEBYUUDTpNCs
-        eCCoAbvuUm6a3omo9BFQyHb9bBDIpvQR6kjReGMwVPoIK3Qiqng1swXQ6QOo4gmETh/Q7aCD7vQRZnai
-        7vQRZnaikPSd9XYWFrgZrVSP8vYaBZyJ49FW9npYd/QBiuksEyH2DF2sMtTR4NHa9TRAQFhOns2MThRO
-        egE1jZKK0K918j1lPSgRp9iwp12EPP1rFm3DBPyzAt+FLAMYX9ARPijs1MgUXIQPilJgj80QOb1mf79H
-        hA8Kb6RARO26JcIHDaJk1wXvYBrfx+Ch0YtQFeBvHuGDpkboOcpHo+f5qHXg++hCNrCb4FBygJ+/3ifC
-        B43uGNr2IvobSBVrLT66gRDZlN2Y9fEFOVig/9A11dMAAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="BookName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Author.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="BookImage.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Price.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IsInFavorites.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="IsInCart.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="CartItemId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="pbProfile.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAYAAABXuSs3AAAABGdBTUEAALGPC/xhBQAAAiNJREFUaEPN
-        loFRBCEMRSnNkuzAUizFEizFEnT+zb01x8FuSAB9M4yzx0J+fgJrKXN4KaW8lVI+7uO7GvpN84w/RWJr
-        kQiXOJJh1EltT8IK1l89a4yAaJvEMlqCZ7A0ATafKbiGGNPE4/K0DU+wBoWxrbFDNChuSjyiV7XGFdxC
-        Q/y1aBhynj77D9A2l60662Rzt2ufbNXQdLoP92kU+2WsR8aM037PuG1vgpYz7H3pXIfTlulOOPCudZW9
-        Q9P1zIHUZh7R0BTgANcfklbgyGYRB5sCnDwl7S11TTThJwFOSPpGxDUYbRPICr9p3dnfMCVmNHuRER5Z
-        Jw690eAi0+PpmNGDKSI3ROZMiaPNMsLFaKtl3BbHzZIVLhB/5qLm9E70UMI0xwFR2ssmYAWPVKbH0eOj
-        pe7BhhJYj69SyudFRbwcerPCKR2O6lnj9T54tkllKkyMX+sHsYK9QuR4ZJ3lWJe50iKBIbrHg1bK7CEa
-        sAWmefci9oG3z1k4Up0rRsQ/vedplxWiwVPF7jtXrjcXTeSpDSq682eudxdNpmdO123oud5LaDY9g/R7
-        V7RoHRR+20Ud/9Jt4EUc7lVhFdZdt2jg8yzxxyd2E4qlmK3qu8DpXf0NuKwRrjTC3+uJhegfs5RoQPxw
-        yQLgdlo0TN+wgrO0xCDbe/bkZ7CCOZDLsAmQxEhAvcvNsUVwDa7bG4DBnB0Ite9vFdzCutgSaBOaIvYH
-        HzMvwhTge5YAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAKCAYAAACuaZ5oAAAABGdBTUEAALGPC/xhBQAAADNJREFUOE9j
+        YEADAjxy9YI88vvRxakCoIb/p4kFw8JwsAXUxrS3AM0X1A8iGBh2llDNAgBhb0SPVpwUVAAAAABJRU5E
+        rkJggg==
 </value>
   </data>
 </root>
