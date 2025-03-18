@@ -1,4 +1,5 @@
 ﻿using book_store.database.entity;
+using book_store.dto.bookReview;
 using book_store.exception;
 using book_store.service;
 using book_store.util;
@@ -17,10 +18,12 @@ namespace book_store.form
     public partial class FormBookInfo : Form
     {
         private readonly BookService bookService = new BookService();
+        private readonly BookReviewService bookReviewService = new BookReviewService();
         private int bookId;
         private bool isInFavorites;
         private bool isInCart;
         private Book book;
+        private List<BookReviewListDto> bookReviews;
         public FormBookInfo(int bookId)
         {
             this.bookId = bookId;
@@ -73,6 +76,21 @@ namespace book_store.form
             {
                 buttonInCart.Text = "Добавить в корзину";
             }
+
+            cbOrderByDate.SelectedIndex = 0;
+            cbOrderByRating.SelectedIndex = 0;
+
+
+            dgvReviews.AutoGenerateColumns = false;
+            dgvReviews.Columns[0].DataPropertyName = "Id";
+            dgvReviews.Columns[1].DataPropertyName = "Username";
+            dgvReviews.Columns[2].DataPropertyName = "UserAvatar";
+            dgvReviews.Columns[3].DataPropertyName = "Content";
+            dgvReviews.Columns[4].DataPropertyName = "Rating";
+            dgvReviews.Columns[5].DataPropertyName = "CreatedAt";
+
+            bookReviews = bookReviewService.GetReviewsByBook(bookId);
+            dgvReviews.DataSource = bookReviews;
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

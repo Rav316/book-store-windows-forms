@@ -25,6 +25,7 @@ namespace book_store.context
         public DbSet<User> Users { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<BookReview> BookReviews { get; set; }
 
         private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
                     new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
@@ -75,6 +76,10 @@ namespace book_store.context
             modelBuilder.Entity<Favorite>().ToTable("favorites")
             .HasKey(f => new { f.BookId, f.UserId });
 
+            modelBuilder.Entity<BookReview>().ToTable("book_review")
+        .HasIndex(b => new { b.UserId, b.BookId })
+        .IsUnique();
+
             base.OnModelCreating(modelBuilder);
 
             foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
@@ -97,6 +102,19 @@ namespace book_store.context
                     .UseLazyLoadingProxies();
             }
         }
+
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries<BookReview>())
+            {
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                }
+            }
+            return base.SaveChanges();
+        }
+
 
         private static string ToSnakeCase(string input)
         {

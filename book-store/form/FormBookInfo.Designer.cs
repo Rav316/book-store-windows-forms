@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBookInfo));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pictureBox2 = new PictureBox();
             labelBookInfo = new Label();
             pbBookImage = new PictureBox();
@@ -72,10 +74,25 @@
             pbInFavorites = new PictureBox();
             buttonInCart = new Button();
             labelPrice = new Label();
+            labelReviews = new Label();
+            label2 = new Label();
+            buttonAddReview = new Button();
+            cbOrderByDate = new ComboBox();
+            dgvReviews = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Username = new DataGridViewTextBoxColumn();
+            UserAvatar = new DataGridViewImageColumn();
+            Content = new DataGridViewTextBoxColumn();
+            Rating = new DataGridViewTextBoxColumn();
+            CreatedAt = new DataGridViewTextBoxColumn();
+            labelDateFilter = new Label();
+            labelRating = new Label();
+            cbOrderByRating = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBookImage).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbInFavorites).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
             SuspendLayout();
             // 
             // pictureBox2
@@ -545,12 +562,155 @@
             labelPrice.TabIndex = 61;
             labelPrice.Text = "525 ₽";
             // 
+            // labelReviews
+            // 
+            labelReviews.AutoSize = true;
+            labelReviews.Font = new Font("Philosopher", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelReviews.Location = new Point(63, 713);
+            labelReviews.Name = "labelReviews";
+            labelReviews.Size = new Size(120, 40);
+            labelReviews.TabIndex = 61;
+            labelReviews.Text = "Отзывы";
+            // 
+            // label2
+            // 
+            label2.BorderStyle = BorderStyle.Fixed3D;
+            label2.Font = new Font("Segoe UI", 1.5F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label2.ForeColor = Color.FromArgb(41, 2, 71);
+            label2.Location = new Point(21, 704);
+            label2.Name = "label2";
+            label2.Size = new Size(1312, 2);
+            label2.TabIndex = 62;
+            // 
+            // buttonAddReview
+            // 
+            buttonAddReview.BackColor = Color.FromArgb(41, 2, 71);
+            buttonAddReview.Cursor = Cursors.Hand;
+            buttonAddReview.FlatStyle = FlatStyle.Flat;
+            buttonAddReview.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonAddReview.ForeColor = SystemColors.Window;
+            buttonAddReview.Location = new Point(1027, 718);
+            buttonAddReview.Name = "buttonAddReview";
+            buttonAddReview.Size = new Size(288, 41);
+            buttonAddReview.TabIndex = 63;
+            buttonAddReview.Text = "Написать отзыв";
+            buttonAddReview.UseVisualStyleBackColor = false;
+            // 
+            // cbOrderByDate
+            // 
+            cbOrderByDate.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOrderByDate.FormattingEnabled = true;
+            cbOrderByDate.Items.AddRange(new object[] { "По умолчанию", "Сначала новые", "Сначала старые" });
+            cbOrderByDate.Location = new Point(425, 724);
+            cbOrderByDate.Name = "cbOrderByDate";
+            cbOrderByDate.Size = new Size(121, 23);
+            cbOrderByDate.TabIndex = 64;
+            // 
+            // dgvReviews
+            // 
+            dgvReviews.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvReviews.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReviews.Columns.AddRange(new DataGridViewColumn[] { Id, Username, UserAvatar, Content, Rating, CreatedAt });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvReviews.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvReviews.Location = new Point(21, 765);
+            dgvReviews.Name = "dgvReviews";
+            dgvReviews.RowTemplate.Height = 136;
+            dgvReviews.Size = new Size(1294, 287);
+            dgvReviews.TabIndex = 65;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.Visible = false;
+            // 
+            // Username
+            // 
+            Username.HeaderText = "Имя пользователя";
+            Username.Name = "Username";
+            // 
+            // UserAvatar
+            // 
+            UserAvatar.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            UserAvatar.HeaderText = "Аватар пользователя";
+            UserAvatar.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            UserAvatar.Name = "UserAvatar";
+            UserAvatar.Resizable = DataGridViewTriState.True;
+            // 
+            // Content
+            // 
+            Content.HeaderText = "Контент";
+            Content.Name = "Content";
+            // 
+            // Rating
+            // 
+            Rating.HeaderText = "Рейтинг";
+            Rating.Name = "Rating";
+            // 
+            // CreatedAt
+            // 
+            CreatedAt.HeaderText = "оставлен в";
+            CreatedAt.Name = "CreatedAt";
+            // 
+            // labelDateFilter
+            // 
+            labelDateFilter.AutoSize = true;
+            labelDateFilter.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelDateFilter.Location = new Point(352, 719);
+            labelDateFilter.Name = "labelDateFilter";
+            labelDateFilter.Size = new Size(66, 28);
+            labelDateFilter.TabIndex = 66;
+            labelDateFilter.Text = "Дата: ";
+            // 
+            // labelRating
+            // 
+            labelRating.AutoSize = true;
+            labelRating.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelRating.Location = new Point(577, 719);
+            labelRating.Name = "labelRating";
+            labelRating.Size = new Size(99, 28);
+            labelRating.TabIndex = 68;
+            labelRating.Text = "Рейтинг: ";
+            // 
+            // cbOrderByRating
+            // 
+            cbOrderByRating.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOrderByRating.FormattingEnabled = true;
+            cbOrderByRating.Items.AddRange(new object[] { "По умолчанию", "Высокий", "Низкий" });
+            cbOrderByRating.Location = new Point(683, 724);
+            cbOrderByRating.Name = "cbOrderByRating";
+            cbOrderByRating.Size = new Size(121, 23);
+            cbOrderByRating.TabIndex = 67;
+            // 
             // FormBookInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonFace;
-            ClientSize = new Size(1327, 745);
+            ClientSize = new Size(1327, 1061);
+            Controls.Add(labelRating);
+            Controls.Add(cbOrderByRating);
+            Controls.Add(labelDateFilter);
+            Controls.Add(dgvReviews);
+            Controls.Add(cbOrderByDate);
+            Controls.Add(buttonAddReview);
+            Controls.Add(label2);
+            Controls.Add(labelReviews);
             Controls.Add(panel1);
             Controls.Add(tbBookDescription);
             Controls.Add(label25);
@@ -599,6 +759,7 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbInFavorites).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -648,5 +809,19 @@
         private Label labelPrice;
         private Button buttonInCart;
         private PictureBox pbInFavorites;
+        private Label labelReviews;
+        private Label label2;
+        private Button buttonAddReview;
+        private ComboBox cbOrderByDate;
+        private DataGridView dgvReviews;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Username;
+        private DataGridViewImageColumn UserAvatar;
+        private DataGridViewTextBoxColumn Content;
+        private DataGridViewTextBoxColumn Rating;
+        private DataGridViewTextBoxColumn CreatedAt;
+        private Label labelDateFilter;
+        private Label labelRating;
+        private ComboBox cbOrderByRating;
     }
 }
