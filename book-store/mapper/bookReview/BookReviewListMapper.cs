@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace book_store.mapper.bookReview
 {
-    internal class BookReviewListMapper
+    internal class BookReviewListMapper: Mapper<BookReview, BookReviewListDto>
     {
-        public BookReviewListDto ToDto(BookReview bookReview)
+        public override BookReviewListDto ToDto(BookReview entity)
         {
-            User user = bookReview.User;
+            User user = entity.User;
             return new BookReviewListDto
             (
-                bookReview.Id,
+                entity.Id,
                 user.Username,
                 ImageUtils.GetUserAvatarByPath(user.ImagePath),
-                bookReview.Content,
-                bookReview.Rating,
-                bookReview.CreatedAt
+                entity.Content,
+                entity.Rating,
+                entity.CreatedAt
             );
         }
     }

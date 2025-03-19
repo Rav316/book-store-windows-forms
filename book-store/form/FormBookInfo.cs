@@ -220,6 +220,7 @@ namespace book_store.form
             int selectedRowIndex = dgvReviews.CurrentRow.Index;
             if(selectedRowIndex >= 0)
             {
+                
                 FormReviewInfo formReviewInfo = new FormReviewInfo(
                     bookId,
                     book.Title,

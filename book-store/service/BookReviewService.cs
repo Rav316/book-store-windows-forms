@@ -15,6 +15,7 @@ namespace book_store.service
     {
         private readonly BookReviewRepository bookReviewRepository = new BookReviewRepository(AppDbContext.INSTANCE);
         private readonly BookReviewListMapper bookReviewListMapper = new BookReviewListMapper();
+        private readonly BookReviewProfileMapper bookReviewProfileMapper = new BookReviewProfileMapper();
 
         public List<BookReviewListDto> GetReviewsByBook(int bookId)
         {
@@ -23,9 +24,21 @@ namespace book_store.service
                 .ToList();
         }
 
+        public List<BookReviewProfileDto> GetReviewsForCurrentUser()
+        {
+            return bookReviewRepository.GetReviewsByUser(SecurityContext.Authentication.Id)
+                .Select(bookReviewProfileMapper.ToDto)
+                .ToList();
+        }
+
         public BookReview? FindByBookAndUser(int bookId)
         {
             return bookReviewRepository.FindByBookAndUser(bookId, SecurityContext.Authentication.Id);
+        }
+
+        public async Task<BookReview?> FindById(int id)
+        {
+            return await bookReviewRepository.FindByIdAsync(id);
         }
 
         public async Task Create(BookReview bookReview)

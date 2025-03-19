@@ -20,6 +20,7 @@ namespace book_store.form
     public partial class FormProfile : Form
     {
         private readonly UserService userService = new UserService();
+        private readonly BookReviewService bookReviewService = new BookReviewService();
         private string fileName;
         public FormProfile()
         {
@@ -45,6 +46,23 @@ namespace book_store.form
             tbEmail.Text = authenticatedUser.Email;
             tbAddress.Text = authenticatedUser.Address;
             pbAvatar.Image = ImageUtils.GetUserAvatarByPath(authenticatedUser.ImagePath);
+
+            dgvReviews.AutoGenerateColumns = false;
+            dgvReviews.ReadOnly = true;
+            dgvReviews.Columns[0].DataPropertyName = "Id";
+            dgvReviews.Columns[1].DataPropertyName = "BookId";
+            dgvReviews.Columns[2].DataPropertyName = "BookName";
+            dgvReviews.Columns[3].DataPropertyName = "Author";
+            dgvReviews.Columns[4].DataPropertyName = "BookImage";
+            dgvReviews.Columns[5].DataPropertyName = "Content";
+            dgvReviews.Columns[6].DataPropertyName = "Rating";
+            dgvReviews.Columns[7].DataPropertyName = "CreatedAt";
+            ViewAllReviews();
+        }
+
+        private void ViewAllReviews()
+        {
+            dgvReviews.DataSource = bookReviewService.GetReviewsForCurrentUser();
         }
 
         private void buttonEditAvatar_Click(object sender, EventArgs e)
@@ -116,6 +134,32 @@ namespace book_store.form
                     {
                         MessageBox.Show(ex.Message);
                     }
+                }
+            }
+        }
+
+        private async void dgvReviews_DoubleClick(object sender, EventArgs e)
+        {
+            int selectedRowIndex = dgvReviews.CurrentRow.Index;
+            if(selectedRowIndex >= 0)
+            {
+                // int bookId, string bookName, string author, BookReview bookReview
+                FormEditReview formEditReview = new FormEditReview
+                (
+                    (int)dgvReviews[1, selectedRowIndex].Value,
+                    dgvReviews[2, selectedRowIndex].Value.ToString(),
+                    dgvReviews[3, selectedRowIndex].Value.ToString(),
+                    await bookReviewService.FindById((int)dgvReviews[0, selectedRowIndex].Value)
+                );
+                DialogResult dialogResult = formEditReview.ShowDialog();
+                if (dialogResult == DialogResult.OK)
+                {
+                    MessageBox.Show("Отзыв успшено изменён ✅");
+                    ViewAllReviews();
+                } else if (dialogResult == DialogResult.Abort)
+                {
+                    MessageBox.Show("Отзыв успшено удалён ✅");
+                    ViewAllReviews();
                 }
             }
         }

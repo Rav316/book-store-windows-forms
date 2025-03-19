@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProfile));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             pbAvatar = new PictureBox();
             pbBack = new PictureBox();
             labelProfile = new Label();
@@ -47,8 +49,19 @@
             labelAddress = new Label();
             buttonSaveChanges = new Button();
             buttonDeleteAccount = new Button();
+            labelReviews = new Label();
+            dgvReviews = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            BookId = new DataGridViewTextBoxColumn();
+            BookName = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
+            BookImage = new DataGridViewImageColumn();
+            Content = new DataGridViewTextBoxColumn();
+            Rating = new DataGridViewTextBoxColumn();
+            CreatedAt = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
             SuspendLayout();
             // 
             // pbAvatar
@@ -248,7 +261,7 @@
             buttonDeleteAccount.FlatStyle = FlatStyle.Flat;
             buttonDeleteAccount.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonDeleteAccount.ForeColor = SystemColors.Window;
-            buttonDeleteAccount.Location = new Point(642, 406);
+            buttonDeleteAccount.Location = new Point(642, 362);
             buttonDeleteAccount.Name = "buttonDeleteAccount";
             buttonDeleteAccount.Size = new Size(146, 32);
             buttonDeleteAccount.TabIndex = 42;
@@ -256,11 +269,96 @@
             buttonDeleteAccount.UseVisualStyleBackColor = false;
             buttonDeleteAccount.Click += buttonDeleteAccount_Click;
             // 
+            // labelReviews
+            // 
+            labelReviews.AutoSize = true;
+            labelReviews.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelReviews.Location = new Point(63, 428);
+            labelReviews.Name = "labelReviews";
+            labelReviews.Size = new Size(148, 32);
+            labelReviews.TabIndex = 62;
+            labelReviews.Text = "Мои отзывы";
+            // 
+            // dgvReviews
+            // 
+            dgvReviews.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvReviews.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvReviews.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReviews.Columns.AddRange(new DataGridViewColumn[] { Id, BookId, BookName, Author, BookImage, Content, Rating, CreatedAt });
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvReviews.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvReviews.Location = new Point(63, 463);
+            dgvReviews.Name = "dgvReviews";
+            dgvReviews.RowTemplate.Height = 136;
+            dgvReviews.Size = new Size(725, 224);
+            dgvReviews.TabIndex = 70;
+            dgvReviews.DoubleClick += dgvReviews_DoubleClick;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.Visible = false;
+            // 
+            // BookId
+            // 
+            BookId.HeaderText = "book id";
+            BookId.Name = "BookId";
+            BookId.Visible = false;
+            // 
+            // BookName
+            // 
+            BookName.HeaderText = "Название книги";
+            BookName.Name = "BookName";
+            // 
+            // Author
+            // 
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
+            // 
+            // BookImage
+            // 
+            BookImage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            BookImage.HeaderText = "Изображение книги";
+            BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            BookImage.Name = "BookImage";
+            BookImage.Resizable = DataGridViewTriState.True;
+            // 
+            // Content
+            // 
+            Content.HeaderText = "Контент";
+            Content.Name = "Content";
+            // 
+            // Rating
+            // 
+            Rating.HeaderText = "Рейтинг";
+            Rating.Name = "Rating";
+            // 
+            // CreatedAt
+            // 
+            CreatedAt.HeaderText = "оставлен в";
+            CreatedAt.Name = "CreatedAt";
+            // 
             // FormProfile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(864, 800);
+            Controls.Add(dgvReviews);
+            Controls.Add(labelReviews);
             Controls.Add(buttonDeleteAccount);
             Controls.Add(buttonSaveChanges);
             Controls.Add(tbAddress);
@@ -284,6 +382,7 @@
             Load += FormProfile_Load;
             ((System.ComponentModel.ISupportInitialize)pbAvatar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -308,5 +407,15 @@
         private Label labelAddress;
         private Button buttonSaveChanges;
         private Button buttonDeleteAccount;
+        private Label labelReviews;
+        private DataGridView dgvReviews;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn BookId;
+        private DataGridViewTextBoxColumn BookName;
+        private DataGridViewTextBoxColumn Author;
+        private DataGridViewImageColumn BookImage;
+        private DataGridViewTextBoxColumn Content;
+        private DataGridViewTextBoxColumn Rating;
+        private DataGridViewTextBoxColumn CreatedAt;
     }
 }

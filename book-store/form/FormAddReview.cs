@@ -40,10 +40,30 @@ namespace book_store.form
             for (int i = 0; i < stars.Length; i++)
             {
                 stars[i].Tag = i + 1;
+                stars[i].MouseEnter += Star_MouseEnter;
+                stars[i].MouseLeave += Star_MouseLeave;
+                stars[i].Click += Star_Click;
             }
             UpdateStars();
             labelBookName.Text = bookName;
             labelAuthorValue.Text = author;
+        }
+
+        private void Star_MouseEnter(object sender, EventArgs e)
+        {
+            int hoverIndex = (int)((PictureBox)sender).Tag;
+            UpdateStars(hoverIndex);
+        }
+
+        private void Star_MouseLeave(object sender, EventArgs e)
+        {
+            UpdateStars();
+        }
+
+        private void Star_Click(object sender, EventArgs e)
+        {
+            selectedStars = (int)((PictureBox)sender).Tag;
+            UpdateStars();
         }
 
         private void UpdateStars(int highlightUpTo = 0)

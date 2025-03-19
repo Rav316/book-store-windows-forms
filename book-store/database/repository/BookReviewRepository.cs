@@ -21,6 +21,15 @@ namespace book_store.database.repository
                 .ToList();
         }
 
+        public List<BookReview> GetReviewsByUser(int userId)
+        {
+            return context.BookReviews
+                .Where(br => br.UserId == userId)
+                .Include(br => br.Book)
+                .ThenInclude(b => b.Author)
+                .ToList();
+        }
+
         public BookReview? FindByBookAndUser(int bookId, int userId)
         {
             return context.BookReviews

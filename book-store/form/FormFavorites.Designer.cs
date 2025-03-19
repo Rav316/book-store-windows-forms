@@ -84,7 +84,7 @@
             dgvBooks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, CartItemId });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Philosopher", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
