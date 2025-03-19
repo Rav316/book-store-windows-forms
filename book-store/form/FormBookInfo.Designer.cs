@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBookInfo));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            pictureBox2 = new PictureBox();
+            pbBack = new PictureBox();
             labelBookInfo = new Label();
             pbBookImage = new PictureBox();
             labelBookName = new Label();
@@ -78,6 +78,9 @@
             label2 = new Label();
             buttonAddReview = new Button();
             cbOrderByDate = new ComboBox();
+            labelDateFilter = new Label();
+            labelRating = new Label();
+            cbOrderByRating = new ComboBox();
             dgvReviews = new DataGridView();
             Id = new DataGridViewTextBoxColumn();
             Username = new DataGridViewTextBoxColumn();
@@ -85,27 +88,24 @@
             Content = new DataGridViewTextBoxColumn();
             Rating = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
-            labelDateFilter = new Label();
-            labelRating = new Label();
-            cbOrderByRating = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBookImage).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbInFavorites).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox2
+            // pbBack
             // 
-            pictureBox2.Cursor = Cursors.Hand;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(21, 28);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(24, 10);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 21;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
+            pbBack.Cursor = Cursors.Hand;
+            pbBack.Image = (Image)resources.GetObject("pbBack.Image");
+            pbBack.Location = new Point(21, 28);
+            pbBack.Name = "pbBack";
+            pbBack.Size = new Size(24, 10);
+            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.TabIndex = 21;
+            pbBack.TabStop = false;
+            pbBack.Click += pbBack_Click;
             // 
             // labelBookInfo
             // 
@@ -550,6 +550,7 @@
             buttonInCart.TabIndex = 61;
             buttonInCart.Text = "Добавить в корзину";
             buttonInCart.UseVisualStyleBackColor = false;
+            buttonInCart.Click += buttonInCart_Click;
             // 
             // labelPrice
             // 
@@ -595,6 +596,7 @@
             buttonAddReview.TabIndex = 63;
             buttonAddReview.Text = "Написать отзыв";
             buttonAddReview.UseVisualStyleBackColor = false;
+            buttonAddReview.Click += buttonAddReview_Click;
             // 
             // cbOrderByDate
             // 
@@ -605,6 +607,38 @@
             cbOrderByDate.Name = "cbOrderByDate";
             cbOrderByDate.Size = new Size(121, 23);
             cbOrderByDate.TabIndex = 64;
+            cbOrderByDate.SelectedIndexChanged += cbOrderByDate_SelectedIndexChanged;
+            // 
+            // labelDateFilter
+            // 
+            labelDateFilter.AutoSize = true;
+            labelDateFilter.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelDateFilter.Location = new Point(352, 719);
+            labelDateFilter.Name = "labelDateFilter";
+            labelDateFilter.Size = new Size(66, 28);
+            labelDateFilter.TabIndex = 66;
+            labelDateFilter.Text = "Дата: ";
+            // 
+            // labelRating
+            // 
+            labelRating.AutoSize = true;
+            labelRating.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelRating.Location = new Point(577, 719);
+            labelRating.Name = "labelRating";
+            labelRating.Size = new Size(99, 28);
+            labelRating.TabIndex = 68;
+            labelRating.Text = "Рейтинг: ";
+            // 
+            // cbOrderByRating
+            // 
+            cbOrderByRating.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbOrderByRating.FormattingEnabled = true;
+            cbOrderByRating.Items.AddRange(new object[] { "По умолчанию", "Высокий", "Низкий" });
+            cbOrderByRating.Location = new Point(683, 724);
+            cbOrderByRating.Name = "cbOrderByRating";
+            cbOrderByRating.Size = new Size(121, 23);
+            cbOrderByRating.TabIndex = 67;
+            cbOrderByRating.SelectedIndexChanged += cbOrderByRating_SelectedIndexChanged;
             // 
             // dgvReviews
             // 
@@ -627,11 +661,12 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReviews.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvReviews.Location = new Point(21, 765);
+            dgvReviews.Location = new Point(49, 765);
             dgvReviews.Name = "dgvReviews";
             dgvReviews.RowTemplate.Height = 136;
-            dgvReviews.Size = new Size(1294, 287);
-            dgvReviews.TabIndex = 65;
+            dgvReviews.Size = new Size(1266, 398);
+            dgvReviews.TabIndex = 69;
+            dgvReviews.DoubleClick += dgvReviews_DoubleClick;
             // 
             // Id
             // 
@@ -667,46 +702,17 @@
             CreatedAt.HeaderText = "оставлен в";
             CreatedAt.Name = "CreatedAt";
             // 
-            // labelDateFilter
-            // 
-            labelDateFilter.AutoSize = true;
-            labelDateFilter.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelDateFilter.Location = new Point(352, 719);
-            labelDateFilter.Name = "labelDateFilter";
-            labelDateFilter.Size = new Size(66, 28);
-            labelDateFilter.TabIndex = 66;
-            labelDateFilter.Text = "Дата: ";
-            // 
-            // labelRating
-            // 
-            labelRating.AutoSize = true;
-            labelRating.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelRating.Location = new Point(577, 719);
-            labelRating.Name = "labelRating";
-            labelRating.Size = new Size(99, 28);
-            labelRating.TabIndex = 68;
-            labelRating.Text = "Рейтинг: ";
-            // 
-            // cbOrderByRating
-            // 
-            cbOrderByRating.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbOrderByRating.FormattingEnabled = true;
-            cbOrderByRating.Items.AddRange(new object[] { "По умолчанию", "Высокий", "Низкий" });
-            cbOrderByRating.Location = new Point(683, 724);
-            cbOrderByRating.Name = "cbOrderByRating";
-            cbOrderByRating.Size = new Size(121, 23);
-            cbOrderByRating.TabIndex = 67;
-            // 
             // FormBookInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = SystemColors.ButtonFace;
-            ClientSize = new Size(1327, 1061);
+            ClientSize = new Size(1355, 1061);
+            Controls.Add(dgvReviews);
             Controls.Add(labelRating);
             Controls.Add(cbOrderByRating);
             Controls.Add(labelDateFilter);
-            Controls.Add(dgvReviews);
             Controls.Add(cbOrderByDate);
             Controls.Add(buttonAddReview);
             Controls.Add(label2);
@@ -750,11 +756,11 @@
             Controls.Add(labelBookName);
             Controls.Add(pbBookImage);
             Controls.Add(labelBookInfo);
-            Controls.Add(pictureBox2);
+            Controls.Add(pbBack);
             Name = "FormBookInfo";
             Text = "Информация о книге";
             Load += FormBookInfo_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbBookImage).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -766,7 +772,7 @@
 
         #endregion
 
-        private PictureBox pictureBox2;
+        private PictureBox pbBack;
         private Label labelBookInfo;
         private PictureBox pbBookImage;
         private Label labelBookName;
@@ -813,6 +819,9 @@
         private Label label2;
         private Button buttonAddReview;
         private ComboBox cbOrderByDate;
+        private Label labelDateFilter;
+        private Label labelRating;
+        private ComboBox cbOrderByRating;
         private DataGridView dgvReviews;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Username;
@@ -820,8 +829,5 @@
         private DataGridViewTextBoxColumn Content;
         private DataGridViewTextBoxColumn Rating;
         private DataGridViewTextBoxColumn CreatedAt;
-        private Label labelDateFilter;
-        private Label labelRating;
-        private ComboBox cbOrderByRating;
     }
 }

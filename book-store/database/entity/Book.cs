@@ -15,7 +15,6 @@ namespace book_store.database.entity
         [Column("id")]
         public int Id { get; set; }
 
-        public double? Rating { get; set; }
         public int Price { get; set; }
 
         public string? ImagePath { get; set; }

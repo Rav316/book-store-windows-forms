@@ -20,5 +20,11 @@ namespace book_store.database.repository
                 .Include(br => br.User)
                 .ToList();
         }
+
+        public BookReview? FindByBookAndUser(int bookId, int userId)
+        {
+            return context.BookReviews
+                .FirstOrDefault(br => br.BookId == bookId && br.UserId == userId);
+        }
     }
 }
