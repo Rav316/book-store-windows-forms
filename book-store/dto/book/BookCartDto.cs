@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace book_store.dto.book
 {
-    public class BookListCartDto
+    public class BookCartDto
     {
         public int Id { get; set; }
         public string Title { get; set; }

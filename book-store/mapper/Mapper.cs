@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace book_store.mapper.bookReview
+namespace book_store.mapper
 {
     internal abstract class Mapper<E, D>
     {

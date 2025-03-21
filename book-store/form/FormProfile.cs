@@ -1,5 +1,7 @@
 ﻿using book_store.context;
 using book_store.database.entity;
+using book_store.dto.book;
+using book_store.dto.order;
 using book_store.exception;
 using book_store.service;
 using book_store.util;
@@ -21,6 +23,8 @@ namespace book_store.form
     {
         private readonly UserService userService = new UserService();
         private readonly BookReviewService bookReviewService = new BookReviewService();
+        private readonly OrderService orderService = new OrderService();
+        private List<OrderProfileDto> orders;
         private string fileName;
         public FormProfile()
         {
@@ -57,7 +61,24 @@ namespace book_store.form
             dgvReviews.Columns[5].DataPropertyName = "Content";
             dgvReviews.Columns[6].DataPropertyName = "Rating";
             dgvReviews.Columns[7].DataPropertyName = "CreatedAt";
+
+            dgvOrders.ReadOnly = true;
+            dgvOrders.Columns[0].DataPropertyName = "Id";
+            dgvOrders.Columns[1].DataPropertyName = "PaymentMethod";
+            dgvOrders.Columns[2].DataPropertyName = "PaymentStatus";
+            dgvOrders.Columns[3].DataPropertyName = "OrderStatus";
+            dgvOrders.Columns[4].DataPropertyName = "Cost";
+            dgvOrders.Columns[5].DataPropertyName = "PaidIn";
+            dgvOrders.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
             ViewAllReviews();
+            ViewAllOrders();
+        }
+
+        private void ViewAllOrders()
+        {
+            orders = orderService.FindAllForCurrentUser();
+            dgvOrders.DataSource = orders;
         }
 
         private void ViewAllReviews()
@@ -141,9 +162,8 @@ namespace book_store.form
         private async void dgvReviews_DoubleClick(object sender, EventArgs e)
         {
             int selectedRowIndex = dgvReviews.CurrentRow.Index;
-            if(selectedRowIndex >= 0)
+            if (selectedRowIndex >= 0)
             {
-                // int bookId, string bookName, string author, BookReview bookReview
                 FormEditReview formEditReview = new FormEditReview
                 (
                     (int)dgvReviews[1, selectedRowIndex].Value,
@@ -161,6 +181,28 @@ namespace book_store.form
                     MessageBox.Show("Отзыв успшено удалён ✅");
                     ViewAllReviews();
                 }
+            }
+        }
+
+        private void dgvOrders_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvOrders.Columns[e.ColumnIndex].DataPropertyName == "Cost" && e.RowIndex >= 0)
+            {
+                if (e.Value != null)
+                {
+                    e.Value = e.Value.ToString() + " ₽";
+                }
+            }
+        }
+
+        private void dgvOrders_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int selectedRowIndex = dgvOrders.CurrentRow.Index;
+            if (selectedRowIndex >= 0)
+            {
+                FormOrderInfo formOrderInfo = new FormOrderInfo(orders[selectedRowIndex]);
+                Close();
+                formOrderInfo.Show();
             }
         }
     }

@@ -25,7 +25,6 @@ namespace book_store.form
         private List<Category> categories = new List<Category>();
         private List<CoverType> coverTypes = new List<CoverType>();
         private List<Language> languages = new List<Language>();
-        int selectedRowIndex = -1;
         public FormMain()
         {
             InitializeComponent();
@@ -191,7 +190,7 @@ namespace book_store.form
 
         private void dgvBooks_DoubleClick(object sender, EventArgs e)
         {
-            selectedRowIndex = dgvBooks.CurrentRow.Index;
+            int selectedRowIndex = dgvBooks.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {
                 FormBookInfo formBookInfo = new FormBookInfo(allBooks[selectedRowIndex].Id);

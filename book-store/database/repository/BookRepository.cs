@@ -92,7 +92,7 @@ namespace book_store.database.repository
             return result;
         }
 
-        public List<BookListCartDto> FindAllInCartWithUserInfo(int userId)
+        public List<BookCartDto> FindAllInCartWithUserInfo(int userId)
         {
             const string query = """
                     SELECT 
@@ -125,7 +125,7 @@ namespace book_store.database.repository
                     """;
 
             var result = context.Database
-                .SqlQueryRaw<BookListCartDto>(query, userId)
+                .SqlQueryRaw<BookCartDto>(query, userId)
                 .ToList();
 
             return result;
@@ -144,17 +144,6 @@ namespace book_store.database.repository
             return context.CartItems.Any(c => c.BookId == bookId && c.UserId == userId);
         }
 
-        public async Task<List<Book>> GetFavoriteBooks(int userId)
-        {
-            return await context.Favorites
-                .Where(f => f.UserId == userId)
-                .Include(f => f.Book) 
-                .ThenInclude(b => b.Author) 
-                .Select(f => f.Book)
-                .ToListAsync();
-
-        }
-
         public void RemoveAllFavoritesForUser(int userId)
         {
             var favoritesToRemove = context.Favorites.Where(f => f.UserId == userId);
@@ -164,6 +153,16 @@ namespace book_store.database.repository
                 context.Favorites.RemoveRange(favoritesToRemove);
                 context.SaveChanges();
             }
+        }
+
+        public List<Book> FindAllByOrder(int orderId)
+        {
+            return context.OrderItems
+            .Where(oi => oi.OrderId == orderId)
+            .Include(oi => oi.Book) 
+            .ThenInclude(b => b.Author) 
+            .Select(oi => oi.Book)
+            .ToList();
         }
     }
 }

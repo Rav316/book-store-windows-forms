@@ -35,6 +35,8 @@ namespace book_store.database.entity
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
 
+        public int Cost { get; set; }
+
         public DateTime PaidIn { get; set; } = DateTime.UtcNow;
 
         public virtual List<OrderItem> OrderItems { get; set; } = new();

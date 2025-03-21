@@ -17,7 +17,7 @@ namespace book_store.form
     {
         private readonly BookService bookService = new BookService();
         private readonly OrderService orderService = new OrderService();
-        private List<BookListCartDto> allBooks = new List<BookListCartDto>();
+        private List<BookCartDto> allBooks = new List<BookCartDto>();
         int selectedRowIndex = -1;
         public FormCart()
         {
@@ -216,7 +216,7 @@ namespace book_store.form
                     if (!isChecked)
                     {
                         await bookService.RemoveFromCart((int)dgvBooks[0, e.RowIndex].Value);
-                        var list = (List<BookListCartDto>)dgvBooks.DataSource;
+                        var list = (List<BookCartDto>)dgvBooks.DataSource;
                         list.RemoveAt(e.RowIndex);
                         dgvBooks.DataSource = null;
                         dgvBooks.DataSource = list;
@@ -295,7 +295,7 @@ namespace book_store.form
                 List<int> bookIds = allBooks
                     .Select(b => b.Id)
                     .ToList();
-                await orderService.CreateOrderFromCartAsync(bookIds);
+                await orderService.CreateOrderFromCartAsync(int.Parse(labelTotalSum.Text.Replace("₽", "")), bookIds);
                 MessageBox.Show("Заказ успешно оформлен ✅");
                 allBooks = bookService.FindAllInCartWithUserInfo();
                 dgvBooks.DataSource = allBooks;

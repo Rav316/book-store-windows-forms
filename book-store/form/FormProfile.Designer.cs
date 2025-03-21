@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProfile));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             pbAvatar = new PictureBox();
             pbBack = new PictureBox();
             labelProfile = new Label();
@@ -59,9 +61,18 @@
             Content = new DataGridViewTextBoxColumn();
             Rating = new DataGridViewTextBoxColumn();
             CreatedAt = new DataGridViewTextBoxColumn();
+            labelOrders = new Label();
+            dgvOrders = new DataGridView();
+            OrderId = new DataGridViewTextBoxColumn();
+            PaymentMethod = new DataGridViewTextBoxColumn();
+            PaymentStatus = new DataGridViewTextBoxColumn();
+            OrderStatus = new DataGridViewTextBoxColumn();
+            Cost = new DataGridViewTextBoxColumn();
+            PaidIn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvReviews).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrders).BeginInit();
             SuspendLayout();
             // 
             // pbAvatar
@@ -102,7 +113,7 @@
             buttonEditAvatar.FlatStyle = FlatStyle.Flat;
             buttonEditAvatar.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonEditAvatar.ForeColor = SystemColors.Window;
-            buttonEditAvatar.Location = new Point(535, 252);
+            buttonEditAvatar.Location = new Point(535, 251);
             buttonEditAvatar.Name = "buttonEditAvatar";
             buttonEditAvatar.Size = new Size(253, 50);
             buttonEditAvatar.TabIndex = 25;
@@ -273,7 +284,7 @@
             // 
             labelReviews.AutoSize = true;
             labelReviews.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelReviews.Location = new Point(63, 428);
+            labelReviews.Location = new Point(63, 429);
             labelReviews.Name = "labelReviews";
             labelReviews.Size = new Size(148, 32);
             labelReviews.TabIndex = 62;
@@ -300,10 +311,10 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReviews.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvReviews.Location = new Point(63, 463);
+            dgvReviews.Location = new Point(63, 464);
             dgvReviews.Name = "dgvReviews";
             dgvReviews.RowTemplate.Height = 136;
-            dgvReviews.Size = new Size(725, 224);
+            dgvReviews.Size = new Size(725, 281);
             dgvReviews.TabIndex = 70;
             dgvReviews.DoubleClick += dgvReviews_DoubleClick;
             // 
@@ -352,11 +363,81 @@
             CreatedAt.HeaderText = "оставлен в";
             CreatedAt.Name = "CreatedAt";
             // 
+            // labelOrders
+            // 
+            labelOrders.AutoSize = true;
+            labelOrders.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelOrders.Location = new Point(806, 12);
+            labelOrders.Name = "labelOrders";
+            labelOrders.Size = new Size(142, 32);
+            labelOrders.TabIndex = 71;
+            labelOrders.Text = "Мои заказы";
+            // 
+            // dgvOrders
+            // 
+            dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvOrders.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOrders.Columns.AddRange(new DataGridViewColumn[] { OrderId, PaymentMethod, PaymentStatus, OrderStatus, Cost, PaidIn });
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvOrders.Location = new Point(806, 63);
+            dgvOrders.Name = "dgvOrders";
+            dgvOrders.Size = new Size(735, 238);
+            dgvOrders.TabIndex = 72;
+            dgvOrders.CellFormatting += dgvOrders_CellFormatting;
+            dgvOrders.CellMouseDoubleClick += dgvOrders_CellMouseDoubleClick;
+            // 
+            // OrderId
+            // 
+            OrderId.HeaderText = "Номер заказа";
+            OrderId.Name = "OrderId";
+            // 
+            // PaymentMethod
+            // 
+            PaymentMethod.HeaderText = "Способ оплаты";
+            PaymentMethod.Name = "PaymentMethod";
+            // 
+            // PaymentStatus
+            // 
+            PaymentStatus.HeaderText = "Статус оплаты";
+            PaymentStatus.Name = "PaymentStatus";
+            // 
+            // OrderStatus
+            // 
+            OrderStatus.HeaderText = "Статус заказа";
+            OrderStatus.Name = "OrderStatus";
+            // 
+            // Cost
+            // 
+            Cost.HeaderText = "Стоимость";
+            Cost.Name = "Cost";
+            // 
+            // PaidIn
+            // 
+            PaidIn.HeaderText = "Время оплаты";
+            PaidIn.Name = "PaidIn";
+            // 
             // FormProfile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(864, 800);
+            ClientSize = new Size(1560, 780);
+            Controls.Add(dgvOrders);
+            Controls.Add(labelOrders);
             Controls.Add(dgvReviews);
             Controls.Add(labelReviews);
             Controls.Add(buttonDeleteAccount);
@@ -383,6 +464,7 @@
             ((System.ComponentModel.ISupportInitialize)pbAvatar).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOrders).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -417,5 +499,13 @@
         private DataGridViewTextBoxColumn Content;
         private DataGridViewTextBoxColumn Rating;
         private DataGridViewTextBoxColumn CreatedAt;
+        private Label labelOrders;
+        private DataGridView dgvOrders;
+        private DataGridViewTextBoxColumn OrderId;
+        private DataGridViewTextBoxColumn PaymentMethod;
+        private DataGridViewTextBoxColumn PaymentStatus;
+        private DataGridViewTextBoxColumn OrderStatus;
+        private DataGridViewTextBoxColumn Cost;
+        private DataGridViewTextBoxColumn PaidIn;
     }
 }

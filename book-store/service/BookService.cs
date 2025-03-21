@@ -3,6 +3,7 @@ using book_store.database.entity;
 using book_store.database.repository;
 using book_store.dto.book;
 using book_store.exception;
+using book_store.mapper.book;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace book_store.service
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
         private readonly CartItemRepository cartItemRepository = new CartItemRepository(AppDbContext.INSTANCE);
         private readonly BookWarehouseRepository bookWarehouseRepository = new BookWarehouseRepository(AppDbContext.INSTANCE);
+        private readonly BookOrderMapper bookOrderMapper = new BookOrderMapper();
 
 
         public List<BookListDto> FindAllWithUserInfo()
@@ -29,7 +31,7 @@ namespace book_store.service
             return bookRepository.FindAllFavoritesWithUserInfo(SecurityContext.Authentication.Id);
         }
 
-        public List<BookListCartDto> FindAllInCartWithUserInfo()
+        public List<BookCartDto> FindAllInCartWithUserInfo()
         {
             return bookRepository.FindAllInCartWithUserInfo(SecurityContext.Authentication.Id);
         }
@@ -93,6 +95,13 @@ namespace book_store.service
         public bool IsBookAvailable(int bookId)
         {
             return bookWarehouseRepository.IsBookAvailable(bookId);
+        }
+
+        public List<BookOrderDto> FindAllByOrder(int orderId)
+        {
+            return bookRepository.FindAllByOrder(orderId)
+                .Select(bookOrderMapper.ToDto)
+                .ToList();
         }
     }
 }
