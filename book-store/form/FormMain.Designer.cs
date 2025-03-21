@@ -55,6 +55,8 @@ namespace book_store.form
             cbCoverType = new ComboBox();
             labelCoverType = new Label();
             dgvBooks = new DataGridView();
+            pbProfile = new PictureBox();
+            labelProfile = new Label();
             Id = new DataGridViewTextBoxColumn();
             BookName = new DataGridViewTextBoxColumn();
             Author = new DataGridViewTextBoxColumn();
@@ -62,9 +64,7 @@ namespace book_store.form
             Price = new DataGridViewTextBoxColumn();
             IsInFavorites = new DataGridViewCheckBoxColumn();
             IsInCart = new DataGridViewCheckBoxColumn();
-            CartItemId = new DataGridViewTextBoxColumn();
-            pbProfile = new PictureBox();
-            labelProfile = new Label();
+            IsAvailable = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbFavorites).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCart).BeginInit();
             gbFilters.SuspendLayout();
@@ -318,7 +318,7 @@ namespace book_store.form
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvBooks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, CartItemId });
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, IsAvailable });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Philosopher", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -335,6 +335,28 @@ namespace book_store.form
             dgvBooks.CellContentClick += dgvBooks_CellContentClick;
             dgvBooks.CellFormatting += dgvBooks_CellFormatting;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
+            // 
+            // pbProfile
+            // 
+            pbProfile.Cursor = Cursors.Hand;
+            pbProfile.Image = (Image)resources.GetObject("pbProfile.Image");
+            pbProfile.Location = new Point(700, 26);
+            pbProfile.Name = "pbProfile";
+            pbProfile.Size = new Size(41, 20);
+            pbProfile.SizeMode = PictureBoxSizeMode.Zoom;
+            pbProfile.TabIndex = 20;
+            pbProfile.TabStop = false;
+            pbProfile.Click += pbProfile_Click;
+            // 
+            // labelProfile
+            // 
+            labelProfile.AutoSize = true;
+            labelProfile.Font = new Font("Philosopher", 9.749999F);
+            labelProfile.Location = new Point(691, 49);
+            labelProfile.Name = "labelProfile";
+            labelProfile.Size = new Size(60, 17);
+            labelProfile.TabIndex = 19;
+            labelProfile.Text = "Профиль";
             // 
             // Id
             // 
@@ -375,33 +397,11 @@ namespace book_store.form
             IsInCart.HeaderText = "В корзине";
             IsInCart.Name = "IsInCart";
             // 
-            // CartItemId
+            // IsAvailable
             // 
-            CartItemId.HeaderText = "cartItemId";
-            CartItemId.Name = "CartItemId";
-            CartItemId.Visible = false;
-            // 
-            // pbProfile
-            // 
-            pbProfile.Cursor = Cursors.Hand;
-            pbProfile.Image = (Image)resources.GetObject("pbProfile.Image");
-            pbProfile.Location = new Point(700, 26);
-            pbProfile.Name = "pbProfile";
-            pbProfile.Size = new Size(41, 20);
-            pbProfile.SizeMode = PictureBoxSizeMode.Zoom;
-            pbProfile.TabIndex = 20;
-            pbProfile.TabStop = false;
-            pbProfile.Click += pbProfile_Click;
-            // 
-            // labelProfile
-            // 
-            labelProfile.AutoSize = true;
-            labelProfile.Font = new Font("Philosopher", 9.749999F);
-            labelProfile.Location = new Point(691, 49);
-            labelProfile.Name = "labelProfile";
-            labelProfile.Size = new Size(60, 17);
-            labelProfile.TabIndex = 19;
-            labelProfile.Text = "Профиль";
+            IsAvailable.HeaderText = "есть ли на складе";
+            IsAvailable.Name = "IsAvailable";
+            IsAvailable.Visible = false;
             // 
             // FormMain
             // 
@@ -458,6 +458,8 @@ namespace book_store.form
         private NumericUpDown nudMinPrice;
         private Label labelMaxPrice;
         private Label labelMinPrice;
+        private PictureBox pbProfile;
+        private Label labelProfile;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn BookName;
         private DataGridViewTextBoxColumn Author;
@@ -465,8 +467,6 @@ namespace book_store.form
         private DataGridViewTextBoxColumn Price;
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
-        private DataGridViewTextBoxColumn CartItemId;
-        private PictureBox pbProfile;
-        private Label labelProfile;
+        private DataGridViewTextBoxColumn IsAvailable;
     }
 }

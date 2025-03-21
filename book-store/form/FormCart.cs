@@ -16,7 +16,7 @@ namespace book_store.form
     public partial class FormCart : Form
     {
         private readonly BookService bookService = new BookService();
-        private List<BookListDto> allBooks = new List<BookListDto>();
+        private List<BookListCartDto> allBooks = new List<BookListCartDto>();
         int selectedRowIndex = -1;
         public FormCart()
         {
@@ -35,6 +35,8 @@ namespace book_store.form
             dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
             dgvBooks.Columns[7].DataPropertyName = "Quantity";
+            dgvBooks.Columns[8].DataPropertyName = "IsAvailable";
+            dgvBooks.Columns[9].DataPropertyName = "AvailableQuantity";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
@@ -46,7 +48,7 @@ namespace book_store.form
                 book.image = ImageUtils.GetBookImageByPath(book.ImagePath);
             });
             dgvBooks.DataSource = allBooks;
-            labelTotalSum.Text =  $"{CalculateTotalSum()} ₽";
+            labelTotalSum.Text = $"{CalculateTotalSum()} ₽";
 
         }
 
@@ -87,6 +89,7 @@ namespace book_store.form
         {
             ViewAllBooks();
             UpdateGridViewVisibility();
+            UpdatePlaceOrderButtonState();
         }
 
         private void buttonBackToMainForm_Click(object sender, EventArgs e)
@@ -103,6 +106,38 @@ namespace book_store.form
                     e.Value = e.Value.ToString() + " ₽";
                 }
             }
+            if (dgvBooks.Columns[e.ColumnIndex].DataPropertyName == "IsInCart" && e.RowIndex >= 0)
+            {
+                bool isAvailable = Convert.ToBoolean(dgvBooks.Rows[e.RowIndex].Cells["IsAvailable"].Value);
+                bool isInCart = Convert.ToBoolean(dgvBooks.Rows[e.RowIndex].Cells["IsInCart"].Value);
+                dgvBooks.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = Color.LightGray;
+
+                DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)dgvBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                checkBoxCell.ReadOnly = !isAvailable && !isInCart;
+
+                if (!isAvailable)
+                {
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.DarkGray;
+                } else
+                {
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                }
+            }
+
+            if (dgvBooks.Columns[e.ColumnIndex].DataPropertyName == "Quantity" && e.RowIndex >= 0)
+            {
+                int availableQuantity = Convert.ToInt32(dgvBooks.Rows[e.RowIndex].Cells["AvailableQuantity"].Value);
+                if (int.TryParse(e.Value?.ToString(), out int quantity) && quantity > availableQuantity)
+                {
+                    dgvBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Red;
+                } else
+                {
+                    dgvBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Black;
+                }
+                UpdatePlaceOrderButtonState();
+            }
         }
 
         private void dgvBooks_DoubleClick(object sender, EventArgs e)
@@ -118,14 +153,37 @@ namespace book_store.form
 
         private void dgvBooks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 7)
+            if (e.RowIndex >= 0 && e.ColumnIndex == 7) 
             {
                 if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewTextBoxCell textBoxCell)
                 {
-                    bookService.UpdateQuantityInCartForCurrentUser(
-                        (int)dgvBooks[0, e.RowIndex].Value, (int)dgvBooks[e.ColumnIndex, e.RowIndex].Value
-                    );
-                    labelTotalSum.Text = $"{CalculateTotalSum()} ₽";
+                    if (int.TryParse(dgvBooks[e.ColumnIndex, e.RowIndex].Value.ToString(), out int quantity))
+                    {
+                        if (quantity < 0)
+                        {
+                            quantity = Math.Abs(quantity);
+                            dgvBooks[e.ColumnIndex, e.RowIndex].Value = quantity;
+                        }
+
+                        int availableQuantity = Convert.ToInt32(dgvBooks.Rows[e.RowIndex].Cells["AvailableQuantity"].Value);
+
+                        if (quantity > availableQuantity)
+                        {
+                            dgvBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Red;
+                        } else
+                        {
+                            dgvBooks.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.ForeColor = Color.Black;
+                        }
+
+                        bookService.UpdateQuantityInCartForCurrentUser(
+                            (int)dgvBooks[0, e.RowIndex].Value,
+                            quantity
+                        );
+
+                        labelTotalSum.Text = $"{CalculateTotalSum()} ₽";
+
+                        UpdatePlaceOrderButtonState();
+                    }
                 }
             }
         }
@@ -157,7 +215,7 @@ namespace book_store.form
                     if (!isChecked)
                     {
                         await bookService.RemoveFromCart((int)dgvBooks[0, e.RowIndex].Value);
-                        var list = (List<BookListDto>)dgvBooks.DataSource;
+                        var list = (List<BookListCartDto>)dgvBooks.DataSource;
                         list.RemoveAt(e.RowIndex);
                         dgvBooks.DataSource = null;
                         dgvBooks.DataSource = list;
@@ -191,5 +249,42 @@ namespace book_store.form
             }
             return totalSum;
         }
+
+        private void UpdatePlaceOrderButtonState()
+        {
+            bool hasInvalidQuantity = false;
+            bool hasUnavailableBooks = false;
+
+            foreach (DataGridViewRow row in dgvBooks.Rows)
+            {
+                if (row.Cells["AvailableQuantity"].Value != null && row.Cells["Quantity"].Value != null)
+                {
+                    int availableQuantity = Convert.ToInt32(row.Cells["AvailableQuantity"].Value);
+                    if (int.TryParse(row.Cells["Quantity"].Value.ToString(), out int quantity) && quantity > availableQuantity)
+                    {
+                        hasInvalidQuantity = true;
+                    }
+                }
+
+                if (row.DefaultCellStyle.BackColor == Color.LightGray)
+                {
+                    hasUnavailableBooks = true;
+                }
+            }
+
+            bool isEnabled = !(hasInvalidQuantity || hasUnavailableBooks);
+            buttonPlaceOrder.Enabled = isEnabled;
+
+            if (isEnabled)
+            {
+                buttonPlaceOrder.BackColor = ColorTranslator.FromHtml("#290247"); ;
+                buttonPlaceOrder.ForeColor = Color.White;
+            } else
+            {
+                buttonPlaceOrder.BackColor = Color.LightGray;
+                buttonPlaceOrder.ForeColor = Color.Gray;
+            }
+        }
+
     }
 }

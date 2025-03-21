@@ -36,6 +36,7 @@ namespace book_store.form
             dgvBooks.Columns[4].ReadOnly = true;
             dgvBooks.Columns[5].DataPropertyName = "IsFavorite";
             dgvBooks.Columns[6].DataPropertyName = "IsInCart";
+            dgvBooks.Columns[7].DataPropertyName = "IsAvailable";
             dgvBooks.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
@@ -97,6 +98,26 @@ namespace book_store.form
                 if (e.Value != null)
                 {
                     e.Value = e.Value.ToString() + " ₽";
+                }
+            }
+
+            if (dgvBooks.Columns[e.ColumnIndex].DataPropertyName == "IsInCart" && e.RowIndex >= 0)
+            {
+                bool isAvailable = Convert.ToBoolean(dgvBooks.Rows[e.RowIndex].Cells["IsAvailable"].Value);
+                bool isInCart = Convert.ToBoolean(dgvBooks.Rows[e.RowIndex].Cells["IsInCart"].Value);
+                dgvBooks.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = Color.LightGray;
+
+                DataGridViewCheckBoxCell checkBoxCell = (DataGridViewCheckBoxCell)dgvBooks.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                checkBoxCell.ReadOnly = !isAvailable && !isInCart;
+
+                if (!isAvailable)
+                {
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.DarkGray;
+                } else
+                {
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                    dgvBooks.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
                 }
             }
         }

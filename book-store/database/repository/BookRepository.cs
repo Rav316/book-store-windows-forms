@@ -17,16 +17,33 @@ namespace book_store.database.repository
         public List<BookListDto> FindAllWithUserInfo(int userId)
         {
             const string query = """
-                    SELECT b.id AS Id, b.title AS Title, b.category_id AS Category, b.image_path AS ImagePath,
-                    b.cover_type_id AS CoverType, b.language_id AS Language, b.price AS Price,
+                    SELECT 
+                        b.id AS Id, 
+                        b.title AS Title, 
+                        b.category_id AS Category, 
+                        b.image_path AS ImagePath,
+                        b.cover_type_id AS CoverType, 
+                        b.language_id AS Language, 
+                        b.price AS Price,
                         CASE WHEN f.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsFavorite,
                         CASE WHEN c.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsInCart,
-                        CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName, c.quantity AS Quantity
+                        CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName, 
+                        c.quantity AS Quantity,
+                        COALESCE(w.total_quantity, 0) AS AvailableQuantity, -- Добавляем доступное количество книг
+                        CASE 
+                            WHEN COALESCE(w.total_quantity, 0) > 0 THEN TRUE 
+                            ELSE FALSE 
+                        END AS IsAvailable
                     FROM book b
                     LEFT JOIN favorites f ON b.id = f.book_id AND f.user_id = {0}
                     LEFT JOIN cart_item c ON b.id = c.book_id AND c.user_id = {0}
                     LEFT JOIN author a ON b.author_id = a.id
-                    ORDER BY b.id
+                    LEFT JOIN (
+                        SELECT book_id, SUM(quantity) AS total_quantity
+                        FROM book_warehouse
+                        GROUP BY book_id
+                    ) w ON b.id = w.book_id
+                    ORDER BY b.id;
                     """;
 
             var result = context.Database
@@ -39,16 +56,33 @@ namespace book_store.database.repository
         public List<BookListDto> FindAllFavoritesWithUserInfo(int userId)
         {
             const string query = """
-                    SELECT b.id AS Id, b.title AS Title, b.category_id AS Category, b.image_path AS ImagePath,
-                    b.cover_type_id AS CoverType, b.language_id AS Language, b.price AS Price,
+                    SELECT 
+                        b.id AS Id, 
+                        b.title AS Title, 
+                        b.category_id AS Category, 
+                        b.image_path AS ImagePath,
+                        b.cover_type_id AS CoverType, 
+                        b.language_id AS Language, 
+                        b.price AS Price,
                         CASE WHEN f.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsFavorite,
                         CASE WHEN c.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsInCart,
-                        CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName, c.quantity AS Quantity
+                        CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName, 
+                        c.quantity AS Quantity,
+                        COALESCE(w.total_quantity, 0) AS AvailableQuantity, -- Добавляем доступное количество книг
+                        CASE 
+                            WHEN COALESCE(w.total_quantity, 0) > 0 THEN TRUE 
+                            ELSE FALSE 
+                        END AS IsAvailable
                     FROM book b
                     JOIN favorites f ON b.id = f.book_id AND f.user_id = {0}
                     LEFT JOIN cart_item c ON b.id = c.book_id AND c.user_id = {0}
                     LEFT JOIN author a ON b.author_id = a.id
-                    ORDER BY b.id
+                    LEFT JOIN (
+                        SELECT book_id, SUM(quantity) AS total_quantity
+                        FROM book_warehouse
+                        GROUP BY book_id
+                    ) w ON b.id = w.book_id
+                    ORDER BY b.id;
                     """;
 
             var result = context.Database
@@ -58,23 +92,40 @@ namespace book_store.database.repository
             return result;
         }
 
-        public List<BookListDto> FindAllInCartWithUserInfo(int userId)
+        public List<BookListCartDto> FindAllInCartWithUserInfo(int userId)
         {
             const string query = """
-                    SELECT b.id AS Id, b.title AS Title, b.category_id AS Category, b.image_path AS ImagePath,
-                    b.cover_type_id AS CoverType, b.language_id AS Language, b.price AS Price,
+                    SELECT 
+                        b.id AS Id, 
+                        b.title AS Title, 
+                        b.category_id AS Category, 
+                        b.image_path AS ImagePath,
+                        b.cover_type_id AS CoverType, 
+                        b.language_id AS Language, 
+                        b.price AS Price,
                         CASE WHEN f.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsFavorite,
                         CASE WHEN c.book_id IS NOT NULL THEN TRUE ELSE FALSE END AS IsInCart,
-                        CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName, c.quantity AS Quantity
+                        CONCAT(a.first_name, ' ', a.mid_name, ' ', a.last_name) AS AuthorFullName, 
+                        c.quantity AS Quantity,
+                        COALESCE(w.total_quantity, 0) AS AvailableQuantity, -- Добавляем доступное количество книг
+                        CASE 
+                            WHEN COALESCE(w.total_quantity, 0) > 0 THEN TRUE 
+                            ELSE FALSE 
+                        END AS IsAvailable
                     FROM book b
                     LEFT JOIN favorites f ON b.id = f.book_id AND f.user_id = {0}
                     JOIN cart_item c ON b.id = c.book_id AND c.user_id = {0}
                     LEFT JOIN author a ON b.author_id = a.id
-                    ORDER BY b.id
+                    LEFT JOIN (
+                        SELECT book_id, SUM(quantity) AS total_quantity
+                        FROM book_warehouse
+                        GROUP BY book_id
+                    ) w ON b.id = w.book_id
+                    ORDER BY b.id;
                     """;
 
             var result = context.Database
-                .SqlQueryRaw<BookListDto>(query, userId)
+                .SqlQueryRaw<BookListCartDto>(query, userId)
                 .ToList();
 
             return result;

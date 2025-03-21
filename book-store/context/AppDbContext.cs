@@ -26,6 +26,8 @@ namespace book_store.context
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<BookReview> BookReviews { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<BookWarehouse> BookWarehouses { get; set; }
 
         private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
                     new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
@@ -77,8 +79,25 @@ namespace book_store.context
             .HasKey(f => new { f.BookId, f.UserId });
 
             modelBuilder.Entity<BookReview>().ToTable("book_review")
-        .HasIndex(b => new { b.UserId, b.BookId })
-        .IsUnique();
+            .HasIndex(b => new { b.UserId, b.BookId })
+            .IsUnique();
+
+            modelBuilder.Entity<Warehouse>().ToTable("warehouse")
+                .HasIndex(w => w.Name)
+                .IsUnique();
+
+            modelBuilder.Entity<BookWarehouse>().ToTable("book_warehouse")
+            .HasKey(bw => new { bw.BookId, bw.WarehouseId });
+
+            modelBuilder.Entity<BookWarehouse>()
+                .HasOne(bw => bw.Book)
+                .WithMany()
+                .HasForeignKey(bw => bw.BookId);
+
+            modelBuilder.Entity<BookWarehouse>()
+                .HasOne(bw => bw.Warehouse)
+                .WithMany()
+                .HasForeignKey(bw => bw.WarehouseId);
 
             base.OnModelCreating(modelBuilder);
 

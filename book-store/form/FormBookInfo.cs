@@ -29,6 +29,7 @@ namespace book_store.form
         private int bookId;
         private bool isInFavorites;
         private bool isInCart;
+        private bool isBookAvailable;
         private Book book;
         private List<BookReviewListDto> bookReviews;
         private BookReview? bookReview;
@@ -69,6 +70,7 @@ namespace book_store.form
             labelPrice.Text = $"{book.Price} ₽";
             isInFavorites = bookService.IsInFavoritesForCurrentUser(bookId);
             isInCart = bookService.IsInCartForCurrentUser(bookId);
+            isBookAvailable = bookService.IsBookAvailable(bookId);
 
             if (isInFavorites)
             {
@@ -81,9 +83,16 @@ namespace book_store.form
             if (isInCart)
             {
                 buttonInCart.Text = "Удалить из корзины";
-            } else
+            } 
+            else if(!isInCart && isBookAvailable)
             {
                 buttonInCart.Text = "Добавить в корзину";
+            } else if(!isInCart && !isBookAvailable)
+            {
+                buttonInCart.Text = "Нет в наличии";
+                buttonInCart.Enabled = false;
+                buttonInCart.BackColor = Color.LightGray;
+                buttonInCart.ForeColor = Color.Gray;
             }
 
             cbOrderByDate.SelectedIndex = 0;
@@ -144,7 +153,16 @@ namespace book_store.form
             {
                 await bookService.RemoveFromCart(bookId);
                 isInCart = false;
-                buttonInCart.Text = "Добавить в корзину";
+                if(isBookAvailable)
+                {
+                    buttonInCart.Text = "Добавить в корзину";
+                } else
+                {
+                    buttonInCart.Text = "Нет в наличии";
+                    buttonInCart.Enabled = false;
+                    buttonInCart.BackColor = Color.LightGray;
+                    buttonInCart.ForeColor = Color.Gray;
+                }
             } else
             {
                 await bookService.AddToCart(bookId, 1);

@@ -16,6 +16,7 @@ namespace book_store.service
         private readonly BookRepository bookRepository = new BookRepository(AppDbContext.INSTANCE);
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
         private readonly CartItemRepository cartItemRepository = new CartItemRepository(AppDbContext.INSTANCE);
+        private readonly BookWarehouseRepository bookWarehouseRepository = new BookWarehouseRepository(AppDbContext.INSTANCE);
 
 
         public List<BookListDto> FindAllWithUserInfo()
@@ -28,7 +29,7 @@ namespace book_store.service
             return bookRepository.FindAllFavoritesWithUserInfo(SecurityContext.Authentication.Id);
         }
 
-        public List<BookListDto> FindAllInCartWithUserInfo()
+        public List<BookListCartDto> FindAllInCartWithUserInfo()
         {
             return bookRepository.FindAllInCartWithUserInfo(SecurityContext.Authentication.Id);
         }
@@ -87,6 +88,11 @@ namespace book_store.service
         public void UpdateQuantityInCartForCurrentUser(int bookId, int newQuantity)
         {
             cartItemRepository.UpdateQuantity(SecurityContext.Authentication.Id, bookId, newQuantity);
+        }
+
+        public bool IsBookAvailable(int bookId)
+        {
+            return bookWarehouseRepository.IsBookAvailable(bookId);
         }
     }
 }

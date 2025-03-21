@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace book_store.dto.book
 {
-    public class BookListDto
+    public class BookListCartDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -22,6 +22,7 @@ namespace book_store.dto.book
         public int Language { get; set; }
         public int Price { get; set; }
         public bool? IsAvailable { get; set; }
+        public int AvailableQuantity { get; set; }
 
         [NotMapped]
         public Image? image { get; set; }

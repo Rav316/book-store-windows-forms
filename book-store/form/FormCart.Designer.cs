@@ -34,6 +34,11 @@
             pbBack = new PictureBox();
             labelCart = new Label();
             dgvBooks = new DataGridView();
+            labelResult = new Label();
+            labelTotalSum = new Label();
+            buttonPlaceOrder = new Button();
+            labelEmpty = new Label();
+            buttonBackToMainForm = new Button();
             Id = new DataGridViewTextBoxColumn();
             BookName = new DataGridViewTextBoxColumn();
             Author = new DataGridViewTextBoxColumn();
@@ -42,11 +47,8 @@
             IsInFavorites = new DataGridViewCheckBoxColumn();
             IsInCart = new DataGridViewCheckBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
-            labelResult = new Label();
-            labelTotalSum = new Label();
-            buttonPlaceOrder = new Button();
-            labelEmpty = new Label();
-            buttonBackToMainForm = new Button();
+            IsAvailable = new DataGridViewTextBoxColumn();
+            AvailableQuantity = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
@@ -85,7 +87,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvBooks.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, Quantity });
+            dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, BookName, Author, BookImage, Price, IsInFavorites, IsInCart, Quantity, IsAvailable, AvailableQuantity });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Philosopher", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -104,50 +106,6 @@
             dgvBooks.CellValueChanged += dgvBooks_CellValueChanged;
             dgvBooks.DataError += dgvBooks_DataError;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            Id.Visible = false;
-            // 
-            // BookName
-            // 
-            BookName.HeaderText = "Название книги";
-            BookName.Name = "BookName";
-            // 
-            // Author
-            // 
-            Author.HeaderText = "Автор";
-            Author.Name = "Author";
-            // 
-            // BookImage
-            // 
-            BookImage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            BookImage.HeaderText = "Изображение";
-            BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            BookImage.Name = "BookImage";
-            BookImage.Resizable = DataGridViewTriState.True;
-            // 
-            // Price
-            // 
-            Price.HeaderText = "Цена";
-            Price.Name = "Price";
-            // 
-            // IsInFavorites
-            // 
-            IsInFavorites.HeaderText = "В избранном";
-            IsInFavorites.Name = "IsInFavorites";
-            // 
-            // IsInCart
-            // 
-            IsInCart.HeaderText = "В корзине";
-            IsInCart.Name = "IsInCart";
-            // 
-            // Quantity
-            // 
-            Quantity.HeaderText = "Количество";
-            Quantity.Name = "Quantity";
             // 
             // labelResult
             // 
@@ -208,6 +166,62 @@
             buttonBackToMainForm.UseVisualStyleBackColor = false;
             buttonBackToMainForm.Click += buttonBackToMainForm_Click;
             // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.Visible = false;
+            // 
+            // BookName
+            // 
+            BookName.HeaderText = "Название книги";
+            BookName.Name = "BookName";
+            // 
+            // Author
+            // 
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
+            // 
+            // BookImage
+            // 
+            BookImage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            BookImage.HeaderText = "Изображение";
+            BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            BookImage.Name = "BookImage";
+            BookImage.Resizable = DataGridViewTriState.True;
+            // 
+            // Price
+            // 
+            Price.HeaderText = "Цена";
+            Price.Name = "Price";
+            // 
+            // IsInFavorites
+            // 
+            IsInFavorites.HeaderText = "В избранном";
+            IsInFavorites.Name = "IsInFavorites";
+            // 
+            // IsInCart
+            // 
+            IsInCart.HeaderText = "В корзине";
+            IsInCart.Name = "IsInCart";
+            // 
+            // Quantity
+            // 
+            Quantity.HeaderText = "Количество";
+            Quantity.Name = "Quantity";
+            // 
+            // IsAvailable
+            // 
+            IsAvailable.HeaderText = "Есть ли книга на складе";
+            IsAvailable.Name = "IsAvailable";
+            IsAvailable.Visible = false;
+            // 
+            // AvailableQuantity
+            // 
+            AvailableQuantity.HeaderText = "Доступное количество книг";
+            AvailableQuantity.Name = "AvailableQuantity";
+            AvailableQuantity.Visible = false;
+            // 
             // FormCart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -248,5 +262,7 @@
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
         private DataGridViewTextBoxColumn Quantity;
+        private DataGridViewTextBoxColumn IsAvailable;
+        private DataGridViewTextBoxColumn AvailableQuantity;
     }
 }
