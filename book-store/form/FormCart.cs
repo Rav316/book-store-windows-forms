@@ -16,6 +16,7 @@ namespace book_store.form
     public partial class FormCart : Form
     {
         private readonly BookService bookService = new BookService();
+        private readonly OrderService orderService = new OrderService();
         private List<BookListCartDto> allBooks = new List<BookListCartDto>();
         int selectedRowIndex = -1;
         public FormCart()
@@ -153,7 +154,7 @@ namespace book_store.form
 
         private void dgvBooks_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 7) 
+            if (e.RowIndex >= 0 && e.ColumnIndex == 7)
             {
                 if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewTextBoxCell textBoxCell)
                 {
@@ -286,5 +287,24 @@ namespace book_store.form
             }
         }
 
+        private async void buttonPlaceOrder_Click(object sender, EventArgs e)
+        {
+            buttonPlaceOrder.Enabled = false;
+            try
+            {
+                List<int> bookIds = allBooks
+                    .Select(b => b.Id)
+                    .ToList();
+                await orderService.CreateOrderFromCartAsync(bookIds);
+                MessageBox.Show("Заказ успешно оформлен ✅");
+                allBooks = bookService.FindAllInCartWithUserInfo();
+                dgvBooks.DataSource = allBooks;
+                UpdateGridViewVisibility();
+            }
+            finally
+            {
+                buttonPlaceOrder.Enabled = true;
+            }
+        }
     }
 }

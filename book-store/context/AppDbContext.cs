@@ -28,6 +28,10 @@ namespace book_store.context
         public DbSet<BookReview> BookReviews { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<BookWarehouse> BookWarehouses { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
+        public DbSet<PaymentStatus> PaymentStatuses { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
                     new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
@@ -98,6 +102,25 @@ namespace book_store.context
                 .HasOne(bw => bw.Warehouse)
                 .WithMany()
                 .HasForeignKey(bw => bw.WarehouseId);
+
+            modelBuilder.Entity<OrderItem>().ToTable("order_item")
+            .HasKey(oi => new { oi.OrderId, oi.BookId });
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Book)
+                .WithMany()
+                .HasForeignKey(oi => oi.BookId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OrderStatus>().ToTable("order_status");
+            modelBuilder.Entity<PaymentStatus>().ToTable("payment_status");
+            modelBuilder.Entity<Order>().ToTable("orders");
 
             base.OnModelCreating(modelBuilder);
 
