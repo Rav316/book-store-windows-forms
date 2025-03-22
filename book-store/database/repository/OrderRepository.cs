@@ -32,15 +32,16 @@ namespace book_store.database.repository
                 {
                     UserId = userId,
                     PaymentMethod = "Unspecified",
-                    PaymentStatusId = 1, 
-                    OrderStatusId = 1, 
-                    Cost = totalCost,
-                    OrderItems = new List<OrderItem>()
+                    PaymentStatusId = 1,
+                    OrderStatusId = 1,
+                    Cost = totalCost
                 };
+
+                var orderItemWarehouses = new List<OrderItem>();
 
                 foreach (var cartItem in cartItems)
                 {
-                    int remainingQuantity = cartItem.Quantity; 
+                    int remainingQuantity = cartItem.Quantity;
 
                     var bookWarehouses = await context.BookWarehouses
                         .Where(bw => bw.BookId == cartItem.BookId && bw.Quantity > 0)
@@ -57,9 +58,11 @@ namespace book_store.database.repository
 
                         int booksToTake = Math.Min(bookWarehouse.Quantity, remainingQuantity);
 
-                        order.OrderItems.Add(new OrderItem
+                        orderItemWarehouses.Add(new OrderItem
                         {
+                            Order = order,
                             BookId = cartItem.BookId,
+                            WarehouseId = bookWarehouse.WarehouseId,
                             Quantity = booksToTake
                         });
 
@@ -71,16 +74,10 @@ namespace book_store.database.repository
                         throw new InvalidOperationException($"Недостаточно книг (ID: {cartItem.BookId}) на всех складах.");
                 }
 
-                order.OrderItems = order.OrderItems
-                    .GroupBy(oi => oi.BookId)
-                    .Select(g => new OrderItem
-                    {
-                        BookId = g.Key,
-                        Quantity = g.Sum(oi => oi.Quantity)
-                    })
-                    .ToList();
-
                 context.Orders.Add(order);
+                await context.SaveChangesAsync();
+
+                await context.OrderItems.AddRangeAsync(orderItemWarehouses);
                 await context.SaveChangesAsync();
 
                 context.CartItems.RemoveRange(cartItems);
@@ -88,6 +85,47 @@ namespace book_store.database.repository
 
                 await transaction.CommitAsync();
                 return order;
+            } catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
+        public async Task CancelOrderAsync(int orderId)
+        {
+            using var transaction = await context.Database.BeginTransactionAsync();
+            try
+            {
+                var order = await context.Orders
+                    .Include(o => o.OrderItems)
+                    .FirstOrDefaultAsync(o => o.Id == orderId);
+
+                if (order == null)
+                    throw new InvalidOperationException("Заказ не найден.");
+
+                var orderItems = await context.OrderItems
+                    .Where(o => o.OrderId == orderId)
+                    .ToListAsync();
+
+                foreach (var item in orderItems)
+                {
+                    var bookWarehouse = await context.BookWarehouses
+                        .FirstOrDefaultAsync(bw => bw.BookId == item.BookId && bw.WarehouseId == item.WarehouseId);
+
+                    if (bookWarehouse != null)
+                    {
+                        bookWarehouse.Quantity += item.Quantity;
+                    }
+                }
+
+                context.OrderItems.RemoveRange(orderItems);
+
+                order.OrderStatusId = 3;
+                context.Orders.Update(order);
+                await context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
             } catch
             {
                 await transaction.RollbackAsync();

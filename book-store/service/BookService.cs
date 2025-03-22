@@ -99,9 +99,7 @@ namespace book_store.service
 
         public List<BookOrderDto> FindAllByOrder(int orderId)
         {
-            return bookRepository.FindAllByOrder(orderId)
-                .Select(bookOrderMapper.ToDto)
-                .ToList();
+            return bookRepository.FindAllByOrder(orderId);
         }
     }
 }

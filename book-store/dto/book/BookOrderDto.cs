@@ -13,15 +13,16 @@ namespace book_store.dto.book
         public string AuthorFullName { get; set; }
         public Image Image { get; set; }
 
-        public int Price { get; set; }
+        public int TotalQuantity { get; set; }
 
-        public BookOrderDto(int id, string title, string authorFullName, Image image, int price)
+        public BookOrderDto() { }
+        public BookOrderDto(int id, string title, string authorFullName, Image image, int totalQuantity)
         {
             Id = id;
             Title = title;
             AuthorFullName = authorFullName;
             Image = image;
-            Price = price;
+            TotalQuantity = totalQuantity;
         }
     }
 }

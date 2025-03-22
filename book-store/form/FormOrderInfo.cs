@@ -28,7 +28,7 @@ namespace book_store.form
             dgvBooks.Columns[1].DataPropertyName = "Title";
             dgvBooks.Columns[2].DataPropertyName = "AuthorFullName";
             dgvBooks.Columns[3].DataPropertyName = "Image";
-            dgvBooks.Columns[4].DataPropertyName = "Price";
+            dgvBooks.Columns[4].DataPropertyName = "TotalQuantity";
             ViewAllBooks();
             UpdateButtonVisibility();
         }

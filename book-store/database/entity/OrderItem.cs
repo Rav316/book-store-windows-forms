@@ -25,5 +25,12 @@ namespace book_store.database.entity
         [Required]
         [Range(1, int.MaxValue)]
         public int Quantity { get; set; } = 1;
+
+        [Required]
+        public int WarehouseId { get; set; }
+
+        [ForeignKey("WarehouseId")]
+        public virtual Warehouse Warehouse { get; set; }
+
     }
 }

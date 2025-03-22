@@ -396,7 +396,7 @@
             dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
             dgvOrders.Location = new Point(806, 63);
             dgvOrders.Name = "dgvOrders";
-            dgvOrders.Size = new Size(735, 238);
+            dgvOrders.Size = new Size(882, 238);
             dgvOrders.TabIndex = 72;
             dgvOrders.CellFormatting += dgvOrders_CellFormatting;
             dgvOrders.CellMouseDoubleClick += dgvOrders_CellMouseDoubleClick;
@@ -435,7 +435,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1560, 780);
+            ClientSize = new Size(1718, 780);
             Controls.Add(dgvOrders);
             Controls.Add(labelOrders);
             Controls.Add(dgvReviews);

@@ -1,6 +1,7 @@
 ﻿using book_store.context;
 using book_store.database.entity;
 using book_store.dto.book;
+using book_store.util;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -155,14 +156,28 @@ namespace book_store.database.repository
             }
         }
 
-        public List<Book> FindAllByOrder(int orderId)
+        public List<BookOrderDto> FindAllByOrder(int orderId)
         {
             return context.OrderItems
-            .Where(oi => oi.OrderId == orderId)
-            .Include(oi => oi.Book) 
-            .ThenInclude(b => b.Author) 
-            .Select(oi => oi.Book)
-            .ToList();
+        .Where(oi => oi.OrderId == orderId)
+        .GroupBy(oi => new
+        {
+            oi.Book.Id,
+            oi.Book.Title,
+            oi.Book.ImagePath,
+            oi.Book.Author!.FirstName,
+            oi.Book.Author.MidName,
+            oi.Book.Author.LastName
+        })
+        .Select(g => new BookOrderDto
+        {
+            Id = g.Key.Id,
+            Title = g.Key.Title,
+            AuthorFullName = $"{g.Key.FirstName} {g.Key.MidName} {g.Key.LastName}",
+            Image = ImageUtils.GetBookImageByPath(g.Key.ImagePath),
+            TotalQuantity = g.Sum(oi => oi.Quantity)
+        })
+        .ToList();
         }
     }
 }

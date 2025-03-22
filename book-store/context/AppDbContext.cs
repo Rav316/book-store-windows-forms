@@ -104,7 +104,7 @@ namespace book_store.context
                 .HasForeignKey(bw => bw.WarehouseId);
 
             modelBuilder.Entity<OrderItem>().ToTable("order_item")
-            .HasKey(oi => new { oi.OrderId, oi.BookId });
+            .HasKey(oi => new { oi.OrderId, oi.BookId, oi.WarehouseId });
 
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Order)
@@ -116,6 +116,12 @@ namespace book_store.context
                 .HasOne(oi => oi.Book)
                 .WithMany()
                 .HasForeignKey(oi => oi.BookId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Warehouse)
+                .WithMany()
+                .HasForeignKey(oi => oi.WarehouseId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<OrderStatus>().ToTable("order_status");
