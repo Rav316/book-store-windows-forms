@@ -37,8 +37,10 @@ namespace book_store.database.entity
 
         public int Cost { get; set; }
 
-        public DateTime PaidIn { get; set; } = DateTime.UtcNow;
+        public DateTime? PaidIn { get; set; }
 
         public virtual List<OrderItem> OrderItems { get; set; } = new();
+
+        public virtual PaymentDetail PaymentDetail { get; set; }
     }
 }

@@ -122,6 +122,12 @@ namespace book_store.context
             modelBuilder.Entity<PaymentStatus>().ToTable("payment_status");
             modelBuilder.Entity<Order>().ToTable("orders");
 
+            modelBuilder.Entity<PaymentDetail>().ToTable("payment_detail")
+                .HasOne(pd => pd.Order)
+                .WithOne(o => o.PaymentDetail)
+                .HasForeignKey<PaymentDetail>(pd => pd.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
 
             foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())

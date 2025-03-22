@@ -21,7 +21,6 @@ namespace book_store.database.repository
             using var transaction = await context.Database.BeginTransactionAsync();
             try
             {
-                // Загружаем CartItems пользователя
                 var cartItems = await context.CartItems
                     .Where(ci => ci.UserId == userId && bookIds.Contains(ci.BookId))
                     .ToListAsync();
@@ -33,19 +32,16 @@ namespace book_store.database.repository
                 {
                     UserId = userId,
                     PaymentMethod = "Unspecified",
-                    PaymentStatusId = 1, // Например, "Pending"
-                    OrderStatusId = 1, // Например, "Processing",
+                    PaymentStatusId = 1, 
+                    OrderStatusId = 1, 
                     Cost = totalCost,
-                    PaidIn = DateTime.UtcNow,
                     OrderItems = new List<OrderItem>()
                 };
 
-                // Обрабатываем каждый товар из корзины
                 foreach (var cartItem in cartItems)
                 {
-                    int remainingQuantity = cartItem.Quantity; // Сколько осталось распределить
+                    int remainingQuantity = cartItem.Quantity; 
 
-                    // Загружаем все склады, где есть эта книга, сортируя по убыванию количества
                     var bookWarehouses = await context.BookWarehouses
                         .Where(bw => bw.BookId == cartItem.BookId && bw.Quantity > 0)
                         .OrderByDescending(bw => bw.Quantity)
@@ -54,7 +50,6 @@ namespace book_store.database.repository
                     if (bookWarehouses.Count == 0)
                         throw new InvalidOperationException($"Нет доступных складов для книги (ID: {cartItem.BookId})");
 
-                    // Распределяем книги по складам
                     foreach (var bookWarehouse in bookWarehouses)
                     {
                         if (remainingQuantity <= 0)
@@ -62,38 +57,32 @@ namespace book_store.database.repository
 
                         int booksToTake = Math.Min(bookWarehouse.Quantity, remainingQuantity);
 
-                        // Добавляем OrderItem в список
                         order.OrderItems.Add(new OrderItem
                         {
                             BookId = cartItem.BookId,
                             Quantity = booksToTake
                         });
 
-                        // Обновляем количество книг на складе
                         bookWarehouse.Quantity -= booksToTake;
                         remainingQuantity -= booksToTake;
                     }
 
-                    // Если после распределения книг не хватило — ошибка
                     if (remainingQuantity > 0)
                         throw new InvalidOperationException($"Недостаточно книг (ID: {cartItem.BookId}) на всех складах.");
                 }
 
-                // Группируем OrderItems перед сохранением
                 order.OrderItems = order.OrderItems
                     .GroupBy(oi => oi.BookId)
                     .Select(g => new OrderItem
                     {
                         BookId = g.Key,
-                        Quantity = g.Sum(oi => oi.Quantity) // Суммируем количество книг
+                        Quantity = g.Sum(oi => oi.Quantity)
                     })
                     .ToList();
 
-                // Сохраняем заказ
                 context.Orders.Add(order);
                 await context.SaveChangesAsync();
 
-                // Удаляем использованные CartItems
                 context.CartItems.RemoveRange(cartItems);
                 await context.SaveChangesAsync();
 
@@ -105,8 +94,6 @@ namespace book_store.database.repository
                 throw;
             }
         }
-
-
 
         public List<Order> FindAllByUser(int userId)
         {

@@ -180,6 +180,7 @@
             buttonPayOrder.TabIndex = 67;
             buttonPayOrder.Text = "Оплатить";
             buttonPayOrder.UseVisualStyleBackColor = false;
+            buttonPayOrder.Click += buttonPayOrder_Click;
             // 
             // buttonCancelOrder
             // 
@@ -194,6 +195,7 @@
             buttonCancelOrder.TabIndex = 68;
             buttonCancelOrder.Text = "Отменить заказ";
             buttonCancelOrder.UseVisualStyleBackColor = false;
+            buttonCancelOrder.Click += buttonCancelOrder_Click;
             // 
             // FormOrderInfo
             // 
