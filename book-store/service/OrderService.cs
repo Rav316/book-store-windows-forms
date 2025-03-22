@@ -43,10 +43,6 @@ namespace book_store.service
 
         public async Task CancelOrder(int orderId)
         {
-            //var order = await orderRepository.FindByIdAsync(orderId);
-            //order!.OrderStatusId = 3;
-            //order.PaidIn = order.PaidIn?.ToUniversalTime();
-            //await orderRepository.UpdateAsync(order);
             await orderRepository.CancelOrderAsync(orderId);
         }
     }
