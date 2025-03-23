@@ -14,7 +14,7 @@ namespace book_store.validation
         @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        public static bool IsValidEmail(string email)
+        public static bool IsValid(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;

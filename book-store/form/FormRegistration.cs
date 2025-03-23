@@ -29,7 +29,7 @@ namespace book_store.form
                 MessageBox.Show("Необходимо заполнить все обязательные поля");
                 return;
             }
-            if(!tbEmail.Text.Equals("") && !EmailValidator.IsValidEmail(tbEmail.Text))
+            if(!tbEmail.Text.Equals("") && !EmailValidator.IsValid(tbEmail.Text))
             {
                 MessageBox.Show("email некорректный");
                 return;
@@ -39,7 +39,7 @@ namespace book_store.form
                 MessageBox.Show("Пароли не совпадают");
                 return;
             }
-            if (!PasswordValidator.IsValidPassword(tbPassword.Text))
+            if (!PasswordValidator.IsValid(tbPassword.Text))
             {
                 MessageBox.Show("Пароль должен быть длиной минимум 6 символов, содержать спец. символы, цифры и заглавные буквы");
                 return;

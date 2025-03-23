@@ -24,7 +24,7 @@ namespace book_store
 
         private async void buttonLogin_Click(object sender, EventArgs e)
         {
-            if(tbUsername.Text.Equals("") || tbPassword.Text.Equals(""))
+            if (tbUsername.Text.Equals("") || tbPassword.Text.Equals(""))
             {
                 MessageBox.Show("Необходимо заполнить все поля");
                 return;

@@ -1,5 +1,6 @@
 ﻿using book_store.database.entity;
 using book_store.service;
+using book_store.validation;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,9 @@ namespace book_store.form
 
         private async void buttonPay_Click(object sender, EventArgs e)
         {
-            if(int.TryParse(tbMonth.Text, out int month) && int.TryParse(tbYear.Text, out int year))
+            if(int.TryParse(tbMonth.Text, out int month) && 
+                int.TryParse(tbYear.Text, out int year) && 
+                short.TryParse(tbCode.Text,  out short code))
             {
                 if(month < 0 || month > 12)
                 {
@@ -47,18 +50,23 @@ namespace book_store.form
                     MessageBox.Show("Срок действия карты некорректный");
                     return;
                 }
+                string cardNumber = tbCardNumber.Text;
+                if (!CardNumberValidator.IsValid(cardNumber))
+                {
+                    MessageBox.Show("Номер карты некорректный");    
+                }
                 await orderService.PayForTheOrder(new PaymentDetail
                 {
                     OrderId = orderId,
                     CardNumber = tbCardNumber.Text,
                     ExpirationDate = expirationDate,
-                    Code = short.Parse(tbCode.Text)
+                    Code = code
                 });
                 this.DialogResult = DialogResult.OK;
                 Close();
             } else
             {
-                MessageBox.Show("Введите корректный месяц и год");
+                MessageBox.Show("Введите корректные данные");
             }
            
         }

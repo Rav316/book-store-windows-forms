@@ -26,7 +26,6 @@ namespace book_store.service
                 throw new EntityNotFoundException($"Пользователь с username {username} не найден.");
             }
 
-            // Проверка пароля
             if (!PasswordEncoder.Matches(password, user.Password))
             {
                 throw new AuthenticationException("Неправильный пароль.");
@@ -115,7 +114,7 @@ namespace book_store.service
                 imageService.DeleteImage(imagePath);
             }
             await userRepository.DeleteByIdAsync(SecurityContext.Authentication.Id);
-            SecurityContext.Authentication = null;
+            SecurityContext.Authentication = null!;
         }
     }
 }

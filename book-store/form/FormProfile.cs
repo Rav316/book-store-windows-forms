@@ -115,13 +115,13 @@ namespace book_store.form
                     MessageBox.Show("Повторённый новый пароль не совпадает с новым паролем");
                     return;
                 }
-                if (!PasswordValidator.IsValidPassword(tbNewPassword.Text))
+                if (!PasswordValidator.IsValid(tbNewPassword.Text))
                 {
                     MessageBox.Show("Пароль должен быть длиной минимум 6 символов, содержать спец. символы, цифры и заглавные буквы");
                     return;
                 }
             }
-            if (!EmailValidator.IsValidEmail(tbEmail.Text))
+            if (!EmailValidator.IsValid(tbEmail.Text))
             {
                 MessageBox.Show("email некорректный");
                 return;
@@ -204,6 +204,14 @@ namespace book_store.form
                 Close();
                 formOrderInfo.Show();
             }
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            SecurityContext.Authentication = null;
+            FormAuthorization formAuthorization = new FormAuthorization();
+            Hide();
+            formAuthorization.Show();
         }
     }
 }

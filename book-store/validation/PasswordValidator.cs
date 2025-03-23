@@ -13,7 +13,7 @@ namespace book_store.validation
         @"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$",
         RegexOptions.Compiled);
 
-        public static bool IsValidPassword(string password)
+        public static bool IsValid(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 return false;
