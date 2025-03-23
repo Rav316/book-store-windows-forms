@@ -179,5 +179,13 @@ namespace book_store.database.repository
         })
         .ToList();
         }
+
+        public bool IsBookPurchased(int userId, int bookId)
+        {
+            return context.OrderItems
+                .Any(oi => oi.BookId == bookId && 
+                oi.Order.UserId == userId &&
+                oi.Order.OrderStatusId == 3);
+        }
     }
 }

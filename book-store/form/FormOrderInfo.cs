@@ -35,7 +35,7 @@ namespace book_store.form
 
         private void UpdateButtonVisibility()
         {
-            if(order.PaymentStatus == "оплачен" || order.OrderStatus == "отменён")
+            if(order.PaymentStatus == "оплачен" || order.OrderStatus == "отменён" || order.OrderStatus == "завершён")
             {
                 buttonCancelOrder.Hide();
                 buttonPayOrder.Hide();

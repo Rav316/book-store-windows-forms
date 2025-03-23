@@ -34,6 +34,7 @@ namespace book_store.form
         private List<BookReviewListDto> bookReviews;
         private BookReview? bookReview;
         private bool hasReview = false;
+        private bool isBookPurchased;
         public FormBookInfo(int bookId)
         {
             this.bookId = bookId;
@@ -71,6 +72,7 @@ namespace book_store.form
             isInFavorites = bookService.IsInFavoritesForCurrentUser(bookId);
             isInCart = bookService.IsInCartForCurrentUser(bookId);
             isBookAvailable = bookService.IsBookAvailable(bookId);
+            isBookPurchased = bookService.IsBookPurchased(bookId);
 
             if (isInFavorites)
             {
@@ -109,6 +111,11 @@ namespace book_store.form
             dgvReviews.Columns[5].DataPropertyName = "CreatedAt";
             bookReview = bookReviewService.FindByBookAndUser(bookId);
             hasReview = bookReview != null;
+
+            if (!isBookPurchased)
+            {
+                buttonAddReview.Visible = false;
+            }
 
             ViewAllReviews();
         }
@@ -231,6 +238,8 @@ namespace book_store.form
                     }
                 }
             }
+            
+            
         }
 
         private void dgvReviews_DoubleClick(object sender, EventArgs e)

@@ -101,5 +101,10 @@ namespace book_store.service
         {
             return bookRepository.FindAllByOrder(orderId);
         }
+
+        public bool IsBookPurchased(int bookId)
+        {
+            return bookRepository.IsBookPurchased(SecurityContext.Authentication.Id, bookId);
+        }
     }
 }
