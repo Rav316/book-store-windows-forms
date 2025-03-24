@@ -34,17 +34,18 @@
             pbBack = new PictureBox();
             labelOrder = new Label();
             dgvBooks = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            BookName = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
+            BookImage = new DataGridViewImageColumn();
+            TotalQuantity = new DataGridViewTextBoxColumn();
             labelOrderStatus = new Label();
             labelPaymentStatus = new Label();
             labelStatusValue = new Label();
             labelPaymentStatusValue = new Label();
             buttonPayOrder = new Button();
             buttonCancelOrder = new Button();
-            Id = new DataGridViewTextBoxColumn();
-            BookName = new DataGridViewTextBoxColumn();
-            Author = new DataGridViewTextBoxColumn();
-            BookImage = new DataGridViewImageColumn();
-            TotalQuantity = new DataGridViewTextBoxColumn();
+            buttonFinishOrder = new Button();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
@@ -97,6 +98,35 @@
             dgvBooks.RowTemplate.Height = 136;
             dgvBooks.Size = new Size(767, 309);
             dgvBooks.TabIndex = 23;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.Visible = false;
+            // 
+            // BookName
+            // 
+            BookName.HeaderText = "Название книги";
+            BookName.Name = "BookName";
+            // 
+            // Author
+            // 
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
+            // 
+            // BookImage
+            // 
+            BookImage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            BookImage.HeaderText = "Изображение";
+            BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            BookImage.Name = "BookImage";
+            BookImage.Resizable = DataGridViewTriState.True;
+            // 
+            // TotalQuantity
+            // 
+            TotalQuantity.HeaderText = "Количество";
+            TotalQuantity.Name = "TotalQuantity";
             // 
             // labelOrderStatus
             // 
@@ -168,40 +198,27 @@
             buttonCancelOrder.UseVisualStyleBackColor = false;
             buttonCancelOrder.Click += buttonCancelOrder_Click;
             // 
-            // Id
+            // buttonFinishOrder
             // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            Id.Visible = false;
-            // 
-            // BookName
-            // 
-            BookName.HeaderText = "Название книги";
-            BookName.Name = "BookName";
-            // 
-            // Author
-            // 
-            Author.HeaderText = "Автор";
-            Author.Name = "Author";
-            // 
-            // BookImage
-            // 
-            BookImage.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            BookImage.HeaderText = "Изображение";
-            BookImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            BookImage.Name = "BookImage";
-            BookImage.Resizable = DataGridViewTriState.True;
-            // 
-            // TotalQuantity
-            // 
-            TotalQuantity.HeaderText = "Количество";
-            TotalQuantity.Name = "TotalQuantity";
+            buttonFinishOrder.BackColor = Color.FromArgb(41, 2, 71);
+            buttonFinishOrder.Cursor = Cursors.Hand;
+            buttonFinishOrder.FlatStyle = FlatStyle.Flat;
+            buttonFinishOrder.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonFinishOrder.ForeColor = SystemColors.Window;
+            buttonFinishOrder.Location = new Point(673, 5);
+            buttonFinishOrder.Name = "buttonFinishOrder";
+            buttonFinishOrder.Size = new Size(115, 33);
+            buttonFinishOrder.TabIndex = 69;
+            buttonFinishOrder.Text = "Завершить";
+            buttonFinishOrder.UseVisualStyleBackColor = false;
+            buttonFinishOrder.Click += buttonFinishOrder_Click;
             // 
             // FormOrderInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 604);
+            Controls.Add(buttonFinishOrder);
             Controls.Add(buttonCancelOrder);
             Controls.Add(buttonPayOrder);
             Controls.Add(labelPaymentStatusValue);
@@ -236,5 +253,6 @@
         private DataGridViewTextBoxColumn Author;
         private DataGridViewImageColumn BookImage;
         private DataGridViewTextBoxColumn TotalQuantity;
+        private Button buttonFinishOrder;
     }
 }

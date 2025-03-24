@@ -45,5 +45,10 @@ namespace book_store.service
         {
             await orderRepository.CancelOrderAsync(orderId);
         }
+
+        public async Task FinishOrder(int orderId)
+        {
+            await orderRepository.FinishOrderAsync(orderId);
+        }
     }
 }

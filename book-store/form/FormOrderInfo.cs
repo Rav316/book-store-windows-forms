@@ -35,14 +35,16 @@ namespace book_store.form
 
         private void UpdateButtonVisibility()
         {
-            if(order.PaymentStatus == "оплачен" || order.OrderStatus == "отменён" || order.OrderStatus == "завершён")
+            if (order.PaymentStatus == "оплачен" || order.OrderStatus == "отменён" || order.OrderStatus == "завершён")
             {
                 buttonCancelOrder.Hide();
                 buttonPayOrder.Hide();
+                buttonFinishOrder.Hide();
             } else
             {
                 buttonCancelOrder.Show();
                 buttonPayOrder.Show();
+                buttonFinishOrder.Show();
             }
         }
 
@@ -95,6 +97,25 @@ namespace book_store.form
             {
                 await orderService.CancelOrder(order.Id);
                 MessageBox.Show("Заказ отменен.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                order = await orderService.FindById(order.Id);
+                UpdateOrderInfo();
+                UpdateButtonVisibility();
+            }
+        }
+
+        private async void buttonFinishOrder_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                "Вы уверены, что хотите завершить заказ?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if(result == DialogResult.Yes)
+            {
+                await orderService.FinishOrder(order.Id);
+                MessageBox.Show("Заказ завершён.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 order = await orderService.FindById(order.Id);
                 UpdateOrderInfo();
                 UpdateButtonVisibility();

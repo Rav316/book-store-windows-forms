@@ -119,7 +119,6 @@ namespace book_store.database.repository
                     }
                 }
 
-                context.OrderItems.RemoveRange(orderItems);
 
                 order.OrderStatusId = 3;
                 context.Orders.Update(order);
@@ -140,6 +139,16 @@ namespace book_store.database.repository
                 .Include(o => o.OrderStatus)
                 .Include(o => o.PaymentStatus)
                 .ToList();
+        }
+
+        public async Task FinishOrderAsync(int orderId)
+        {
+            var order = await context.Orders.FindAsync(orderId);
+            if(order != null)
+            {
+                order.OrderStatusId = 4;
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
