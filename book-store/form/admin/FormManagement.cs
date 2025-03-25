@@ -24,5 +24,12 @@ namespace book_store.form
             Close();
             formBookManagement.Show();
         }
+
+        private void buttonAuthors_Click(object sender, EventArgs e)
+        {
+            FormAuthorManagement formAuthorManagement = new FormAuthorManagement();
+            Close();
+            formAuthorManagement.Show();
+        }
     }
 }

@@ -41,7 +41,7 @@ namespace book_store.form.admin
             int selectedRowIndex = dgvBooks.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {
-                FormBookInfoAdmin formBookInfo = new FormBookInfoAdmin(books[selectedRowIndex].Id);
+                FormBookInfoAdmin formBookInfo = new FormBookInfoAdmin(((BookManagementDto)dgvBooks.CurrentRow!.DataBoundItem).Id);
                 Close();
                 formBookInfo.Show();
             }

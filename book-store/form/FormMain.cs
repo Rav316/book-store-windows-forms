@@ -193,7 +193,7 @@ namespace book_store.form
             int selectedRowIndex = dgvBooks.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {
-                FormBookInfo formBookInfo = new FormBookInfo(allBooks[selectedRowIndex].Id);
+                FormBookInfo formBookInfo = new FormBookInfo(((BookListDto)dgvBooks.CurrentRow!.DataBoundItem).Id);
                 formBookInfo.ShowDialog();
                 ViewAllBooks();
             }

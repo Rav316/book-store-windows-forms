@@ -45,7 +45,7 @@ namespace book_store.form.admin
 
             cbAuthor.DisplayMember = "FullName";
             cbAuthor.ValueMember = "Id";
-            cbAuthor.DataSource = await authorService.FindAll();
+            cbAuthor.DataSource = await authorService.FindAllListDto();
             cbAuthor.SelectedValue = book.AuthorId;
 
             cbCategory.DisplayMember = "Name";

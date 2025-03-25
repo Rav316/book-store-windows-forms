@@ -812,4 +812,24 @@ ALTER TABLE users ALTER COLUMN role SET DEFAULT 0;
 
 ALTER TABLE book
 ADD CONSTRAINT
-title_author_id_key UNIQUE (title, author_id)
+title_author_id_key UNIQUE (title, author_id);
+
+ALTER TABLE author
+DROP COLUMN birth_year;
+
+ALTER TABLE author
+ADD COLUMN birth_date date;
+
+ALTER TABLE author
+DROP COLUMN death_year;
+
+ALTER TABLE author
+ADD COLUMN death_date date;
+
+ALTER TABLE book
+ADD CONSTRAINT fk_author_id_author
+FOREIGN KEY (author_id) REFERENCES author(id)
+ON DELETE CASCADE;
+
+ALTER TABLE book
+DROP CONSTRAINT book_author_id_fkey;

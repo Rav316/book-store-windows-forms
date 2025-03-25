@@ -20,10 +20,10 @@ namespace book_store.database.entity
 
         public string? MidName { get; set; }
 
-        public string BirthYear { get; set; }
+        public DateTime? BirthDate { get; set; }
 
-        public string DeathYear { get; set; }
+        public DateTime? DeathDate { get; set; }
 
-        public string Nationality { get; set; }
+        public string? Nationality { get; set; }
     }
 }

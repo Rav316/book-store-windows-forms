@@ -16,13 +16,33 @@ namespace book_store.service
         private readonly AuthorRepository authorRepository = new AuthorRepository(AppDbContext.INSTANCE);
         private readonly AuthorListMapper authorListMapper = new AuthorListMapper();
 
-        public async Task<List<AuthorListDto>> FindAll()
+        public async Task<List<AuthorListDto>> FindAllListDto()
         {
             var authors = await authorRepository.FindAllAsync();
             return [.. authors
                 .Select(authorListMapper.ToDto)
                 .OrderBy(a => a.Id)
             ];
+        }
+
+        public async Task<List<Author>> FindAll()
+        {
+            return await authorRepository.FindAllAsync();
+        }
+
+        public async Task<Author?> FindById(int id)
+        {
+            return await authorRepository.FindByIdAsync(id);
+        }
+
+        public async Task Update(Author author)
+        {
+            await authorRepository.UpdateAsync(author);
+        }
+
+        public async Task Delete(int id)
+        {
+            await authorRepository.DeleteByIdAsync(id);
         }
     }
 }
