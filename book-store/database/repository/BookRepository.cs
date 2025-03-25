@@ -187,5 +187,10 @@ namespace book_store.database.repository
                 oi.Order.UserId == userId &&
                 oi.Order.OrderStatusId == 3);
         }
+
+        public Book? FindByTitleAndAuthor(string title, int author)
+        {
+            return context.Books.FirstOrDefault(b => b.Title == title && b.AuthorId == author);
+        }
     }
 }

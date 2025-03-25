@@ -63,5 +63,12 @@ namespace book_store.form.admin
             Close();
             formManagement.Show();
         }
+
+        private void buttonCreate_Click(object sender, EventArgs e)
+        {
+            FormBookCreate formBookCreate = new FormBookCreate();
+            Close();
+            formBookCreate.Show();
+        }
     }
 }

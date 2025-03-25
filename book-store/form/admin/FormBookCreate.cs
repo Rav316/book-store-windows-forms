@@ -3,21 +3,19 @@ using book_store.dto.author;
 using book_store.service;
 using book_store.util;
 using book_store.validation;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace book_store.form.admin
 {
-    public partial class FormBookInfoAdmin : Form
+    public partial class FormBookCreate : Form
     {
         private readonly BookService bookService = new BookService();
         private readonly AuthorService authorService = new AuthorService();
@@ -25,61 +23,41 @@ namespace book_store.form.admin
         private readonly PublisherService publisherService = new PublisherService();
         private readonly CoverTypeService coverTypeService = new CoverTypeService();
         private readonly LanguageService languageService = new LanguageService();
-        private int bookId;
-        private Book book;
         private string fileName;
-        public FormBookInfoAdmin(int bookId)
+        private Book book = new Book();
+        public FormBookCreate()
         {
-            this.bookId = bookId;
             InitializeComponent();
         }
 
-        private async void FormBookInfoAdmin_Load(object sender, EventArgs e)
+        private async void FormBookCreate_Load(object sender, EventArgs e)
         {
             await LoadInfo();
         }
 
         private async Task LoadInfo()
         {
-            book = (await bookService.FindById(bookId))!;
 
             cbAuthor.DisplayMember = "FullName";
             cbAuthor.ValueMember = "Id";
             cbAuthor.DataSource = await authorService.FindAll();
-            cbAuthor.SelectedValue = book.AuthorId;
 
             cbCategory.DisplayMember = "Name";
             cbCategory.ValueMember = "Id";
             cbCategory.DataSource = await categoryService.FindAll();
-            cbCategory.SelectedValue = book.CategoryId;
 
             cbPublisher.DisplayMember = "Name";
             cbPublisher.ValueMember = "Id";
             cbPublisher.DataSource = await publisherService.FindAll();
-            cbPublisher.SelectedValue = book.PublisherId;
 
             cbCoverType.DisplayMember = "Type";
             cbCoverType.ValueMember = "Id";
             cbCoverType.DataSource = await coverTypeService.FindAll();
-            cbCoverType.SelectedValue = book.PublisherId;
 
             cbLanguage.DisplayMember = "Name";
             cbLanguage.ValueMember = "Id";
             cbLanguage.DataSource = await languageService.FindAll();
-            cbLanguage.SelectedValue = book.LanguageId;
 
-            tbId.Text = book.Id.ToString();
-            tbTitle.Text = book.Title;
-            tbPrice.Text = book.Price.ToString();
-            tbSeries.Text = book.Series;
-            tbYearOfPublishing.Text = book.YearOfPublishing.ToString();
-            tbIsbn.Text = book.Isbn;
-            tbNumberOfPages.Text = book.NumberOfPages.ToString();
-            tbSize.Text = book.Size;
-            tbCirculation.Text = book.Circulation.ToString();
-            tbWeight.Text = book.Weight.ToString();
-            tbAgeRestrictions.Text = $"{book.AgeRestrictions}+";
-            tbDescription.Text = book.Description;
 
             pbBookImage.Image = ImageUtils.GetBookImageByPath(book.ImagePath);
         }
@@ -99,7 +77,7 @@ namespace book_store.form.admin
             }
         }
 
-        private async void buttonSaveChanges_Click(object sender, EventArgs e)
+        private async void buttonCreate_Click(object sender, EventArgs e)
         {
             if (tbTitle.Name == "")
             {
@@ -178,24 +156,13 @@ namespace book_store.form.admin
                 book.ImagePath = fileName;
             }
             await bookService.Update(book);
-            MessageBox.Show("Книга успешно обновлена ✅");
-            await LoadInfo();
+            MessageBox.Show("Книга успешно создана ✅");
+            OpenPreviousForm();
         }
 
         private void pbBack_Click(object sender, EventArgs e)
         {
             OpenPreviousForm();
-        }
-
-        private async void buttonDeleteBook_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Вы уверены, что хотите удалить объект?", "Подтверждение",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                await bookService.Delete(bookId);
-                MessageBox.Show("Книга успешно удалена ✅");
-                OpenPreviousForm();
-            }
         }
 
         private void OpenPreviousForm()

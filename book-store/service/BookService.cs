@@ -20,7 +20,6 @@ namespace book_store.service
         private readonly ImageService imageService = new ImageService();
         private readonly BookRepository bookRepository = new BookRepository(AppDbContext.INSTANCE);
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
-
         private readonly CartItemRepository cartItemRepository = new CartItemRepository(AppDbContext.INSTANCE);
         private readonly BookWarehouseRepository bookWarehouseRepository = new BookWarehouseRepository(AppDbContext.INSTANCE);
         private readonly BookOrderMapper bookOrderMapper = new BookOrderMapper();
@@ -128,6 +127,16 @@ namespace book_store.service
                 imageService.SaveImage(book.ImagePath, @"..\..\..\Resources\Books");
             }
             await bookRepository.UpdateAsync(book);
+        }
+
+        public Book? FindByTitleAndAuthor(string title, int author)
+        {
+            return bookRepository.FindByTitleAndAuthor(title, author);
+        }
+
+        public async Task Delete(int bookid)
+        {
+            await bookRepository.DeleteByIdAsync(bookid);
         }
     }
 }

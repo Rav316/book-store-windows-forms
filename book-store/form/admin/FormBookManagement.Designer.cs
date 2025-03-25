@@ -37,6 +37,7 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             pbBack = new PictureBox();
+            buttonCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
@@ -58,7 +59,7 @@
             dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, Title, Author });
             dgvBooks.Location = new Point(36, 132);
             dgvBooks.Name = "dgvBooks";
-            dgvBooks.Size = new Size(742, 295);
+            dgvBooks.Size = new Size(742, 264);
             dgvBooks.TabIndex = 4;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
             // 
@@ -111,11 +112,27 @@
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
             // 
+            // buttonCreate
+            // 
+            buttonCreate.BackColor = Color.FromArgb(41, 2, 71);
+            buttonCreate.Cursor = Cursors.Hand;
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonCreate.ForeColor = SystemColors.Window;
+            buttonCreate.Location = new Point(36, 402);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(195, 36);
+            buttonCreate.TabIndex = 78;
+            buttonCreate.Text = "Создать";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
+            // 
             // FormBookManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonCreate);
             Controls.Add(pbBack);
             Controls.Add(labelSearch);
             Controls.Add(tbSearch);
@@ -140,5 +157,6 @@
         private DataGridViewTextBoxColumn Title;
         private DataGridViewTextBoxColumn Author;
         private PictureBox pbBack;
+        private Button buttonCreate;
     }
 }

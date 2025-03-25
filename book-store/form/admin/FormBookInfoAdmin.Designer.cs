@@ -500,6 +500,7 @@
             buttonDeleteBook.TabIndex = 122;
             buttonDeleteBook.Text = "Удалить книгу";
             buttonDeleteBook.UseVisualStyleBackColor = false;
+            buttonDeleteBook.Click += buttonDeleteBook_Click;
             // 
             // FormBookInfoAdmin
             // 
