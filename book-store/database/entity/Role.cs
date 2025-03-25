@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace book_store.mapper
+namespace book_store.database.entity
 {
-    public abstract class Mapper<E, D>
+    public enum Role
     {
-        public abstract D ToDto(E entity);
+        User,
+        Admin
     }
 }

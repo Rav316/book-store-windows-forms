@@ -39,19 +39,19 @@ namespace book_store.database.entity
         public string? Isbn { get; set; }
 
         [ForeignKey("PublisherId")]
-        public int? PublisherId { get; set; }
+        public int PublisherId { get; set; }
         public virtual Publisher? Publisher { get; set; }
 
         [ForeignKey("AuthorId")]
-        public int? AuthorId { get; set; }
+        public int AuthorId { get; set; }
         public virtual Author? Author { get; set; }
 
         [ForeignKey("CoverTypeId")]
-        public int? CoverTypeId { get; set; }
+        public int CoverTypeId { get; set; }
         public virtual CoverType? CoverType { get; set; }
 
         [ForeignKey("LanguageId")]
-        public int? LanguageId { get; set; }
+        public int LanguageId { get; set; }
         public virtual Language? Language { get; set; }
 
         public virtual List<User> FavoritedByUsers { get; set; } = new List<User>();

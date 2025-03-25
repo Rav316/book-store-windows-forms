@@ -8,11 +8,10 @@ namespace book_store.service
 {
     internal class ImageService
     {
-        public string SaveImage(string fileName)
+        public string SaveImage(string fileName, string saveDirectory)
         {
             string fileExtension = Path.GetExtension(fileName);
             string newFileName = $"{Guid.NewGuid()}{fileExtension}";
-            string saveDirectory = @"..\..\..\Resources\Users";
             string savePath = Path.Combine(saveDirectory, newFileName);
 
             if(!Directory.Exists(savePath))

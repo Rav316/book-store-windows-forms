@@ -1,0 +1,78 @@
+﻿namespace book_store.form
+{
+    partial class FormManagement
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            labelManagement = new Label();
+            buttonBooks = new Button();
+            SuspendLayout();
+            // 
+            // labelManagement
+            // 
+            labelManagement.AutoSize = true;
+            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelManagement.Location = new Point(133, 35);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(538, 48);
+            labelManagement.TabIndex = 2;
+            labelManagement.Text = "Управление объектами системы";
+            // 
+            // buttonBooks
+            // 
+            buttonBooks.BackColor = Color.FromArgb(41, 2, 71);
+            buttonBooks.Cursor = Cursors.Hand;
+            buttonBooks.FlatStyle = FlatStyle.Flat;
+            buttonBooks.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonBooks.ForeColor = SystemColors.Window;
+            buttonBooks.Location = new Point(133, 114);
+            buttonBooks.Name = "buttonBooks";
+            buttonBooks.Size = new Size(218, 50);
+            buttonBooks.TabIndex = 5;
+            buttonBooks.Text = "Книги";
+            buttonBooks.UseVisualStyleBackColor = false;
+            buttonBooks.Click += buttonBooks_Click;
+            // 
+            // FormManagement
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(buttonBooks);
+            Controls.Add(labelManagement);
+            Name = "FormManagement";
+            Text = "Управление системой";
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private Label labelManagement;
+        private Button buttonBooks;
+    }
+}

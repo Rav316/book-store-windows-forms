@@ -4,9 +4,12 @@ using book_store.database.repository;
 using book_store.dto.book;
 using book_store.exception;
 using book_store.mapper.book;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,12 +17,14 @@ namespace book_store.service
 {
     internal class BookService
     {
+        private readonly ImageService imageService = new ImageService();
         private readonly BookRepository bookRepository = new BookRepository(AppDbContext.INSTANCE);
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
+
         private readonly CartItemRepository cartItemRepository = new CartItemRepository(AppDbContext.INSTANCE);
         private readonly BookWarehouseRepository bookWarehouseRepository = new BookWarehouseRepository(AppDbContext.INSTANCE);
         private readonly BookOrderMapper bookOrderMapper = new BookOrderMapper();
-
+        private readonly BookManagementMapper bookManagementMapper = new BookManagementMapper();
 
         public List<BookListDto> FindAllWithUserInfo()
         {
@@ -105,6 +110,24 @@ namespace book_store.service
         public bool IsBookPurchased(int bookId)
         {
             return bookRepository.IsBookPurchased(SecurityContext.Authentication.Id, bookId);
+        }
+
+        public async Task<List<BookManagementDto>> FindAllForManagement()
+        {
+            var books = await bookRepository.FindAllAsync();
+            return [.. books
+                .Select(bookManagementMapper.ToDto)
+                .OrderBy(b => b.Id)
+            ];
+        }
+
+        public async Task Update(Book book)
+        {
+            if (book.ImagePath != null)
+            {
+                imageService.SaveImage(book.ImagePath, @"..\..\..\Resources\Books");
+            }
+            await bookRepository.UpdateAsync(book);
         }
     }
 }

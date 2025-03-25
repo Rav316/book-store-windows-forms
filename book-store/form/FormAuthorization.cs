@@ -1,4 +1,5 @@
-﻿using book_store.exception;
+﻿using book_store.database.entity;
+using book_store.exception;
 using book_store.form;
 using book_store.service;
 
@@ -31,10 +32,19 @@ namespace book_store
             }
             try
             {
-                await userService.AuthenticateAsync(tbUsername.Text, tbPassword.Text);
+                var user = await userService.AuthenticateAsync(tbUsername.Text, tbPassword.Text);
                 Hide();
-                FormMain formMain = new FormMain();
-                formMain.Show();
+                if (user.Role == Role.User)
+                {
+                    FormMain formMain = new FormMain();
+                    formMain.Show();
+                }
+                else
+                {
+                    FormAdmin formAdmin = new FormAdmin();
+                    formAdmin.Show();
+                }
+                
             } catch (Exception ex) when (ex is EntityNotFoundException || ex is AuthenticationException || ex is ArgumentException)
             {
                 MessageBox.Show(ex.Message, "Ошибка при авторизации пользователя", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace book_store.validation
 {
-    public class CardNumberValidator
+    public sealed class CardNumberValidator
     {
+        private CardNumberValidator() { }
         public static bool IsValid(string number)
         {
             number = number.Replace(" ", "");

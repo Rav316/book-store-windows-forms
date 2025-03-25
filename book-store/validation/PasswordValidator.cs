@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace book_store.validation
 {
-    internal class PasswordValidator
+    public sealed class PasswordValidator
     {
+        private PasswordValidator() { }
         private static readonly Regex PasswordRegex = new Regex(
         @"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$",
         RegexOptions.Compiled);

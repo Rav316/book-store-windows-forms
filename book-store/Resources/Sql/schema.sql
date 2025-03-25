@@ -799,3 +799,17 @@ values  ('не оплачен'),
         ('оплачен');
 
 
+ALTER TABLE users ALTER COLUMN role DROP DEFAULT;
+
+ALTER TABLE users
+    ALTER COLUMN role TYPE INTEGER
+        USING CASE
+                  WHEN role = 'user' THEN 0
+                  WHEN role = 'admin' THEN 1
+        END;
+
+ALTER TABLE users ALTER COLUMN role SET DEFAULT 0;
+
+ALTER TABLE book
+ADD CONSTRAINT
+title_author_id_key UNIQUE (title, author_id)

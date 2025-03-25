@@ -22,7 +22,7 @@ namespace book_store.database.entity
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        public Role Role { get; set; }
 
         [EmailAddress]
         public string Email { get; set; }

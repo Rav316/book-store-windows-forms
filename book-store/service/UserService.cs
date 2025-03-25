@@ -17,7 +17,7 @@ namespace book_store.service
         private readonly ImageService imageService = new ImageService();
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
 
-        public async Task AuthenticateAsync(string username, string password)
+        public async Task<User> AuthenticateAsync(string username, string password)
         {
             var user = await userRepository.FindByUsernameAsync(username);
 
@@ -32,6 +32,7 @@ namespace book_store.service
             }
 
             SecurityContext.Authentication = user;
+            return user;
         }
 
         public async Task CreateUser(string username, string password, string email, string address)
@@ -53,7 +54,7 @@ namespace book_store.service
                 Password = PasswordEncoder.Encode(password),
                 Email = email,
                 Address = address,
-                Role = "user"
+                Role = Role.User
             };
             await userRepository.CreateAsync(user);
         }
@@ -95,7 +96,7 @@ namespace book_store.service
             user.Address = address;
             if(fileName != null)
             {
-                string savePath = imageService.SaveImage(fileName);
+                string savePath = imageService.SaveImage(fileName, @"..\..\..\Resources\Users");
                 user.ImagePath = savePath;
             }
             await userRepository.UpdateAsync(user);

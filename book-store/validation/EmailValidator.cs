@@ -9,7 +9,7 @@ namespace book_store.validation
 {
     internal sealed class EmailValidator
     {
-        public EmailValidator() { }
+        private EmailValidator() { }
         private static readonly Regex EmailRegex = new Regex(
         @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
