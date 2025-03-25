@@ -31,5 +31,12 @@ namespace book_store.form
             Close();
             formAuthorManagement.Show();
         }
+
+        private void buttonCategories_Click(object sender, EventArgs e)
+        {
+            FormCategoryManagement formCategoryManagement = new FormCategoryManagement();
+            Close();
+            formCategoryManagement.Show();
+        }
     }
 }

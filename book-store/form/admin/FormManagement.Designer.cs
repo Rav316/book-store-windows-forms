@@ -87,6 +87,7 @@
             buttonCategories.TabIndex = 7;
             buttonCategories.Text = "Категории";
             buttonCategories.UseVisualStyleBackColor = false;
+            buttonCategories.Click += buttonCategories_Click;
             // 
             // FormManagement
             // 

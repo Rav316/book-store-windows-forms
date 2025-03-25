@@ -15,5 +15,7 @@ namespace book_store.database.entity
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public Category () {}
     }
 }

@@ -11,5 +11,10 @@ namespace book_store.database.repository
     internal class CategoryRepository: Repository<Category>
     {
         public CategoryRepository(AppDbContext context) : base(context) { }
+
+        public Category? FindByName(string name)
+        {
+            return context.Categories.FirstOrDefault(c => c.Name == name);
+        }
     }
 }

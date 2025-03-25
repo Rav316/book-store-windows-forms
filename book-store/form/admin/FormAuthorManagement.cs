@@ -26,12 +26,11 @@ namespace book_store.form.admin
             dgvAuthors.Columns[1].DataPropertyName = "FirstName";
             dgvAuthors.Columns[2].DataPropertyName = "MidName";
             dgvAuthors.Columns[3].DataPropertyName = "LastName";
-            ViewAllAuthors();
         }
 
         private void FormAuthorManagement_Load(object sender, EventArgs e)
         {
-
+            ViewAllAuthors();
         }
 
         private async void ViewAllAuthors()

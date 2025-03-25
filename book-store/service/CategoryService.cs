@@ -16,5 +16,30 @@ namespace book_store.service
         {
             return categoryRepository.FindAllAsync();
         }
+
+        public async Task Create(Category category)
+        {
+            await categoryRepository.CreateAsync(category);
+        }
+
+        public Category? FindByName(string name)
+        {
+            return categoryRepository.FindByName(name);
+        }
+
+        public async Task Delete(int id)
+        {
+            await categoryRepository.DeleteByIdAsync(id);
+        }
+
+        public async Task<Category?> FindById(int id)
+        {
+            return await categoryRepository.FindByIdAsync(id);
+        }
+
+        public async Task Update(Category category)
+        {
+            await categoryRepository.UpdateAsync(category);
+        }
     }
 }
