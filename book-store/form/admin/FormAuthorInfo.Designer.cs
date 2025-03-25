@@ -39,14 +39,14 @@
             labelMidName = new Label();
             tbFirstName = new TextBox();
             labelFirstName = new Label();
-            tbId = new TextBox();
-            labelId = new Label();
             tbNationality = new TextBox();
             labelNationality = new Label();
             buttonSaveChanges = new Button();
-            buttonDelete = new Button();
             dtpBirthDate = new DateTimePicker();
             dtpDeathDate = new DateTimePicker();
+            labelId = new Label();
+            tbId = new TextBox();
+            buttonDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
             // 
@@ -157,28 +157,6 @@
             labelFirstName.TabIndex = 101;
             labelFirstName.Text = "Имя:";
             // 
-            // tbId
-            // 
-            tbId.BackColor = Color.FromArgb(224, 224, 224);
-            tbId.BorderStyle = BorderStyle.None;
-            tbId.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbId.Location = new Point(266, 82);
-            tbId.Name = "tbId";
-            tbId.ReadOnly = true;
-            tbId.Size = new Size(223, 22);
-            tbId.TabIndex = 100;
-            // 
-            // labelId
-            // 
-            labelId.AutoSize = true;
-            labelId.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelId.ForeColor = Color.Black;
-            labelId.Location = new Point(59, 82);
-            labelId.Name = "labelId";
-            labelId.Size = new Size(26, 21);
-            labelId.TabIndex = 99;
-            labelId.Text = "id:";
-            // 
             // tbNationality
             // 
             tbNationality.BackColor = Color.FromArgb(224, 224, 224);
@@ -215,6 +193,42 @@
             buttonSaveChanges.UseVisualStyleBackColor = false;
             buttonSaveChanges.Click += buttonSaveChanges_Click;
             // 
+            // dtpBirthDate
+            // 
+            dtpBirthDate.Location = new Point(266, 250);
+            dtpBirthDate.Name = "dtpBirthDate";
+            dtpBirthDate.Size = new Size(223, 23);
+            dtpBirthDate.TabIndex = 115;
+            // 
+            // dtpDeathDate
+            // 
+            dtpDeathDate.Location = new Point(266, 290);
+            dtpDeathDate.Name = "dtpDeathDate";
+            dtpDeathDate.Size = new Size(223, 23);
+            dtpDeathDate.TabIndex = 116;
+            // 
+            // labelId
+            // 
+            labelId.AutoSize = true;
+            labelId.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelId.ForeColor = Color.Black;
+            labelId.Location = new Point(59, 82);
+            labelId.Name = "labelId";
+            labelId.Size = new Size(26, 21);
+            labelId.TabIndex = 99;
+            labelId.Text = "id:";
+            // 
+            // tbId
+            // 
+            tbId.BackColor = Color.FromArgb(224, 224, 224);
+            tbId.BorderStyle = BorderStyle.None;
+            tbId.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbId.Location = new Point(266, 82);
+            tbId.Name = "tbId";
+            tbId.ReadOnly = true;
+            tbId.Size = new Size(223, 22);
+            tbId.TabIndex = 100;
+            // 
             // buttonDelete
             // 
             buttonDelete.BackColor = Color.Red;
@@ -229,20 +243,6 @@
             buttonDelete.Text = "Удалить";
             buttonDelete.UseVisualStyleBackColor = false;
             buttonDelete.Click += buttonDelete_Click;
-            // 
-            // dtpBirthDate
-            // 
-            dtpBirthDate.Location = new Point(266, 250);
-            dtpBirthDate.Name = "dtpBirthDate";
-            dtpBirthDate.Size = new Size(223, 23);
-            dtpBirthDate.TabIndex = 115;
-            // 
-            // dtpDeathDate
-            // 
-            dtpDeathDate.Location = new Point(266, 290);
-            dtpDeathDate.Name = "dtpDeathDate";
-            dtpDeathDate.Size = new Size(223, 23);
-            dtpDeathDate.TabIndex = 116;
             // 
             // FormAuthorInfo
             // 
@@ -287,13 +287,13 @@
         private Label labelMidName;
         private TextBox tbFirstName;
         private Label labelFirstName;
-        private TextBox tbId;
-        private Label labelId;
         private TextBox tbNationality;
         private Label labelNationality;
         private Button buttonSaveChanges;
-        private Button buttonDelete;
         private DateTimePicker dtpBirthDate;
         private DateTimePicker dtpDeathDate;
+        private Label labelId;
+        private TextBox tbId;
+        private Button buttonDelete;
     }
 }

@@ -56,6 +56,7 @@
             buttonCreate.TabIndex = 84;
             buttonCreate.Text = "Создать";
             buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // pbBack
             // 
