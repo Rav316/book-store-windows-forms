@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormWarehouseCreate));
-            buttonSaveChanges = new Button();
+            buttonCreate = new Button();
             tbName = new TextBox();
             labelName = new Label();
             pbBack = new PictureBox();
@@ -39,20 +39,20 @@
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
             // 
-            // buttonSaveChanges
+            // buttonCreate
             // 
-            buttonSaveChanges.BackColor = Color.FromArgb(41, 2, 71);
-            buttonSaveChanges.Cursor = Cursors.Hand;
-            buttonSaveChanges.FlatStyle = FlatStyle.Flat;
-            buttonSaveChanges.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonSaveChanges.ForeColor = SystemColors.Window;
-            buttonSaveChanges.Location = new Point(78, 195);
-            buttonSaveChanges.Name = "buttonSaveChanges";
-            buttonSaveChanges.Size = new Size(430, 43);
-            buttonSaveChanges.TabIndex = 152;
-            buttonSaveChanges.Text = "Сохранить изменения";
-            buttonSaveChanges.UseVisualStyleBackColor = false;
-            buttonSaveChanges.Click += buttonSaveChanges_Click;
+            buttonCreate.BackColor = Color.FromArgb(41, 2, 71);
+            buttonCreate.Cursor = Cursors.Hand;
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonCreate.ForeColor = SystemColors.Window;
+            buttonCreate.Location = new Point(78, 195);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(430, 43);
+            buttonCreate.TabIndex = 152;
+            buttonCreate.Text = "Создать";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // tbName
             // 
@@ -125,7 +125,7 @@
             ClientSize = new Size(577, 277);
             Controls.Add(tbAddress);
             Controls.Add(labelAddress);
-            Controls.Add(buttonSaveChanges);
+            Controls.Add(buttonCreate);
             Controls.Add(tbName);
             Controls.Add(labelName);
             Controls.Add(pbBack);
@@ -139,7 +139,7 @@
 
         #endregion
 
-        private Button buttonSaveChanges;
+        private Button buttonCreate;
         private TextBox tbName;
         private Label labelName;
         private PictureBox pbBack;

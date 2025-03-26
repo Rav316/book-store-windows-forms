@@ -138,5 +138,10 @@ namespace book_store.service
         {
             await bookRepository.DeleteByIdAsync(bookid);
         }
+
+        public async Task<List<Book>> FindAll()
+        {
+            return await bookRepository.FindAllAsync();
+        }
     }
 }

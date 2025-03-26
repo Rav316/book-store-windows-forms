@@ -52,5 +52,19 @@ namespace book_store.form
             Close();
             formWarehouseManagement.Show();
         }
+
+        private void buttonBookWarehouses_Click(object sender, EventArgs e)
+        {
+            FormBookWarehouseManagement formBookWarehouseManagement = new FormBookWarehouseManagement();
+            Close();
+            formBookWarehouseManagement.Show();
+        }
+
+        private void buttonApp_Click(object sender, EventArgs e)
+        {
+            FormMain formMain = new FormMain();
+            Close();
+            formMain.Show();
+        }
     }
 }

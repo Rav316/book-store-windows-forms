@@ -77,7 +77,7 @@
             tbName.BackColor = Color.FromArgb(224, 224, 224);
             tbName.BorderStyle = BorderStyle.None;
             tbName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbName.Location = new Point(284, 136);
+            tbName.Location = new Point(280, 136);
             tbName.Name = "tbName";
             tbName.Size = new Size(223, 22);
             tbName.TabIndex = 146;
@@ -87,7 +87,7 @@
             labelName.AutoSize = true;
             labelName.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelName.ForeColor = Color.Black;
-            labelName.Location = new Point(77, 136);
+            labelName.Location = new Point(77, 137);
             labelName.Name = "labelName";
             labelName.Size = new Size(82, 21);
             labelName.TabIndex = 145;
@@ -98,7 +98,7 @@
             tbId.BackColor = Color.FromArgb(224, 224, 224);
             tbId.BorderStyle = BorderStyle.None;
             tbId.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbId.Location = new Point(284, 99);
+            tbId.Location = new Point(280, 99);
             tbId.Name = "tbId";
             tbId.ReadOnly = true;
             tbId.Size = new Size(223, 22);
@@ -152,11 +152,11 @@
             labelAddress.AutoSize = true;
             labelAddress.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelAddress.ForeColor = Color.Black;
-            labelAddress.Location = new Point(73, 181);
+            labelAddress.Location = new Point(77, 181);
             labelAddress.Name = "labelAddress";
-            labelAddress.Size = new Size(82, 21);
+            labelAddress.Size = new Size(58, 21);
             labelAddress.TabIndex = 149;
-            labelAddress.Text = "Название:";
+            labelAddress.Text = "Адрес:";
             // 
             // FormWarehouseInfo
             // 

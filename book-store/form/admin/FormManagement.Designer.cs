@@ -34,6 +34,8 @@
             buttonCategories = new Button();
             buttonPublishers = new Button();
             buttonWarehouses = new Button();
+            buttonBookWarehouses = new Button();
+            buttonApp = new Button();
             SuspendLayout();
             // 
             // labelManagement
@@ -121,11 +123,43 @@
             buttonWarehouses.UseVisualStyleBackColor = false;
             buttonWarehouses.Click += buttonWarehouses_Click;
             // 
+            // buttonBookWarehouses
+            // 
+            buttonBookWarehouses.BackColor = Color.FromArgb(41, 2, 71);
+            buttonBookWarehouses.Cursor = Cursors.Hand;
+            buttonBookWarehouses.FlatStyle = FlatStyle.Flat;
+            buttonBookWarehouses.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonBookWarehouses.ForeColor = SystemColors.Window;
+            buttonBookWarehouses.Location = new Point(453, 295);
+            buttonBookWarehouses.Name = "buttonBookWarehouses";
+            buttonBookWarehouses.Size = new Size(218, 50);
+            buttonBookWarehouses.TabIndex = 10;
+            buttonBookWarehouses.Text = "Книги на складе";
+            buttonBookWarehouses.UseVisualStyleBackColor = false;
+            buttonBookWarehouses.Click += buttonBookWarehouses_Click;
+            // 
+            // buttonApp
+            // 
+            buttonApp.BackColor = Color.FromArgb(41, 2, 71);
+            buttonApp.Cursor = Cursors.Hand;
+            buttonApp.FlatStyle = FlatStyle.Flat;
+            buttonApp.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonApp.ForeColor = SystemColors.Window;
+            buttonApp.Location = new Point(562, 414);
+            buttonApp.Name = "buttonApp";
+            buttonApp.Size = new Size(226, 33);
+            buttonApp.TabIndex = 11;
+            buttonApp.Text = "Перейти в приложение";
+            buttonApp.UseVisualStyleBackColor = false;
+            buttonApp.Click += buttonApp_Click;
+            // 
             // FormManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonApp);
+            Controls.Add(buttonBookWarehouses);
             Controls.Add(buttonWarehouses);
             Controls.Add(buttonPublishers);
             Controls.Add(buttonCategories);
@@ -146,5 +180,7 @@
         private Button buttonCategories;
         private Button buttonPublishers;
         private Button buttonWarehouses;
+        private Button buttonBookWarehouses;
+        private Button buttonApp;
     }
 }

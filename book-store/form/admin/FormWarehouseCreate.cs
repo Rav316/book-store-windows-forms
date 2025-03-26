@@ -34,7 +34,7 @@ namespace book_store.form.admin
             OpenPreviousForm();
         }
 
-        private async void buttonSaveChanges_Click(object sender, EventArgs e)
+        private async void buttonCreate_Click(object sender, EventArgs e)
         {
             if (tbName.Text == "")
             {
