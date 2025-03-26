@@ -18,5 +18,30 @@ namespace book_store.service
         {
             return await publisherRepository.FindAllAsync();
         }
+
+        public async Task<Publisher?> FindById(int id)
+        {
+            return await publisherRepository.FindByIdAsync(id);
+        }
+
+        public Publisher? FindByName(string name)
+        {
+            return publisherRepository.FindByName(name);
+        }
+
+        public async Task Create(Publisher publisher)
+        {
+            await publisherRepository.CreateAsync(publisher);
+        }
+
+        public async Task Update(Publisher publisher)
+        {
+            await publisherRepository.UpdateAsync(publisher);
+        }
+
+        public async Task Delete(int id)
+        {
+            await publisherRepository.DeleteByIdAsync(id);
+        }
     }
 }

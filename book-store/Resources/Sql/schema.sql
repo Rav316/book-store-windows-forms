@@ -833,3 +833,11 @@ ON DELETE CASCADE;
 
 ALTER TABLE book
 DROP CONSTRAINT book_author_id_fkey;
+
+ALTER TABLE book
+ADD CONSTRAINT fk_publisher_id_publisher
+FOREIGN KEY (publisher_id) REFERENCES publisher(id)
+ON DELETE CASCADE;
+
+ALTER TABLE book
+DROP CONSTRAINT book_publisher_id_fkey;

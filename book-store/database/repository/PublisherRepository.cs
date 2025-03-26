@@ -11,5 +11,10 @@ namespace book_store.database.repository
     public class PublisherRepository: Repository<Publisher>
     {
         public PublisherRepository(AppDbContext context) : base(context) { }
+
+        public Publisher? FindByName(string name)
+        {
+            return context.Publishers.FirstOrDefault(p => p.Name == name);
+        }
     }
 }

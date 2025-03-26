@@ -34,7 +34,6 @@ namespace book_store.form.admin
         {
             string searchText = tbSearch.Text.ToLower();
 
-
             List<Category> filteredCategories = categories
                 .Where(category => category.Name.ToLower().Contains(searchText))
                 .ToList();

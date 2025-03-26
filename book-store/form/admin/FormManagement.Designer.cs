@@ -32,6 +32,7 @@
             buttonBooks = new Button();
             buttonAuthors = new Button();
             buttonCategories = new Button();
+            buttonPublishers = new Button();
             SuspendLayout();
             // 
             // labelManagement
@@ -89,11 +90,27 @@
             buttonCategories.UseVisualStyleBackColor = false;
             buttonCategories.Click += buttonCategories_Click;
             // 
+            // buttonPublishers
+            // 
+            buttonPublishers.BackColor = Color.FromArgb(41, 2, 71);
+            buttonPublishers.Cursor = Cursors.Hand;
+            buttonPublishers.FlatStyle = FlatStyle.Flat;
+            buttonPublishers.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonPublishers.ForeColor = SystemColors.Window;
+            buttonPublishers.Location = new Point(453, 207);
+            buttonPublishers.Name = "buttonPublishers";
+            buttonPublishers.Size = new Size(218, 50);
+            buttonPublishers.TabIndex = 8;
+            buttonPublishers.Text = "Издатели";
+            buttonPublishers.UseVisualStyleBackColor = false;
+            buttonPublishers.Click += buttonPublishers_Click;
+            // 
             // FormManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonPublishers);
             Controls.Add(buttonCategories);
             Controls.Add(buttonAuthors);
             Controls.Add(buttonBooks);
@@ -110,5 +127,6 @@
         private Button buttonBooks;
         private Button buttonAuthors;
         private Button buttonCategories;
+        private Button buttonPublishers;
     }
 }
