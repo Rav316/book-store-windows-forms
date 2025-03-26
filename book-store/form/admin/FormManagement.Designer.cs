@@ -33,6 +33,7 @@
             buttonAuthors = new Button();
             buttonCategories = new Button();
             buttonPublishers = new Button();
+            buttonWarehouses = new Button();
             SuspendLayout();
             // 
             // labelManagement
@@ -105,11 +106,27 @@
             buttonPublishers.UseVisualStyleBackColor = false;
             buttonPublishers.Click += buttonPublishers_Click;
             // 
+            // buttonWarehouses
+            // 
+            buttonWarehouses.BackColor = Color.FromArgb(41, 2, 71);
+            buttonWarehouses.Cursor = Cursors.Hand;
+            buttonWarehouses.FlatStyle = FlatStyle.Flat;
+            buttonWarehouses.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonWarehouses.ForeColor = SystemColors.Window;
+            buttonWarehouses.Location = new Point(133, 295);
+            buttonWarehouses.Name = "buttonWarehouses";
+            buttonWarehouses.Size = new Size(218, 50);
+            buttonWarehouses.TabIndex = 9;
+            buttonWarehouses.Text = "Склады";
+            buttonWarehouses.UseVisualStyleBackColor = false;
+            buttonWarehouses.Click += buttonWarehouses_Click;
+            // 
             // FormManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonWarehouses);
             Controls.Add(buttonPublishers);
             Controls.Add(buttonCategories);
             Controls.Add(buttonAuthors);
@@ -128,5 +145,6 @@
         private Button buttonAuthors;
         private Button buttonCategories;
         private Button buttonPublishers;
+        private Button buttonWarehouses;
     }
 }
