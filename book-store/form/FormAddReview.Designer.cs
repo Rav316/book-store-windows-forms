@@ -189,6 +189,7 @@
             Controls.Add(labelAuthorValue);
             Controls.Add(labelAuthor);
             Controls.Add(labelBookName);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAddReview";
             Text = "Написать отзыв";
             ((System.ComponentModel.ISupportInitialize)pbStar1).EndInit();

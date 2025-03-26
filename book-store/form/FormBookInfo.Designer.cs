@@ -757,6 +757,7 @@
             Controls.Add(pbBookImage);
             Controls.Add(labelBookInfo);
             Controls.Add(pbBack);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookInfo";
             Text = "Информация о книге";
             Load += FormBookInfo_Load;

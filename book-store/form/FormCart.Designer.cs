@@ -236,6 +236,7 @@
             Controls.Add(dgvBooks);
             Controls.Add(pbBack);
             Controls.Add(labelCart);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormCart";
             Text = "Корзина";
             Load += FormCart_Load;

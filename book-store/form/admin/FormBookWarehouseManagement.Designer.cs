@@ -173,6 +173,7 @@
             Controls.Add(pbBack);
             Controls.Add(dgvBookWarehouses);
             Controls.Add(labelManagement);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookWarehouseManagement";
             Text = "Управление книгами на складе";
             Load += FormBookWarehouseManagement_Load;

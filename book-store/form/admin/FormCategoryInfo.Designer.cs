@@ -148,6 +148,7 @@
             Controls.Add(labelId);
             Controls.Add(pbBack);
             Controls.Add(labelCategory);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormCategoryInfo";
             Text = "Информация о категории";
             Load += FormCategoryInfo_Load;

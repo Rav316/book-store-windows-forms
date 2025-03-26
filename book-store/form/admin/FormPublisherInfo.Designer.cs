@@ -148,6 +148,7 @@
             Controls.Add(labelId);
             Controls.Add(pbBack);
             Controls.Add(labelPublisher);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPublisherInfo";
             Text = "Информация об издателе";
             Load += FormPublisherInfo_Load;

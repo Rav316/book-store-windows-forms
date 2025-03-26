@@ -174,6 +174,7 @@
             Controls.Add(labelBookId);
             Controls.Add(pbBack);
             Controls.Add(labelBookWarehouse);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookWarehouseInfo";
             Text = "Информация о книге на складе";
             Load += FormBookWarehouseInfo_Load;

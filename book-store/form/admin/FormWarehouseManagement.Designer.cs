@@ -139,6 +139,7 @@
             Controls.Add(tbSearch);
             Controls.Add(dgvWarehouses);
             Controls.Add(labelManagement);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormWarehouseManagement";
             Text = "Управление складами";
             Load += FormWarehouseManagement_Load;

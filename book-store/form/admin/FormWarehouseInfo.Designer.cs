@@ -173,6 +173,7 @@
             Controls.Add(labelId);
             Controls.Add(pbBack);
             Controls.Add(labelWarehouse);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormWarehouseInfo";
             Text = "Информация о складе";
             Load += FormWarehouseInfo_Load;

@@ -267,6 +267,7 @@
             Controls.Add(labelId);
             Controls.Add(pbBack);
             Controls.Add(labelAuthor);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorInfo";
             Text = "Информация об авторе";
             Load += FormAuthorInfo_Load;

@@ -105,6 +105,7 @@
             Controls.Add(labelName);
             Controls.Add(pbBack);
             Controls.Add(labelPublisher);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPublisherCreate";
             Text = "Создать издателя";
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

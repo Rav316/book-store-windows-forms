@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDeleteAccount));
             buttonYes = new Button();
             buttonCancel = new Button();
             labelEnterPassword = new Label();
@@ -81,6 +82,7 @@
             Controls.Add(labelEnterPassword);
             Controls.Add(buttonCancel);
             Controls.Add(buttonYes);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormDeleteAccount";
             Text = "Вы действительно хотите удалить аккаунт?";
             ResumeLayout(false);

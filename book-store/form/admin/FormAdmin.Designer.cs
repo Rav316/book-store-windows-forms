@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdmin));
             labelAdmin = new Label();
             buttonManagement = new Button();
             buttonApp = new Button();
@@ -81,6 +82,7 @@
             Controls.Add(buttonApp);
             Controls.Add(buttonManagement);
             Controls.Add(labelAdmin);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAdmin";
             Text = "Форма администратора";
             ResumeLayout(false);

@@ -224,6 +224,7 @@
             Controls.Add(labelFirstName);
             Controls.Add(pbBack);
             Controls.Add(labelAuthor);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorCreate";
             Text = "Создание автора";
             Load += FormAuthorCreate_Load;

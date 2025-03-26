@@ -130,6 +130,7 @@
             Controls.Add(labelName);
             Controls.Add(pbBack);
             Controls.Add(labelWarehouse);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormWarehouseCreate";
             Text = "Создание склада";
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

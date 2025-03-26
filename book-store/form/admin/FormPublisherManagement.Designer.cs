@@ -133,6 +133,7 @@
             Controls.Add(tbSearch);
             Controls.Add(dgvPublishers);
             Controls.Add(labelManagement);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPublisherManagement";
             Text = "Управление издателями";
             Load += FormPublisherManagement_Load;

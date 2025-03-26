@@ -504,6 +504,7 @@
             Controls.Add(labelTitle);
             Controls.Add(pbBack);
             Controls.Add(labelBook);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookCreate";
             Text = "Создать новую книгу";
             Load += FormBookCreate_Load;

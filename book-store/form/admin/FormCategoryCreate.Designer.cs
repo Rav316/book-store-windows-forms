@@ -105,6 +105,7 @@
             Controls.Add(labelName);
             Controls.Add(pbBack);
             Controls.Add(labelCategory);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormCategoryCreate";
             Text = "Создать категорию";
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

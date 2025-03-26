@@ -205,6 +205,7 @@
             Controls.Add(labelAuthorValue);
             Controls.Add(labelAuthor);
             Controls.Add(labelBookName);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormEditReview";
             Text = "FormEditReview";
             ((System.ComponentModel.ISupportInitialize)pbStar5).EndInit();

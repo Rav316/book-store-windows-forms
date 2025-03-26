@@ -34,9 +34,6 @@
             labelFavorites = new Label();
             pbBack = new PictureBox();
             dgvBooks = new DataGridView();
-            labelEmpty = new Label();
-            buttonBackToMainForm = new Button();
-            buttonClearFavorites = new Button();
             Id = new DataGridViewTextBoxColumn();
             BookName = new DataGridViewTextBoxColumn();
             Author = new DataGridViewTextBoxColumn();
@@ -45,6 +42,9 @@
             IsInFavorites = new DataGridViewCheckBoxColumn();
             IsInCart = new DataGridViewCheckBoxColumn();
             IsAvailable = new DataGridViewTextBoxColumn();
+            labelEmpty = new Label();
+            buttonBackToMainForm = new Button();
+            buttonClearFavorites = new Button();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             SuspendLayout();
@@ -101,46 +101,6 @@
             dgvBooks.CellFormatting += dgvBooks_CellFormatting;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
             // 
-            // labelEmpty
-            // 
-            labelEmpty.AutoSize = true;
-            labelEmpty.Font = new Font("Philosopher", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelEmpty.Location = new Point(229, 164);
-            labelEmpty.Name = "labelEmpty";
-            labelEmpty.Size = new Size(358, 44);
-            labelEmpty.TabIndex = 22;
-            labelEmpty.Text = "Пока что здесь пусто :(";
-            // 
-            // buttonBackToMainForm
-            // 
-            buttonBackToMainForm.BackColor = Color.FromArgb(41, 2, 71);
-            buttonBackToMainForm.Cursor = Cursors.Hand;
-            buttonBackToMainForm.FlatStyle = FlatStyle.Flat;
-            buttonBackToMainForm.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonBackToMainForm.ForeColor = SystemColors.Window;
-            buttonBackToMainForm.Location = new Point(307, 227);
-            buttonBackToMainForm.Name = "buttonBackToMainForm";
-            buttonBackToMainForm.Size = new Size(206, 50);
-            buttonBackToMainForm.TabIndex = 23;
-            buttonBackToMainForm.Text = "Вернуться на главную";
-            buttonBackToMainForm.UseVisualStyleBackColor = false;
-            buttonBackToMainForm.Click += buttonBackToMainForm_Click;
-            // 
-            // buttonClearFavorites
-            // 
-            buttonClearFavorites.BackColor = Color.FromArgb(41, 2, 71);
-            buttonClearFavorites.Cursor = Cursors.Hand;
-            buttonClearFavorites.FlatStyle = FlatStyle.Flat;
-            buttonClearFavorites.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearFavorites.ForeColor = SystemColors.Window;
-            buttonClearFavorites.Location = new Point(582, 11);
-            buttonClearFavorites.Name = "buttonClearFavorites";
-            buttonClearFavorites.Size = new Size(206, 50);
-            buttonClearFavorites.TabIndex = 24;
-            buttonClearFavorites.Text = "Очистить";
-            buttonClearFavorites.UseVisualStyleBackColor = false;
-            buttonClearFavorites.Click += buttonClearFavorites_Click;
-            // 
             // Id
             // 
             Id.HeaderText = "id";
@@ -186,6 +146,46 @@
             IsAvailable.Name = "IsAvailable";
             IsAvailable.Visible = false;
             // 
+            // labelEmpty
+            // 
+            labelEmpty.AutoSize = true;
+            labelEmpty.Font = new Font("Philosopher", 23.9999962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelEmpty.Location = new Point(229, 164);
+            labelEmpty.Name = "labelEmpty";
+            labelEmpty.Size = new Size(358, 44);
+            labelEmpty.TabIndex = 22;
+            labelEmpty.Text = "Пока что здесь пусто :(";
+            // 
+            // buttonBackToMainForm
+            // 
+            buttonBackToMainForm.BackColor = Color.FromArgb(41, 2, 71);
+            buttonBackToMainForm.Cursor = Cursors.Hand;
+            buttonBackToMainForm.FlatStyle = FlatStyle.Flat;
+            buttonBackToMainForm.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonBackToMainForm.ForeColor = SystemColors.Window;
+            buttonBackToMainForm.Location = new Point(307, 227);
+            buttonBackToMainForm.Name = "buttonBackToMainForm";
+            buttonBackToMainForm.Size = new Size(206, 50);
+            buttonBackToMainForm.TabIndex = 23;
+            buttonBackToMainForm.Text = "Вернуться на главную";
+            buttonBackToMainForm.UseVisualStyleBackColor = false;
+            buttonBackToMainForm.Click += buttonBackToMainForm_Click;
+            // 
+            // buttonClearFavorites
+            // 
+            buttonClearFavorites.BackColor = Color.FromArgb(41, 2, 71);
+            buttonClearFavorites.Cursor = Cursors.Hand;
+            buttonClearFavorites.FlatStyle = FlatStyle.Flat;
+            buttonClearFavorites.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonClearFavorites.ForeColor = SystemColors.Window;
+            buttonClearFavorites.Location = new Point(582, 11);
+            buttonClearFavorites.Name = "buttonClearFavorites";
+            buttonClearFavorites.Size = new Size(206, 50);
+            buttonClearFavorites.TabIndex = 24;
+            buttonClearFavorites.Text = "Очистить";
+            buttonClearFavorites.UseVisualStyleBackColor = false;
+            buttonClearFavorites.Click += buttonClearFavorites_Click;
+            // 
             // FormFavorites
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -197,6 +197,7 @@
             Controls.Add(dgvBooks);
             Controls.Add(pbBack);
             Controls.Add(labelFavorites);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormFavorites";
             Text = "Избранное";
             Load += FormFavorites_Load;

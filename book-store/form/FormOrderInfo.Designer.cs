@@ -228,6 +228,7 @@
             Controls.Add(dgvBooks);
             Controls.Add(pbBack);
             Controls.Add(labelOrder);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormOrderInfo";
             Text = "Информация о заказе";
             Load += FormOrderInfo_Load;

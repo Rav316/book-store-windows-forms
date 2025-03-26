@@ -153,6 +153,7 @@
             Controls.Add(labelBook);
             Controls.Add(pbBack);
             Controls.Add(labelBookWarehouse);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookWarehouseCreate";
             Text = "Добавление книги на склад";
             Load += FormBookWarehouseCreate_Load;

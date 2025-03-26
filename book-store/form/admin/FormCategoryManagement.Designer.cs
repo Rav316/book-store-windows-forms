@@ -133,6 +133,7 @@
             Controls.Add(tbSearch);
             Controls.Add(dgvCategories);
             Controls.Add(labelManagement);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormCategoryManagement";
             Text = "Управление категориями";
             Load += FormCategoryManagement_Load;

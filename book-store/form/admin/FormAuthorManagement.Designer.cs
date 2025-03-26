@@ -144,6 +144,7 @@
             Controls.Add(tbSearch);
             Controls.Add(dgvAuthors);
             Controls.Add(labelManagement);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorManagement";
             Text = "Управление авторами книг";
             Load += FormAuthorManagement_Load;

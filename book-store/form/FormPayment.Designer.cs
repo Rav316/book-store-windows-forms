@@ -220,6 +220,7 @@
             Controls.Add(labelPaymentDetails);
             Controls.Add(pbBack);
             Controls.Add(labelOrderInfo);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPayment";
             Text = "Оплата заказа";
             Load += FormPayment_Load;

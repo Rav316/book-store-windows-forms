@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAuthorization));
             labelLogin = new Label();
             tbUsername = new TextBox();
             tbPassword = new TextBox();
@@ -142,6 +143,7 @@
             Controls.Add(tbPassword);
             Controls.Add(tbUsername);
             Controls.Add(labelLogin);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorization";
             Text = "Авторизация";
             ResumeLayout(false);

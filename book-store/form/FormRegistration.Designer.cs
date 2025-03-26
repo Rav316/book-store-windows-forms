@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegistration));
             buttonRegister = new Button();
             labelRegistration = new Label();
             tbUsername = new TextBox();
@@ -232,6 +233,7 @@
             Controls.Add(buttonRegister);
             Controls.Add(tbUsername);
             Controls.Add(labelRegistration);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormRegistration";
             Text = "Регистрация";
             FormClosing += FormRegistration_FormClosing;

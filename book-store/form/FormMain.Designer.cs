@@ -418,6 +418,7 @@ namespace book_store.form
             Controls.Add(labelFavorites);
             Controls.Add(labelSearch);
             Controls.Add(tbSearch);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormMain";
             Text = "Главная";
             Load += FormMain_Load;

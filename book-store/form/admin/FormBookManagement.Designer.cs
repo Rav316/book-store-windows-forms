@@ -138,6 +138,7 @@
             Controls.Add(tbSearch);
             Controls.Add(dgvBooks);
             Controls.Add(labelManagement);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookManagement";
             Text = "Управление книгами";
             Load += FormBookManagement_Load;
