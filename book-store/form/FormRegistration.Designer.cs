@@ -130,6 +130,7 @@
             tbPassword.Location = new Point(250, 159);
             tbPassword.MinimumSize = new Size(300, 25);
             tbPassword.Name = "tbPassword";
+            tbPassword.PasswordChar = '•';
             tbPassword.Size = new Size(300, 25);
             tbPassword.TabIndex = 17;
             // 

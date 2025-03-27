@@ -1,35 +1,157 @@
-INSERT INTO publisher (id, name) VALUES
-(1, 'Oxford University Press'),
-(2, 'Vintage Classics'),
-(3, 'Penguin Classics');
+﻿insert into public.users (username, password, role, email, address, image_path)
+values
+('user', 'a00dbda08434d887293d911766f4d6b7db1b3bc30c69c3220482968fb60a6540a370f265d34b3d2857b998b033f460ee3d90ad95ce4f80a74e5cf5458f449c28', 0, 'user@test.test', 'Saint-Petersburg', null),
+('admin', 'a00dbda08434d887293d911766f4d6b7db1b3bc30c69c3220482968fb60a6540a370f265d34b3d2857b998b033f460ee3d90ad95ce4f80a74e5cf5458f449c28', 1, 'admin@test.test', 'Moscow', null);
 
-INSERT INTO cover_type (id, type) VALUES
-    (1, 'Paperback'),
-    (2, 'Hardcover')
+-- Вставка реальных авторов
+INSERT INTO author (first_name, mid_name, last_name, nationality, birth_date, death_date) VALUES
+('Leo', NULL, 'Tolstoy', 'Russian', '1828-09-09', '1910-11-20'),
+('Fyodor', NULL, 'Dostoevsky', 'Russian', '1821-11-11', '1881-02-09'),
+('Jane', NULL, 'Austen', 'British', '1775-12-16', '1817-07-18'),
+('Mark', NULL, 'Twain', 'American', '1835-11-30', '1910-04-21'),
+('Charles', NULL, 'Dickens', 'British', '1812-02-07', '1870-06-09'),
+('Gabriel', 'García', 'Márquez', 'Colombian', '1927-03-06', '2014-04-17'),
+('Harper', NULL, 'Lee', 'American', '1926-04-28', '2016-02-19'),
+('George', 'Orwell', NULL, 'British', '1903-06-25', '1950-01-21'),
+('Franz', NULL, 'Kafka', 'Austrian', '1883-07-03', '1924-06-03'),
+('Ernest', NULL, 'Hemingway', 'American', '1899-07-21', '1961-07-02');
 
-INSERT INTO language (id, language) VALUES
-    (1, 'EN'),
-    (2, 'FR'),
-    (3, 'DE'),
-    (4, 'ES'),
-    (5, 'IT'),
-    (6, 'RU');
+-- Вставка категорий
+INSERT INTO category (name) VALUES
+('Classic'),
+('Fiction'),
+('Philosophy'),
+('Science Fiction'),
+('Drama');
 
-INSERT INTO book (id, author_id, rating, price, publisher_id, series, year_of_publishing, isbn, number_of_pages, size, cover_type_id, circulation, weight, age_restrictions, name, category_id, description, language_id, image_path)
-VALUES
-    (1, 1, 4.5, 15, 1, NULL, 1869, '9780199536117', 1296, '6.1 x 1.9 x 9.2 inches', 1, 100000, 1588, 0, 'War and Peace', 1, 'A monumental novel that explores the impact of the Napoleonic Wars on Tsarist Russia.', 1, '71wXZB-VtBL._AC_UF1000,1000_QL80_.jpg'),
-    (2, 2, 4.3, 12, 2, NULL, 1866, '9780099503271', 672, '5.1 x 1.8 x 7.8 inches', 1, 100000, 672, 0, 'Crime and Punishment', 1, 'A psychological thriller that delves into the mind of a murderer.', 2, 'Crimeandpunishmentcover.png'),
-    (3, 3, 4.2, 10, 3, NULL, 1813, '9780141439562', 480, '5.1 x 1.3 x 7.8 inches', 1, 100000, 480, 0, 'Pride and Prejudice', 1, 'A romantic novel that explores the themes of love, marriage, and social class.', 3, 'MV5BMTA1NDQ3NTcyOTNeQTJeQWpwZ15BbWU3MDA0MzA4MzE@._V1_.jpg'),
-    (4, 4, 4.1, 14, 3, NULL, 1859, '9780141439593', 944, '5.1 x 2 x 7.8 inches', 1, 100000, 944, 0, 'A Tale of Two Cities', 1, 'A historical novel set in the French Revolution that explores the themes of duality and resurrection.', 4, 'images.jpg'),
-    (5, 5, 4.0, 11, 1, NULL, 1884, '9780199535543', 416, '5.1 x 0.9 x 7.8 inches', 1, 100000, 416, 0, 'Adventures of Huckleberry Finn', 1, 'A satirical novel that explores the themes of racism and morality.', 1, '91sBZnKzEfL._AC_UF1000,1000_QL80_.jpg'),
-    (6, 6, 3.9, 13, 3, NULL, 1851, '9780141439814', 672, '5.1 x 1.7 x 7.8 inches', 1, 100000, 672, 0, 'Moby-Dick', 1, 'An epic novel that explores the themes of obsession and the nature of good and evil.', 2, '81R91ODA9DL._AC_UF1000,1000_QL80_.jpg'),
-    (7, 7, 3.8, 16, 3, NULL, 1857, '9780140449281', 512, '5.1 x 1.3 x 7.8 inches', 1, 100000, 512, 0, 'Madame Bovary', 1, 'A realist novel that explores the themes of adultery and the nature of human desire.', 3, '41Of4Xao87L._AC_UF1000,1000_QL80_.jpg'),
-    (8, 8, 3.7, 12, 3, NULL, 1861, '9780140434234', 864, '5.1 x 2 x 7.8 inches', 1, 100000, 864, 0, 'Silas Marner', 1, 'A pastoral novel that explores the themes of redemption and the nature of human relationships.', 4, '71ZvgiUWuJL._AC_UF1000,1000_QL80_.jpg'),
-    (9, 9, 3.6, 10, 3, NULL, 1874, '9780140434241', 448, '5.1 x 0.9 x 7.8 inches', 1, 100000, 448, 0, 'Far from the Madding Crowd', 1, 'A pastoral novel that explores the themes of love and the nature of human relationships.', 1, 'MV5BNzI4NzUwNDgwN15BMl5BanBnXkFtZTgwNTI3MjMwNTE@._V1_.jpg'),
-    (10, 10, 3.5, 13, 3, NULL, 1847, '9780141439548', 448, '5.1 x 0.9 x 7.8 inches', 1, 100000, 448, 0, 'Wuthering Heights', 1, 'A gothic novel that explores the themes of love and the nature of human relationships.', 2, '81dvA4tU0rL._AC_UF1000,1000_QL80_.jpg');
+-- Вставка издателей
+INSERT INTO publisher (name) VALUES
+('Penguin Books'),
+('HarperCollins'),
+('Vintage'),
+('Oxford University Press'),
+('Random House');
 
-SELECT setval('author_id_seq', (SELECT MAX(id) FROM author));
-SELECT setval('publisher_id_seq', (SELECT MAX(id) FROM publisher));
-SELECT setval('cover_type_id_seq', (SELECT MAX(id) FROM cover_type));
-SELECT setval('language_id_seq', (SELECT MAX(id) FROM language));
-SELECT setval('book_id_seq', (SELECT MAX(id) FROM book));
+-- Вставка типов обложек
+INSERT INTO cover_type (type) VALUES
+('Hardcover'),
+('Paperback');
+
+-- Вставка языков
+INSERT INTO language (name) VALUES
+('ENG'),
+('RUS'),
+('SPA'),
+('GER'),
+('FRE');
+
+-- Вставка книг
+
+INSERT INTO book (title, author_id, category_id, publisher_id, cover_type_id, language_id, price, year_of_publishing, isbn, number_of_pages, circulation, age_restrictions) VALUES
+-- Лев Толстой
+('Война и мир', 1, 1, 1, 1, 1, 1500, 1869, '978-5-17-067456-0', 1225, 10000, 12),
+('Анна Каренина', 1, 1, 3, 2, 1, 1200, 1877, '978-5-04-089123-4', 864, 8000, 16),
+('Воскресение', 1, 5, 5, 1, 1, 900, 1899, '978-5-04-091234-5', 592, 5000, 16),
+
+-- Фёдор Достоевский
+('Преступление и наказание', 2, 1, 2, 1, 1, 950, 1866, '978-5-04-090001-6', 608, 12000, 16),
+('Идиот', 2, 1, 4, 2, 1, 1100, 1869, '978-5-17-067890-1', 640, 9500, 16),
+('Братья Карамазовы', 2, 1, 1, 1, 1, 1350, 1880, '978-5-389-12345-7', 824, 7500, 16),
+
+-- Джейн Остин
+('Гордость и предубеждение', 3, 1, 2, 2, 2, 850, 1813, '978-0-14-143951-8', 432, 20000, 12),
+('Эмма', 3, 1, 5, 1, 2, 920, 1815, '978-0-19-953552-4', 474, 15000, 12),
+('Чувство и чувствительность', 3, 1, 3, 2, 2, 790, 1811, '978-0-679-73173-2', 352, 18000, 12),
+
+-- Марк Твен
+('Приключения Тома Сойера', 4, 1, 4, 1, 2, 680, 1876, '978-0-14-303956-3', 274, 25000, 6),
+('Принц и нищий', 4, 1, 1, 2, 2, 720, 1881, '978-1-51-468123-4', 240, 22000, 12),
+('Янки из Коннектикута', 4, 4, 5, 1, 2, 810, 1889, '978-0-19-283925-5', 384, 17000, 12),
+
+-- Чарльз Диккенс
+('Оливер Твист', 5, 1, 3, 2, 2, 870, 1838, '978-0-14-143974-7', 448, 19000, 12),
+('Большие надежды', 5, 1, 2, 1, 2, 950, 1861, '978-0-14-144016-3', 544, 21000, 12),
+('Дэвид Копперфилд', 5, 1, 4, 1, 2, 1100, 1850, '978-0-19-953625-5', 1024, 16000, 12),
+
+-- Габриэль Гарсиа Маркес
+('Сто лет одиночества', 6, 2, 5, 1, 3, 1300, 1967, '978-5-03-001234-5', 416, 30000, 16),
+('Любовь во время холеры', 6, 5, 1, 2, 3, 1150, 1985, '978-5-17-078901-2', 368, 27000, 18),
+('Осень патриарха', 6, 2, 3, 1, 3, 990, 1975, '978-5-699-12345-6', 304, 23000, 16),
+
+-- Харпер Ли
+('Убить пересмешника', 7, 5, 2, 1, 2, 890, 1960, '978-0-06-112008-4', 376, 45000, 16),
+('Пойди поставь сторожа', 7, 5, 4, 2, 2, 780, 2015, '978-0-06-240985-0', 288, 35000, 16),
+
+-- Джордж Оруэлл
+('1984', 8, 4, 5, 1, 2, 950, 1949, '978-0-452-28423-4', 328, 50000, 16),
+('Скотный двор', 8, 4, 1, 2, 2, 720, 1945, '978-0-15-101026-4', 112, 40000, 12),
+('Да здравствует фикус!', 8, 3, 3, 1, 2, 680, 1936, '978-0-14-118260-6', 320, 28000, 16),
+
+-- Франц Кафка
+('Процесс', 9, 3, 4, 1, 4, 870, 1925, '978-3-16-148410-0', 224, 18000, 16),
+('Замок', 9, 3, 2, 2, 4, 910, 1926, '978-3-18-127654-3', 316, 17000, 16),
+('Превращение', 9, 2, 5, 1, 4, 650, 1915, '978-3-12-345678-9', 80, 25000, 16),
+
+-- Эрнест Хемингуэй
+('Старик и море', 10, 1, 1, 1, 2, 770, 1952, '978-0-684-80122-3', 128, 60000, 12),
+('Прощай, оружие!', 10, 5, 3, 2, 2, 850, 1929, '978-0-684-80123-0', 332, 38000, 16),
+('По ком звонит колокол', 10, 5, 4, 1, 2, 920, 1940, '978-0-684-83045-2', 480, 42000, 16);
+
+-- Добавляем 5 складов
+INSERT INTO warehouse (name, address) VALUES
+('Центральный склад Москва', 'г. Москва, Ленинградское шоссе, д. 1'),
+('Северный склад СПб', 'г. Санкт-Петербург, Невский проспект, д. 25'),
+('Уральский склад', 'г. Екатеринбург, ул. Малышева, д. 45'),
+('Сибирский склад', 'г. Новосибирск, ул. Кирова, д. 12'),
+('Приволжский склад', 'г. Казань, ул. Баумана, д. 7');
+
+-- Распределяем книги по складам
+INSERT INTO book_warehouse (book_id, warehouse_id, quantity) VALUES
+-- Книги Льва Толстого (ID 1-3)
+(1, 1, 42),  (1, 3, 15),  -- Война и мир
+(2, 2, 30),  (2, 4, 20),  -- Анна Каренина
+(3, 5, 25),                -- Воскресение
+
+-- Книги Достоевского (ID 4-6)
+(4, 1, 55),  (4, 2, 18),  -- Преступление и наказание
+(5, 3, 22),  (5, 5, 12),  -- Идиот
+(6, 4, 35),                -- Братья Карамазовы
+
+-- Джейн Остин (ID 7-9)
+(7, 2, 40),  (7, 5, 25),  -- Гордость и предубеждение
+(8, 1, 30),                -- Эмма
+(9, 3, 20),  (9, 4, 15),  -- Чувство и чувствительность
+
+-- Марк Твен (ID 10-12)
+(10, 4, 60), (10, 5, 30), -- Том Сойер
+(11, 1, 45),               -- Принц и нищий
+(12, 2, 35), (12, 3, 20), -- Янки из Коннектикута
+
+-- Диккенс (ID 13-15)
+(13, 3, 50),               -- Оливер Твист
+(14, 1, 40), (14, 5, 25), -- Большие надежды
+(15, 2, 30),               -- Дэвид Копперфилд
+
+-- Маркес (ID 16-18)
+(16, 4, 65),               -- Сто лет одиночества
+(17, 1, 30), (17, 2, 20), -- Любовь во время холеры
+(18, 5, 45),               -- Осень патриарха
+
+-- Харпер Ли (ID 19-20)
+(19, 3, 50), (19, 4, 35), -- Убить пересмешника
+(20, 2, 40),               -- Пойди поставь сторожа
+
+-- Оруэлл (ID 21-23)
+(21, 1, 100), (21, 3, 60), -- 1984
+(22, 4, 80),               -- Скотный двор
+(23, 5, 45),               -- Да здравствует фикус!
+
+-- Кафка (ID 24-26)
+(24, 2, 35), (24, 4, 25), -- Процесс
+(25, 1, 30),               -- Замок
+(26, 3, 55),               -- Превращение
+
+-- Хемингуэй (ID 27-29)
+(27, 5, 70), (27, 2, 45), -- Старик и море
+(28, 1, 40),               -- Прощай, оружие!
+(29, 3, 50), (29, 4, 35); -- По ком звонит колокол
