@@ -35,7 +35,7 @@ namespace book_store.context
 
         private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
                     new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
-                    .UseNpgsql("Server=localhost; Port=5432; DataBase=book_store_windows_forms_copy; User Id=postgres; Password=1")
+                    .UseNpgsql("Server=localhost; Port=5432; DataBase=book_store_windows_forms; User Id=postgres; Password=1")
                     .UseLazyLoadingProxies()
                     .LogTo(message => System.Diagnostics.Debug.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information)
                     .EnableSensitiveDataLogging()
