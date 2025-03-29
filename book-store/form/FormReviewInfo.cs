@@ -14,7 +14,7 @@ namespace book_store.form
     {
         private PictureBox[] stars;
         private int selectedStars;
-        public FormReviewInfo(int bookId, string bookName, string author, string content, int rating, string createdAt)
+        public FormReviewInfo(int bookId, string bookName, string author, string reviewAuthor, string content, int rating, string createdAt)
         {
             InitializeComponent();
             stars =
@@ -34,6 +34,7 @@ namespace book_store.form
             tbReviewContent.Text = content;
             selectedStars = rating;
             labelCreatedAt.Text = createdAt.ToString();
+            labelReviewAuthorValue.Text = reviewAuthor;
             UpdateStars();
         }
 

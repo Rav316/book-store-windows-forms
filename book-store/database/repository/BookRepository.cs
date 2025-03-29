@@ -185,7 +185,7 @@ namespace book_store.database.repository
             return context.OrderItems
                 .Any(oi => oi.BookId == bookId && 
                 oi.Order.UserId == userId &&
-                oi.Order.OrderStatusId == 3);
+                oi.Order.OrderStatusId == 4);
         }
 
         public Book? FindByTitleAndAuthor(string title, int author)

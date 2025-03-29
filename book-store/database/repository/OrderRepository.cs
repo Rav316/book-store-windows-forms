@@ -147,6 +147,7 @@ namespace book_store.database.repository
             if(order != null)
             {
                 order.OrderStatusId = 4;
+                context.Orders.Update(order);
                 await context.SaveChangesAsync();
             }
         }

@@ -3,7 +3,7 @@ values
 ('user', 'a00dbda08434d887293d911766f4d6b7db1b3bc30c69c3220482968fb60a6540a370f265d34b3d2857b998b033f460ee3d90ad95ce4f80a74e5cf5458f449c28', 0, 'user@test.test', 'Saint-Petersburg', null),
 ('admin', 'a00dbda08434d887293d911766f4d6b7db1b3bc30c69c3220482968fb60a6540a370f265d34b3d2857b998b033f460ee3d90ad95ce4f80a74e5cf5458f449c28', 1, 'admin@test.test', 'Moscow', null);
 
--- Вставка реальных авторов
+-- Вставка авторов
 INSERT INTO author (first_name, mid_name, last_name, nationality, birth_date, death_date) VALUES
 ('Leo', NULL, 'Tolstoy', 'Russian', '1828-09-09', '1910-11-20'),
 ('Fyodor', NULL, 'Dostoevsky', 'Russian', '1821-11-11', '1881-02-09'),

@@ -38,7 +38,7 @@
             labelAuthorValue = new Label();
             labelAuthor = new Label();
             labelBookName = new Label();
-            label1 = new Label();
+            labelReviewAuthorValue = new Label();
             labelReviewAuthor = new Label();
             labelCreatedAt = new Label();
             ((System.ComponentModel.ISupportInitialize)pbStar5).BeginInit();
@@ -141,15 +141,15 @@
             labelBookName.TabIndex = 34;
             labelBookName.Text = "Crime and Punishment";
             // 
-            // label1
+            // labelReviewAuthorValue
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            label1.Location = new Point(122, 340);
-            label1.Name = "label1";
-            label1.Size = new Size(134, 20);
-            label1.TabIndex = 46;
-            label1.Text = "Fyodor Dostoevsky";
+            labelReviewAuthorValue.AutoSize = true;
+            labelReviewAuthorValue.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelReviewAuthorValue.Location = new Point(122, 340);
+            labelReviewAuthorValue.Name = "labelReviewAuthorValue";
+            labelReviewAuthorValue.Size = new Size(134, 20);
+            labelReviewAuthorValue.TabIndex = 46;
+            labelReviewAuthorValue.Text = "Fyodor Dostoevsky";
             // 
             // labelReviewAuthor
             // 
@@ -177,7 +177,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(698, 369);
             Controls.Add(labelCreatedAt);
-            Controls.Add(label1);
+            Controls.Add(labelReviewAuthorValue);
             Controls.Add(labelReviewAuthor);
             Controls.Add(pbStar5);
             Controls.Add(pbStar4);
@@ -211,7 +211,7 @@
         private Label labelAuthorValue;
         private Label labelAuthor;
         private Label labelBookName;
-        private Label label1;
+        private Label labelReviewAuthorValue;
         private Label labelReviewAuthor;
         private Label labelCreatedAt;
     }

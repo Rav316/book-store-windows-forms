@@ -89,7 +89,7 @@ namespace book_store.form
             bookReview.Content = tbReviewContent.Text;
             bookReview.Rating = selectedStars;
             bookReview.CreatedAt = bookReview.CreatedAt.ToUniversalTime();
-            bookReview.UpdatedAt = bookReview.UpdatedAt.ToUniversalTime();
+            bookReview.UpdatedAt = DateTime.Now.ToUniversalTime();
             await bookReviewService.Update(bookReview);
             this.DialogResult = DialogResult.OK;
             Close();

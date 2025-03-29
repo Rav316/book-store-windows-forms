@@ -251,7 +251,8 @@ namespace book_store.form
                 FormReviewInfo formReviewInfo = new FormReviewInfo(
                     bookId,
                     book.Title,
-                    labelAuthor.Text, 
+                    labelAuthor.Text,
+                    dgvReviews[1, selectedRowIndex].Value.ToString(),
                     dgvReviews[3, selectedRowIndex].Value.ToString(),
                     (int)dgvReviews[4, selectedRowIndex].Value,
                     dgvReviews[5, selectedRowIndex].Value.ToString()
