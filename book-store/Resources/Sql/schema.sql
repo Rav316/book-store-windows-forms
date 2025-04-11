@@ -35,7 +35,6 @@ CREATE TABLE public.author (
 );
 
 
-ALTER TABLE public.author OWNER TO postgres;
 
 --
 -- Name: author_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -78,7 +77,6 @@ CREATE TABLE public.book (
 );
 
 
-ALTER TABLE public.book OWNER TO postgres;
 
 --
 -- Name: book_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -110,7 +108,6 @@ CREATE TABLE public.book_review (
 );
 
 
-ALTER TABLE public.book_review OWNER TO postgres;
 
 --
 -- Name: book_review_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -137,7 +134,6 @@ CREATE TABLE public.book_warehouse (
 );
 
 
-ALTER TABLE public.book_warehouse OWNER TO postgres;
 
 --
 -- Name: cart_item; Type: TABLE; Schema: public; Owner: postgres
@@ -150,7 +146,6 @@ CREATE TABLE public.cart_item (
 );
 
 
-ALTER TABLE public.cart_item OWNER TO postgres;
 
 --
 -- Name: category; Type: TABLE; Schema: public; Owner: postgres
@@ -162,7 +157,6 @@ CREATE TABLE public.category (
 );
 
 
-ALTER TABLE public.category OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -188,7 +182,6 @@ CREATE TABLE public.cover_type (
 );
 
 
-ALTER TABLE public.cover_type OWNER TO postgres;
 
 --
 -- Name: cover_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -214,7 +207,6 @@ CREATE TABLE public.favorites (
 );
 
 
-ALTER TABLE public.favorites OWNER TO postgres;
 
 --
 -- Name: language; Type: TABLE; Schema: public; Owner: postgres
@@ -226,7 +218,6 @@ CREATE TABLE public.language (
 );
 
 
-ALTER TABLE public.language OWNER TO postgres;
 
 --
 -- Name: language_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -254,7 +245,6 @@ CREATE TABLE public.order_item (
 );
 
 
-ALTER TABLE public.order_item OWNER TO postgres;
 
 --
 -- Name: order_status; Type: TABLE; Schema: public; Owner: postgres
@@ -266,7 +256,6 @@ CREATE TABLE public.order_status (
 );
 
 
-ALTER TABLE public.order_status OWNER TO postgres;
 
 --
 -- Name: order_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -298,7 +287,6 @@ CREATE TABLE public.orders (
 );
 
 
-ALTER TABLE public.orders OWNER TO postgres;
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -326,7 +314,6 @@ CREATE TABLE public.payment_detail (
 );
 
 
-ALTER TABLE public.payment_detail OWNER TO postgres;
 
 --
 -- Name: payment_status; Type: TABLE; Schema: public; Owner: postgres
@@ -338,7 +325,6 @@ CREATE TABLE public.payment_status (
 );
 
 
-ALTER TABLE public.payment_status OWNER TO postgres;
 
 --
 -- Name: payment_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -364,7 +350,6 @@ CREATE TABLE public.publisher (
 );
 
 
-ALTER TABLE public.publisher OWNER TO postgres;
 
 --
 -- Name: publisher_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -395,7 +380,6 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -422,7 +406,6 @@ CREATE TABLE public.warehouse (
 );
 
 
-ALTER TABLE public.warehouse OWNER TO postgres;
 
 --
 -- Name: warehouse_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
