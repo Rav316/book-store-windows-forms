@@ -155,3 +155,13 @@ INSERT INTO book_warehouse (book_id, warehouse_id, quantity) VALUES
 (27, 5, 70), (27, 2, 45), -- Старик и море
 (28, 1, 40),               -- Прощай, оружие!
 (29, 3, 50), (29, 4, 35); -- По ком звонит колокол
+
+insert into public.order_status (name)
+values  ('в обработке'),
+        ('отправлен'),
+        ('отменён'),
+        ('завершён');
+
+insert into public.payment_status (name)
+values  ('не оплачен'),
+        ('оплачен');
