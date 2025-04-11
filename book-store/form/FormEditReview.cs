@@ -105,5 +105,10 @@ namespace book_store.form
                 this.Close();
             }
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

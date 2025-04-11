@@ -116,6 +116,7 @@
             buttonCancel.TabIndex = 39;
             buttonCancel.Text = "Отмена";
             buttonCancel.UseVisualStyleBackColor = false;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // buttonEdit
             // 
