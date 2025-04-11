@@ -53,7 +53,8 @@ namespace book_store.form
                 string cardNumber = tbCardNumber.Text;
                 if (!CardNumberValidator.IsValid(cardNumber))
                 {
-                    MessageBox.Show("Номер карты некорректный");    
+                    MessageBox.Show("Номер карты некорректный");
+                    return;
                 }
                 await orderService.PayForTheOrder(new PaymentDetail
                 {
@@ -67,6 +68,7 @@ namespace book_store.form
             } else
             {
                 MessageBox.Show("Введите корректные данные");
+                return;
             }
            
         }

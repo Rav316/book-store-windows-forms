@@ -120,7 +120,7 @@ namespace book_store.database.repository
                 }
 
 
-                order.OrderStatusId = 3;
+                order.OrderStatus = (await context.OrderStatuses.FindAsync(3))!;
                 context.Orders.Update(order);
                 await context.SaveChangesAsync();
 

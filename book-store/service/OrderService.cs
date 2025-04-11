@@ -26,6 +26,7 @@ namespace book_store.service
         {
             return orderRepository.FindAllByUser(SecurityContext.Authentication.Id)
                 .Select(orderProfileMapper.ToDto)
+                .OrderBy(o => o.Id)
                 .ToList();
         }
 

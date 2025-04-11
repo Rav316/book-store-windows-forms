@@ -78,6 +78,7 @@ namespace book_store.form
             if (formPayment.ShowDialog() == DialogResult.OK)
             {
                 MessageBox.Show("Заказ успешно оплачен ✅");
+                TimeZoneInfo moscowTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Russian Standard Time");
                 order = await orderService.FindById(order.Id);
                 UpdateOrderInfo();
                 UpdateButtonVisibility();

@@ -23,10 +23,16 @@ namespace book_store.database.repository
 
                 if (order != null)
                 {
-                    order.PaymentStatusId = 2;
-                    order.PaidIn = DateTime.UtcNow;
+                    order.PaymentStatus = (await context.PaymentStatuses.FindAsync(2))!;
+                    order.OrderStatus = (await context.OrderStatuses.FindAsync(4))!;
+                    string timeZoneId = "Russian Standard Time";
+                    TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+                    DateTime utcNow = DateTime.UtcNow;
+                    DateTime localTime = utcNow;
+                    order.PaidIn = localTime;
                     context.Orders.Update(order);
                     await context.SaveChangesAsync();
+                    order.PaidIn = TimeZoneInfo.ConvertTimeFromUtc(utcNow, timeZone);
                 }
 
                 await transaction.CommitAsync();
