@@ -777,3 +777,66 @@ ALTER TABLE ONLY public.payment_detail
 -- PostgreSQL database dump complete
 --
 
+CREATE OR REPLACE FUNCTION get_total_book_quantity(p_book_id INT)
+    RETURNS INT AS $$
+BEGIN
+    RETURN (
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM book_warehouse
+        WHERE book_id = p_book_id
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_author_full_name(p_author_id INT)
+    RETURNS TEXT AS $$
+DECLARE
+    fname TEXT;
+    mname TEXT;
+    lname TEXT;
+BEGIN
+    SELECT first_name, mid_name, last_name
+    INTO fname, mname, lname
+    FROM author
+    WHERE id = p_author_id;
+
+    RETURN TRIM(CONCAT_WS(' ', fname, mname, lname));
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION get_cart_total(p_user_id INT)
+    RETURNS INT AS $$
+BEGIN
+    RETURN (
+        SELECT COALESCE(SUM(b.price * c.quantity), 0)
+        FROM cart_item c
+                 JOIN book b ON b.id = c.book_id
+        WHERE c.user_id = p_user_id
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION is_book_in_favorites(p_user_id INT, p_book_id INT)
+    RETURNS BOOLEAN AS $$
+BEGIN
+    RETURN EXISTS (
+        SELECT 1 FROM favorites
+        WHERE user_id = p_user_id AND book_id = p_book_id
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION has_user_purchased_book(p_user_id INT, p_book_id INT)
+    RETURNS BOOLEAN AS $$
+BEGIN
+    RETURN EXISTS (
+        SELECT 1
+        FROM order_item oi
+                 JOIN orders o ON oi.order_id = o.id
+        WHERE o.user_id = p_user_id
+          AND oi.book_id = p_book_id
+          AND o.order_status_id = 4
+    );
+END;
+$$ LANGUAGE plpgsql;
+
