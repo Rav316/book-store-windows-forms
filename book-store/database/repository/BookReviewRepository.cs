@@ -16,6 +16,7 @@ namespace book_store.database.repository
         public List<BookReview> GetReviewsByBook(int bookId)
         {
             return context.BookReviews
+                .AsNoTracking()
                 .Where(br => br.BookId == bookId)
                 .Include(br => br.User)
                 .ToList();
@@ -33,6 +34,7 @@ namespace book_store.database.repository
         public BookReview? FindByBookAndUser(int bookId, int userId)
         {
             return context.BookReviews
+                .AsNoTracking()
                 .FirstOrDefault(br => br.BookId == bookId && br.UserId == userId);
         }
     }

@@ -840,3 +840,102 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+ALTER TABLE orders
+ADD COLUMN created_at timestamp;
+
+-- ענטדדונû
+
+-- 1
+CREATE OR REPLACE FUNCTION check_cart_item_quantity()
+    RETURNS TRIGGER AS $$
+DECLARE
+    available INT;
+BEGIN
+    SELECT SUM(quantity)
+    INTO available
+    FROM book_warehouse
+    WHERE book_id = NEW.book_id;
+
+    IF NEW.quantity > COALESCE(available, 0) THEN
+        RAISE EXCEPTION 'Not enough books in stock. Available: %', COALESCE(available, 0);
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER trg_check_cart_item_quantity
+    BEFORE INSERT OR UPDATE ON cart_item
+    FOR EACH ROW
+EXECUTE FUNCTION check_cart_item_quantity();
+
+
+--2
+CREATE OR REPLACE FUNCTION set_order_created_at()
+    RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.created_at IS NULL THEN
+        NEW.created_at := CURRENT_TIMESTAMP;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_set_created_at_on_orders
+    BEFORE INSERT ON orders
+    FOR EACH ROW
+EXECUTE FUNCTION set_order_created_at();
+
+--3
+create or replace function set_paid_in_on_payment()
+    returns trigger as $$
+begin
+    if NEW.payment_status_id = 2 and OLD.payment_status_id <> 2 then
+        NEW.paid_in := now();
+    end if;
+    return NEW;
+end;
+$$ language plpgsql;
+
+create trigger trg_set_paid_in
+    before update on orders
+    for each row
+    when (NEW.payment_status_id = 2 and OLD.payment_status_id is distinct from 2)
+execute function set_paid_in_on_payment();
+
+--4
+create or replace function prevent_user_change()
+    returns trigger as $$
+begin
+    if OLD.user_id <> NEW.user_id then
+        raise exception 'Changing user_id is not allowed!';
+    end if;
+    return NEW;
+end;
+$$ language plpgsql;
+
+create trigger trg_prevent_user_change
+    before update on orders
+    for each row
+execute function prevent_user_change();
+
+
+--5
+
+create or replace function set_review_timestamps()
+    returns trigger as $$
+begin
+    if TG_OP = 'INSERT' then
+        NEW.created_at := now();
+    end if;
+
+    NEW.updated_at := now();
+    return NEW;
+end;
+$$ language plpgsql;
+
+create trigger trg_set_review_timestamps
+    before insert or update on book_review
+    for each row
+execute function set_review_timestamps();

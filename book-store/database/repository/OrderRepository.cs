@@ -31,7 +31,7 @@ namespace book_store.database.repository
                 var order = new Order
                 {
                     UserId = userId,
-                    PaymentMethod = "Unspecified",
+                    PaymentMethod = "Банковская карта",
                     PaymentStatusId = 1,
                     OrderStatusId = 1,
                     Cost = totalCost
@@ -135,6 +135,7 @@ namespace book_store.database.repository
         public List<Order> FindAllByUser(int userId)
         {
             return context.Orders
+                .AsNoTracking()
                 .Where(o => o.UserId == userId)
                 .Include(o => o.OrderStatus)
                 .Include(o => o.PaymentStatus)
