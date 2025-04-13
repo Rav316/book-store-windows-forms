@@ -16,7 +16,7 @@ namespace book_store.database.entity
 
         public string FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         public string? MidName { get; set; }
 
