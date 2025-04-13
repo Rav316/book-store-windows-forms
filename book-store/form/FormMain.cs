@@ -21,10 +21,12 @@ namespace book_store.form
         private readonly CategoryService categoryService = new CategoryService();
         private readonly CoverTypeService coverTypeService = new CoverTypeService();
         private readonly LanguageService languageService = new LanguageService();
+        private readonly PublisherService publisherService = new PublisherService();
         private List<BookListDto> allBooks = new List<BookListDto>();
         private List<Category> categories = new List<Category>();
         private List<CoverType> coverTypes = new List<CoverType>();
         private List<Language> languages = new List<Language>();
+        private List<Publisher> publishers = new List<Publisher>();
         public FormMain()
         {
             InitializeComponent();
@@ -69,6 +71,14 @@ namespace book_store.form
             cbLanguage.ValueMember = "Id";
             cbLanguage.DataSource = languages;
 
+
+            publishers = await publisherService.FindAll();
+            publishers.Insert(0, new Publisher { Id = 0, Name = "Не выбран" });
+
+            cbPublisher.DisplayMember = "Name";
+            cbPublisher.ValueMember = "Id";
+            cbPublisher.DataSource = publishers;
+
             (int minPrice, int maxPrice) = bookService.GetMinAndMaxPrice();
             nudMinPrice.Minimum = minPrice;
             nudMinPrice.Maximum = maxPrice;
@@ -77,7 +87,7 @@ namespace book_store.form
             nudMinPrice.Value = minPrice;
             nudMaxPrice.Value = maxPrice;
             ViewAllBooks();
-            
+
         }
 
         private void ViewAllBooks()
@@ -139,6 +149,7 @@ namespace book_store.form
             string authorText = tbAuthor.Text.ToLower();
             int selectedCoverType = cbCoverType.SelectedValue as int? ?? 0;
             int selectedLanguage = cbLanguage.SelectedValue as int? ?? 0;
+            int selectedPublisher = cbPublisher.SelectedValue as int? ?? 0;
 
             List<BookListDto> filteredBooks = allBooks
                                         .Where(book => book.Title.ToLower().Contains(searchText))
@@ -146,6 +157,7 @@ namespace book_store.form
                                         .Where(book => selectedCategory == 0 || book.Category == selectedCategory)
                                         .Where(book => selectedCoverType == 0 || book.CoverType == selectedCoverType)
                                         .Where(book => selectedLanguage == 0 || book.Language == selectedLanguage)
+                                        .Where(book => selectedPublisher == 0 || book.Publisher == selectedPublisher)
                                         .Where(book => book.Price >= nudMinPrice.Value && book.Price <= nudMaxPrice.Value)
                                         .ToList();
             dgvBooks.DataSource = filteredBooks;
@@ -181,11 +193,21 @@ namespace book_store.form
             UpdateFilter();
         }
 
-        private void pbFavorites_Click(object sender, EventArgs e)
+        private void cbPublisher_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateFilter();
+        }
+
+        private void OpenFavoritesForm()
         {
             FormFavorites formFavorites = new FormFavorites();
             Close();
             formFavorites.Show();
+        }
+
+        private void pbFavorites_Click(object sender, EventArgs e)
+        {
+            OpenFavoritesForm();
         }
 
         private void dgvBooks_DoubleClick(object sender, EventArgs e)
@@ -204,7 +226,7 @@ namespace book_store.form
             if (e.ColumnIndex == 5)
             {
                 dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
-                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                if (e.RowIndex >= 0 && dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
                 {
                     bool isChecked = (bool)checkBoxCell.Value;
 
@@ -219,7 +241,7 @@ namespace book_store.form
             } else if (e.ColumnIndex == 6)
             {
                 dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
-                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                if (e.RowIndex >= 0 && dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
                 {
                     bool isChecked = (bool)checkBoxCell.Value;
 
@@ -236,6 +258,11 @@ namespace book_store.form
 
         private void pbCart_Click(object sender, EventArgs e)
         {
+            OpenCartForm();
+        }
+
+        private void OpenCartForm()
+        {
             FormCart formCart = new FormCart();
             Close();
             formCart.Show();
@@ -243,9 +270,29 @@ namespace book_store.form
 
         private void pbProfile_Click(object sender, EventArgs e)
         {
+            OpenProfileForm();
+        }
+
+        private void OpenProfileForm()
+        {
             FormProfile formProfile = new FormProfile();
             Close();
             formProfile.Show();
+        }
+
+        private void labelFavorites_Click(object sender, EventArgs e)
+        {
+            OpenFavoritesForm();
+        }
+
+        private void labelCart_Click(object sender, EventArgs e)
+        {
+            OpenCartForm();
+        }
+
+        private void labelProfile_Click(object sender, EventArgs e)
+        {
+            OpenProfileForm();
         }
     }
 }

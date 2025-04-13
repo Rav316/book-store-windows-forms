@@ -161,6 +161,10 @@ namespace book_store.form
 
         private async void dgvReviews_DoubleClick(object sender, EventArgs e)
         {
+            if(dgvReviews.CurrentRow == null)
+            {
+                return;
+            }
             int selectedRowIndex = dgvReviews.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {
@@ -197,6 +201,10 @@ namespace book_store.form
 
         private void dgvOrders_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (dgvOrders.CurrentRow == null)
+            {
+                return;
+            }
             int selectedRowIndex = dgvOrders.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {

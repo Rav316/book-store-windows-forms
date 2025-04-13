@@ -194,7 +194,7 @@ namespace book_store.form
             if (e.ColumnIndex == 5)
             {
                 dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
-                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                if (e.RowIndex >= 0 && dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
                 {
                     bool isChecked = (bool)checkBoxCell.Value;
 
@@ -209,7 +209,7 @@ namespace book_store.form
             } else if (e.ColumnIndex == 6)
             {
                 dgvBooks.CommitEdit(DataGridViewDataErrorContexts.Commit);
-                if (dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
+                if (e.RowIndex >= 0 && dgvBooks[e.ColumnIndex, e.RowIndex] is DataGridViewCheckBoxCell checkBoxCell)
                 {
                     bool isChecked = (bool)checkBoxCell.Value;
 

@@ -14,6 +14,7 @@ namespace book_store.dto.book
         public string Title { get; set; }
         public string AuthorFullName { get; set; }
         public string? ImagePath { get; set; }
+        public int Publisher { get; set; }
         public bool IsFavorite { get; set; }
         public bool IsInCart { get; set; }
         public int? Quantity { get; set; }

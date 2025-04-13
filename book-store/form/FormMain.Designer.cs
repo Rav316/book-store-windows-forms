@@ -43,13 +43,13 @@ namespace book_store.form
             tbAuthor = new TextBox();
             labelAuthor = new Label();
             gbFilters = new GroupBox();
+            cbPublisher = new ComboBox();
             labelMaxPrice = new Label();
             labelMinPrice = new Label();
             nudMaxPrice = new NumericUpDown();
             nudMinPrice = new NumericUpDown();
             labelPrice = new Label();
             labelPublisher = new Label();
-            tbPublisher = new TextBox();
             cbLanguage = new ComboBox();
             labelLanguage = new Label();
             cbCoverType = new ComboBox();
@@ -99,22 +99,26 @@ namespace book_store.form
             // labelFavorites
             // 
             labelFavorites.AutoSize = true;
+            labelFavorites.Cursor = Cursors.Hand;
             labelFavorites.Font = new Font("Philosopher", 9.749999F);
             labelFavorites.Location = new Point(527, 49);
             labelFavorites.Name = "labelFavorites";
             labelFavorites.Size = new Size(70, 17);
             labelFavorites.TabIndex = 9;
             labelFavorites.Text = "Избранное";
+            labelFavorites.Click += labelFavorites_Click;
             // 
             // labelCart
             // 
             labelCart.AutoSize = true;
+            labelCart.Cursor = Cursors.Hand;
             labelCart.Font = new Font("Philosopher", 9.749999F);
             labelCart.Location = new Point(620, 49);
             labelCart.Name = "labelCart";
             labelCart.Size = new Size(57, 17);
             labelCart.TabIndex = 10;
             labelCart.Text = "Корзина";
+            labelCart.Click += labelCart_Click;
             // 
             // pbFavorites
             // 
@@ -181,13 +185,13 @@ namespace book_store.form
             // gbFilters
             // 
             gbFilters.BackColor = Color.Transparent;
+            gbFilters.Controls.Add(cbPublisher);
             gbFilters.Controls.Add(labelMaxPrice);
             gbFilters.Controls.Add(labelMinPrice);
             gbFilters.Controls.Add(nudMaxPrice);
             gbFilters.Controls.Add(nudMinPrice);
             gbFilters.Controls.Add(labelPrice);
             gbFilters.Controls.Add(labelPublisher);
-            gbFilters.Controls.Add(tbPublisher);
             gbFilters.Controls.Add(cbLanguage);
             gbFilters.Controls.Add(labelLanguage);
             gbFilters.Controls.Add(cbCoverType);
@@ -202,6 +206,16 @@ namespace book_store.form
             gbFilters.TabIndex = 17;
             gbFilters.TabStop = false;
             gbFilters.Text = "фильтры";
+            // 
+            // cbPublisher
+            // 
+            cbPublisher.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbPublisher.FormattingEnabled = true;
+            cbPublisher.Location = new Point(7, 272);
+            cbPublisher.Name = "cbPublisher";
+            cbPublisher.Size = new Size(121, 23);
+            cbPublisher.TabIndex = 30;
+            cbPublisher.SelectedIndexChanged += cbPublisher_SelectedIndexChanged;
             // 
             // labelMaxPrice
             // 
@@ -258,13 +272,6 @@ namespace book_store.form
             labelPublisher.Size = new Size(61, 17);
             labelPublisher.TabIndex = 23;
             labelPublisher.Text = "Издатель";
-            // 
-            // tbPublisher
-            // 
-            tbPublisher.Location = new Point(6, 262);
-            tbPublisher.Name = "tbPublisher";
-            tbPublisher.Size = new Size(121, 23);
-            tbPublisher.TabIndex = 22;
             // 
             // cbLanguage
             // 
@@ -396,12 +403,14 @@ namespace book_store.form
             // labelProfile
             // 
             labelProfile.AutoSize = true;
+            labelProfile.Cursor = Cursors.Hand;
             labelProfile.Font = new Font("Philosopher", 9.749999F);
             labelProfile.Location = new Point(691, 49);
             labelProfile.Name = "labelProfile";
             labelProfile.Size = new Size(60, 17);
             labelProfile.TabIndex = 19;
             labelProfile.Text = "Профиль";
+            labelProfile.Click += labelProfile_Click;
             // 
             // FormMain
             // 
@@ -448,7 +457,6 @@ namespace book_store.form
         private Label labelAuthor;
         private GroupBox gbFilters;
         private Label labelPublisher;
-        private TextBox tbPublisher;
         private ComboBox cbLanguage;
         private Label labelLanguage;
         private ComboBox cbCoverType;
@@ -469,5 +477,6 @@ namespace book_store.form
         private DataGridViewCheckBoxColumn IsInFavorites;
         private DataGridViewCheckBoxColumn IsInCart;
         private DataGridViewTextBoxColumn IsAvailable;
+        private ComboBox cbPublisher;
     }
 }

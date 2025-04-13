@@ -38,5 +38,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Init\Books\" />
+    <Folder Include="Resources\Init\Users\" />
+  </ItemGroup>
+
 
 </Project>
