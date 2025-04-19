@@ -212,6 +212,10 @@ namespace book_store.form
 
         private void dgvBooks_DoubleClick(object sender, EventArgs e)
         {
+            if(dgvBooks.CurrentRow == null)
+            {
+                return;
+            }
             int selectedRowIndex = dgvBooks.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {

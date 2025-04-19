@@ -48,6 +48,10 @@ namespace book_store.form.admin
 
         private void dgvCategories_DoubleClick(object sender, EventArgs e)
         {
+            if (dgvCategories.CurrentRow == null)
+            {
+                return;
+            }
             int selectedRowIndex = dgvCategories.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {

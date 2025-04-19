@@ -94,6 +94,7 @@
             tbYearOfPublishing.BorderStyle = BorderStyle.None;
             tbYearOfPublishing.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbYearOfPublishing.Location = new Point(265, 283);
+            tbYearOfPublishing.MaxLength = 10;
             tbYearOfPublishing.Name = "tbYearOfPublishing";
             tbYearOfPublishing.Size = new Size(223, 22);
             tbYearOfPublishing.TabIndex = 89;
@@ -115,6 +116,7 @@
             tbSeries.BorderStyle = BorderStyle.None;
             tbSeries.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbSeries.Location = new Point(265, 243);
+            tbSeries.MaxLength = 32;
             tbSeries.Name = "tbSeries";
             tbSeries.Size = new Size(223, 22);
             tbSeries.TabIndex = 87;
@@ -136,6 +138,7 @@
             tbPrice.BorderStyle = BorderStyle.None;
             tbPrice.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbPrice.Location = new Point(265, 206);
+            tbPrice.MaxLength = 10;
             tbPrice.Name = "tbPrice";
             tbPrice.Size = new Size(223, 22);
             tbPrice.TabIndex = 85;
@@ -168,6 +171,7 @@
             tbTitle.BorderStyle = BorderStyle.None;
             tbTitle.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbTitle.Location = new Point(265, 126);
+            tbTitle.MaxLength = 1000;
             tbTitle.Name = "tbTitle";
             tbTitle.Size = new Size(223, 22);
             tbTitle.TabIndex = 81;
@@ -233,6 +237,7 @@
             tbSize.BorderStyle = BorderStyle.None;
             tbSize.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbSize.Location = new Point(265, 414);
+            tbSize.MaxLength = 32;
             tbSize.Name = "tbSize";
             tbSize.Size = new Size(223, 22);
             tbSize.TabIndex = 98;
@@ -254,6 +259,7 @@
             tbNumberOfPages.BorderStyle = BorderStyle.None;
             tbNumberOfPages.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbNumberOfPages.Location = new Point(265, 374);
+            tbNumberOfPages.MaxLength = 10;
             tbNumberOfPages.Name = "tbNumberOfPages";
             tbNumberOfPages.Size = new Size(223, 22);
             tbNumberOfPages.TabIndex = 96;
@@ -275,6 +281,7 @@
             tbIsbn.BorderStyle = BorderStyle.None;
             tbIsbn.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbIsbn.Location = new Point(265, 326);
+            tbIsbn.MaxLength = 17;
             tbIsbn.Name = "tbIsbn";
             tbIsbn.Size = new Size(223, 22);
             tbIsbn.TabIndex = 94;
@@ -296,6 +303,7 @@
             tbAgeRestrictions.BorderStyle = BorderStyle.None;
             tbAgeRestrictions.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbAgeRestrictions.Location = new Point(740, 165);
+            tbAgeRestrictions.MaxLength = 3;
             tbAgeRestrictions.Name = "tbAgeRestrictions";
             tbAgeRestrictions.Size = new Size(223, 22);
             tbAgeRestrictions.TabIndex = 104;
@@ -317,6 +325,7 @@
             tbWeight.BorderStyle = BorderStyle.None;
             tbWeight.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbWeight.Location = new Point(740, 125);
+            tbWeight.MaxLength = 10;
             tbWeight.Name = "tbWeight";
             tbWeight.Size = new Size(223, 22);
             tbWeight.TabIndex = 102;
@@ -338,6 +347,7 @@
             tbCirculation.BorderStyle = BorderStyle.None;
             tbCirculation.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbCirculation.Location = new Point(740, 88);
+            tbCirculation.MaxLength = 18;
             tbCirculation.Name = "tbCirculation";
             tbCirculation.Size = new Size(223, 22);
             tbCirculation.TabIndex = 100;

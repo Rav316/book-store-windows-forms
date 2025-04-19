@@ -25,10 +25,9 @@ namespace book_store.form.admin
         {
             InitializeComponent();
             dgvBookWarehouses.AutoGenerateColumns = false;
-            dgvBookWarehouses.Columns[0].DataPropertyName = "Id";
-            dgvBookWarehouses.Columns[1].DataPropertyName = "BookId";
-            dgvBookWarehouses.Columns[2].DataPropertyName = "WarehouseId";
-            dgvBookWarehouses.Columns[3].DataPropertyName = "Quantity";
+            dgvBookWarehouses.Columns[0].DataPropertyName = "BookId";
+            dgvBookWarehouses.Columns[1].DataPropertyName = "WarehouseId";
+            dgvBookWarehouses.Columns[2].DataPropertyName = "Quantity";
         }
 
         private void pbBack_Click(object sender, EventArgs e)

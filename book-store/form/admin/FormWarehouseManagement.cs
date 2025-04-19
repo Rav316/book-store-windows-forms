@@ -50,6 +50,10 @@ namespace book_store.form.admin
 
         private void dgvWarehouses_DoubleClick(object sender, EventArgs e)
         {
+            if (dgvWarehouses.CurrentRow == null)
+            {
+                return;
+            }
             int selectedRowIndex = dgvWarehouses.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {

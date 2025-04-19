@@ -82,6 +82,7 @@
             tbNationality.BorderStyle = BorderStyle.None;
             tbNationality.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbNationality.Location = new Point(264, 295);
+            tbNationality.MaxLength = 127;
             tbNationality.Name = "tbNationality";
             tbNationality.Size = new Size(223, 22);
             tbNationality.TabIndex = 130;
@@ -125,6 +126,7 @@
             tbLastName.BorderStyle = BorderStyle.None;
             tbLastName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbLastName.Location = new Point(264, 161);
+            tbLastName.MaxLength = 127;
             tbLastName.Name = "tbLastName";
             tbLastName.Size = new Size(223, 22);
             tbLastName.TabIndex = 126;
@@ -146,6 +148,7 @@
             tbMidName.BorderStyle = BorderStyle.None;
             tbMidName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbMidName.Location = new Point(264, 118);
+            tbMidName.MaxLength = 127;
             tbMidName.Name = "tbMidName";
             tbMidName.Size = new Size(223, 22);
             tbMidName.TabIndex = 124;
@@ -167,6 +170,7 @@
             tbFirstName.BorderStyle = BorderStyle.None;
             tbFirstName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbFirstName.Location = new Point(264, 78);
+            tbFirstName.MaxLength = 127;
             tbFirstName.Name = "tbFirstName";
             tbFirstName.Size = new Size(223, 22);
             tbFirstName.TabIndex = 122;

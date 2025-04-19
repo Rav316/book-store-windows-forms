@@ -49,6 +49,10 @@ namespace book_store.form.admin
 
         private void dgvPublishers_DoubleClick(object sender, EventArgs e)
         {
+            if (dgvPublishers.CurrentRow == null)
+            {
+                return;
+            }
             int selectedRowIndex = dgvPublishers.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {

@@ -106,6 +106,7 @@
             tbQuantity.BorderStyle = BorderStyle.None;
             tbQuantity.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbQuantity.Location = new Point(299, 201);
+            tbQuantity.MaxLength = 10;
             tbQuantity.Name = "tbQuantity";
             tbQuantity.Size = new Size(223, 22);
             tbQuantity.TabIndex = 163;

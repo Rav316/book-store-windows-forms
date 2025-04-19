@@ -32,15 +32,14 @@
             buttonCreate = new Button();
             pbBack = new PictureBox();
             dgvBookWarehouses = new DataGridView();
-            Id = new DataGridViewTextBoxColumn();
-            BookId = new DataGridViewTextBoxColumn();
-            WarehouseId = new DataGridViewTextBoxColumn();
-            Quantity = new DataGridViewTextBoxColumn();
             labelManagement = new Label();
             labelWarehouse = new Label();
             cbWarehouse = new ComboBox();
             labelBook = new Label();
             cbBook = new ComboBox();
+            BookId = new DataGridViewTextBoxColumn();
+            WarehouseId = new DataGridViewTextBoxColumn();
+            Quantity = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBookWarehouses).BeginInit();
             SuspendLayout();
@@ -76,37 +75,13 @@
             // 
             dgvBookWarehouses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBookWarehouses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookWarehouses.Columns.AddRange(new DataGridViewColumn[] { Id, BookId, WarehouseId, Quantity });
+            dgvBookWarehouses.Columns.AddRange(new DataGridViewColumn[] { BookId, WarehouseId, Quantity });
             dgvBookWarehouses.Location = new Point(37, 108);
             dgvBookWarehouses.Name = "dgvBookWarehouses";
             dgvBookWarehouses.ReadOnly = true;
             dgvBookWarehouses.Size = new Size(742, 291);
             dgvBookWarehouses.TabIndex = 98;
             dgvBookWarehouses.DoubleClick += dgvBookWarehouses_DoubleClick;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            // 
-            // BookId
-            // 
-            BookId.HeaderText = "Книга";
-            BookId.Name = "BookId";
-            BookId.ReadOnly = true;
-            // 
-            // WarehouseId
-            // 
-            WarehouseId.HeaderText = "Склад";
-            WarehouseId.Name = "WarehouseId";
-            WarehouseId.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            Quantity.HeaderText = "Количество";
-            Quantity.Name = "Quantity";
-            Quantity.ReadOnly = true;
             // 
             // labelManagement
             // 
@@ -160,6 +135,24 @@
             cbBook.TabIndex = 103;
             cbBook.SelectedIndexChanged += cbBook_SelectedIndexChanged;
             // 
+            // BookId
+            // 
+            BookId.HeaderText = "Книга";
+            BookId.Name = "BookId";
+            BookId.ReadOnly = true;
+            // 
+            // WarehouseId
+            // 
+            WarehouseId.HeaderText = "Склад";
+            WarehouseId.Name = "WarehouseId";
+            WarehouseId.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            Quantity.HeaderText = "Количество";
+            Quantity.Name = "Quantity";
+            Quantity.ReadOnly = true;
+            // 
             // FormBookWarehouseManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -189,13 +182,12 @@
         private PictureBox pbBack;
         private DataGridView dgvBookWarehouses;
         private Label labelManagement;
-        private DataGridViewTextBoxColumn Id;
-        private DataGridViewTextBoxColumn BookId;
-        private DataGridViewTextBoxColumn WarehouseId;
-        private DataGridViewTextBoxColumn Quantity;
         private Label labelWarehouse;
         private ComboBox cbWarehouse;
         private Label labelBook;
         private ComboBox cbBook;
+        private DataGridViewTextBoxColumn BookId;
+        private DataGridViewTextBoxColumn WarehouseId;
+        private DataGridViewTextBoxColumn Quantity;
     }
 }

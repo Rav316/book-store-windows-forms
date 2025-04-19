@@ -77,6 +77,7 @@
             tbUsername.BorderStyle = BorderStyle.None;
             tbUsername.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbUsername.Location = new Point(250, 93);
+            tbUsername.MaxLength = 128;
             tbUsername.MinimumSize = new Size(300, 25);
             tbUsername.Name = "tbUsername";
             tbUsername.Size = new Size(300, 25);
@@ -128,6 +129,7 @@
             tbPassword.BorderStyle = BorderStyle.None;
             tbPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbPassword.Location = new Point(250, 159);
+            tbPassword.MaxLength = 256;
             tbPassword.MinimumSize = new Size(300, 25);
             tbPassword.Name = "tbPassword";
             tbPassword.PasswordChar = '•';
@@ -140,6 +142,7 @@
             tbConfirmPassword.BorderStyle = BorderStyle.None;
             tbConfirmPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbConfirmPassword.Location = new Point(250, 225);
+            tbConfirmPassword.MaxLength = 256;
             tbConfirmPassword.MinimumSize = new Size(300, 25);
             tbConfirmPassword.Name = "tbConfirmPassword";
             tbConfirmPassword.PasswordChar = '•';
@@ -152,6 +155,7 @@
             tbEmail.BorderStyle = BorderStyle.None;
             tbEmail.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbEmail.Location = new Point(250, 291);
+            tbEmail.MaxLength = 320;
             tbEmail.MinimumSize = new Size(300, 25);
             tbEmail.Name = "tbEmail";
             tbEmail.Size = new Size(300, 25);
