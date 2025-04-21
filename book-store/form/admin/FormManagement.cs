@@ -66,5 +66,12 @@ namespace book_store.form
             Close();
             formMain.Show();
         }
+
+        private void buttonReviews_Click(object sender, EventArgs e)
+        {
+            FormReviewManagement formReviewManagement = new FormReviewManagement();
+            Close();
+            formReviewManagement.Show();
+        }
     }
 }

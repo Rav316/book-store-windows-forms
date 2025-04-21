@@ -30,6 +30,23 @@ namespace book_store.form
             labelAuthorValue.Text = author;
             selectedStars = bookReview.Rating;
             tbReviewContent.Text = bookReview.Content;
+        }
+
+        public FormEditReview(int bookReviewId)
+        {
+            InitializeComponent();
+            bookReview = bookReviewService.FindById(bookReviewId)!;
+            bookId = bookReview.BookId;
+            var book = bookReview.Book;
+            var bookAuthor = book.Author;
+            labelBookName.Text = book.Title;
+            labelAuthor.Text = $"{bookAuthor?.FirstName} {bookAuthor?.MidName} {bookAuthor?.LastName}";
+            selectedStars = bookReview.Rating;
+            tbReviewContent.Text = bookReview.Content;
+        }
+
+        private void FormEditReview_Load(object sender, EventArgs e)
+        {
             stars =
             [
                 pbStar1,
@@ -110,5 +127,7 @@ namespace book_store.form
         {
             Close();
         }
+
+        
     }
 }

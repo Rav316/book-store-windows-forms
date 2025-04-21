@@ -209,6 +209,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormEditReview";
             Text = "Изменить отзыв";
+            Load += FormEditReview_Load;
             ((System.ComponentModel.ISupportInitialize)pbStar5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbStar4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbStar3).EndInit();

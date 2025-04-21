@@ -34,11 +34,11 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             dgvAuthors = new DataGridView();
+            labelManagement = new Label();
             Id = new DataGridViewTextBoxColumn();
             FirstName = new DataGridViewTextBoxColumn();
             MidName = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
-            labelManagement = new Label();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAuthors).BeginInit();
             SuspendLayout();
@@ -103,10 +103,21 @@
             dgvAuthors.TabIndex = 80;
             dgvAuthors.DoubleClick += dgvAuthors_DoubleClick;
             // 
+            // labelManagement
+            // 
+            labelManagement.AutoSize = true;
+            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelManagement.Location = new Point(180, 9);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(453, 48);
+            labelManagement.TabIndex = 79;
+            labelManagement.Text = "Управление авторами книг";
+            // 
             // Id
             // 
             Id.HeaderText = "id";
             Id.Name = "Id";
+            Id.Visible = false;
             // 
             // FirstName
             // 
@@ -122,16 +133,6 @@
             // 
             LastName.HeaderText = "Фамилия";
             LastName.Name = "LastName";
-            // 
-            // labelManagement
-            // 
-            labelManagement.AutoSize = true;
-            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelManagement.Location = new Point(180, 9);
-            labelManagement.Name = "labelManagement";
-            labelManagement.Size = new Size(453, 48);
-            labelManagement.TabIndex = 79;
-            labelManagement.Text = "Управление авторами книг";
             // 
             // FormAuthorManagement
             // 

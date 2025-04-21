@@ -34,10 +34,10 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             dgvWarehouses = new DataGridView();
+            labelManagement = new Label();
             Id = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
             Address = new DataGridViewTextBoxColumn();
-            labelManagement = new Label();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvWarehouses).BeginInit();
             SuspendLayout();
@@ -102,11 +102,22 @@
             dgvWarehouses.TabIndex = 92;
             dgvWarehouses.DoubleClick += dgvWarehouses_DoubleClick;
             // 
+            // labelManagement
+            // 
+            labelManagement.AutoSize = true;
+            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelManagement.Location = new Point(224, 9);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(373, 48);
+            labelManagement.TabIndex = 91;
+            labelManagement.Text = "Управление складами";
+            // 
             // Id
             // 
             Id.HeaderText = "id";
             Id.Name = "Id";
             Id.ReadOnly = true;
+            Id.Visible = false;
             // 
             // CategoryName
             // 
@@ -117,16 +128,6 @@
             // 
             Address.HeaderText = "адрес";
             Address.Name = "Address";
-            // 
-            // labelManagement
-            // 
-            labelManagement.AutoSize = true;
-            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelManagement.Location = new Point(224, 9);
-            labelManagement.Name = "labelManagement";
-            labelManagement.Size = new Size(373, 48);
-            labelManagement.TabIndex = 91;
-            labelManagement.Text = "Управление складами";
             // 
             // FormWarehouseManagement
             // 

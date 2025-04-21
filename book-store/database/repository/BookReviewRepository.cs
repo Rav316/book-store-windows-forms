@@ -13,6 +13,18 @@ namespace book_store.database.repository
     {
         public BookReviewRepository(AppDbContext context) : base(context) { }
 
+        public BookReview? FindById(int id)
+        {
+            return context.BookReviews.Find(id);
+        }
+        public List<BookReview> FindAllWithLoadedEntities()
+        {
+            return context.BookReviews
+                .Include(br => br.Book)
+                .Include(br => br.User)
+                .ToList();
+        }
+
         public List<BookReview> GetReviewsByBook(int bookId)
         {
             return context.BookReviews

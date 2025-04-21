@@ -19,10 +19,10 @@ namespace book_store.database.entity
         public string CardNumber { get; set; } = string.Empty;
 
         [Required]
-        public DateTime ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
 
         [Required]
-        public short Code { get; set; }
+        public string Code { get; set; }
 
         public virtual Order Order { get; set; }
     }

@@ -17,6 +17,10 @@ namespace book_store.service
         private readonly ImageService imageService = new ImageService();
         private readonly UserRepository userRepository = new UserRepository(AppDbContext.INSTANCE);
 
+        public async Task<List<User>> FindAll()
+        {
+            return await userRepository.FindAllAsync();
+        }
         public async Task<User> AuthenticateAsync(string username, string password)
         {
             var user = await userRepository.FindByUsernameAsync(username);

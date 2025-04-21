@@ -37,6 +37,7 @@
             buttonWarehouses = new Button();
             buttonBookWarehouses = new Button();
             buttonApp = new Button();
+            buttonReviews = new Button();
             SuspendLayout();
             // 
             // labelManagement
@@ -141,24 +142,40 @@
             // 
             // buttonApp
             // 
-            buttonApp.BackColor = Color.FromArgb(41, 2, 71);
+            buttonApp.BackColor = Color.FromArgb(114, 4, 199);
             buttonApp.Cursor = Cursors.Hand;
             buttonApp.FlatStyle = FlatStyle.Flat;
             buttonApp.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonApp.ForeColor = SystemColors.Window;
-            buttonApp.Location = new Point(562, 414);
+            buttonApp.Location = new Point(445, 381);
             buttonApp.Name = "buttonApp";
-            buttonApp.Size = new Size(226, 33);
+            buttonApp.Size = new Size(226, 50);
             buttonApp.TabIndex = 11;
             buttonApp.Text = "Перейти в приложение";
             buttonApp.UseVisualStyleBackColor = false;
             buttonApp.Click += buttonApp_Click;
             // 
+            // buttonReviews
+            // 
+            buttonReviews.BackColor = Color.FromArgb(41, 2, 71);
+            buttonReviews.Cursor = Cursors.Hand;
+            buttonReviews.FlatStyle = FlatStyle.Flat;
+            buttonReviews.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonReviews.ForeColor = SystemColors.Window;
+            buttonReviews.Location = new Point(133, 381);
+            buttonReviews.Name = "buttonReviews";
+            buttonReviews.Size = new Size(218, 50);
+            buttonReviews.TabIndex = 12;
+            buttonReviews.Text = "Отзывы";
+            buttonReviews.UseVisualStyleBackColor = false;
+            buttonReviews.Click += buttonReviews_Click;
+            // 
             // FormManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 537);
+            Controls.Add(buttonReviews);
             Controls.Add(buttonApp);
             Controls.Add(buttonBookWarehouses);
             Controls.Add(buttonWarehouses);
@@ -184,5 +201,6 @@
         private Button buttonWarehouses;
         private Button buttonBookWarehouses;
         private Button buttonApp;
+        private Button buttonReviews;
     }
 }

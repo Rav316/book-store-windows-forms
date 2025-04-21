@@ -11,11 +11,18 @@ using System.Threading.Tasks;
 
 namespace book_store.service
 {
-    internal class OrderService
+    public class OrderService
     {
+        private readonly string secret = "book store secret"; 
+        private readonly AesEncryptionService aesEncryptionService;
         private readonly OrderRepository orderRepository = new OrderRepository(AppDbContext.INSTANCE);
         private readonly PaymentDetailRepository paymentDetailRepository = new PaymentDetailRepository(AppDbContext.INSTANCE);
         private readonly OrderProfileMapper orderProfileMapper = new OrderProfileMapper();
+
+        public OrderService()
+        {
+            aesEncryptionService = new AesEncryptionService(secret);
+        }
 
         public async Task<Order> CreateOrderFromCartAsync(int totalCost, List<int> bookIds)
         {
@@ -30,9 +37,19 @@ namespace book_store.service
                 .ToList();
         }
 
-        public async Task PayForTheOrder(PaymentDetail paymentDetail)
+        public async Task PayForTheOrder(int orderId, string cardNumber, DateTime expirationDate, short code)
         {
-            paymentDetail.ExpirationDate = paymentDetail.ExpirationDate.ToUniversalTime();
+            expirationDate = expirationDate.ToUniversalTime();
+            cardNumber = aesEncryptionService.Encrypt(cardNumber);
+            string encryptedExpirationDate = aesEncryptionService.Encrypt(expirationDate.ToString());
+            string encryptedCode = aesEncryptionService.Encrypt(code.ToString());
+            PaymentDetail paymentDetail = new PaymentDetail
+            {
+                OrderId = orderId,
+                CardNumber = cardNumber,
+                ExpirationDate = encryptedExpirationDate,
+                Code = encryptedCode
+            };
             await paymentDetailRepository.PayForTheOrder(paymentDetail);
         }
 

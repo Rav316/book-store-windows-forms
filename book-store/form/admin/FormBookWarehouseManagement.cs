@@ -1,5 +1,6 @@
 ﻿using book_store.database.entity;
 using book_store.dto.book;
+using book_store.dto.bookWarehouse;
 using book_store.service;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace book_store.form.admin
         private readonly BookWarehouseService bookWarehouseService = new BookWarehouseService();
         private readonly BookService bookService = new BookService();
         private readonly WarehouseService warehouseService = new WarehouseService();
-        private List<BookWarehouse> bookWarehouses;
+        private List<BookWarehouseManagementDto> bookWarehouses;
         private List<Book> books;
         private List<Warehouse> warehouses;
         public FormBookWarehouseManagement()
@@ -27,7 +28,9 @@ namespace book_store.form.admin
             dgvBookWarehouses.AutoGenerateColumns = false;
             dgvBookWarehouses.Columns[0].DataPropertyName = "BookId";
             dgvBookWarehouses.Columns[1].DataPropertyName = "WarehouseId";
-            dgvBookWarehouses.Columns[2].DataPropertyName = "Quantity";
+            dgvBookWarehouses.Columns[2].DataPropertyName = "BookName";
+            dgvBookWarehouses.Columns[3].DataPropertyName = "WarehouseName";
+            dgvBookWarehouses.Columns[4].DataPropertyName = "Quantity";
         }
 
         private void pbBack_Click(object sender, EventArgs e)
@@ -70,7 +73,7 @@ namespace book_store.form.admin
             int selectedRowIndex = dgvBookWarehouses.CurrentRow.Index;
             if (selectedRowIndex >= 0)
             {
-                var bookWarehouse = (BookWarehouse)dgvBookWarehouses.CurrentRow!.DataBoundItem;
+                var bookWarehouse = (BookWarehouseManagementDto)dgvBookWarehouses.CurrentRow!.DataBoundItem;
                 FormBookWarehouseInfo formBookWarehouseInfo = new FormBookWarehouseInfo(
                     bookWarehouse.BookId, bookWarehouse.WarehouseId
                 );
@@ -94,7 +97,7 @@ namespace book_store.form.admin
             int selectedBook = cbBook.SelectedValue as int? ?? 0;
             int selectedWarehouse = cbWarehouse.SelectedValue as int? ?? 0;
 
-            List<BookWarehouse> filteredBookWarehouses = bookWarehouses
+            List<BookWarehouseManagementDto> filteredBookWarehouses = bookWarehouses
                                         .Where(bw => selectedBook == 0 || bw.BookId == selectedBook)
                                         .Where(bw => selectedWarehouse == 0 || bw.WarehouseId == selectedWarehouse)
                                         .ToList();

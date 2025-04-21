@@ -1,6 +1,8 @@
 ﻿using book_store.context;
 using book_store.database.entity;
 using book_store.database.repository;
+using book_store.dto.bookWarehouse;
+using book_store.mapper.bookWarehouse;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +14,13 @@ namespace book_store.service
     public class BookWarehouseService
     {
         private readonly BookWarehouseRepository bookWarehouseRepository = new BookWarehouseRepository(AppDbContext.INSTANCE);
-        public async Task<List<BookWarehouse>> FindAll()
+        private readonly BookWarehouseManagementMapper bookWarehouseManagementMapper = new BookWarehouseManagementMapper();
+        public async Task<List<BookWarehouseManagementDto>> FindAll()
         {
-            return await bookWarehouseRepository.FindAllAsync();
+            List<BookWarehouse> bookWarehouses = await bookWarehouseRepository.FindAllAsync();
+            return bookWarehouses
+                .Select(bookWarehouseManagementMapper.ToDto)
+                .ToList();
         }
 
         public async Task<BookWarehouse?> FindByBookAndWarehouse(int bookId, int warehouseId)

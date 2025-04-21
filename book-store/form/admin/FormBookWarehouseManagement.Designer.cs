@@ -39,6 +39,8 @@
             cbBook = new ComboBox();
             BookId = new DataGridViewTextBoxColumn();
             WarehouseId = new DataGridViewTextBoxColumn();
+            BookName = new DataGridViewTextBoxColumn();
+            WarehouseName = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBookWarehouses).BeginInit();
@@ -75,7 +77,7 @@
             // 
             dgvBookWarehouses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBookWarehouses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookWarehouses.Columns.AddRange(new DataGridViewColumn[] { BookId, WarehouseId, Quantity });
+            dgvBookWarehouses.Columns.AddRange(new DataGridViewColumn[] { BookId, WarehouseId, BookName, WarehouseName, Quantity });
             dgvBookWarehouses.Location = new Point(37, 108);
             dgvBookWarehouses.Name = "dgvBookWarehouses";
             dgvBookWarehouses.ReadOnly = true;
@@ -137,15 +139,29 @@
             // 
             // BookId
             // 
-            BookId.HeaderText = "Книга";
+            BookId.HeaderText = "Id книги";
             BookId.Name = "BookId";
             BookId.ReadOnly = true;
+            BookId.Visible = false;
             // 
             // WarehouseId
             // 
-            WarehouseId.HeaderText = "Склад";
+            WarehouseId.HeaderText = "Id склада";
             WarehouseId.Name = "WarehouseId";
             WarehouseId.ReadOnly = true;
+            WarehouseId.Visible = false;
+            // 
+            // BookName
+            // 
+            BookName.HeaderText = "Книга";
+            BookName.Name = "BookName";
+            BookName.ReadOnly = true;
+            // 
+            // WarehouseName
+            // 
+            WarehouseName.HeaderText = "Склад";
+            WarehouseName.Name = "WarehouseName";
+            WarehouseName.ReadOnly = true;
             // 
             // Quantity
             // 
@@ -188,6 +204,8 @@
         private ComboBox cbBook;
         private DataGridViewTextBoxColumn BookId;
         private DataGridViewTextBoxColumn WarehouseId;
+        private DataGridViewTextBoxColumn BookName;
+        private DataGridViewTextBoxColumn WarehouseName;
         private DataGridViewTextBoxColumn Quantity;
     }
 }

@@ -56,13 +56,7 @@ namespace book_store.form
                     MessageBox.Show("Номер карты некорректный");
                     return;
                 }
-                await orderService.PayForTheOrder(new PaymentDetail
-                {
-                    OrderId = orderId,
-                    CardNumber = tbCardNumber.Text,
-                    ExpirationDate = expirationDate,
-                    Code = code
-                });
+                await orderService.PayForTheOrder(orderId, tbCardNumber.Text, expirationDate, code);
                 this.DialogResult = DialogResult.OK;
                 Close();
             } else
@@ -70,7 +64,6 @@ namespace book_store.form
                 MessageBox.Show("Введите корректные данные");
                 return;
             }
-           
         }
 
         private void FormPayment_Load(object sender, EventArgs e)

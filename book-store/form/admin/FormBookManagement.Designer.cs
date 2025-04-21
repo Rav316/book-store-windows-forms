@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBookManagement));
             labelManagement = new Label();
             dgvBooks = new DataGridView();
-            Id = new DataGridViewTextBoxColumn();
-            Title = new DataGridViewTextBoxColumn();
-            Author = new DataGridViewTextBoxColumn();
             labelSearch = new Label();
             tbSearch = new TextBox();
             pbBack = new PictureBox();
             buttonCreate = new Button();
+            Id = new DataGridViewTextBoxColumn();
+            Title = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
@@ -62,21 +62,6 @@
             dgvBooks.Size = new Size(742, 264);
             dgvBooks.TabIndex = 4;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
-            // 
-            // Id
-            // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            // 
-            // Title
-            // 
-            Title.HeaderText = "Название";
-            Title.Name = "Title";
-            // 
-            // Author
-            // 
-            Author.HeaderText = "Автор";
-            Author.Name = "Author";
             // 
             // labelSearch
             // 
@@ -127,6 +112,23 @@
             buttonCreate.UseVisualStyleBackColor = false;
             buttonCreate.Click += buttonCreate_Click;
             // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // Title
+            // 
+            Title.HeaderText = "Название";
+            Title.Name = "Title";
+            // 
+            // Author
+            // 
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
+            // 
             // FormBookManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -154,10 +156,10 @@
         private DataGridView dgvBooks;
         private Label labelSearch;
         private TextBox tbSearch;
+        private PictureBox pbBack;
+        private Button buttonCreate;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Title;
         private DataGridViewTextBoxColumn Author;
-        private PictureBox pbBack;
-        private Button buttonCreate;
     }
 }

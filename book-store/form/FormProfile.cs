@@ -173,7 +173,7 @@ namespace book_store.form
                     (int)dgvReviews[1, selectedRowIndex].Value,
                     dgvReviews[2, selectedRowIndex].Value.ToString(),
                     dgvReviews[3, selectedRowIndex].Value.ToString(),
-                    await bookReviewService.FindById((int)dgvReviews[0, selectedRowIndex].Value)
+                    await bookReviewService.FindByIdAsync((int)dgvReviews[0, selectedRowIndex].Value)
                 );
                 DialogResult dialogResult = formEditReview.ShowDialog();
                 if (dialogResult == DialogResult.OK)

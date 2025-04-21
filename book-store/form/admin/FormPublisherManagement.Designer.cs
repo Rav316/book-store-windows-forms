@@ -34,9 +34,9 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             dgvPublishers = new DataGridView();
+            labelManagement = new Label();
             Id = new DataGridViewTextBoxColumn();
             PublisherName = new DataGridViewTextBoxColumn();
-            labelManagement = new Label();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPublishers).BeginInit();
             SuspendLayout();
@@ -101,17 +101,6 @@
             dgvPublishers.TabIndex = 92;
             dgvPublishers.DoubleClick += dgvPublishers_DoubleClick;
             // 
-            // Id
-            // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            // 
-            // PublisherName
-            // 
-            PublisherName.HeaderText = "Название";
-            PublisherName.Name = "PublisherName";
-            // 
             // labelManagement
             // 
             labelManagement.AutoSize = true;
@@ -121,6 +110,18 @@
             labelManagement.Size = new Size(409, 48);
             labelManagement.TabIndex = 91;
             labelManagement.Text = "Управление издателями";
+            // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // PublisherName
+            // 
+            PublisherName.HeaderText = "Название";
+            PublisherName.Name = "PublisherName";
             // 
             // FormPublisherManagement
             // 
@@ -150,8 +151,8 @@
         private Label labelSearch;
         private TextBox tbSearch;
         private DataGridView dgvPublishers;
+        private Label labelManagement;
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn PublisherName;
-        private Label labelManagement;
     }
 }

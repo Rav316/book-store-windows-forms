@@ -34,9 +34,9 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             dgvCategories = new DataGridView();
+            labelManagement = new Label();
             Id = new DataGridViewTextBoxColumn();
             CategoryName = new DataGridViewTextBoxColumn();
-            labelManagement = new Label();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
             SuspendLayout();
@@ -101,17 +101,6 @@
             dgvCategories.TabIndex = 86;
             dgvCategories.DoubleClick += dgvCategories_DoubleClick;
             // 
-            // Id
-            // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            // 
-            // CategoryName
-            // 
-            CategoryName.HeaderText = "Название";
-            CategoryName.Name = "CategoryName";
-            // 
             // labelManagement
             // 
             labelManagement.AutoSize = true;
@@ -121,6 +110,18 @@
             labelManagement.Size = new Size(425, 48);
             labelManagement.TabIndex = 85;
             labelManagement.Text = "Управление категориями";
+            // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // CategoryName
+            // 
+            CategoryName.HeaderText = "Название";
+            CategoryName.Name = "CategoryName";
             // 
             // FormCategoryManagement
             // 
