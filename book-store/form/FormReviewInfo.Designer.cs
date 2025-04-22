@@ -190,6 +190,7 @@
             Controls.Add(labelBookName);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormReviewInfo";
+            StartPosition = FormStartPosition.Manual;
             Text = "Информация об отзыве";
             ((System.ComponentModel.ISupportInitialize)pbStar5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbStar4).EndInit();

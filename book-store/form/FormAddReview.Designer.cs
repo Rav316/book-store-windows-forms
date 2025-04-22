@@ -191,6 +191,7 @@
             Controls.Add(labelBookName);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAddReview";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Написать отзыв";
             ((System.ComponentModel.ISupportInitialize)pbStar1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbStar2).EndInit();

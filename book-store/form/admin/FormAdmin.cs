@@ -30,5 +30,10 @@ namespace book_store.form
             Close();
             formMain.Show();
         }
+
+        private void buttonCloseApp_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

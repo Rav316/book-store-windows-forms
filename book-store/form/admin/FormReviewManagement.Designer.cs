@@ -52,6 +52,8 @@
             // 
             // dgvReviews
             // 
+            dgvReviews.AllowUserToResizeColumns = false;
+            dgvReviews.AllowUserToResizeRows = false;
             dgvReviews.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
@@ -168,10 +170,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(29, 30);
+            pbBack.Location = new Point(29, 25);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 108;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -198,7 +200,9 @@
             Controls.Add(pbBack);
             Controls.Add(labelManagement);
             Controls.Add(dgvReviews);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormReviewManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Управление отзывами";
             Load += FormReviewManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dgvReviews).EndInit();

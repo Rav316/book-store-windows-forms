@@ -50,10 +50,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(21, 28);
+            pbBack.Location = new Point(21, 23);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 24;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -222,6 +222,7 @@
             Controls.Add(labelOrderInfo);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPayment";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Оплата заказа";
             Load += FormPayment_Load;
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

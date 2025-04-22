@@ -23,7 +23,10 @@ namespace book_store.database.entity
         public string? Series { get; set; }
 
         public int? NumberOfPages { get; set; }
-        public string? Size { get; set; }
+
+        public decimal Height { get; set; }
+        public decimal Width { get; set; }
+        public decimal Length { get; set; }
         public long? Circulation { get; set; }
         public int? Weight { get; set; }
 

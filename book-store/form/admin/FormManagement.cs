@@ -73,5 +73,12 @@ namespace book_store.form
             Close();
             formReviewManagement.Show();
         }
+
+        private void pbBack_Click(object sender, EventArgs e)
+        {
+            FormAdmin formAdmin = new FormAdmin();
+            Close();
+            formAdmin.Show();
+        }
     }
 }

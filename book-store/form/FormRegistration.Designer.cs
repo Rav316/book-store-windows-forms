@@ -75,7 +75,7 @@
             // 
             tbUsername.BackColor = Color.FromArgb(224, 224, 224);
             tbUsername.BorderStyle = BorderStyle.None;
-            tbUsername.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbUsername.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbUsername.Location = new Point(250, 93);
             tbUsername.MaxLength = 128;
             tbUsername.MinimumSize = new Size(300, 25);
@@ -127,7 +127,7 @@
             // 
             tbPassword.BackColor = Color.FromArgb(224, 224, 224);
             tbPassword.BorderStyle = BorderStyle.None;
-            tbPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbPassword.Font = new Font("Philosopher", 14.2499981F);
             tbPassword.Location = new Point(250, 159);
             tbPassword.MaxLength = 256;
             tbPassword.MinimumSize = new Size(300, 25);
@@ -140,7 +140,7 @@
             // 
             tbConfirmPassword.BackColor = Color.FromArgb(224, 224, 224);
             tbConfirmPassword.BorderStyle = BorderStyle.None;
-            tbConfirmPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbConfirmPassword.Font = new Font("Philosopher", 14.2499981F);
             tbConfirmPassword.Location = new Point(250, 225);
             tbConfirmPassword.MaxLength = 256;
             tbConfirmPassword.MinimumSize = new Size(300, 25);
@@ -153,7 +153,7 @@
             // 
             tbEmail.BackColor = Color.FromArgb(224, 224, 224);
             tbEmail.BorderStyle = BorderStyle.None;
-            tbEmail.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbEmail.Font = new Font("Philosopher", 14.2499981F);
             tbEmail.Location = new Point(250, 291);
             tbEmail.MaxLength = 320;
             tbEmail.MinimumSize = new Size(300, 25);
@@ -165,7 +165,7 @@
             // 
             tbAddress.BackColor = Color.FromArgb(224, 224, 224);
             tbAddress.BorderStyle = BorderStyle.None;
-            tbAddress.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbAddress.Font = new Font("Philosopher", 14.2499981F);
             tbAddress.Location = new Point(250, 357);
             tbAddress.MinimumSize = new Size(300, 25);
             tbAddress.Name = "tbAddress";
@@ -188,7 +188,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label1.ForeColor = Color.Red;
-            label1.Location = new Point(369, 57);
+            label1.Location = new Point(361, 61);
             label1.Name = "label1";
             label1.Size = new Size(15, 20);
             label1.TabIndex = 22;
@@ -200,7 +200,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label2.ForeColor = Color.Red;
-            label2.Location = new Point(306, 121);
+            label2.Location = new Point(299, 128);
             label2.Name = "label2";
             label2.Size = new Size(15, 20);
             label2.TabIndex = 23;
@@ -212,7 +212,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             label3.ForeColor = Color.Red;
-            label3.Location = new Point(369, 187);
+            label3.Location = new Point(360, 192);
             label3.Name = "label3";
             label3.Size = new Size(15, 20);
             label3.TabIndex = 24;
@@ -240,6 +240,7 @@
             Controls.Add(labelRegistration);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormRegistration";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Регистрация";
             FormClosing += FormRegistration_FormClosing;
             ResumeLayout(false);

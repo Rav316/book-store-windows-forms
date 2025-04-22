@@ -80,10 +80,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(41, 44);
+            pbBack.Location = new Point(41, 39);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 149;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -133,6 +133,7 @@
             Controls.Add(labelWarehouse);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormWarehouseCreate";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Создание склада";
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();
             ResumeLayout(false);

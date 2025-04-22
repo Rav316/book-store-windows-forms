@@ -1,4 +1,7 @@
-﻿using book_store.dto.book;
+﻿using book_store.database.entity;
+using book_store.dto.author;
+using book_store.dto.book;
+using book_store.dto.bookWarehouse;
 using book_store.service;
 using System;
 using System.Collections.Generic;
@@ -15,19 +18,28 @@ namespace book_store.form.admin
     public partial class FormBookManagement : Form
     {
         private readonly BookService bookService = new BookService();
-        private List<BookManagementDto> books;
+        private readonly AuthorService authorService = new AuthorService();
+        private List<BookManagementDto> books = new List<BookManagementDto>();
+        private List<AuthorListDto> authors;
         public FormBookManagement()
         {
             InitializeComponent();
             dgvBooks.ReadOnly = true;
+            dgvBooks.AutoGenerateColumns = false;
             dgvBooks.Columns[0].DataPropertyName = "Id";
             dgvBooks.Columns[1].DataPropertyName = "Title";
             dgvBooks.Columns[2].DataPropertyName = "Author";
         }
 
-        private void FormBookManagement_Load(object sender, EventArgs e)
+        private async void FormBookManagement_Load(object sender, EventArgs e)
         {
             ViewAllBooks();
+
+            authors = await authorService.FindAllListDto();
+            cbAuthor.DisplayMember = "FullName";
+            cbAuthor.ValueMember = "Id";
+            authors.Insert(0, new AuthorListDto(0, "не выбран"));
+            cbAuthor.DataSource = authors;
         }
 
         private async void ViewAllBooks()
@@ -38,7 +50,7 @@ namespace book_store.form.admin
 
         private void dgvBooks_DoubleClick(object sender, EventArgs e)
         {
-            if(dgvBooks.CurrentRow == null)
+            if (dgvBooks.CurrentRow == null)
             {
                 return;
             }
@@ -53,12 +65,7 @@ namespace book_store.form.admin
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            string searchText = tbSearch.Text.ToLower();
-
-            List<BookManagementDto> filteredBooks = books
-                .Where(book => book.Title.ToLower().Contains(searchText))
-                .ToList();
-            dgvBooks.DataSource = filteredBooks;
+            FilterBooks();
         }
 
         private void pbBack_Click(object sender, EventArgs e)
@@ -73,6 +80,23 @@ namespace book_store.form.admin
             FormBookCreate formBookCreate = new FormBookCreate();
             Close();
             formBookCreate.Show();
+        }
+
+        private void cbAuthor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterBooks();
+        }
+
+        private void FilterBooks()
+        {
+            int selectedAuthor = cbAuthor.SelectedValue as int? ?? 0;
+            string tbSearchText = tbSearch.Text.ToLower();
+
+            List<BookManagementDto> filteredBooks = books
+                                        .Where(b => selectedAuthor == 0 || b.AuthorId == selectedAuthor)
+                                        .Where(book => book.Title.ToLower().Contains(tbSearchText.ToLower()))
+                                        .ToList();
+            dgvBooks.DataSource = filteredBooks;
         }
     }
 }

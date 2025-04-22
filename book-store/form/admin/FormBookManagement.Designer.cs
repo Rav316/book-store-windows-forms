@@ -31,13 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBookManagement));
             labelManagement = new Label();
             dgvBooks = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Title = new DataGridViewTextBoxColumn();
+            Author = new DataGridViewTextBoxColumn();
             labelSearch = new Label();
             tbSearch = new TextBox();
             pbBack = new PictureBox();
             buttonCreate = new Button();
-            Id = new DataGridViewTextBoxColumn();
-            Title = new DataGridViewTextBoxColumn();
-            Author = new DataGridViewTextBoxColumn();
+            labelAuthor = new Label();
+            cbAuthor = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvBooks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
@@ -54,6 +56,8 @@
             // 
             // dgvBooks
             // 
+            dgvBooks.AllowUserToResizeColumns = false;
+            dgvBooks.AllowUserToResizeRows = false;
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBooks.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBooks.Columns.AddRange(new DataGridViewColumn[] { Id, Title, Author });
@@ -63,11 +67,28 @@
             dgvBooks.TabIndex = 4;
             dgvBooks.DoubleClick += dgvBooks_DoubleClick;
             // 
+            // Id
+            // 
+            Id.HeaderText = "id";
+            Id.Name = "Id";
+            Id.ReadOnly = true;
+            Id.Visible = false;
+            // 
+            // Title
+            // 
+            Title.HeaderText = "Название";
+            Title.Name = "Title";
+            // 
+            // Author
+            // 
+            Author.HeaderText = "Автор";
+            Author.Name = "Author";
+            // 
             // labelSearch
             // 
             labelSearch.AutoSize = true;
             labelSearch.Font = new Font("Philosopher", 9.749999F);
-            labelSearch.Location = new Point(36, 57);
+            labelSearch.Location = new Point(36, 71);
             labelSearch.Name = "labelSearch";
             labelSearch.Size = new Size(43, 17);
             labelSearch.TabIndex = 9;
@@ -77,11 +98,11 @@
             // 
             tbSearch.BackColor = Color.FromArgb(224, 224, 224);
             tbSearch.BorderStyle = BorderStyle.None;
-            tbSearch.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbSearch.Location = new Point(36, 77);
+            tbSearch.Font = new Font("Philosopher", 18.75F);
+            tbSearch.Location = new Point(36, 91);
             tbSearch.MinimumSize = new Size(300, 35);
             tbSearch.Name = "tbSearch";
-            tbSearch.Size = new Size(329, 36);
+            tbSearch.Size = new Size(329, 35);
             tbSearch.TabIndex = 8;
             tbSearch.TextChanged += tbSearch_TextChanged;
             // 
@@ -89,10 +110,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(21, 28);
+            pbBack.Location = new Point(21, 23);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 77;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -112,28 +133,33 @@
             buttonCreate.UseVisualStyleBackColor = false;
             buttonCreate.Click += buttonCreate_Click;
             // 
-            // Id
+            // labelAuthor
             // 
-            Id.HeaderText = "id";
-            Id.Name = "Id";
-            Id.ReadOnly = true;
-            Id.Visible = false;
+            labelAuthor.AutoSize = true;
+            labelAuthor.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelAuthor.Location = new Point(572, 98);
+            labelAuthor.Name = "labelAuthor";
+            labelAuthor.Size = new Size(78, 28);
+            labelAuthor.TabIndex = 106;
+            labelAuthor.Text = "Автор: ";
             // 
-            // Title
+            // cbAuthor
             // 
-            Title.HeaderText = "Название";
-            Title.Name = "Title";
-            // 
-            // Author
-            // 
-            Author.HeaderText = "Автор";
-            Author.Name = "Author";
+            cbAuthor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbAuthor.FormattingEnabled = true;
+            cbAuthor.Location = new Point(657, 103);
+            cbAuthor.Name = "cbAuthor";
+            cbAuthor.Size = new Size(121, 23);
+            cbAuthor.TabIndex = 105;
+            cbAuthor.SelectedIndexChanged += cbAuthor_SelectedIndexChanged;
             // 
             // FormBookManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(labelAuthor);
+            Controls.Add(cbAuthor);
             Controls.Add(buttonCreate);
             Controls.Add(pbBack);
             Controls.Add(labelSearch);
@@ -142,6 +168,7 @@
             Controls.Add(labelManagement);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Управление книгами";
             Load += FormBookManagement_Load;
             ((System.ComponentModel.ISupportInitialize)dgvBooks).EndInit();
@@ -161,5 +188,7 @@
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Title;
         private DataGridViewTextBoxColumn Author;
+        private Label labelAuthor;
+        private ComboBox cbAuthor;
     }
 }

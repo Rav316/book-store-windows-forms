@@ -84,6 +84,7 @@
             Controls.Add(buttonYes);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormDeleteAccount";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Вы действительно хотите удалить аккаунт?";
             ResumeLayout(false);
             PerformLayout();

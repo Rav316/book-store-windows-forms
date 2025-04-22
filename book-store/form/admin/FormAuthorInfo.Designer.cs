@@ -54,10 +54,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(22, 28);
+            pbBack.Location = new Point(22, 23);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 78;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -273,6 +273,7 @@
             Controls.Add(labelAuthor);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorInfo";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Информация об авторе";
             Load += FormAuthorInfo_Load;
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

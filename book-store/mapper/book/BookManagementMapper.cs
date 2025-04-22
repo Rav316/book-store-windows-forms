@@ -12,11 +12,12 @@ namespace book_store.mapper.book
     {
         public override BookManagementDto ToDto(Book entity)
         {
-            var author = entity.Author;
+            var author = entity.Author!;
             return new BookManagementDto
             (
                 entity.Id,
                 entity.Title,
+                author.Id,
                 $"{author?.FirstName} {author?.MidName} {author?.LastName}"
             );
         }

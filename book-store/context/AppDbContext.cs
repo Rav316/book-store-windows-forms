@@ -28,15 +28,15 @@ namespace book_store.context
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
-        private static readonly Lazy<AppDbContext> _instance = new Lazy<AppDbContext>(() =>
-                    new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
-                    .UseNpgsql("Server=localhost; Port=5432; DataBase=book_store_copy; User Id=postgres; Password=1")
-                    .UseLazyLoadingProxies()
-                    .LogTo(message => System.Diagnostics.Debug.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information)
-                    .EnableSensitiveDataLogging()
-                    .Options));
+        private static readonly DbContextOptions<AppDbContext> _options =
+                new DbContextOptionsBuilder<AppDbContext>()
+               .UseNpgsql("Server=localhost; Port=5432; DataBase=book_store_copy; User Id=postgres; Password=1")
+               .UseLazyLoadingProxies()
+               .LogTo(message => System.Diagnostics.Debug.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information)
+               .EnableSensitiveDataLogging()
+               .Options;
 
-        public static AppDbContext INSTANCE => _instance.Value;
+        public static AppDbContext INSTANCE => new AppDbContext(_options);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

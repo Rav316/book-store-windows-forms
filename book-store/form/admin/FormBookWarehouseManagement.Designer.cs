@@ -32,16 +32,16 @@
             buttonCreate = new Button();
             pbBack = new PictureBox();
             dgvBookWarehouses = new DataGridView();
-            labelManagement = new Label();
-            labelWarehouse = new Label();
-            cbWarehouse = new ComboBox();
-            labelBook = new Label();
-            cbBook = new ComboBox();
             BookId = new DataGridViewTextBoxColumn();
             WarehouseId = new DataGridViewTextBoxColumn();
             BookName = new DataGridViewTextBoxColumn();
             WarehouseName = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
+            labelManagement = new Label();
+            labelWarehouse = new Label();
+            cbWarehouse = new ComboBox();
+            labelBook = new Label();
+            cbBook = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBookWarehouses).BeginInit();
             SuspendLayout();
@@ -65,16 +65,18 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(22, 31);
+            pbBack.Location = new Point(22, 26);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 101;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
             // 
             // dgvBookWarehouses
             // 
+            dgvBookWarehouses.AllowUserToResizeColumns = false;
+            dgvBookWarehouses.AllowUserToResizeRows = false;
             dgvBookWarehouses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvBookWarehouses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBookWarehouses.Columns.AddRange(new DataGridViewColumn[] { BookId, WarehouseId, BookName, WarehouseName, Quantity });
@@ -84,6 +86,38 @@
             dgvBookWarehouses.Size = new Size(742, 291);
             dgvBookWarehouses.TabIndex = 98;
             dgvBookWarehouses.DoubleClick += dgvBookWarehouses_DoubleClick;
+            // 
+            // BookId
+            // 
+            BookId.HeaderText = "Id книги";
+            BookId.Name = "BookId";
+            BookId.ReadOnly = true;
+            BookId.Visible = false;
+            // 
+            // WarehouseId
+            // 
+            WarehouseId.HeaderText = "Id склада";
+            WarehouseId.Name = "WarehouseId";
+            WarehouseId.ReadOnly = true;
+            WarehouseId.Visible = false;
+            // 
+            // BookName
+            // 
+            BookName.HeaderText = "Книга";
+            BookName.Name = "BookName";
+            BookName.ReadOnly = true;
+            // 
+            // WarehouseName
+            // 
+            WarehouseName.HeaderText = "Склад";
+            WarehouseName.Name = "WarehouseName";
+            WarehouseName.ReadOnly = true;
+            // 
+            // Quantity
+            // 
+            Quantity.HeaderText = "Количество";
+            Quantity.Name = "Quantity";
+            Quantity.ReadOnly = true;
             // 
             // labelManagement
             // 
@@ -137,38 +171,6 @@
             cbBook.TabIndex = 103;
             cbBook.SelectedIndexChanged += cbBook_SelectedIndexChanged;
             // 
-            // BookId
-            // 
-            BookId.HeaderText = "Id книги";
-            BookId.Name = "BookId";
-            BookId.ReadOnly = true;
-            BookId.Visible = false;
-            // 
-            // WarehouseId
-            // 
-            WarehouseId.HeaderText = "Id склада";
-            WarehouseId.Name = "WarehouseId";
-            WarehouseId.ReadOnly = true;
-            WarehouseId.Visible = false;
-            // 
-            // BookName
-            // 
-            BookName.HeaderText = "Книга";
-            BookName.Name = "BookName";
-            BookName.ReadOnly = true;
-            // 
-            // WarehouseName
-            // 
-            WarehouseName.HeaderText = "Склад";
-            WarehouseName.Name = "WarehouseName";
-            WarehouseName.ReadOnly = true;
-            // 
-            // Quantity
-            // 
-            Quantity.HeaderText = "Количество";
-            Quantity.Name = "Quantity";
-            Quantity.ReadOnly = true;
-            // 
             // FormBookWarehouseManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -184,6 +186,7 @@
             Controls.Add(labelManagement);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookWarehouseManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Управление книгами на складе";
             Load += FormBookWarehouseManagement_Load;
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

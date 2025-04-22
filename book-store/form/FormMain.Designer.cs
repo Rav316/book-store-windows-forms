@@ -315,6 +315,8 @@ namespace book_store.form
             // 
             // dgvBooks
             // 
+            dgvBooks.AllowUserToResizeColumns = false;
+            dgvBooks.AllowUserToResizeRows = false;
             dgvBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
@@ -429,6 +431,7 @@ namespace book_store.form
             Controls.Add(tbSearch);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormMain";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Главная";
             Load += FormMain_Load;
             ((System.ComponentModel.ISupportInitialize)pbFavorites).EndInit();

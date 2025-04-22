@@ -120,10 +120,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(37, 45);
+            pbBack.Location = new Point(37, 40);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 152;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -176,6 +176,7 @@
             Controls.Add(labelBookWarehouse);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormBookWarehouseInfo";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Информация о книге на складе";
             Load += FormBookWarehouseInfo_Load;
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

@@ -34,9 +34,9 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             dgvPublishers = new DataGridView();
-            labelManagement = new Label();
             Id = new DataGridViewTextBoxColumn();
             PublisherName = new DataGridViewTextBoxColumn();
+            labelManagement = new Label();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPublishers).BeginInit();
             SuspendLayout();
@@ -60,10 +60,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(22, 31);
+            pbBack.Location = new Point(22, 26);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 95;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -82,16 +82,18 @@
             // 
             tbSearch.BackColor = Color.FromArgb(224, 224, 224);
             tbSearch.BorderStyle = BorderStyle.None;
-            tbSearch.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbSearch.Font = new Font("Philosopher", 18.75F);
             tbSearch.Location = new Point(37, 80);
             tbSearch.MinimumSize = new Size(300, 35);
             tbSearch.Name = "tbSearch";
-            tbSearch.Size = new Size(329, 36);
+            tbSearch.Size = new Size(329, 35);
             tbSearch.TabIndex = 93;
             tbSearch.TextChanged += tbSearch_TextChanged;
             // 
             // dgvPublishers
             // 
+            dgvPublishers.AllowUserToResizeColumns = false;
+            dgvPublishers.AllowUserToResizeRows = false;
             dgvPublishers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPublishers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPublishers.Columns.AddRange(new DataGridViewColumn[] { Id, PublisherName });
@@ -100,16 +102,6 @@
             dgvPublishers.Size = new Size(742, 264);
             dgvPublishers.TabIndex = 92;
             dgvPublishers.DoubleClick += dgvPublishers_DoubleClick;
-            // 
-            // labelManagement
-            // 
-            labelManagement.AutoSize = true;
-            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelManagement.Location = new Point(203, 9);
-            labelManagement.Name = "labelManagement";
-            labelManagement.Size = new Size(409, 48);
-            labelManagement.TabIndex = 91;
-            labelManagement.Text = "Управление издателями";
             // 
             // Id
             // 
@@ -122,6 +114,16 @@
             // 
             PublisherName.HeaderText = "Название";
             PublisherName.Name = "PublisherName";
+            // 
+            // labelManagement
+            // 
+            labelManagement.AutoSize = true;
+            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelManagement.Location = new Point(203, 9);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(409, 48);
+            labelManagement.TabIndex = 91;
+            labelManagement.Text = "Управление издателями";
             // 
             // FormPublisherManagement
             // 
@@ -136,6 +138,7 @@
             Controls.Add(labelManagement);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPublisherManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Управление издателями";
             Load += FormPublisherManagement_Load;
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

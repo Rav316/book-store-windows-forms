@@ -208,6 +208,7 @@
             Controls.Add(labelBookName);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormEditReview";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Изменить отзыв";
             Load += FormEditReview_Load;
             ((System.ComponentModel.ISupportInitialize)pbStar5).EndInit();

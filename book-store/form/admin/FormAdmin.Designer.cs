@@ -32,6 +32,7 @@
             labelAdmin = new Label();
             buttonManagement = new Button();
             buttonApp = new Button();
+            buttonCloseApp = new Button();
             SuspendLayout();
             // 
             // labelAdmin
@@ -74,16 +75,33 @@
             buttonApp.UseVisualStyleBackColor = false;
             buttonApp.Click += buttonApp_Click;
             // 
+            // buttonCloseApp
+            // 
+            buttonCloseApp.BackColor = Color.Red;
+            buttonCloseApp.Cursor = Cursors.Hand;
+            buttonCloseApp.FlatStyle = FlatStyle.Flat;
+            buttonCloseApp.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonCloseApp.ForeColor = SystemColors.Window;
+            buttonCloseApp.Location = new Point(603, 406);
+            buttonCloseApp.Name = "buttonCloseApp";
+            buttonCloseApp.Size = new Size(185, 32);
+            buttonCloseApp.TabIndex = 43;
+            buttonCloseApp.Text = "Закрыть приложение";
+            buttonCloseApp.UseVisualStyleBackColor = false;
+            buttonCloseApp.Click += buttonCloseApp_Click;
+            // 
             // FormAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(buttonCloseApp);
             Controls.Add(buttonApp);
             Controls.Add(buttonManagement);
             Controls.Add(labelAdmin);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAdmin";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Форма администратора";
             ResumeLayout(false);
             PerformLayout();
@@ -94,5 +112,6 @@
         private Label labelAdmin;
         private Button buttonManagement;
         private Button buttonApp;
+        private Button buttonCloseApp;
     }
 }

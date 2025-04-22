@@ -34,11 +34,11 @@
             labelSearch = new Label();
             tbSearch = new TextBox();
             dgvAuthors = new DataGridView();
-            labelManagement = new Label();
             Id = new DataGridViewTextBoxColumn();
             FirstName = new DataGridViewTextBoxColumn();
             MidName = new DataGridViewTextBoxColumn();
             LastName = new DataGridViewTextBoxColumn();
+            labelManagement = new Label();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAuthors).BeginInit();
             SuspendLayout();
@@ -62,10 +62,10 @@
             // 
             pbBack.Cursor = Cursors.Hand;
             pbBack.Image = (Image)resources.GetObject("pbBack.Image");
-            pbBack.Location = new Point(22, 30);
+            pbBack.Location = new Point(22, 25);
             pbBack.Name = "pbBack";
-            pbBack.Size = new Size(24, 10);
-            pbBack.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
             pbBack.TabIndex = 83;
             pbBack.TabStop = false;
             pbBack.Click += pbBack_Click;
@@ -84,16 +84,18 @@
             // 
             tbSearch.BackColor = Color.FromArgb(224, 224, 224);
             tbSearch.BorderStyle = BorderStyle.None;
-            tbSearch.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbSearch.Font = new Font("Philosopher", 18.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbSearch.Location = new Point(37, 79);
             tbSearch.MinimumSize = new Size(300, 35);
             tbSearch.Name = "tbSearch";
-            tbSearch.Size = new Size(329, 36);
+            tbSearch.Size = new Size(329, 35);
             tbSearch.TabIndex = 81;
             tbSearch.TextChanged += tbSearch_TextChanged;
             // 
             // dgvAuthors
             // 
+            dgvAuthors.AllowUserToResizeColumns = false;
+            dgvAuthors.AllowUserToResizeRows = false;
             dgvAuthors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAuthors.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAuthors.Columns.AddRange(new DataGridViewColumn[] { Id, FirstName, MidName, LastName });
@@ -102,16 +104,6 @@
             dgvAuthors.Size = new Size(742, 264);
             dgvAuthors.TabIndex = 80;
             dgvAuthors.DoubleClick += dgvAuthors_DoubleClick;
-            // 
-            // labelManagement
-            // 
-            labelManagement.AutoSize = true;
-            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelManagement.Location = new Point(180, 9);
-            labelManagement.Name = "labelManagement";
-            labelManagement.Size = new Size(453, 48);
-            labelManagement.TabIndex = 79;
-            labelManagement.Text = "Управление авторами книг";
             // 
             // Id
             // 
@@ -134,6 +126,16 @@
             LastName.HeaderText = "Фамилия";
             LastName.Name = "LastName";
             // 
+            // labelManagement
+            // 
+            labelManagement.AutoSize = true;
+            labelManagement.Font = new Font("Philosopher", 26.2499962F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelManagement.Location = new Point(180, 9);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(453, 48);
+            labelManagement.TabIndex = 79;
+            labelManagement.Text = "Управление авторами книг";
+            // 
             // FormAuthorManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -147,6 +149,7 @@
             Controls.Add(labelManagement);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Управление авторами книг";
             Load += FormAuthorManagement_Load;
             ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();

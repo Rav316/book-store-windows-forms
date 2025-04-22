@@ -38,6 +38,8 @@
             buttonBookWarehouses = new Button();
             buttonApp = new Button();
             buttonReviews = new Button();
+            pbBack = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
             // 
             // labelManagement
@@ -147,9 +149,9 @@
             buttonApp.FlatStyle = FlatStyle.Flat;
             buttonApp.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonApp.ForeColor = SystemColors.Window;
-            buttonApp.Location = new Point(445, 381);
+            buttonApp.Location = new Point(453, 381);
             buttonApp.Name = "buttonApp";
-            buttonApp.Size = new Size(226, 50);
+            buttonApp.Size = new Size(218, 50);
             buttonApp.TabIndex = 11;
             buttonApp.Text = "Перейти в приложение";
             buttonApp.UseVisualStyleBackColor = false;
@@ -170,11 +172,24 @@
             buttonReviews.UseVisualStyleBackColor = false;
             buttonReviews.Click += buttonReviews_Click;
             // 
+            // pbBack
+            // 
+            pbBack.Cursor = Cursors.Hand;
+            pbBack.Image = (Image)resources.GetObject("pbBack.Image");
+            pbBack.Location = new Point(37, 49);
+            pbBack.Name = "pbBack";
+            pbBack.Size = new Size(24, 20);
+            pbBack.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbBack.TabIndex = 22;
+            pbBack.TabStop = false;
+            pbBack.Click += pbBack_Click;
+            // 
             // FormManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 537);
+            ClientSize = new Size(800, 505);
+            Controls.Add(pbBack);
             Controls.Add(buttonReviews);
             Controls.Add(buttonApp);
             Controls.Add(buttonBookWarehouses);
@@ -186,7 +201,9 @@
             Controls.Add(labelManagement);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormManagement";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Управление системой";
+            ((System.ComponentModel.ISupportInitialize)pbBack).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -202,5 +219,6 @@
         private Button buttonBookWarehouses;
         private Button buttonApp;
         private Button buttonReviews;
+        private PictureBox pbBack;
     }
 }

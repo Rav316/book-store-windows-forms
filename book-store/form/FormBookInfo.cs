@@ -62,7 +62,7 @@ namespace book_store.form
             labelYearOfPublishingValue.Text = book.YearOfPublishing.ToString();
             labelIsbnValue.Text = book.Isbn;
             labelNumberOfPages.Text = book.NumberOfPages.ToString();
-            labelSizeValue.Text = book.Size;
+            labelSizeValue.Text = $"{book.Height} см x {book.Width} см x {book.Length} см";
             labelCoverTypeValue.Text = book.CoverType?.Type;
             labelCirculationValue.Text = book.Circulation.ToString();
             labelWeightValue.Text = book.Weight.ToString();

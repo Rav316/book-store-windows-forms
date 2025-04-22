@@ -79,7 +79,7 @@ namespace book_store.form.admin
 
         private async void buttonCreate_Click(object sender, EventArgs e)
         {
-            if (tbTitle.Name == "")
+            if (tbTitle.Text == "")
             {
                 MessageBox.Show("Название не должно быть пустым");
                 return;
@@ -89,12 +89,7 @@ namespace book_store.form.admin
                 MessageBox.Show("Цена некорректная");
                 return;
             }
-            if (tbSeries.Text == "")
-            {
-                MessageBox.Show("Серия не должна быть пустой");
-                return;
-            }
-            if (!int.TryParse(tbYearOfPublishing.Text, out int yearOfPublishing) || yearOfPublishing > DateTime.Now.Year)
+            if (!int.TryParse(tbYearOfPublishing.Text, out int yearOfPublishing) || yearOfPublishing > DateTime.Now.Year || yearOfPublishing < 0)
             {
                 MessageBox.Show("Год издания некорректный");
                 return;
@@ -118,6 +113,14 @@ namespace book_store.form.admin
                 return;
             }
 
+            if(!decimal.TryParse(tbHeight.Text, out decimal height) || height <= 0 ||
+                !decimal.TryParse(tbWidth.Text, out decimal width) || width <= 0 ||
+                !decimal.TryParse(tbLength.Text, out decimal length) || length <= 0)
+            {
+                MessageBox.Show("Размеры книги некорретные");
+                return;
+            }
+
             if (!int.TryParse(tbWeight.Text, out int weight) || weight <= 0)
             {
                 MessageBox.Show("Вес некорректный");
@@ -129,7 +132,7 @@ namespace book_store.form.admin
                 MessageBox.Show("Возрастное ограничение некорректно");
                 return;
             }
-            if (bookService.FindByTitleAndAuthor(tbTitle.Text, (int)cbAuthor.SelectedValue) != null)
+            if (bookService.FindByTitleAndAuthor(tbTitle.Text, (int)cbAuthor.SelectedValue!) != null)
             {
                 MessageBox.Show("Книга с таким названием и автором уже существует");
                 return;
@@ -142,7 +145,9 @@ namespace book_store.form.admin
             book.YearOfPublishing = yearOfPublishing;
             book.Isbn = tbIsbn.Text;
             book.NumberOfPages = numberOfPages;
-            book.Size = tbSize.Text;
+            book.Height = height;
+            book.Width = width;
+            book.Length = length;
             book.Circulation = circulation;
             book.Weight = weight;
             book.AgeRestrictions = ageRestrictions;

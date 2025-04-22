@@ -55,6 +55,7 @@
             tbUsername.BorderStyle = BorderStyle.None;
             tbUsername.Font = new Font("Philosopher", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbUsername.Location = new Point(234, 152);
+            tbUsername.MaxLength = 128;
             tbUsername.MinimumSize = new Size(300, 50);
             tbUsername.Name = "tbUsername";
             tbUsername.Size = new Size(300, 50);
@@ -66,6 +67,7 @@
             tbPassword.BorderStyle = BorderStyle.None;
             tbPassword.Font = new Font("Philosopher", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbPassword.Location = new Point(234, 250);
+            tbPassword.MaxLength = 256;
             tbPassword.MinimumSize = new Size(300, 50);
             tbPassword.Name = "tbPassword";
             tbPassword.PasswordChar = '•';
@@ -145,6 +147,7 @@
             Controls.Add(labelLogin);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAuthorization";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Авторизация";
             ResumeLayout(false);
             PerformLayout();
