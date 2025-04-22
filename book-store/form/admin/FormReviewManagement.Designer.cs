@@ -71,7 +71,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReviews.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvReviews.Location = new Point(19, 107);
+            dgvReviews.Location = new Point(19, 149);
             dgvReviews.Name = "dgvReviews";
             dgvReviews.RowTemplate.Height = 136;
             dgvReviews.Size = new Size(1266, 398);

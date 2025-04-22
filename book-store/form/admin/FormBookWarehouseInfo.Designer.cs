@@ -33,12 +33,12 @@
             labelQuantity = new Label();
             buttonDelete = new Button();
             buttonSaveChanges = new Button();
-            labelWarehouseId = new Label();
-            labelBookId = new Label();
+            labelWarehouse = new Label();
+            labelBook = new Label();
             pbBack = new PictureBox();
             labelBookWarehouse = new Label();
+            cbWarehouse = new ComboBox();
             tbBook = new TextBox();
-            tbWarehouse = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pbBack).BeginInit();
             SuspendLayout();
             // 
@@ -94,27 +94,27 @@
             buttonSaveChanges.UseVisualStyleBackColor = false;
             buttonSaveChanges.Click += buttonSaveChanges_Click;
             // 
-            // labelWarehouseId
+            // labelWarehouse
             // 
-            labelWarehouseId.AutoSize = true;
-            labelWarehouseId.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelWarehouseId.ForeColor = Color.Black;
-            labelWarehouseId.Location = new Point(127, 140);
-            labelWarehouseId.Name = "labelWarehouseId";
-            labelWarehouseId.Size = new Size(80, 21);
-            labelWarehouseId.TabIndex = 155;
-            labelWarehouseId.Text = "id склада:";
+            labelWarehouse.AutoSize = true;
+            labelWarehouse.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelWarehouse.ForeColor = Color.Black;
+            labelWarehouse.Location = new Point(127, 140);
+            labelWarehouse.Name = "labelWarehouse";
+            labelWarehouse.Size = new Size(56, 21);
+            labelWarehouse.TabIndex = 155;
+            labelWarehouse.Text = "склад:";
             // 
-            // labelBookId
+            // labelBook
             // 
-            labelBookId.AutoSize = true;
-            labelBookId.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelBookId.ForeColor = Color.Black;
-            labelBookId.Location = new Point(127, 95);
-            labelBookId.Name = "labelBookId";
-            labelBookId.Size = new Size(72, 21);
-            labelBookId.TabIndex = 153;
-            labelBookId.Text = "id книги:";
+            labelBook.AutoSize = true;
+            labelBook.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            labelBook.ForeColor = Color.Black;
+            labelBook.Location = new Point(127, 95);
+            labelBook.Name = "labelBook";
+            labelBook.Size = new Size(55, 21);
+            labelBook.TabIndex = 153;
+            labelBook.Text = "книга:";
             // 
             // pbBack
             // 
@@ -138,41 +138,40 @@
             labelBookWarehouse.TabIndex = 151;
             labelBookWarehouse.Text = "Информация о книге на складе";
             // 
+            // cbWarehouse
+            // 
+            cbWarehouse.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbWarehouse.FormattingEnabled = true;
+            cbWarehouse.Location = new Point(334, 138);
+            cbWarehouse.Name = "cbWarehouse";
+            cbWarehouse.Size = new Size(223, 23);
+            cbWarehouse.TabIndex = 164;
+            // 
             // tbBook
             // 
             tbBook.BackColor = Color.FromArgb(224, 224, 224);
             tbBook.BorderStyle = BorderStyle.None;
             tbBook.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbBook.Location = new Point(334, 92);
+            tbBook.MaxLength = 10;
             tbBook.Name = "tbBook";
             tbBook.ReadOnly = true;
             tbBook.Size = new Size(223, 22);
-            tbBook.TabIndex = 161;
-            // 
-            // tbWarehouse
-            // 
-            tbWarehouse.BackColor = Color.FromArgb(224, 224, 224);
-            tbWarehouse.BorderStyle = BorderStyle.None;
-            tbWarehouse.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbWarehouse.Location = new Point(334, 137);
-            tbWarehouse.Name = "tbWarehouse";
-            tbWarehouse.ReadOnly = true;
-            tbWarehouse.Size = new Size(223, 22);
-            tbWarehouse.TabIndex = 162;
+            tbBook.TabIndex = 165;
             // 
             // FormBookWarehouseInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(664, 385);
-            Controls.Add(tbWarehouse);
             Controls.Add(tbBook);
+            Controls.Add(cbWarehouse);
             Controls.Add(tbQuantity);
             Controls.Add(labelQuantity);
             Controls.Add(buttonDelete);
             Controls.Add(buttonSaveChanges);
-            Controls.Add(labelWarehouseId);
-            Controls.Add(labelBookId);
+            Controls.Add(labelWarehouse);
+            Controls.Add(labelBook);
             Controls.Add(pbBack);
             Controls.Add(labelBookWarehouse);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -190,11 +189,11 @@
         private Label labelQuantity;
         private Button buttonDelete;
         private Button buttonSaveChanges;
-        private Label labelWarehouseId;
-        private Label labelBookId;
+        private Label labelWarehouse;
+        private Label labelBook;
         private PictureBox pbBack;
         private Label labelBookWarehouse;
+        private ComboBox cbWarehouse;
         private TextBox tbBook;
-        private TextBox tbWarehouse;
     }
 }
