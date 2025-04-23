@@ -137,23 +137,25 @@
             // 
             tbUsername.BackColor = Color.FromArgb(224, 224, 224);
             tbUsername.BorderStyle = BorderStyle.None;
-            tbUsername.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbUsername.Font = new Font("Philosopher", 15.7499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbUsername.Location = new Point(270, 85);
             tbUsername.MaxLength = 128;
+            tbUsername.MinimumSize = new Size(223, 30);
             tbUsername.Name = "tbUsername";
-            tbUsername.Size = new Size(223, 22);
+            tbUsername.Size = new Size(223, 30);
             tbUsername.TabIndex = 30;
             // 
             // tbCurrentPassword
             // 
             tbCurrentPassword.BackColor = Color.FromArgb(224, 224, 224);
             tbCurrentPassword.BorderStyle = BorderStyle.None;
-            tbCurrentPassword.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbCurrentPassword.Location = new Point(270, 123);
+            tbCurrentPassword.Font = new Font("Philosopher", 15.7499981F);
+            tbCurrentPassword.Location = new Point(270, 132);
             tbCurrentPassword.MaxLength = 256;
+            tbCurrentPassword.MinimumSize = new Size(223, 30);
             tbCurrentPassword.Name = "tbCurrentPassword";
             tbCurrentPassword.PasswordChar = '•';
-            tbCurrentPassword.Size = new Size(223, 22);
+            tbCurrentPassword.Size = new Size(223, 30);
             tbCurrentPassword.TabIndex = 32;
             // 
             // labelCurrentPassword
@@ -161,7 +163,7 @@
             labelCurrentPassword.AutoSize = true;
             labelCurrentPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelCurrentPassword.ForeColor = Color.Black;
-            labelCurrentPassword.Location = new Point(63, 123);
+            labelCurrentPassword.Location = new Point(63, 132);
             labelCurrentPassword.Name = "labelCurrentPassword";
             labelCurrentPassword.Size = new Size(140, 21);
             labelCurrentPassword.TabIndex = 31;
@@ -171,12 +173,13 @@
             // 
             tbNewPassword.BackColor = Color.FromArgb(224, 224, 224);
             tbNewPassword.BorderStyle = BorderStyle.None;
-            tbNewPassword.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbNewPassword.Location = new Point(270, 161);
+            tbNewPassword.Font = new Font("Philosopher", 15.7499981F);
+            tbNewPassword.Location = new Point(270, 180);
             tbNewPassword.MaxLength = 256;
+            tbNewPassword.MinimumSize = new Size(223, 30);
             tbNewPassword.Name = "tbNewPassword";
             tbNewPassword.PasswordChar = '•';
-            tbNewPassword.Size = new Size(223, 22);
+            tbNewPassword.Size = new Size(223, 30);
             tbNewPassword.TabIndex = 34;
             // 
             // labelNewPassword
@@ -184,7 +187,7 @@
             labelNewPassword.AutoSize = true;
             labelNewPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelNewPassword.ForeColor = Color.Black;
-            labelNewPassword.Location = new Point(63, 161);
+            labelNewPassword.Location = new Point(63, 180);
             labelNewPassword.Name = "labelNewPassword";
             labelNewPassword.Size = new Size(124, 21);
             labelNewPassword.TabIndex = 33;
@@ -194,12 +197,13 @@
             // 
             tbConfirmNewPassword.BackColor = Color.FromArgb(224, 224, 224);
             tbConfirmNewPassword.BorderStyle = BorderStyle.None;
-            tbConfirmNewPassword.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbConfirmNewPassword.Location = new Point(270, 203);
+            tbConfirmNewPassword.Font = new Font("Philosopher", 15.7499981F);
+            tbConfirmNewPassword.Location = new Point(270, 231);
             tbConfirmNewPassword.MaxLength = 256;
+            tbConfirmNewPassword.MinimumSize = new Size(223, 30);
             tbConfirmNewPassword.Name = "tbConfirmNewPassword";
             tbConfirmNewPassword.PasswordChar = '•';
-            tbConfirmNewPassword.Size = new Size(223, 22);
+            tbConfirmNewPassword.Size = new Size(223, 30);
             tbConfirmNewPassword.TabIndex = 36;
             // 
             // labelConfirmNewPassword
@@ -207,7 +211,7 @@
             labelConfirmNewPassword.AutoSize = true;
             labelConfirmNewPassword.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelConfirmNewPassword.ForeColor = Color.Black;
-            labelConfirmNewPassword.Location = new Point(63, 203);
+            labelConfirmNewPassword.Location = new Point(63, 231);
             labelConfirmNewPassword.Name = "labelConfirmNewPassword";
             labelConfirmNewPassword.Size = new Size(203, 21);
             labelConfirmNewPassword.TabIndex = 35;
@@ -217,11 +221,12 @@
             // 
             tbEmail.BackColor = Color.FromArgb(224, 224, 224);
             tbEmail.BorderStyle = BorderStyle.None;
-            tbEmail.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbEmail.Location = new Point(270, 240);
+            tbEmail.Font = new Font("Philosopher", 15.7499981F);
+            tbEmail.Location = new Point(270, 280);
             tbEmail.MaxLength = 320;
+            tbEmail.MinimumSize = new Size(223, 30);
             tbEmail.Name = "tbEmail";
-            tbEmail.Size = new Size(223, 22);
+            tbEmail.Size = new Size(223, 30);
             tbEmail.TabIndex = 38;
             // 
             // labelEmail
@@ -229,7 +234,7 @@
             labelEmail.AutoSize = true;
             labelEmail.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelEmail.ForeColor = Color.Black;
-            labelEmail.Location = new Point(63, 240);
+            labelEmail.Location = new Point(63, 280);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(159, 21);
             labelEmail.TabIndex = 37;
@@ -239,10 +244,11 @@
             // 
             tbAddress.BackColor = Color.FromArgb(224, 224, 224);
             tbAddress.BorderStyle = BorderStyle.None;
-            tbAddress.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbAddress.Location = new Point(270, 280);
+            tbAddress.Font = new Font("Philosopher", 15.7499981F);
+            tbAddress.Location = new Point(270, 327);
+            tbAddress.MinimumSize = new Size(223, 30);
             tbAddress.Name = "tbAddress";
-            tbAddress.Size = new Size(223, 22);
+            tbAddress.Size = new Size(223, 30);
             tbAddress.TabIndex = 40;
             // 
             // labelAddress
@@ -250,7 +256,7 @@
             labelAddress.AutoSize = true;
             labelAddress.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelAddress.ForeColor = Color.Black;
-            labelAddress.Location = new Point(63, 280);
+            labelAddress.Location = new Point(63, 327);
             labelAddress.Name = "labelAddress";
             labelAddress.Size = new Size(62, 21);
             labelAddress.TabIndex = 39;
@@ -263,7 +269,7 @@
             buttonSaveChanges.FlatStyle = FlatStyle.Flat;
             buttonSaveChanges.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonSaveChanges.ForeColor = SystemColors.Window;
-            buttonSaveChanges.Location = new Point(63, 344);
+            buttonSaveChanges.Location = new Point(63, 381);
             buttonSaveChanges.Name = "buttonSaveChanges";
             buttonSaveChanges.Size = new Size(253, 50);
             buttonSaveChanges.TabIndex = 41;
@@ -290,7 +296,7 @@
             // 
             labelReviews.AutoSize = true;
             labelReviews.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelReviews.Location = new Point(63, 429);
+            labelReviews.Location = new Point(824, 327);
             labelReviews.Name = "labelReviews";
             labelReviews.Size = new Size(148, 32);
             labelReviews.TabIndex = 62;
@@ -319,10 +325,10 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvReviews.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvReviews.Location = new Point(63, 464);
+            dgvReviews.Location = new Point(824, 362);
             dgvReviews.Name = "dgvReviews";
             dgvReviews.RowTemplate.Height = 136;
-            dgvReviews.Size = new Size(725, 281);
+            dgvReviews.Size = new Size(882, 281);
             dgvReviews.TabIndex = 70;
             dgvReviews.DoubleClick += dgvReviews_DoubleClick;
             // 
@@ -375,7 +381,7 @@
             // 
             labelOrders.AutoSize = true;
             labelOrders.Font = new Font("Philosopher", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            labelOrders.Location = new Point(806, 12);
+            labelOrders.Location = new Point(824, 28);
             labelOrders.Name = "labelOrders";
             labelOrders.Size = new Size(142, 32);
             labelOrders.TabIndex = 71;
@@ -404,7 +410,7 @@
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             dgvOrders.DefaultCellStyle = dataGridViewCellStyle4;
-            dgvOrders.Location = new Point(806, 63);
+            dgvOrders.Location = new Point(824, 63);
             dgvOrders.Name = "dgvOrders";
             dgvOrders.Size = new Size(882, 238);
             dgvOrders.TabIndex = 72;
@@ -448,7 +454,7 @@
             buttonLogout.FlatStyle = FlatStyle.Flat;
             buttonLogout.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             buttonLogout.ForeColor = SystemColors.Window;
-            buttonLogout.Location = new Point(642, 362);
+            buttonLogout.Location = new Point(1398, 736);
             buttonLogout.Name = "buttonLogout";
             buttonLogout.Size = new Size(146, 32);
             buttonLogout.TabIndex = 73;

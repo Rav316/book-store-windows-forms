@@ -78,11 +78,11 @@ namespace book_store.form
             // 
             tbSearch.BackColor = Color.FromArgb(224, 224, 224);
             tbSearch.BorderStyle = BorderStyle.None;
-            tbSearch.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbSearch.Font = new Font("Philosopher", 19F);
             tbSearch.Location = new Point(182, 29);
             tbSearch.MinimumSize = new Size(300, 35);
             tbSearch.Name = "tbSearch";
-            tbSearch.Size = new Size(329, 36);
+            tbSearch.Size = new Size(329, 35);
             tbSearch.TabIndex = 2;
             tbSearch.TextChanged += tbUsername_TextChanged;
             // 

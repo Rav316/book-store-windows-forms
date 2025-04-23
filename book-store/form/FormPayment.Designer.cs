@@ -101,9 +101,10 @@
             // tbCardNumber
             // 
             tbCardNumber.BorderStyle = BorderStyle.None;
-            tbCardNumber.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbCardNumber.Font = new Font("Philosopher", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbCardNumber.Location = new Point(163, 159);
             tbCardNumber.MaxLength = 16;
+            tbCardNumber.MinimumSize = new Size(452, 36);
             tbCardNumber.Name = "tbCardNumber";
             tbCardNumber.Size = new Size(452, 36);
             tbCardNumber.TabIndex = 31;
@@ -111,9 +112,10 @@
             // tbMonth
             // 
             tbMonth.BorderStyle = BorderStyle.None;
-            tbMonth.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbMonth.Font = new Font("Philosopher", 20.25F);
             tbMonth.Location = new Point(163, 284);
             tbMonth.MaxLength = 2;
+            tbMonth.MinimumSize = new Size(50, 36);
             tbMonth.Name = "tbMonth";
             tbMonth.Size = new Size(50, 36);
             tbMonth.TabIndex = 33;
@@ -132,9 +134,10 @@
             // tbCode
             // 
             tbCode.BorderStyle = BorderStyle.None;
-            tbCode.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbCode.Font = new Font("Philosopher", 20.25F);
             tbCode.Location = new Point(465, 284);
             tbCode.MaxLength = 3;
+            tbCode.MinimumSize = new Size(150, 36);
             tbCode.Name = "tbCode";
             tbCode.Size = new Size(150, 36);
             tbCode.TabIndex = 35;
@@ -183,9 +186,10 @@
             // tbYear
             // 
             tbYear.BorderStyle = BorderStyle.None;
-            tbYear.Font = new Font("Philosopher", 23.9999962F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbYear.Font = new Font("Philosopher", 20.25F);
             tbYear.Location = new Point(250, 284);
             tbYear.MaxLength = 2;
+            tbYear.MinimumSize = new Size(50, 36);
             tbYear.Name = "tbYear";
             tbYear.Size = new Size(50, 36);
             tbYear.TabIndex = 42;

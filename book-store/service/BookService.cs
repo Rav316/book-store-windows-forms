@@ -146,5 +146,10 @@ namespace book_store.service
                 .OrderBy(b => b.Title)
                 .ToList();
         }
+
+        public Book? FindByIsbn(string isbn)
+        {
+            return bookRepository.FindByIsbn(isbn);
+        }
     }
 }

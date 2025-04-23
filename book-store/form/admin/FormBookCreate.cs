@@ -138,6 +138,12 @@ namespace book_store.form.admin
                 return;
             }
 
+            if (bookService.FindByIsbn(tbIsbn.Text) != null)
+            {
+                MessageBox.Show("Книга с таким isbn уже существует");
+                return;
+            }
+
             book.Title = tbTitle.Text;
             book.AuthorId = (cbAuthor.SelectedItem as AuthorListDto)!.Id;
             book.Price = price;

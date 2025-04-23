@@ -61,6 +61,7 @@ namespace book_store.form
             dgvReviews.Columns[5].DataPropertyName = "Content";
             dgvReviews.Columns[6].DataPropertyName = "Rating";
             dgvReviews.Columns[7].DataPropertyName = "CreatedAt";
+            dgvReviews.Columns[7].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
             dgvOrders.ReadOnly = true;
             dgvOrders.Columns[0].DataPropertyName = "Id";

@@ -17,22 +17,18 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: check_cart_item_quantity(); Type: FUNCTION; Schema: public; Owner: postgres
+-- Name: check_unique_isbn(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
-CREATE FUNCTION public.check_cart_item_quantity() RETURNS trigger
+CREATE FUNCTION public.check_unique_isbn() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
-DECLARE
-    available INT;
 BEGIN
-    SELECT SUM(quantity)
-    INTO available
-    FROM book_warehouse
-    WHERE book_id = NEW.book_id;
-
-    IF NEW.quantity > COALESCE(available, 0) THEN
-        RAISE EXCEPTION 'Not enough books in stock. Available: %', COALESCE(available, 0);
+    IF EXISTS (
+        SELECT 1 FROM book
+        WHERE isbn = NEW.isbn AND id <> NEW.id
+    ) THEN
+        RAISE EXCEPTION 'ISBN must be unique. Duplicate found: %', NEW.isbn;
     END IF;
 
     RETURN NEW;
@@ -40,7 +36,7 @@ END;
 $$;
 
 
-ALTER FUNCTION public.check_cart_item_quantity() OWNER TO postgres;
+ALTER FUNCTION public.check_unique_isbn() OWNER TO postgres;
 
 --
 -- Name: get_author_full_name(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -653,6 +649,14 @@ ALTER TABLE ONLY public.author
 
 
 --
+-- Name: book book_isbn_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.book
+    ADD CONSTRAINT book_isbn_key UNIQUE (isbn);
+
+
+--
 -- Name: book book_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -837,10 +841,10 @@ ALTER TABLE ONLY public.warehouse
 
 
 --
--- Name: cart_item trg_check_cart_item_quantity; Type: TRIGGER; Schema: public; Owner: postgres
+-- Name: book trg_check_unique_isbn; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER trg_check_cart_item_quantity BEFORE INSERT OR UPDATE ON public.cart_item FOR EACH ROW EXECUTE FUNCTION public.check_cart_item_quantity();
+CREATE TRIGGER trg_check_unique_isbn BEFORE INSERT OR UPDATE ON public.book FOR EACH ROW EXECUTE FUNCTION public.check_unique_isbn();
 
 
 --

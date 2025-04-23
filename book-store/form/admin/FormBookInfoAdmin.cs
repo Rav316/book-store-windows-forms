@@ -156,10 +156,16 @@ namespace book_store.form.admin
                 MessageBox.Show("Возрастное ограничение некорректно");
                 return;
             }
-            var existsBook = bookService.FindByTitleAndAuthor(tbTitle.Text, (int)cbAuthor.SelectedValue!);
-            if (existsBook != null && existsBook.Id != book.Id)
+            var bookByTitleAndAuthor = bookService.FindByTitleAndAuthor(tbTitle.Text, (int)cbAuthor.SelectedValue!);
+            if (bookByTitleAndAuthor != null && bookByTitleAndAuthor.Id != book.Id)
             {
                 MessageBox.Show("Книга с таким названием и автором уже существует");
+                return;
+            }
+            var bookByIsbn = bookService.FindByIsbn(tbIsbn.Text);
+            if(bookByIsbn != null && bookByIsbn.Id != book.Id)
+            {
+                MessageBox.Show("Книга с таким isbn уже существует");
                 return;
             }
 

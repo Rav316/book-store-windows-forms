@@ -195,5 +195,10 @@ namespace book_store.database.repository
         {
             return context.Books.FirstOrDefault(b => b.Title == title && b.AuthorId == author);
         }
+
+        public Book? FindByIsbn(string isbn)
+        {
+            return context.Books.FirstOrDefault(b => b.Isbn == isbn);
+        }
     }
 }
