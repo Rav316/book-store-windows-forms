@@ -43,6 +43,7 @@ namespace book_store.form
 
         private void FormBookInfo_Load(object sender, EventArgs e)
         {
+            this.ActiveControl = pbInFavorites;
             try
             {
                 book = Task.Run(() => bookService.FindById(bookId)).Result;
