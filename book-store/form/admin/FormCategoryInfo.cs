@@ -42,7 +42,8 @@ namespace book_store.form.admin
                 MessageBox.Show("Название категории не может быть пустым");
                 return;
             }
-            if (categoryService.FindByName(tbName.Text) != null)
+            var existsCategory = categoryService.FindByName(tbName.Text);
+            if (existsCategory != null && existsCategory.Id != category.Id  )
             {
                 MessageBox.Show($"Категория с названием {tbName.Text} уже существует");
                 return;

@@ -56,9 +56,10 @@
             // 
             tbName.BackColor = Color.FromArgb(224, 224, 224);
             tbName.BorderStyle = BorderStyle.None;
-            tbName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbName.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbName.Location = new Point(285, 91);
             tbName.MaxLength = 32;
+            tbName.MinimumSize = new Size(223, 22);
             tbName.Name = "tbName";
             tbName.Size = new Size(223, 22);
             tbName.TabIndex = 138;

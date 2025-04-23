@@ -52,7 +52,7 @@ namespace book_store.form.admin
             var byBookAndWarehouse = await bookWarehouseService.FindByBookAndWarehouse(bookId, warehouseId);
             if (byBookAndWarehouse != null)
             {
-                MessageBox.Show($"Книга с id {bookId} уже существует на складе {warehouseId}");
+                MessageBox.Show($"Книга \"{byBookAndWarehouse.Book.Title}\" уже существует на складе \"{byBookAndWarehouse.Warehouse.Name}\"");
                 return;
             }
             bookWarehouse.BookId = (int)cbBook.SelectedValue!;
@@ -65,12 +65,12 @@ namespace book_store.form.admin
         private async void FormBookWarehouseCreate_Load(object sender, EventArgs e)
         {
             books = await bookService.FindAll();
-            cbBook.DisplayMember = "Id";
+            cbBook.DisplayMember = "Title";
             cbBook.ValueMember = "Id";
             cbBook.DataSource = books;
 
             warehouses = await warehouseService.FindAll();
-            cbWarehouse.DisplayMember = "Id";
+            cbWarehouse.DisplayMember = "Name";
             cbWarehouse.ValueMember = "Id";
             cbWarehouse.DataSource = warehouses;
         }

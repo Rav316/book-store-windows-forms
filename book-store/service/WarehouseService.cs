@@ -15,7 +15,10 @@ namespace book_store.service
 
         public async Task<List<Warehouse>> FindAll()
         {
-            return await warehouseRepository.FindAllAsync();
+            List<Warehouse> warehouses = await warehouseRepository.FindAllAsync();
+            return warehouses
+                .OrderBy(w => w.Name)
+                .ToList();
         }
 
         public async Task<Warehouse?> FindById(int id)

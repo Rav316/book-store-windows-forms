@@ -19,6 +19,7 @@ namespace book_store.form.admin
         public FormPublisherManagement()
         {
             InitializeComponent();
+            dgvPublishers.ReadOnly = true;
             dgvPublishers.Columns[0].DataPropertyName = "Id";
             dgvPublishers.Columns[1].DataPropertyName = "Name";
         }

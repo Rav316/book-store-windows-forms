@@ -16,7 +16,10 @@ namespace book_store.service
 
         public async Task<List<Publisher>> FindAll()
         {
-            return await publisherRepository.FindAllAsync();
+            List<Publisher> publishers = await publisherRepository.FindAllAsync();
+            return publishers
+                .OrderBy(p => p.Name)
+                .ToList();
         }
 
         public async Task<Publisher?> FindById(int id)

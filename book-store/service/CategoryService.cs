@@ -12,9 +12,12 @@ namespace book_store.service
     internal class CategoryService
     {
         private readonly CategoryRepository categoryRepository = new CategoryRepository(AppDbContext.INSTANCE);
-        public Task<List<Category>> FindAll()
+        public async Task<List<Category>> FindAll()
         {
-            return categoryRepository.FindAllAsync();
+            List<Category> categories = await categoryRepository.FindAllAsync();
+            return categories
+                .OrderBy(o => o.Name)
+                .ToList();
         }
 
         public async Task Create(Category category)

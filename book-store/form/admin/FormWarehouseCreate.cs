@@ -38,7 +38,7 @@ namespace book_store.form.admin
         {
             if (tbName.Text == "")
             {
-                MessageBox.Show("Название издателя не может быть пустым");
+                MessageBox.Show("Название склада не может быть пустым");
                 return;
             }
             if (warehouseService.FindByName(tbName.Text) != null)

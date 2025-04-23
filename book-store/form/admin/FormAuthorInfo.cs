@@ -75,7 +75,7 @@ namespace book_store.form.admin
             }
             if (tbLastName.Text == "")
             {
-                MessageBox.Show("имя автора не может быть пустым");
+                MessageBox.Show("фамилия автора не может быть пустой");
                 return;
             }
             if (dtpBirthDate.Checked)
@@ -92,7 +92,7 @@ namespace book_store.form.admin
             }
             if (dtpDeathDate.Checked)
             {
-                if (dtpDeathDate.Value >= DateTime.Now || dtpDeathDate.Value < dtpBirthDate.Value)
+                if (dtpDeathDate.Value >= DateTime.Now || (dtpBirthDate.Checked && dtpDeathDate.Value < dtpBirthDate.Value))
                 {
                     MessageBox.Show("Введите корректную дату смерти");
                     return;

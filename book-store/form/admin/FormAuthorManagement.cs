@@ -22,6 +22,7 @@ namespace book_store.form.admin
         {
             InitializeComponent();
             dgvAuthors.ReadOnly = true;
+            dgvAuthors.AutoGenerateColumns = false;
             dgvAuthors.Columns[0].DataPropertyName = "Id";
             dgvAuthors.Columns[1].DataPropertyName = "FirstName";
             dgvAuthors.Columns[2].DataPropertyName = "MidName";

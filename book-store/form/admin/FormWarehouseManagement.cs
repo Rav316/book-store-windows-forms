@@ -20,6 +20,7 @@ namespace book_store.form.admin
         public FormWarehouseManagement()
         {
             InitializeComponent();
+            dgvWarehouses.ReadOnly = true;
             dgvWarehouses.Columns[0].DataPropertyName = "Id";
             dgvWarehouses.Columns[1].DataPropertyName = "Name";
             dgvWarehouses.Columns[2].DataPropertyName = "Address";

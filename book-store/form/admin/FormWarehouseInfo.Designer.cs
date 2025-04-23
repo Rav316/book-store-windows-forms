@@ -76,9 +76,10 @@
             // 
             tbName.BackColor = Color.FromArgb(224, 224, 224);
             tbName.BorderStyle = BorderStyle.None;
-            tbName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tbName.Location = new Point(280, 136);
+            tbName.Font = new Font("Philosopher", 11.25F);
+            tbName.Location = new Point(280, 142);
             tbName.MaxLength = 127;
+            tbName.MinimumSize = new Size(223, 22);
             tbName.Name = "tbName";
             tbName.Size = new Size(223, 22);
             tbName.TabIndex = 146;
@@ -88,7 +89,7 @@
             labelName.AutoSize = true;
             labelName.Font = new Font("Philosopher", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 204);
             labelName.ForeColor = Color.Black;
-            labelName.Location = new Point(77, 137);
+            labelName.Location = new Point(77, 143);
             labelName.Name = "labelName";
             labelName.Size = new Size(82, 21);
             labelName.TabIndex = 145;
@@ -98,8 +99,9 @@
             // 
             tbId.BackColor = Color.FromArgb(224, 224, 224);
             tbId.BorderStyle = BorderStyle.None;
-            tbId.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbId.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbId.Location = new Point(280, 99);
+            tbId.MinimumSize = new Size(223, 22);
             tbId.Name = "tbId";
             tbId.ReadOnly = true;
             tbId.Size = new Size(223, 22);
@@ -142,8 +144,10 @@
             // 
             tbAddress.BackColor = Color.FromArgb(224, 224, 224);
             tbAddress.BorderStyle = BorderStyle.None;
-            tbAddress.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbAddress.Font = new Font("Philosopher", 11.25F);
             tbAddress.Location = new Point(280, 181);
+            tbAddress.MaxLength = 256;
+            tbAddress.MinimumSize = new Size(223, 22);
             tbAddress.Name = "tbAddress";
             tbAddress.Size = new Size(223, 22);
             tbAddress.TabIndex = 150;

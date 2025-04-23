@@ -20,6 +20,8 @@ namespace book_store.service
             List<BookWarehouse> bookWarehouses = await bookWarehouseRepository.FindAllAsync();
             return bookWarehouses
                 .Select(bookWarehouseManagementMapper.ToDto)
+                .OrderBy(bw => bw.BookId)
+                .ThenBy(bw => bw.WarehouseId)
                 .ToList();
         }
 

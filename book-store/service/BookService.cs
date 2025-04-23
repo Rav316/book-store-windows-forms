@@ -141,7 +141,10 @@ namespace book_store.service
 
         public async Task<List<Book>> FindAll()
         {
-            return await bookRepository.FindAllAsync();
+            List<Book> books = await bookRepository.FindAllAsync();
+            return books
+                .OrderBy(b => b.Title)
+                .ToList();
         }
     }
 }

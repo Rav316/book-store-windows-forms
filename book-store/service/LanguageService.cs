@@ -13,9 +13,12 @@ namespace book_store.service
     {
         private readonly LanguageRepository languageRepository = new LanguageRepository(AppDbContext.INSTANCE);
 
-        public Task<List<Language>> FindAll()
+        public async Task<List<Language>> FindAll()
         {
-            return languageRepository.FindAllAsync();
+            List<Language> languages = await languageRepository.FindAllAsync();
+            return languages
+                .OrderBy(l => l.Name)
+                .ToList();
         }
     }
 }

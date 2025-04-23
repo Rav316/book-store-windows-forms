@@ -51,12 +51,14 @@ namespace book_store.form.admin
                 MessageBox.Show("Название склада не может быть пустым");
                 return;
             }
-            if (warehouseService.FindByName(tbName.Text) != null)
+            var existsWarehouse = warehouseService.FindByName(tbName.Text);
+            if (existsWarehouse != null && existsWarehouse.Id != warehouse.Id)
             {
                 MessageBox.Show($"Склад с названием {tbName.Text} уже существует");
                 return;
             }
             warehouse.Name = tbName.Text;
+            warehouse.Address = tbAddress.Text;
             await warehouseService.Update(warehouse);
             MessageBox.Show("Склад успешно обновлён ✅");
         }

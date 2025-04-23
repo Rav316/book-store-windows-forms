@@ -21,13 +21,14 @@ namespace book_store.service
             var authors = await authorRepository.FindAllAsync();
             return [.. authors
                 .Select(authorListMapper.ToDto)
-                .OrderBy(a => a.Id)
+                .OrderBy(a => a.FullName)
             ];
         }
 
         public async Task<List<Author>> FindAll()
         {
-            return await authorRepository.FindAllAsync();
+            List<Author> authors = await authorRepository.FindAllAsync();
+            return authors.OrderBy(a => a.Id).ToList();
         }
 
         public async Task<Author?> FindById(int id)

@@ -42,7 +42,7 @@ namespace book_store.form.admin
             }
             if (tbLastName.Text == "")
             {
-                MessageBox.Show("имя автора не может быть пустым");
+                MessageBox.Show("фамилия автора не может быть пустой");
                 return;
             }
             if (dtpBirthDate.Checked)

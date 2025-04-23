@@ -46,9 +46,10 @@
             // 
             tbQuantity.BackColor = Color.FromArgb(224, 224, 224);
             tbQuantity.BorderStyle = BorderStyle.None;
-            tbQuantity.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbQuantity.Font = new Font("Philosopher", 11.25F);
             tbQuantity.Location = new Point(334, 184);
             tbQuantity.MaxLength = 10;
+            tbQuantity.MinimumSize = new Size(223, 22);
             tbQuantity.Name = "tbQuantity";
             tbQuantity.Size = new Size(223, 22);
             tbQuantity.TabIndex = 160;
@@ -151,9 +152,10 @@
             // 
             tbBook.BackColor = Color.FromArgb(224, 224, 224);
             tbBook.BorderStyle = BorderStyle.None;
-            tbBook.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbBook.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbBook.Location = new Point(334, 92);
             tbBook.MaxLength = 10;
+            tbBook.MinimumSize = new Size(223, 22);
             tbBook.Name = "tbBook";
             tbBook.ReadOnly = true;
             tbBook.Size = new Size(223, 22);

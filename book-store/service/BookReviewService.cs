@@ -22,6 +22,7 @@ namespace book_store.service
         {
             return bookReviewRepository.FindAllWithLoadedEntities()
                 .Select(bookReviewManagementMapper.ToDto)
+                .OrderBy(br => br.Id)
                 .ToList();
         }
 

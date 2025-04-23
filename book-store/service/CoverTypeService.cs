@@ -14,9 +14,12 @@ namespace book_store.service
     {
         private readonly CoverTypeRepository bookRepository = new CoverTypeRepository(AppDbContext.INSTANCE);
 
-        public Task<List<CoverType>> FindAll()
+        public async Task<List<CoverType>> FindAll()
         {
-            return bookRepository.FindAllAsync();
+            List<CoverType> coverTypes = await bookRepository.FindAllAsync();
+            return coverTypes
+                .OrderBy(ct => ct.Type)
+                .ToList();
         }
     }
 }

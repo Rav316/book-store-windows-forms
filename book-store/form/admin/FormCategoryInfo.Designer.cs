@@ -74,9 +74,10 @@
             // 
             tbName.BackColor = Color.FromArgb(224, 224, 224);
             tbName.BorderStyle = BorderStyle.None;
-            tbName.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbName.Font = new Font("Philosopher", 11.25F);
             tbName.Location = new Point(288, 121);
             tbName.MaxLength = 32;
+            tbName.MinimumSize = new Size(223, 22);
             tbName.Name = "tbName";
             tbName.Size = new Size(223, 22);
             tbName.TabIndex = 122;
@@ -96,8 +97,9 @@
             // 
             tbId.BackColor = Color.FromArgb(224, 224, 224);
             tbId.BorderStyle = BorderStyle.None;
-            tbId.Font = new Font("Philosopher", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tbId.Font = new Font("Philosopher", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tbId.Location = new Point(288, 84);
+            tbId.MinimumSize = new Size(223, 22);
             tbId.Name = "tbId";
             tbId.ReadOnly = true;
             tbId.Size = new Size(223, 22);

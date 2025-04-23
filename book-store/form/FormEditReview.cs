@@ -40,7 +40,7 @@ namespace book_store.form
             var book = bookReview.Book;
             var bookAuthor = book.Author;
             labelBookName.Text = book.Title;
-            labelAuthor.Text = $"{bookAuthor?.FirstName} {bookAuthor?.MidName} {bookAuthor?.LastName}";
+            labelAuthorValue.Text = $"{bookAuthor?.FirstName} {bookAuthor?.MidName} {bookAuthor?.LastName}";
             selectedStars = bookReview.Rating;
             tbReviewContent.Text = bookReview.Content;
         }

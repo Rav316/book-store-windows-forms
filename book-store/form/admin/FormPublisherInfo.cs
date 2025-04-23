@@ -49,7 +49,8 @@ namespace book_store.form.admin
                 MessageBox.Show("Название издателя не может быть пустым");
                 return;
             }
-            if (publisherService.FindByName(tbName.Text) != null)
+            var existsPublisher = publisherService.FindByName(tbName.Text);
+            if (existsPublisher != null && existsPublisher.Id != publisher.Id)
             {
                 MessageBox.Show($"Издатель с названием {tbName.Text} уже существует");
                 return;
