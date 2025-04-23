@@ -22,6 +22,7 @@ namespace book_store.database.repository
             return context.BookReviews
                 .Include(br => br.Book)
                 .Include(br => br.User)
+                .AsNoTracking()
                 .ToList();
         }
 

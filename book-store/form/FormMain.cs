@@ -97,7 +97,7 @@ namespace book_store.form
             {
                 book.image = ImageUtils.GetBookImageByPath(book.ImagePath);
             });
-            dgvBooks.DataSource = allBooks;
+            UpdateFilter();
 
         }
 

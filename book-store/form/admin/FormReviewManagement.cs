@@ -54,8 +54,6 @@ namespace book_store.form.admin
             cbBook.DataSource = books;
 
             LoadInfo();
-
-
         }
 
         private void LoadInfo()
