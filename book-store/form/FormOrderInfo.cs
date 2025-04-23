@@ -39,12 +39,10 @@ namespace book_store.form
             {
                 buttonCancelOrder.Hide();
                 buttonPayOrder.Hide();
-                buttonFinishOrder.Hide();
             } else
             {
                 buttonCancelOrder.Show();
                 buttonPayOrder.Show();
-                buttonFinishOrder.Show();
             }
         }
 

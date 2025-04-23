@@ -45,5 +45,10 @@ namespace book_store.form
                 stars[i].Image = Image.FromFile(@"..\..\..\Resources\Images\star.png");
             }
         }
+
+        private void FormReviewInfo_Load(object sender, EventArgs e)
+        {
+            this.ActiveControl = labelBookName;
+        }
     }
 }

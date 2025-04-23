@@ -192,6 +192,7 @@
             Name = "FormReviewInfo";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Информация об отзыве";
+            Load += FormReviewInfo_Load;
             ((System.ComponentModel.ISupportInitialize)pbStar5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbStar4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbStar3).EndInit();

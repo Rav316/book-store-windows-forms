@@ -47,6 +47,7 @@ namespace book_store.form
 
         private void FormEditReview_Load(object sender, EventArgs e)
         {
+            this.ActiveControl = labelBookName;
             stars =
             [
                 pbStar1,
