@@ -30,7 +30,7 @@ namespace book_store.context
 
         private static readonly DbContextOptions<AppDbContext> _options =
                 new DbContextOptionsBuilder<AppDbContext>()
-               .UseNpgsql("Server=localhost; Port=5432; DataBase=book_store_copy; User Id=postgres; Password=1")
+               .UseNpgsql("Server=localhost; Port=5432; DataBase=a; User Id=postgres; Password=1")
                .UseLazyLoadingProxies()
                .LogTo(message => System.Diagnostics.Debug.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information)
                .EnableSensitiveDataLogging()
