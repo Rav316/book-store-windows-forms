@@ -22,7 +22,7 @@ SET row_security = off;
 
 CREATE FUNCTION public.check_unique_isbn() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
     IF EXISTS (
         SELECT 1 FROM book
@@ -36,7 +36,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.check_unique_isbn() OWNER TO postgres;
 
 --
 -- Name: get_author_full_name(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -44,7 +43,7 @@ ALTER FUNCTION public.check_unique_isbn() OWNER TO postgres;
 
 CREATE FUNCTION public.get_author_full_name(p_author_id integer) RETURNS text
     LANGUAGE plpgsql
-    AS $$
+AS $$
 DECLARE
     fname TEXT;
     mname TEXT;
@@ -60,7 +59,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.get_author_full_name(p_author_id integer) OWNER TO postgres;
 
 --
 -- Name: get_cart_total(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -68,7 +66,7 @@ ALTER FUNCTION public.get_author_full_name(p_author_id integer) OWNER TO postgre
 
 CREATE FUNCTION public.get_cart_total(p_user_id integer) RETURNS integer
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
     RETURN (
         SELECT COALESCE(SUM(b.price * c.quantity), 0)
@@ -80,7 +78,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.get_cart_total(p_user_id integer) OWNER TO postgres;
 
 --
 -- Name: get_total_book_quantity(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -88,7 +85,7 @@ ALTER FUNCTION public.get_cart_total(p_user_id integer) OWNER TO postgres;
 
 CREATE FUNCTION public.get_total_book_quantity(p_book_id integer) RETURNS integer
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
     RETURN (
         SELECT COALESCE(SUM(quantity), 0)
@@ -99,7 +96,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.get_total_book_quantity(p_book_id integer) OWNER TO postgres;
 
 --
 -- Name: has_user_purchased_book(integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -107,7 +103,7 @@ ALTER FUNCTION public.get_total_book_quantity(p_book_id integer) OWNER TO postgr
 
 CREATE FUNCTION public.has_user_purchased_book(p_user_id integer, p_book_id integer) RETURNS boolean
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
     RETURN EXISTS (
         SELECT 1
@@ -121,7 +117,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.has_user_purchased_book(p_user_id integer, p_book_id integer) OWNER TO postgres;
 
 --
 -- Name: is_book_in_favorites(integer, integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -129,7 +124,7 @@ ALTER FUNCTION public.has_user_purchased_book(p_user_id integer, p_book_id integ
 
 CREATE FUNCTION public.is_book_in_favorites(p_user_id integer, p_book_id integer) RETURNS boolean
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
     RETURN EXISTS (
         SELECT 1 FROM favorites
@@ -139,7 +134,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.is_book_in_favorites(p_user_id integer, p_book_id integer) OWNER TO postgres;
 
 --
 -- Name: prevent_user_change(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -147,7 +141,7 @@ ALTER FUNCTION public.is_book_in_favorites(p_user_id integer, p_book_id integer)
 
 CREATE FUNCTION public.prevent_user_change() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
+AS $$
 begin
     if OLD.user_id <> NEW.user_id then
         raise exception 'Changing user_id is not allowed!';
@@ -157,7 +151,6 @@ end;
 $$;
 
 
-ALTER FUNCTION public.prevent_user_change() OWNER TO postgres;
 
 --
 -- Name: set_order_created_at(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -165,7 +158,7 @@ ALTER FUNCTION public.prevent_user_change() OWNER TO postgres;
 
 CREATE FUNCTION public.set_order_created_at() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
+AS $$
 BEGIN
     IF NEW.created_at IS NULL THEN
         NEW.created_at := CURRENT_TIMESTAMP;
@@ -175,7 +168,6 @@ END;
 $$;
 
 
-ALTER FUNCTION public.set_order_created_at() OWNER TO postgres;
 
 --
 -- Name: set_paid_in_on_payment(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -183,7 +175,7 @@ ALTER FUNCTION public.set_order_created_at() OWNER TO postgres;
 
 CREATE FUNCTION public.set_paid_in_on_payment() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
+AS $$
 begin
     if NEW.payment_status_id = 2 and OLD.payment_status_id <> 2 then
         NEW.paid_in := now();
@@ -193,7 +185,6 @@ end;
 $$;
 
 
-ALTER FUNCTION public.set_paid_in_on_payment() OWNER TO postgres;
 
 --
 -- Name: set_review_timestamps(); Type: FUNCTION; Schema: public; Owner: postgres
@@ -201,7 +192,7 @@ ALTER FUNCTION public.set_paid_in_on_payment() OWNER TO postgres;
 
 CREATE FUNCTION public.set_review_timestamps() RETURNS trigger
     LANGUAGE plpgsql
-    AS $$
+AS $$
 begin
     if TG_OP = 'INSERT' then
         NEW.created_at := now();
@@ -213,7 +204,6 @@ end;
 $$;
 
 
-ALTER FUNCTION public.set_review_timestamps() OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -224,17 +214,16 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.author (
-    id integer NOT NULL,
-    last_name character varying(127) NOT NULL,
-    mid_name character varying(127),
-    nationality character varying(127),
-    first_name character varying(127) NOT NULL,
-    birth_date date,
-    death_date date
+                               id integer NOT NULL,
+                               last_name character varying(127) NOT NULL,
+                               mid_name character varying(127),
+                               nationality character varying(127),
+                               first_name character varying(127) NOT NULL,
+                               birth_date date,
+                               death_date date
 );
 
 
-ALTER TABLE public.author OWNER TO postgres;
 
 --
 -- Name: author_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -247,7 +236,7 @@ ALTER TABLE public.author ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -255,31 +244,30 @@ ALTER TABLE public.author ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 --
 
 CREATE TABLE public.book (
-    id integer NOT NULL,
-    price integer NOT NULL,
-    image_path text,
-    series character varying(32),
-    year_of_publishing integer NOT NULL,
-    isbn character varying(17) NOT NULL,
-    number_of_pages integer NOT NULL,
-    circulation bigint NOT NULL,
-    weight integer,
-    age_restrictions integer NOT NULL,
-    title text NOT NULL,
-    category_id integer NOT NULL,
-    description text,
-    publisher_id integer,
-    author_id integer,
-    cover_type_id integer,
-    language_id integer,
-    height numeric(5,2) DEFAULT 10 NOT NULL,
-    width numeric(5,2) DEFAULT 10 NOT NULL,
-    length numeric(5,2) DEFAULT 10 NOT NULL,
-    CONSTRAINT book_price_check CHECK ((price >= 0))
+                             id integer NOT NULL,
+                             price integer NOT NULL,
+                             image_path text,
+                             series character varying(32),
+                             year_of_publishing integer NOT NULL,
+                             isbn character varying(17) NOT NULL,
+                             number_of_pages integer NOT NULL,
+                             circulation bigint NOT NULL,
+                             weight integer,
+                             age_restrictions integer NOT NULL,
+                             title text NOT NULL,
+                             category_id integer NOT NULL,
+                             description text,
+                             publisher_id integer,
+                             author_id integer,
+                             cover_type_id integer,
+                             language_id integer,
+                             height numeric(5,2) DEFAULT 10 NOT NULL,
+                             width numeric(5,2) DEFAULT 10 NOT NULL,
+                             length numeric(5,2) DEFAULT 10 NOT NULL,
+                             CONSTRAINT book_price_check CHECK ((price >= 0))
 );
 
 
-ALTER TABLE public.book OWNER TO postgres;
 
 --
 -- Name: book_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -292,7 +280,7 @@ ALTER TABLE public.book ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -300,18 +288,17 @@ ALTER TABLE public.book ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 --
 
 CREATE TABLE public.book_review (
-    id integer NOT NULL,
-    user_id integer,
-    book_id integer,
-    content text NOT NULL,
-    rating smallint NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT book_review_rating_check CHECK (((rating >= 1) AND (rating <= 5)))
+                                    id integer NOT NULL,
+                                    user_id integer,
+                                    book_id integer,
+                                    content text NOT NULL,
+                                    rating smallint NOT NULL,
+                                    created_at timestamp without time zone,
+                                    updated_at timestamp without time zone,
+                                    CONSTRAINT book_review_rating_check CHECK (((rating >= 1) AND (rating <= 5)))
 );
 
 
-ALTER TABLE public.book_review OWNER TO postgres;
 
 --
 -- Name: book_review_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -324,7 +311,7 @@ ALTER TABLE public.book_review ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENT
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -332,38 +319,35 @@ ALTER TABLE public.book_review ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENT
 --
 
 CREATE TABLE public.book_warehouse (
-    book_id integer NOT NULL,
-    warehouse_id integer NOT NULL,
-    quantity integer DEFAULT 1 NOT NULL
+                                       book_id integer NOT NULL,
+                                       warehouse_id integer NOT NULL,
+                                       quantity integer DEFAULT 1 NOT NULL
 );
 
 
-ALTER TABLE public.book_warehouse OWNER TO postgres;
 
 --
 -- Name: cart_item; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.cart_item (
-    user_id integer NOT NULL,
-    book_id integer NOT NULL,
-    quantity integer DEFAULT 1
+                                  user_id integer NOT NULL,
+                                  book_id integer NOT NULL,
+                                  quantity integer DEFAULT 1
 );
 
 
-ALTER TABLE public.cart_item OWNER TO postgres;
 
 --
 -- Name: category; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.category (
-    id integer NOT NULL,
-    name character varying(32)
+                                 id integer NOT NULL,
+                                 name character varying(32)
 );
 
 
-ALTER TABLE public.category OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -376,7 +360,7 @@ ALTER TABLE public.category ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -384,12 +368,11 @@ ALTER TABLE public.category ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
 --
 
 CREATE TABLE public.cover_type (
-    id integer NOT NULL,
-    type text NOT NULL
+                                   id integer NOT NULL,
+                                   type text NOT NULL
 );
 
 
-ALTER TABLE public.cover_type OWNER TO postgres;
 
 --
 -- Name: cover_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -402,7 +385,7 @@ ALTER TABLE public.cover_type ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTI
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -410,24 +393,22 @@ ALTER TABLE public.cover_type ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTI
 --
 
 CREATE TABLE public.favorites (
-    book_id integer NOT NULL,
-    user_id integer NOT NULL
+                                  book_id integer NOT NULL,
+                                  user_id integer NOT NULL
 );
 
 
-ALTER TABLE public.favorites OWNER TO postgres;
 
 --
 -- Name: language; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.language (
-    id integer NOT NULL,
-    name character varying(32) NOT NULL
+                                 id integer NOT NULL,
+                                 name character varying(32) NOT NULL
 );
 
 
-ALTER TABLE public.language OWNER TO postgres;
 
 --
 -- Name: language_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -440,7 +421,7 @@ ALTER TABLE public.language ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -448,26 +429,24 @@ ALTER TABLE public.language ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
 --
 
 CREATE TABLE public.order_item (
-    order_id integer NOT NULL,
-    book_id integer NOT NULL,
-    quantity integer DEFAULT 1,
-    warehouse_id integer NOT NULL
+                                   order_id integer NOT NULL,
+                                   book_id integer NOT NULL,
+                                   quantity integer DEFAULT 1,
+                                   warehouse_id integer NOT NULL
 );
 
 
-ALTER TABLE public.order_item OWNER TO postgres;
 
 --
 -- Name: order_status; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.order_status (
-    id integer NOT NULL,
-    name character varying(16) NOT NULL
+                                     id integer NOT NULL,
+                                     name character varying(16) NOT NULL
 );
 
 
-ALTER TABLE public.order_status OWNER TO postgres;
 
 --
 -- Name: order_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -480,7 +459,7 @@ ALTER TABLE public.order_status ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDEN
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -488,19 +467,18 @@ ALTER TABLE public.order_status ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDEN
 --
 
 CREATE TABLE public.orders (
-    id integer NOT NULL,
-    user_id integer NOT NULL,
-    payment_method character varying(127) NOT NULL,
-    payment_status_id integer NOT NULL,
-    order_status_id integer NOT NULL,
-    cost integer NOT NULL,
-    paid_in timestamp without time zone DEFAULT now(),
-    created_at timestamp without time zone,
-    CONSTRAINT orders_cost_check CHECK ((cost > 0))
+                               id integer NOT NULL,
+                               user_id integer NOT NULL,
+                               payment_method character varying(127) NOT NULL,
+                               payment_status_id integer NOT NULL,
+                               order_status_id integer NOT NULL,
+                               cost integer NOT NULL,
+                               paid_in timestamp without time zone DEFAULT now(),
+                               created_at timestamp without time zone,
+                               CONSTRAINT orders_cost_check CHECK ((cost > 0))
 );
 
 
-ALTER TABLE public.orders OWNER TO postgres;
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -513,7 +491,7 @@ ALTER TABLE public.orders ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -521,26 +499,24 @@ ALTER TABLE public.orders ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 --
 
 CREATE TABLE public.payment_detail (
-    order_id integer NOT NULL,
-    card_number character varying(127) NOT NULL,
-    expiration_date character varying(127) NOT NULL,
-    code character varying(127) NOT NULL
+                                       order_id integer NOT NULL,
+                                       card_number character varying(127) NOT NULL,
+                                       expiration_date character varying(127) NOT NULL,
+                                       code character varying(127) NOT NULL
 );
 
 
-ALTER TABLE public.payment_detail OWNER TO postgres;
 
 --
 -- Name: payment_status; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.payment_status (
-    id integer NOT NULL,
-    name character varying(16) NOT NULL
+                                       id integer NOT NULL,
+                                       name character varying(16) NOT NULL
 );
 
 
-ALTER TABLE public.payment_status OWNER TO postgres;
 
 --
 -- Name: payment_status_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -553,7 +529,7 @@ ALTER TABLE public.payment_status ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -561,12 +537,11 @@ ALTER TABLE public.payment_status ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 --
 
 CREATE TABLE public.publisher (
-    id integer NOT NULL,
-    name character varying(127) NOT NULL
+                                  id integer NOT NULL,
+                                  name character varying(127) NOT NULL
 );
 
 
-ALTER TABLE public.publisher OWNER TO postgres;
 
 --
 -- Name: publisher_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -579,7 +554,7 @@ ALTER TABLE public.publisher ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTIT
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -587,17 +562,16 @@ ALTER TABLE public.publisher ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTIT
 --
 
 CREATE TABLE public.users (
-    id integer NOT NULL,
-    username character varying(128) NOT NULL,
-    password character varying(256) NOT NULL,
-    role integer DEFAULT 0 NOT NULL,
-    email character varying(320),
-    address text,
-    image_path text
+                              id integer NOT NULL,
+                              username character varying(128) NOT NULL,
+                              password character varying(256) NOT NULL,
+                              role integer DEFAULT 0 NOT NULL,
+                              email character varying(320),
+                              address text,
+                              image_path text
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -610,7 +584,7 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -618,13 +592,12 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 --
 
 CREATE TABLE public.warehouse (
-    id integer NOT NULL,
-    name character varying(127) NOT NULL,
-    address character varying(256) NOT NULL
+                                  id integer NOT NULL,
+                                  name character varying(127) NOT NULL,
+                                  address character varying(256) NOT NULL
 );
 
 
-ALTER TABLE public.warehouse OWNER TO postgres;
 
 --
 -- Name: warehouse_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -637,7 +610,7 @@ ALTER TABLE public.warehouse ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTIT
     NO MINVALUE
     NO MAXVALUE
     CACHE 1
-);
+    );
 
 
 --
@@ -1038,4 +1011,3 @@ ALTER TABLE ONLY public.payment_detail
 --
 -- PostgreSQL database dump complete
 --
-
