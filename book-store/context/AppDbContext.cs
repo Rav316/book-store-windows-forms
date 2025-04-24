@@ -147,7 +147,7 @@ namespace book_store.context
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                    .UseNpgsql("Host=localhost;Port=5432;Database=book_store_windows_forms;Username=postgres;Password=1")
+                    .UseNpgsql("Host=localhost;Port=5432;Database=a;Username=postgres;Password=1")
                     .UseLazyLoadingProxies();
             }
         }

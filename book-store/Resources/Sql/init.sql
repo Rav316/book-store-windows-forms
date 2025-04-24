@@ -1,12 +1,10 @@
-﻿-- Обновленные данные на русском языке
-
--- Пользователи (оставляем username на английском)
+﻿-- Пользователи
 INSERT INTO public.users (username, password, role, email, address, image_path)
 VALUES
 ('user', 'a00dbda08434d887293d911766f4d6b7db1b3bc30c69c3220482968fb60a6540a370f265d34b3d2857b998b033f460ee3d90ad95ce4f80a74e5cf5458f449c28', 0, 'user@test.test', 'Санкт-Петербург', NULL),
 ('admin', 'a00dbda08434d887293d911766f4d6b7db1b3bc30c69c3220482968fb60a6540a370f265d34b3d2857b998b033f460ee3d90ad95ce4f80a74e5cf5458f449c28', 1, 'admin@test.test', 'Москва', NULL);
 
--- Авторы (национальности на русском)
+-- Авторы
 INSERT INTO author (first_name, mid_name, last_name, nationality, birth_date, death_date) VALUES
 ('Лев', NULL, 'Толстой', 'Русский', '1828-09-09', '1910-11-20'),
 ('Фёдор', NULL, 'Достоевский', 'Русский', '1821-11-11', '1881-02-09'),
@@ -19,7 +17,7 @@ INSERT INTO author (first_name, mid_name, last_name, nationality, birth_date, de
 ('Франц', NULL, 'Кафка', 'Австрийский', '1883-07-03', '1924-06-03'),
 ('Эрнест', NULL, 'Хемингуэй', 'Американский', '1899-07-21', '1961-07-02');
 
--- Категории на русском
+-- Категории 
 INSERT INTO category (name) VALUES
 ('Классика'),
 ('Художественная литература'),
@@ -27,7 +25,7 @@ INSERT INTO category (name) VALUES
 ('Научная фантастика'),
 ('Драма');
 
--- Издатели с переводом
+-- Издатели
 INSERT INTO publisher (name) VALUES
 ('Penguin Books'),
 ('HarperCollins'),
@@ -35,12 +33,12 @@ INSERT INTO publisher (name) VALUES
 ('Oxford University Press'),
 ('Random House');
 
--- Типы обложек (оставляем английские термины как устойчивые выражения)
+-- Типы обложек 
 INSERT INTO cover_type (type) VALUES
 ('Твёрдая'),
 ('Мягкая');
 
--- Языки на русском
+-- Языки
 INSERT INTO language (name) VALUES
 ('Английский'),
 ('Русский'),

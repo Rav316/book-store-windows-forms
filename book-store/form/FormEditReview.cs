@@ -128,7 +128,5 @@ namespace book_store.form
         {
             Close();
         }
-
-        
     }
 }

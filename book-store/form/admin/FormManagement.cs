@@ -20,65 +20,53 @@ namespace book_store.form
 
         private void buttonBooks_Click(object sender, EventArgs e)
         {
-            FormBookManagement formBookManagement = new FormBookManagement();
-            Close();
-            formBookManagement.Show();
+            OpenForm(new FormBookManagement());
         }
 
         private void buttonAuthors_Click(object sender, EventArgs e)
         {
-            FormAuthorManagement formAuthorManagement = new FormAuthorManagement();
-            Close();
-            formAuthorManagement.Show();
+            OpenForm(new FormAuthorManagement());
         }
 
         private void buttonCategories_Click(object sender, EventArgs e)
         {
-            FormCategoryManagement formCategoryManagement = new FormCategoryManagement();
-            Close();
-            formCategoryManagement.Show();
+            OpenForm(new FormCategoryManagement());
         }
 
         private void buttonPublishers_Click(object sender, EventArgs e)
         {
-            FormPublisherManagement formPublisherManagement = new FormPublisherManagement();
-            Close();
-            formPublisherManagement.Show();
+            OpenForm(new FormPublisherManagement());
         }
 
         private void buttonWarehouses_Click(object sender, EventArgs e)
         {
-            FormWarehouseManagement formWarehouseManagement = new FormWarehouseManagement();
-            Close();
-            formWarehouseManagement.Show();
+            OpenForm(new FormWarehouseManagement());
         }
 
         private void buttonBookWarehouses_Click(object sender, EventArgs e)
         {
-            FormBookWarehouseManagement formBookWarehouseManagement = new FormBookWarehouseManagement();
-            Close();
-            formBookWarehouseManagement.Show();
+            OpenForm(new FormBookWarehouseManagement());
         }
 
         private void buttonApp_Click(object sender, EventArgs e)
         {
-            FormMain formMain = new FormMain();
-            Close();
-            formMain.Show();
+            OpenForm(new FormMain());
         }
 
         private void buttonReviews_Click(object sender, EventArgs e)
         {
-            FormReviewManagement formReviewManagement = new FormReviewManagement();
-            Close();
-            formReviewManagement.Show();
+            OpenForm(new FormReviewManagement());
         }
 
         private void pbBack_Click(object sender, EventArgs e)
         {
-            FormAdmin formAdmin = new FormAdmin();
+            OpenForm(new FormAdmin());
+        }
+
+        private void OpenForm(Form form)
+        {
             Close();
-            formAdmin.Show();
+            form.Show();
         }
     }
 }
