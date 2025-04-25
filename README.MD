@@ -6,7 +6,7 @@
 2. Настройте подключение к базе данных в классе [`AppDbContext`](book-store/context/AppDbContext.cs).
 3. Выполните [скрипт](book-store/Resources/Sql/schema.sql) для создания схемы базы данных.
 4. Выполните [скрипт](book-store/Resources/Sql/init.sql) для добавления тестовых данных.
-5. Перенесите изображения из [папки](book-store/Resources/Init/Books) `Resources/Init` в [папку](book-store/Resources/Books) `Resources/Books`.
+5. Перенесите изображения из [папки](book-store/Resources/Init/Books) `Resources/Init/Books` в [папку](book-store/Resources/Books) `Resources/Books`.
 
 ---
 
